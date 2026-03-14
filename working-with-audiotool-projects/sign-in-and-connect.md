@@ -1,3 +1,9 @@
+---
+title: Sign In and Connect
+parent: Working With Audiotool Projects
+nav_order: 1
+---
+
 # Sign In and Connect
 
 This page covers the full authentication flow for browser apps and the Personal Access Token alternative for server environments — and how to go from a login to a connected client.

@@ -1,3 +1,9 @@
+---
+title: Tips and Patterns
+parent: How Nexus Works
+nav_order: 7
+---
+
 # Tips and Patterns
 
 Practical patterns that come up often when building with Nexus.

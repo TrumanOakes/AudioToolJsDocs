@@ -1,3 +1,9 @@
+---
+title: System Overview
+parent: How Nexus Works
+nav_order: 1
+---
+
 # System Overview
 
 This page explains how Audiotool and Nexus work together at a system level — the architecture, the core primitives, and what actually happens when you open a project and start making changes.

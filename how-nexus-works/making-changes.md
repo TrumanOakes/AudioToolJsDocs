@@ -1,3 +1,9 @@
+---
+title: Making Changes
+parent: How Nexus Works
+nav_order: 4
+---
+
 # Making Changes
 
 All modifications to a Nexus document go through a **transaction builder**. This page explains how transactions work, what operations are available, and how the document lock fits in.

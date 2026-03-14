@@ -1,3 +1,9 @@
+---
+title: Offline vs Synced Behavior
+parent: Errors and Fixes
+nav_order: 6
+---
+
 # Offline vs Synced Behavior
 
 Offline documents and synced documents expose the same API, but they behave differently in important ways. This page clarifies the differences to prevent surprises.

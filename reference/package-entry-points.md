@@ -1,3 +1,9 @@
+---
+title: Package Entry Points
+parent: Reference
+nav_order: 2
+---
+
 # Package Entry Points
 
 **Module:** `@audiotool/nexus`

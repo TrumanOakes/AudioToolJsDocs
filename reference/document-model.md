@@ -1,3 +1,9 @@
+---
+title: Document Model
+parent: Reference
+nav_order: 3
+---
+
 # Document Model
 
 **Module:** `@audiotool/nexus/document`

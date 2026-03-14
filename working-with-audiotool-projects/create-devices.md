@@ -1,3 +1,9 @@
+---
+title: Create Devices
+parent: Working With Audiotool Projects
+nav_order: 3
+---
+
 # Create Devices
 
 Audio devices are the synthesizers, drum machines, effects, and utility units that make up the audio processing graph in Audiotool. This page shows how to create and connect them.

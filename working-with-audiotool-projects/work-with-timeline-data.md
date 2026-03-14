@@ -1,3 +1,9 @@
+---
+title: Work With Timeline Data
+parent: Working With Audiotool Projects
+nav_order: 4
+---
+
 # Work With Timeline Data
 
 The Audiotool timeline contains tracks, regions, note collections, and individual notes. This page shows how to create and work with timeline content using Nexus.

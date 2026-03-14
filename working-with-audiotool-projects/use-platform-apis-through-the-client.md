@@ -1,3 +1,9 @@
+---
+title: Use Platform APIs Through the Client
+parent: Working With Audiotool Projects
+nav_order: 9
+---
+
 # Use Platform APIs Through the Client
 
 The `AudiotoolClient` includes access to Audiotool's REST API services via `client.api`. These services let you manage projects, samples, users, and more.

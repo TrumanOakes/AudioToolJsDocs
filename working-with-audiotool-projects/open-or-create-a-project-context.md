@@ -1,3 +1,9 @@
+---
+title: Open or Create a Project Context
+parent: Working With Audiotool Projects
+nav_order: 2
+---
+
 # Open or Create a Project Context
 
 Once you have an `AudiotoolClient`, the next step is to open a **document** — the object that represents a specific Audiotool project and gives you access to its entities, events, and modification interface.

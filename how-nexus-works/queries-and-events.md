@@ -1,3 +1,9 @@
+---
+title: Queries and Events
+parent: How Nexus Works
+nav_order: 5
+---
+
 # Queries and Events
 
 Nexus gives you two ways to read document state: **queries** (snapshot inspection) and **events** (live change notifications). This page explains both and when to use each.
