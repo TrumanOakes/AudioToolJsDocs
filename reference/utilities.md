@@ -1,3 +1,9 @@
+---
+title: Utilities
+parent: Reference
+nav_order: 5
+---
+
 # Utilities
 
 **Module:** `@audiotool/nexus/utils`

@@ -1,3 +1,9 @@
+---
+title: Overview
+parent: Getting Started
+nav_order: 1
+---
+
 # Overview
 
 **@audiotool/nexus** is a JavaScript/TypeScript package that lets you read and modify [Audiotool](https://new.audiotool.com) projects programmatically.

@@ -1,3 +1,9 @@
+---
+title: Before You Debug
+parent: Errors and Fixes
+nav_order: 1
+---
+
 # Before You Debug
 
 When something is not working in Nexus, this page helps you quickly narrow down where the problem is.

@@ -1,3 +1,9 @@
+---
+title: Authorization Problems
+parent: Errors and Fixes
+nav_order: 2
+---
+
 # Authorization Problems
 
 Problems that occur during login, token handling, or client creation.

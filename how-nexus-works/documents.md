@@ -1,3 +1,9 @@
+---
+title: Documents
+parent: How Nexus Works
+nav_order: 2
+---
+
 # Documents
 
 A **document** is the central object you work with in Nexus. It represents a single Audiotool project and exposes everything you need to read and modify it.

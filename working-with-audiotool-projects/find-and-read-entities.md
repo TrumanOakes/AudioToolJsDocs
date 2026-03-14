@@ -1,3 +1,9 @@
+---
+title: Find and Read Entities
+parent: Working With Audiotool Projects
+nav_order: 5
+---
+
 # Find and Read Entities
 
 The query system lets you inspect the current state of the document — find entities by type, filter by field values, and read their current field data.

@@ -1,3 +1,9 @@
+---
+title: Listen for Changes
+parent: Working With Audiotool Projects
+nav_order: 6
+---
+
 # Listen for Changes
 
 The event system lets you react to entity changes in real time — whether those changes come from your code, another bot, or a collaborator editing in the DAW.

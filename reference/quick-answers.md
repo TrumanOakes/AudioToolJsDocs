@@ -1,3 +1,9 @@
+---
+title: Quick Answers
+parent: Reference
+nav_order: 1
+---
+
 # Quick Answers
 
 Short answers to common questions about Nexus.

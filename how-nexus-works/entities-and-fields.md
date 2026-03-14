@@ -1,3 +1,9 @@
+---
+title: Entities and Fields
+parent: How Nexus Works
+nav_order: 3
+---
+
 # Entities and Fields
 
 Entities are the building blocks of every Audiotool project. This page explains what they are, how their fields work, and how they relate to each other.

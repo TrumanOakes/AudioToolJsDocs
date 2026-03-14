@@ -1,3 +1,9 @@
+---
+title: Authorization and Setup
+parent: Getting Started
+nav_order: 3
+---
+
 # Authorization and Setup
 
 This page walks through everything you need to go from zero to a running Nexus app: installing dependencies, registering your application, authenticating, and making your first API call.

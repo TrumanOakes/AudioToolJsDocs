@@ -1,3 +1,9 @@
+---
+title: Package Structure
+parent: How Nexus Works
+nav_order: 6
+---
+
 # Package Structure
 
 The `@audiotool/nexus` package is organized into several modules. This page explains what each module contains and when you need to import from it.

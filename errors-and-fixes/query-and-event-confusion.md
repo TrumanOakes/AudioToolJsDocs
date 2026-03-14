@@ -1,3 +1,9 @@
+---
+title: Query and Event Confusion
+parent: Errors and Fixes
+nav_order: 5
+---
+
 # Query and Event Confusion
 
 Issues that arise from misunderstanding how queries and events work.

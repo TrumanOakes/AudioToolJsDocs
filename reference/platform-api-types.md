@@ -1,3 +1,9 @@
+---
+title: Platform API Types
+parent: Reference
+nav_order: 6
+---
+
 # Platform API Types
 
 **Module:** `@audiotool/nexus/api`

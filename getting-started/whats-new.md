@@ -1,3 +1,9 @@
+---
+title: What's New
+parent: Getting Started
+nav_order: 2
+---
+
 # What's New
 
 This page tracks notable changes to the **@audiotool/nexus** package.

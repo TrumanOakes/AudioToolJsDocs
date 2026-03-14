@@ -1,3 +1,9 @@
+---
+title: Examples and Next Steps
+parent: Getting Started
+nav_order: 4
+---
+
 # Examples and Next Steps
 
 This page shows small, complete examples to help you get oriented quickly after setup. Each example links to the relevant deep-dive page.

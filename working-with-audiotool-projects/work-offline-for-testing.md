@@ -1,3 +1,9 @@
+---
+title: Work Offline for Testing
+parent: Working With Audiotool Projects
+nav_order: 8
+---
+
 # Work Offline for Testing
 
 Nexus supports a fully offline document mode for local development and testing. Offline documents use the same API as synced documents but require no auth, no network, and no project URL.

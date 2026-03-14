@@ -1,3 +1,9 @@
+---
+title: Entity Reference
+parent: Reference
+nav_order: 4
+---
+
 # Entity Reference
 
 **Module:** `@audiotool/nexus/entities`

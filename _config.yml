@@ -1,0 +1,40 @@
+title: "@audiotool/nexus Documentation"
+description: "JavaScript/TypeScript package for reading and modifying Audiotool projects programmatically — in real time, with full multiplayer support."
+
+remote_theme: just-the-docs/just-the-docs@v0.10.0
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+
+color_scheme: dark
+
+search_enabled: true
+heading_anchors: true
+
+aux_links:
+  "GitHub":
+    - "https://github.com/audiotool/nexus"
+  "Developer Hub":
+    - "https://developer.audiotool.com"
+
+aux_links_new_tab: true
+
+footer_content: '<a href="https://developer.audiotool.com">Developer Hub</a> &middot; <a href="https://github.com/audiotool/nexus">GitHub</a> &middot; <a href="https://new.audiotool.com">Audiotool DAW</a> &middot; <a href="https://discord.gg/5Cde4Zvret">Discord</a>'
+
+callouts_level: quiet
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red

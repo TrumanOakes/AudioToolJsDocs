@@ -1,3 +1,9 @@
+---
+title: Make Safe Changes
+parent: Working With Audiotool Projects
+nav_order: 7
+---
+
 # Make Safe Changes
 
 This page covers practical guidelines for making modifications safely — using transactions correctly, avoiding common mistakes, and understanding how validation and locking protect your data.
