@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - "claude/github-pages-deployment-SPyTT"
   workflow_dispatch:
 
 permissions:
