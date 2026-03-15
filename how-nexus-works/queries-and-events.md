@@ -1,8 +1,14 @@
+---
+title: Queries and Events
+parent: How Nexus Works
+nav_order: 5
+---
+
 # Queries and Events
 
-Nexus gives you two ways to read document state: **queries** (snapshot inspection) and **events** (live change notifications). This page explains both and when to use each.
+Nexus gives you two ways to read document state: <span class="tooltip" data-tooltip="A way to search for and retrieve specific entities or data from a document.">**queries**</span> (a snapshot of what's there right now) and <span class="tooltip" data-tooltip="A signal that something changed, such as an entity being created, updated, or removed.">**events**</span> (notifications when things change). This page explains both and when to use each.
 
-## Queries — snapshot inspection
+## Queries — reading current state
 
 Use `document.queryEntities` to inspect the current state of the document at any moment.
 
@@ -19,7 +25,7 @@ const gains = document.queryEntities.ofTypes("tinyGain").get();
 const tracks = document.queryEntities.ofTypes("noteTrack", "audioTrack").get();
 ```
 
-`.get()` returns an array of entity objects matching the query at the time of the call. It is a snapshot — it does not update automatically.
+`.get()` returns the matching entities at the moment of the call. The result is not live — it won't change as the document updates.
 
 ### Query by field value
 
@@ -38,7 +44,7 @@ const highVelocityNotes = document.queryEntities
 - In response to a user action or event
 - To initialize your app state when the document first loads
 
-## Events — live change notifications
+## Events — reacting to changes
 
 Use `document.events` to subscribe to entity changes as they happen. Events fire for all changes — whether made by your code, other bots, or users in the DAW.
 
@@ -96,7 +102,7 @@ document.events.onCreate("note", (entity) => {
 
 ## Subscriptions and cleanup
 
-Event subscriptions return a `Terminable` that you can dispose to unsubscribe:
+Each event subscription returns a <span class="tooltip" data-tooltip="An object with a .terminate() method that cancels the subscription when you no longer need it.">terminable</span> — an object with a `.terminate()` method you can call to unsubscribe:
 
 ```typescript
 const subscription = document.events.onCreate("note", handler);
@@ -105,7 +111,7 @@ const subscription = document.events.onCreate("note", handler);
 subscription.terminate();
 ```
 
-This is important if your app mounts and unmounts UI components or if you stop caring about certain events.
+This matters if your app mounts and unmounts components, or if you want to stop listening after a workflow step completes.
 
 ## Next step
 

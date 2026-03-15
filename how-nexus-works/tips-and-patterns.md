@@ -1,3 +1,9 @@
+---
+title: Tips and Patterns
+parent: How Nexus Works
+nav_order: 7
+---
+
 # Tips and Patterns
 
 Practical patterns that come up often when building with Nexus.
@@ -22,7 +28,7 @@ console.log(gains.length); // 1
 
 ## Batch changes in one transaction
 
-Multiple operations in a single `modify()` call are applied atomically. Prefer batching related changes rather than calling `modify()` many times in sequence:
+Multiple operations in a single `modify()` call are applied together — all succeed or none do. Prefer batching related changes rather than calling `modify()` many times in sequence:
 
 ```typescript
 // Preferred: one transaction for related changes

@@ -1,3 +1,9 @@
+---
+title: Offline vs Synced Behavior
+parent: Errors and Fixes
+nav_order: 6
+---
+
 # Offline vs Synced Behavior
 
 Offline documents and synced documents expose the same API, but they behave differently in important ways. This page clarifies the differences to prevent surprises.
@@ -25,7 +31,7 @@ If you used `createOfflineDocument({ validated: false })`, you may have written 
 
 When a synced document starts, it replays existing entities as `onCreate` events. If your code assumes `onCreate` means "brand new entity," it may double-process things that already existed.
 
-Design your `onCreate` handler to be idempotent — calling it twice for the same entity should not cause errors.
+Design your `onCreate` handler so that running it twice for the same entity doesn't cause errors — treat it as "this entity is now available" rather than "this entity was just added."
 
 ### Timing is different on synced
 

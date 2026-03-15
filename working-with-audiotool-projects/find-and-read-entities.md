@@ -1,6 +1,12 @@
+---
+title: Find and Read Entities
+parent: Working With Audiotool Projects
+nav_order: 5
+---
+
 # Find and Read Entities
 
-The query system lets you inspect the current state of the document — find entities by type, filter by field values, and read their current field data.
+Use <span class="tooltip" data-tooltip="A way to search for and retrieve specific entities or data from a document.">queries</span> to inspect the current state of the document — find <span class="tooltip" data-tooltip="A single item inside a project document, such as a device, note region, or other project object.">entities</span> by type, filter by field values, and read their current field data.
 
 ## Query by entity type
 
@@ -15,7 +21,7 @@ const devices = document.queryEntities
   .get();
 ```
 
-`.get()` returns an array of entity objects. The result is a **snapshot** — it reflects state at the moment of the call and does not update automatically.
+`.get()` returns the matching entities at the moment of the call. The result is not live — it won't change as the document updates.
 
 ## Filter by field value
 

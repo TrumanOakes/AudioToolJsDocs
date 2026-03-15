@@ -1,3 +1,9 @@
+---
+title: Validation Errors
+parent: Errors and Fixes
+nav_order: 4
+---
+
 # Validation Errors
 
 Transaction validation errors occur when `document.modify()` rejects an operation because it violates the document schema.

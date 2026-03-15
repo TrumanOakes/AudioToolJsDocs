@@ -1,10 +1,16 @@
+---
+title: Entities and Fields
+parent: How Nexus Works
+nav_order: 3
+---
+
 # Entities and Fields
 
-Entities are the building blocks of every Audiotool project. This page explains what they are, how their fields work, and how they relate to each other.
+This page explains what <span class="tooltip" data-tooltip="A single item inside a project document, such as a device, note region, or other project object.">entities</span> are, how their fields work, and how they relate to each other.
 
 ## What is an entity?
 
-An entity is a small, typed object that lives inside a document. Every piece of a project — a synthesizer, a note, a mixer channel, a cable — is an entity.
+An entity is a single item inside a project. Every piece of a project — a synthesizer, a note, a mixer channel, a cable — is an entity.
 
 Each entity has:
 
@@ -12,7 +18,7 @@ Each entity has:
 - A fixed **type key** (like `"tinyGain"`, `"note"`, `"noteTrack"`)
 - A set of **typed fields** defined by that entity type's schema
 
-You interact with entities by reading their fields, updating their fields via transactions, and listening for changes via events.
+You interact with entities by reading their fields, updating them through <span class="tooltip" data-tooltip="A grouped set of changes made to a document as one operation.">transactions</span>, and listening for changes through <span class="tooltip" data-tooltip="A signal that something changed, such as an entity being created, updated, or removed.">events</span>.
 
 ## Entity categories
 
@@ -98,14 +104,14 @@ entity.fields.collection  // a pointer field (references another entity)
 
 ## Pointers
 
-Some fields are **pointers** — they reference another entity or a field on another entity. Pointers define the relationships in the document graph.
+Some fields hold a reference to another entity instead of a plain value. These are called **pointers** — they define the relationships between entities in the document.
 
-Examples:
+For example:
 - A `note` has a `collection` field that points to the `noteCollection` it belongs to.
 - An `automationTrack` points to the device parameter it controls.
-- An `audioCable` points to the output and input it connects.
+- An `audioCable` points to the audio output and input it connects.
 
-When you create entities that need to reference others, you pass pointer values as part of the creation call.
+When you create an entity that needs to reference another, you pass the referenced entity as part of the creation fields.
 
 ## Working with entities in practice
 

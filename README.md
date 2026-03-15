@@ -1,3 +1,10 @@
+---
+title: Home
+nav_order: 0
+description: "@audiotool/nexus — JavaScript/TypeScript package for reading and modifying Audiotool projects programmatically."
+permalink: /
+---
+
 # @audiotool/nexus Documentation
 
 **@audiotool/nexus** is a JavaScript/TypeScript package for reading and modifying [Audiotool](https://new.audiotool.com) projects programmatically — in real time, with full multiplayer support.

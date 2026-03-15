@@ -1,8 +1,14 @@
+---
+title: Package Entry Points
+parent: Reference
+nav_order: 2
+---
+
 # Package Entry Points
 
 **Module:** `@audiotool/nexus`
 
-The primary entry point for the Audiotool Nexus SDK. Import from here for the client factory, login helpers, and offline document creation.
+The main entry point for the <span class="tooltip" data-tooltip="The JavaScript package used to interact with Audiotool projects and data from your own app.">Nexus</span> package. Import from here to create a client, check login status, or open an offline document.
 
 ## Quick start
 
@@ -70,12 +76,12 @@ Returns the current OAuth login status. Used to implement login/logout UI in bro
 
 | Type | Description |
 |------|-------------|
-| `AudiotoolClient` | The main authenticated client instance |
-| `LoggedInStatus` | Login status when a user is authenticated — has `.logout()` method |
-| `LoggedOutStatus` | Login status when no user is authenticated — has `.login()` method |
-| `LoginStatus` | Union of `LoggedInStatus \| LoggedOutStatus` |
-| `OfflineDocument` | Document type for offline/no-backend use |
-| `SyncedDocument` | Document type with real-time backend synchronization |
+| `AudiotoolClient` | The connected client — use this to open documents and call APIs |
+| `LoggedInStatus` | The user is signed in — has a `.logout()` method |
+| `LoggedOutStatus` | The user is not signed in — has a `.login()` method |
+| `LoginStatus` | The result of `getLoginStatus()` — either signed in or signed out |
+| `OfflineDocument` | A local-only document, no network required |
+| `SyncedDocument` | A document connected to a real Audiotool project in real time |
 
 ## See also
 

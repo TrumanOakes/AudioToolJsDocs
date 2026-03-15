@@ -1,10 +1,16 @@
+---
+title: Platform API Types
+parent: Reference
+nav_order: 6
+---
+
 # Platform API Types
 
 **Module:** `@audiotool/nexus/api`
 
-API service types and bindings for the Audiotool platform. These types are auto-generated from proto files and wrapped in a `RetryingClient`.
+Type definitions for the Audiotool REST API services. Use this page to look up service names, request/response types, and enumerations.
 
-For practical usage of these services, see [Use Platform APIs Through the Client](../working-with-audiotool-projects/use-platform-apis-through-the-client.md).
+For practical usage examples, see [Use Platform APIs Through the Client](../working-with-audiotool-projects/use-platform-apis-through-the-client.md).
 
 ## Accessing services
 

@@ -1,3 +1,9 @@
+---
+title: Query and Event Confusion
+parent: Errors and Fixes
+nav_order: 5
+---
+
 # Query and Event Confusion
 
 Issues that arise from misunderstanding how queries and events work.
@@ -49,14 +55,14 @@ document.events.onCreate("note", (e) => notes = [...notes, e]);
 document.events.onRemove("note", (e) => notes = notes.filter(n => n.id !== e.id));
 ```
 
-## Calling modify() inside an event handler causes a deadlock
+## Calling modify() inside an event handler causes it to hang
 
-The document lock is held during event dispatch. Calling `modify()` inside an event handler tries to acquire the same lock — causing a deadlock.
+Nexus can't start a new transaction while an event is being handled. Calling `modify()` inside an event callback will never resolve.
 
 ```typescript
-// WRONG — deadlocks
+// WRONG — will never resolve
 document.events.onCreate("note", async (entity) => {
-  await document.modify((t) => { ... }); // never resolves
+  await document.modify((t) => { ... }); // hangs here
 });
 
 // Correct — schedule modification for after the event

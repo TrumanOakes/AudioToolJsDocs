@@ -1,6 +1,12 @@
+---
+title: Use Platform APIs Through the Client
+parent: Working With Audiotool Projects
+nav_order: 9
+---
+
 # Use Platform APIs Through the Client
 
-The `AudiotoolClient` includes access to Audiotool's REST API services via `client.api`. These services let you manage projects, samples, users, and more.
+Your <span class="tooltip" data-tooltip="The main object your app uses to connect to Audiotool and work with projects, documents, and APIs.">AudiotoolClient</span> includes access to Audiotool's REST API services via `client.api`. These services let you manage projects, samples, users, and more.
 
 ## Access the API
 
@@ -15,7 +21,7 @@ client.api.userService
 client.api.audiographService
 ```
 
-All API calls return Promises and are automatically wrapped in a retrying transport — transient network failures are retried without any extra code on your part.
+All API calls return Promises. Transient network failures are automatically retried — you don't need to add any retry logic yourself.
 
 ## ProjectService — manage projects
 

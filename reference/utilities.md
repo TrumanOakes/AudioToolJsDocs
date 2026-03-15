@@ -1,8 +1,14 @@
+---
+title: Utilities
+parent: Reference
+nav_order: 5
+---
+
 # Utilities
 
 **Module:** `@audiotool/nexus/utils`
 
-Utility functions, classes, and types used across the package. Includes timing helpers, async primitives, and observable/notification patterns.
+Utility functions, classes, and types from `@audiotool/nexus/utils`. Includes timing helpers for timeline work, async coordination utilities, and observable value patterns.
 
 ## Import
 
@@ -18,7 +24,7 @@ const { Ticks, secondsToTicks, ticksToSeconds, AsyncLock } = utils;
 
 ### `Ticks`
 
-A constant object providing timeline time measurement values. A "tick" is the finest resolution at which events can be scheduled on the timeline. Tick values are independent of tempo.
+A constant object with timeline time values. Ticks are the unit used for all timeline positions and durations in Nexus — they are independent of tempo, so the same tick values work at any BPM.
 
 ```typescript
 import { utils } from "@audiotool/nexus";
@@ -71,7 +77,7 @@ const value = maybeNull ?? throw_("Expected a value here");
 
 ### `AsyncLock`
 
-An asynchronous mutual-exclusion lock. Ensures that only one piece of code runs in the critical section at a time.
+An async lock that ensures only one block of code runs at a time. Useful if you need to serialize async operations in your own code.
 
 ```typescript
 const lock = new AsyncLock();
@@ -84,7 +90,7 @@ await lock.acquire(async () => {
 
 ### `HashMap<K extends Hashable, V>`
 
-A hash map keyed by `Hashable` objects (objects that implement a hash function). Used internally for efficient entity storage.
+A hash map used internally by Nexus for efficient entity storage. Available for use in your own code if needed.
 
 ### `Notifier<T>`
 
