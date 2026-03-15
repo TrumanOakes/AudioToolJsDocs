@@ -10,7 +10,7 @@ This page shows small, complete examples to help you get oriented quickly after 
 
 ## Minimal working example (PAT auth)
 
-The fastest way to try Nexus — no browser login required:
+The fastest way to try <span class="tooltip" data-tooltip="The JavaScript package used to interact with Audiotool projects and data from your own app.">Nexus</span> — no browser login required. Uses a <span class="tooltip" data-tooltip="A private token that lets your app access an Audiotool account without using a browser login flow.">Personal Access Token</span> to connect directly:
 
 ```typescript
 import { createAudiotoolClient } from "@audiotool/nexus";
@@ -79,6 +79,8 @@ console.log(`There are ${notes.length} notes in the project.`);
 → See [Find and Read Entities](../working-with-audiotool-projects/find-and-read-entities.md).
 
 ## Work offline (no backend needed)
+
+Use an <span class="tooltip" data-tooltip="A document used locally without a live connection, often for testing or controlled edits.">offline document</span> to develop and test your logic without connecting to Audiotool:
 
 ```typescript
 import { createOfflineDocument } from "@audiotool/nexus";

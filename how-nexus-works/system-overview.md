@@ -6,18 +6,18 @@ nav_order: 1
 
 # System Overview
 
-This page explains how Audiotool and Nexus work together at a system level — the architecture, the core primitives, and what actually happens when you open a project and start making changes.
+This page explains how the main pieces of <span class="tooltip" data-tooltip="The JavaScript package used to interact with Audiotool projects and data from your own app.">Nexus</span> fit together — what a document is, how entities work, and what happens when you open a project and start making changes.
 
 ## The Audiotool document model
 
-An Audiotool project is stored as a **document** — a structured collection of **entities**. Everything in a project is an entity: audio devices, mixer channels, timeline tracks, individual notes, cables connecting devices, and so on.
+An Audiotool project is stored as a <span class="tooltip" data-tooltip="The structured data that represents the contents of an Audiotool project.">**document**</span> — a collection of <span class="tooltip" data-tooltip="A single item inside a project document, such as a device, note region, or other project object.">**entities**</span>. Everything in a project is an entity: audio devices, mixer channels, timeline tracks, individual notes, cables connecting devices, and so on.
 
-When you open a project in Nexus, you get a **document object** that represents the live state of that project. The document:
+When you open a project in Nexus, you get a document object that represents the live state of that project. The document:
 
 - holds the full set of entities currently in the project
-- emits events when entities are created, updated, or removed
-- exposes a query interface to inspect current state
-- accepts modification transactions that are validated and synced
+- fires <span class="tooltip" data-tooltip="A signal that something changed, such as an entity being created, updated, or removed.">events</span> when entities are created, updated, or removed
+- lets you <span class="tooltip" data-tooltip="A way to search for and retrieve specific entities or data from a document.">query</span> the current state at any moment
+- lets you make changes through a <span class="tooltip" data-tooltip="A grouped set of changes made to a document as one operation.">transaction</span> system that validates and syncs your edits
 
 ## Synced vs offline documents
 
@@ -46,17 +46,17 @@ You cannot add arbitrary fields to entities. The schema is fixed and validated.
 
 ## Pointers
 
-Some fields in an entity are **pointers** — they reference another entity or a field on another entity. Pointers create semantic relationships between entities.
+Some fields in an entity hold a reference to another entity instead of a plain value. These are called **pointers**. They define how entities relate to each other.
 
-Examples:
-- A `note` entity has a `collection` field that points to the `noteCollection` it belongs to.
-- An `automationTrack` entity points to the device parameter it automates.
+For example:
+- A `note` has a `collection` field that points to the `noteCollection` it belongs to.
+- An `automationTrack` points to the device parameter it controls.
 
-Pointers are how the document structure is organized — rather than nesting data, everything is flat entities linked by pointers.
+Rather than nesting objects inside one another, the document uses flat entities connected by these references.
 
 ## The modification system
 
-You cannot change a document directly. All changes go through a **transaction builder** obtained via `document.modify()`:
+You cannot change a document directly. All changes go through a <span class="tooltip" data-tooltip="The tool used to prepare and apply changes to a document.">**transaction builder**</span> obtained via `document.modify()`:
 
 ```typescript
 await document.modify((t) => {
@@ -74,7 +74,7 @@ The three operations are:
 | `t.update(field, value)` | Sets a field on an existing entity |
 | `t.remove(entity)` | Removes an entity from the document |
 
-The transaction builder acquires a document lock before modifications begin. This ensures changes are applied atomically and in order.
+Nexus applies all operations in a single `modify()` call together as one unit — either all changes succeed or none do. Multiple `modify()` calls are queued and run one at a time.
 
 → See [Making Changes](making-changes.md) for a full guide.
 

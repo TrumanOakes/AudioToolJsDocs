@@ -8,7 +8,7 @@ nav_order: 4
 
 **Module:** `@audiotool/nexus/entities`
 
-Field types for all entities in the Nexus document schema. Use these types when creating or updating entities via the transaction builder.
+Field types for all <span class="tooltip" data-tooltip="A single item inside a project document, such as a device, note region, or other project object.">entities</span> in the Nexus schema. Use this page to look up entity type keys and their fields when creating or updating entities.
 
 ## How to use entity types
 

@@ -10,7 +10,7 @@ The Audiotool timeline contains tracks, regions, note collections, and individua
 
 ## Understanding timeline structure
 
-The timeline is built from nested entities:
+The timeline is built from several linked <span class="tooltip" data-tooltip="A single item inside a project document, such as a device, note region, or other project object.">entities</span>. A track holds regions, each region points to a note collection, and the collection holds the individual notes:
 
 ```
 noteTrack
@@ -19,7 +19,7 @@ noteTrack
               └── note (positionTicks, pitch, velocity)
 ```
 
-To place notes in a project, you create all of these in a single transaction.
+To place notes in a project, you create all of these in a single <span class="tooltip" data-tooltip="A grouped set of changes made to a document as one operation.">transaction</span>.
 
 ## Time measurement: ticks
 

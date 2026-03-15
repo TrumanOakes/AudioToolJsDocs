@@ -6,7 +6,7 @@ nav_order: 8
 
 # Work Offline for Testing
 
-Nexus supports a fully offline document mode for local development and testing. Offline documents use the same API as synced documents but require no auth, no network, and no project URL.
+<span class="tooltip" data-tooltip="The JavaScript package used to interact with Audiotool projects and data from your own app.">Nexus</span> supports a fully <span class="tooltip" data-tooltip="A document used locally without a live connection, often for testing or controlled edits.">offline document</span> mode for local development and testing. Offline documents use the same API as <span class="tooltip" data-tooltip="A document connected to Audiotool in real time, so changes can update as the project changes.">synced documents</span> but require no auth, no network, and no project URL.
 
 ## Create an offline document
 

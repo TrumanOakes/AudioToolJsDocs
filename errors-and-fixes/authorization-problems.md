@@ -31,7 +31,7 @@ const status = await getLoginStatus({
 
 ## Login always shows as "logged out"
 
-**Cause:** This is expected behavior on the first call. `getLoginStatus` always reports `LoggedOutStatus` on its very first invocation — even if the user is authenticated. The OAuth flow works via a redirect, and the result is only available after the user has gone through the redirect.
+**Cause:** This is expected on the first call. `getLoginStatus` always reports the user as signed out initially — even if they authenticated before. The <span class="tooltip" data-tooltip="A login method that lets users sign in through Audiotool and grant your app permission without sharing their password directly.">OAuth</span> flow works via a browser redirect, and the signed-in state is only available after that redirect completes.
 
 **Fix:** Implement both login and logout button states, and do not assume that `LoggedOutStatus` means there is a problem:
 

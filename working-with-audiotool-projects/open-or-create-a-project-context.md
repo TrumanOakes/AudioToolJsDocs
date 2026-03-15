@@ -6,7 +6,7 @@ nav_order: 2
 
 # Open or Create a Project Context
 
-Once you have an `AudiotoolClient`, the next step is to open a **document** — the object that represents a specific Audiotool project and gives you access to its entities, events, and modification interface.
+Once you have an <span class="tooltip" data-tooltip="The main object your app uses to connect to Audiotool and work with projects, documents, and APIs.">AudiotoolClient</span>, the next step is to open a <span class="tooltip" data-tooltip="The structured data that represents the contents of an Audiotool project.">**document**</span> — the object that represents a specific Audiotool project and gives you access to its entities, events, and changes.
 
 ## Open a synced document
 
@@ -56,7 +56,7 @@ When you are done, stop syncing:
 await document.stop();
 ```
 
-This finalizes any pending changes and transitions the document to read-only. After stopping, you can still query entities but cannot call `modify()`.
+This finalizes any pending changes and makes the document read-only. You can still query entities, but `modify()` will throw.
 
 Offline documents do not require `stop()`.
 

@@ -6,7 +6,7 @@ nav_order: 7
 
 # Make Safe Changes
 
-This page covers practical guidelines for making modifications safely — using transactions correctly, avoiding common mistakes, and understanding how validation and locking protect your data.
+This page covers practical guidelines for making modifications safely — using <span class="tooltip" data-tooltip="A grouped set of changes made to a document as one operation.">transactions</span> correctly and avoiding common mistakes.
 
 ## The basics of modify()
 
@@ -27,7 +27,7 @@ The three operations — `create`, `update`, `remove` — are described in [Maki
 Group related operations into a single transaction. This keeps the document consistent — either all changes apply or none do:
 
 ```typescript
-// Good: create device and set its name atomically
+// Good: create device and set its name in one step
 await document.modify((t) => {
   const gain = t.create("tinyGain", { positionX: 100 });
   t.update(gain.fields.displayName, "My Gain");
@@ -40,10 +40,10 @@ await document.modify((t) => { t.update(gain.fields.displayName, "..."); });
 
 ## Never modify from inside an event handler
 
-Do not call `document.modify()` from within an event callback. The document lock is already held during event dispatch, and re-entrant locking will deadlock:
+Do not call `document.modify()` from within an event callback. Nexus cannot start a new transaction while an event is already being handled — the call will never resolve:
 
 ```typescript
-// WRONG — will deadlock
+// WRONG — will never resolve
 document.events.onCreate("note", async (entity) => {
   await document.modify((t) => { // ← never do this
     t.update(entity.fields.pitch, 60);

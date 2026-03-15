@@ -12,7 +12,7 @@ A **document** is the central object you work with in Nexus. It represents a sin
 
 ### SyncedDocument
 
-Created via `client.createSyncedDocument(...)`. Connects to a live Audiotool project on the backend. Changes you make are immediately transmitted to the server and broadcast to all other connected clients (other bots, other users in the DAW).
+A <span class="tooltip" data-tooltip="A document connected to Audiotool in real time, so changes can update as the project changes.">synced document</span> connects to a live Audiotool project. Changes are immediately sent to Audiotool and visible to all other connected collaborators (other bots, other users in the DAW). Created via `client.createSyncedDocument(...)`.
 
 ```typescript
 const document = await client.createSyncedDocument({
@@ -33,7 +33,7 @@ await document.stop();
 
 ### OfflineDocument
 
-Created via `createOfflineDocument()`. Runs entirely in-process with no network connection. Changes are not persisted — everything resets on reload or shutdown.
+An <span class="tooltip" data-tooltip="A document used locally without a live connection, often for testing or controlled edits.">offline document</span> runs locally with no network connection. Changes are not saved — everything resets on reload or shutdown. Created via `createOfflineDocument()`.
 
 ```typescript
 import { createOfflineDocument } from "@audiotool/nexus";
@@ -50,7 +50,7 @@ Offline documents support an optional `validated` flag:
 const document = await createOfflineDocument({ validated: false });
 ```
 
-Disabling validation reduces strict schema enforcement, which is useful when exploring the API rapidly. Keep validation enabled for production-like testing.
+Disabling validation lets you experiment freely without transactions throwing errors. Re-enable it before testing production-like behavior.
 
 ## Document interface
 
@@ -63,17 +63,6 @@ Both document types expose the same interface:
 | `document.queryEntities` | Query the current set of entities |
 | `document.start()` | Begin syncing (SyncedDocument only) |
 | `document.stop()` | Finalize and stop syncing (SyncedDocument only) |
-
-## Type aliases
-
-The `@audiotool/nexus` package exports these document-related types:
-
-| Type | Description |
-|------|-------------|
-| `SyncedDocument` | The type of a document connected to the backend |
-| `OfflineDocument` | The type of a local-only document |
-
-Both are returned as `Promise<...>` from their factory functions.
 
 ## Next step
 

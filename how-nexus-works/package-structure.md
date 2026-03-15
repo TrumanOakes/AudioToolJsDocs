@@ -6,11 +6,11 @@ nav_order: 6
 
 # Package Structure
 
-The `@audiotool/nexus` package is organized into several modules. This page explains what each module contains and when you need to import from it.
+The `@audiotool/nexus` package is split into several modules. This page explains what each one contains and when to use it.
 
-## Primary entry point
+## Main import
 
-Most code only needs the main entry point:
+For most tasks, you only need to import from the main entry point:
 
 ```typescript
 import { createAudiotoolClient, createOfflineDocument, getLoginStatus } from "@audiotool/nexus";
@@ -30,16 +30,13 @@ This gives you everything needed to authenticate, create a client, and open a do
 
 ## Main module exports
 
-The primary module exports three functions and six types:
+The main module gives you the three functions you need most:
 
-**Functions:**
-- `createAudiotoolClient` — creates an authenticated client from a `LoginStatus` or PAT
-- `createOfflineDocument` — creates a local-only document for testing
-- `getLoginStatus` — checks current OAuth login state (browser only)
+- `createAudiotoolClient` — creates an authenticated <span class="tooltip" data-tooltip="The main object your app uses to connect to Audiotool and work with projects, documents, and APIs.">client</span> using a login result or a <span class="tooltip" data-tooltip="A private token that lets your app access an Audiotool account without using a browser login flow.">Personal Access Token</span>
+- `createOfflineDocument` — creates a local-only document for development and testing
+- `getLoginStatus` — checks whether the user is signed in (browser apps only)
 
-**Types:**
-- `AudiotoolClient`, `LoginStatus`, `LoggedInStatus`, `LoggedOutStatus`
-- `SyncedDocument`, `OfflineDocument`
+It also exports TypeScript types for the client, login state, and document objects. See [Package Entry Points](../reference/package-entry-points.md) for the full list.
 
 ## Utility module highlights
 
@@ -60,7 +57,7 @@ const ticks = secondsToTicks(2.5, 120); // 2.5 seconds at 120 BPM
 const secs  = ticksToSeconds(3840, 120); // one beat at 120 BPM = 0.5s
 ```
 
-The utils module also includes async locking and notification primitives (`AsyncLock`, `Notifier`, `ValueNotifier`, etc.) used internally by the package and available for your own code if needed.
+The utils module also includes async coordination utilities (`AsyncLock`, `Notifier`, `ValueNotifier`, etc.) used internally by Nexus and available for your own code if needed.
 
 ## API module
 

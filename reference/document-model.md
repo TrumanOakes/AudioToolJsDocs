@@ -8,7 +8,7 @@ nav_order: 3
 
 **Module:** `@audiotool/nexus/document`
 
-Types and interfaces that describe the Nexus document structure, schema, and transaction system.
+Type definitions for the Nexus document structure, schema, and <span class="tooltip" data-tooltip="A grouped set of changes made to a document as one operation.">transaction</span> system. Use this page as a reference when working with the document API directly or when you need specific type names for TypeScript.
 
 ## Interfaces
 

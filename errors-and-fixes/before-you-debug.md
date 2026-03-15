@@ -40,7 +40,7 @@ await document.start(); // required before events/changes
 
 ### 4. Are you calling `modify()` inside an event handler?
 
-This causes a deadlock. The document lock is already held when events fire. Schedule modifications outside the callback.
+Nexus can't start a new transaction while an event is being handled. The call will never resolve. Schedule modifications outside the callback.
 
 → [Query and Event Confusion](query-and-event-confusion.md)
 

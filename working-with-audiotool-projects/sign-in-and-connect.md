@@ -6,7 +6,7 @@ nav_order: 1
 
 # Sign In and Connect
 
-This page covers the full authentication flow for browser apps and the Personal Access Token alternative for server environments — and how to go from a login to a connected client.
+This page shows how to sign in and create an <span class="tooltip" data-tooltip="The main object your app uses to connect to Audiotool and work with projects, documents, and APIs.">AudiotoolClient</span>. For setup instructions and a detailed explanation of the two auth methods, see [Authorization and Setup](../getting-started/authorization-and-setup.md).
 
 ## Browser apps — OAuth flow
 
@@ -22,9 +22,9 @@ const status = await getLoginStatus({
 });
 ```
 
-`getLoginStatus` returns a `LoginStatus` — either `LoggedInStatus` or `LoggedOutStatus`.
+`getLoginStatus` checks whether the user is already signed in.
 
-> The **first call always returns `LoggedOutStatus`**, even if the user authenticated before. This is expected — OAuth works via a redirect, and the result is only available after the redirect completes.
+> The **first call always reports logged out**, even if the user authenticated before. This is expected — <span class="tooltip" data-tooltip="A login method that lets users sign in through Audiotool and grant your app permission without sharing their password directly.">OAuth</span> works via a browser redirect, and the result is only available after the redirect completes.
 
 ### 2. Handle both states
 
@@ -48,11 +48,11 @@ When `status.login()` is called, the browser redirects to Audiotool's OAuth page
 const client = await createAudiotoolClient({ status });
 ```
 
-`createAudiotoolClient` accepts a `LoginStatus` (from `getLoginStatus`) or a PAT. It returns a fully initialized `AudiotoolClient`.
+`createAudiotoolClient` accepts the result from `getLoginStatus` or a <span class="tooltip" data-tooltip="A private token that lets your app access an Audiotool account without using a browser login flow.">Personal Access Token</span>. It returns a ready-to-use client.
 
 ## Server apps — Personal Access Token
 
-For Node.js, Bun, or Deno scripts and bots:
+For <span class="tooltip" data-tooltip="An app or script that runs outside the browser, such as in Node.js, Bun, or Deno.">server apps</span> — Node.js, Bun, or Deno scripts and bots:
 
 ```typescript
 const client = await createAudiotoolClient({

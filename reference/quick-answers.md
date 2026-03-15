@@ -53,7 +53,7 @@ Use `secondsToTicks(seconds, bpm)` and `ticksToSeconds(ticks, bpm)` from the `ut
 
 **Q: Can I modify a document from inside an event handler?**
 
-No. The document lock is held during event dispatch. Calling `modify()` inside an event handler will deadlock. Schedule modifications with `setTimeout` or similar to run after the event handler returns.
+No. Nexus cannot start a new transaction while an event is already being handled — the call will never resolve. Schedule modifications with `setTimeout` or similar to run after the event handler returns.
 
 ---
 
