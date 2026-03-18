@@ -78,18 +78,18 @@ See [Entity Reference](../reference/entity-reference.md) for the exact field def
 
 | Entity | Description |
 |--------|-------------|
-| `noteTrack` | Track for MIDI/note data |
-| `audioTrack` | Track for audio clips |
-| `automationTrack` | Track for parameter automation curves |
-| `patternTrack` | Track for pattern-based sequencing |
+| [`noteTrack`](../reference/entities/noteTrack.md) | Track for MIDI/note data |
+| [`audioTrack`](../reference/entities/audioTrack.md) | Track for audio clips |
+| [`automationTrack`](../reference/entities/automationTrack.md) | Track for parameter automation curves |
+| [`patternTrack`](../reference/entities/patternTrack.md) | Track for pattern-based sequencing |
 
 ## Region types
 
 | Entity | Description |
 |--------|-------------|
-| `noteRegion` | A region on a note track, references a `noteCollection` |
-| `audioRegion` | A region on an audio track, references a `sample` |
-| `automationRegion` | A region on an automation track |
+| [`noteRegion`](../reference/entities/noteRegion.md) | A region on a note track, references a `noteCollection` |
+| [`audioRegion`](../reference/entities/audioRegion.md) | A region on an audio track, references a `sample` |
+| [`automationRegion`](../reference/entities/automationRegion.md) | A region on an automation track |
 
 ## Note fields
 

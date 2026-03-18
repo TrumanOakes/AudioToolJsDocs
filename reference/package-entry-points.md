@@ -74,14 +74,116 @@ Returns the current OAuth login status. Used to implement login/logout UI in bro
 
 ## Exported Type Aliases
 
-| Type | Description |
-|------|-------------|
-| `AudiotoolClient` | The connected client — use this to open documents and call APIs |
-| `LoggedInStatus` | The user is signed in — has a `.logout()` method |
-| `LoggedOutStatus` | The user is not signed in — has a `.login()` method |
-| `LoginStatus` | The result of `getLoginStatus()` — either signed in or signed out |
-| `OfflineDocument` | A local-only document, no network required |
-| `SyncedDocument` | A document connected to a real Audiotool project in real time |
+### `AudiotoolClient`
+
+The authenticated client object returned by `createAudiotoolClient()`. Use this to open documents and call REST API services.
+
+```typescript
+import type { AudiotoolClient } from "@audiotool/nexus";
+
+// Pass the client to helper functions with a typed annotation
+async function openProject(client: AudiotoolClient, url: string) {
+  const document = await client.createSyncedDocument({
+    mode: "online",
+    project: url,
+  });
+  await document.start();
+  return document;
+}
+```
+
+---
+
+### `LoginStatus`
+
+The union type returned by `getLoginStatus()` — either a `LoggedInStatus` or a `LoggedOutStatus`. Check which one you have before taking action.
+
+```typescript
+import type { LoginStatus } from "@audiotool/nexus";
+
+function handleLogin(status: LoginStatus) {
+  if ("logout" in status) {
+    // It's a LoggedInStatus — user is authenticated
+    console.log("Logged in");
+  } else {
+    // It's a LoggedOutStatus — show a login button
+    status.login(); // redirect to the OAuth login page
+  }
+}
+```
+
+---
+
+### `LoggedInStatus`
+
+The user is authenticated. Has a `.logout()` method to end the session.
+
+```typescript
+import type { LoggedInStatus } from "@audiotool/nexus";
+
+function showUserMenu(status: LoggedInStatus) {
+  // User is signed in — show account options
+  document.getElementById("logout-btn")?.addEventListener("click", () => {
+    status.logout();
+  });
+}
+```
+
+---
+
+### `LoggedOutStatus`
+
+The user is not authenticated. Has a `.login()` method to start the OAuth login flow.
+
+```typescript
+import type { LoggedOutStatus } from "@audiotool/nexus";
+
+function showLoginPrompt(status: LoggedOutStatus) {
+  document.getElementById("login-btn")?.addEventListener("click", () => {
+    status.login(); // redirects the browser to the OAuth consent page
+  });
+}
+```
+
+---
+
+### `OfflineDocument`
+
+A local-only document with no backend connection. Changes are discarded on reload. Returned by `createOfflineDocument()`. Exposes the same `modify()`, `events`, and `queryEntities` API as a synced document.
+
+```typescript
+import type { OfflineDocument } from "@audiotool/nexus";
+
+async function buildTestDocument(): Promise<OfflineDocument> {
+  const doc = await createOfflineDocument();
+
+  await doc.modify((t) => {
+    t.create("tinyGain", { gain: 0.8, displayName: "Test Gain" });
+  });
+
+  return doc;
+}
+```
+
+---
+
+### `SyncedDocument`
+
+A document connected to a real Audiotool project in real time. Changes are persisted and broadcast to all collaborators. Returned by `client.createSyncedDocument()` after calling `.start()`.
+
+```typescript
+import type { SyncedDocument } from "@audiotool/nexus";
+
+async function watchNotes(doc: SyncedDocument) {
+  await doc.start(); // begin receiving updates
+
+  doc.events.onCreate("note", (note) => {
+    console.log("Collaborator added a note:", note.fields.pitch);
+  });
+}
+```
+
+---
 
 ## See also
 
