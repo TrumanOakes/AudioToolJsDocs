@@ -40,39 +40,68 @@ const secs  = ticksToSeconds(3840, 120); // one beat at 120 BPM = 0.5s
 
 ## Creating a note track with notes
 
+Use `createTransaction()` so that you can reference newly created entities' locations immediately:
+
 ```typescript
-await document.modify((t) => {
-  // 1. Create the track
-  const track = t.create("noteTrack", {
-    displayName: "Melody"
-  });
+import { utils } from "@audiotool/nexus";
+const { Ticks } = utils;
 
-  // 2. Create a note collection to hold the notes
-  const collection = t.create("noteCollection", {});
+const t = await document.createTransaction();
 
-  // 3. Create a region on the track that references the collection
-  const region = t.create("noteRegion", {
-    // positionTicks: start of the region
-    // lengthTicks: duration of the region
-    // collection: pointer to noteCollection
-  });
-
-  // 4. Create individual notes inside the collection
-  t.create("note", {
-    positionTicks: 0,
-    pitch: 60,       // MIDI pitch (60 = middle C)
-    velocity: 100,   // 0–127
-  });
-
-  t.create("note", {
-    positionTicks: Ticks.Beat,
-    pitch: 64,
-    velocity: 80,
-  });
+// 1. Create the synthesizer that will play the track
+const synth = t.create("pulverisateur", {
+  positionX: 100,
+  positionY: 100,
+  displayName: "Lead Synth",
 });
+
+// 2. Create the track — player is required and uses .location
+const track = t.create("noteTrack", {
+  player: synth.location,
+  orderAmongTracks: 1000 + Math.random() * 1000,
+  displayName: "Melody",
+});
+
+// 3. Create a note collection to hold the notes
+const collection = t.create("noteCollection", {});
+
+// 4. Create a region on the track — timing lives inside the nested `region` object
+t.create("noteRegion", {
+  collection: collection.location,   // pointer uses .location
+  track: track.location,             // pointer uses .location
+  region: {
+    positionTicks: 0,                // starts at bar 1
+    durationTicks: Ticks.Beat * 4,   // 4 beats long
+    loopDurationTicks: Ticks.Beat * 4, // same as durationTicks = no extra looping
+    loopOffsetTicks: 0,
+    collectionOffsetTicks: 0,
+    colorIndex: 3,
+    displayName: "Melody",
+    isEnabled: true,
+  },
+});
+
+// 5. Create individual notes inside the collection
+t.create("note", {
+  collection: collection.location,
+  positionTicks: 0,
+  durationTicks: Ticks.Beat,
+  pitch: 60,       // MIDI pitch (60 = middle C)
+  velocity: 100,   // 0–127
+});
+
+t.create("note", {
+  collection: collection.location,
+  positionTicks: Ticks.Beat,
+  durationTicks: Ticks.Beat,
+  pitch: 64,       // E4
+  velocity: 80,
+});
+
+t.send();
 ```
 
-See [Entity Reference](../reference/entity-reference.md) for the exact field definitions, including pointer fields for `noteRegion` and `noteCollection`.
+See [noteRegion](../reference/entities/noteRegion.md), [noteTrack](../reference/entities/noteTrack.md), and [note](../reference/entities/note.md) for full field details.
 
 ## Track types
 

@@ -9,40 +9,48 @@ nav_exclude: true
 
 **Module:** `@audiotool/nexus/entities`
 
-A noteCable connects a note output (from a track or sequencer) to a note input (on a device). It is the MIDI equivalent of an `audioCable` — instead of carrying audio, it carries note trigger data so that notes in a `noteTrack` can play a synthesizer or drum machine.
+A noteCable connects a note output socket (from a track or sequencer) to a note input socket (on a device). It is the MIDI equivalent of a `desktopAudioCable` — instead of carrying audio, it carries note trigger data so that notes in a `noteTrack` can play a synthesizer or drum machine.
+
+> **Pointer syntax:** Fields that reference other entities use the **`.location`** property on a **field**, not the entity itself. Pass `entity.fields.socketName.location` wherever a pointer field is expected.
 
 ## Fields
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `source` | pointer | Points to the note output being connected from (e.g. a `noteTrack`'s note output port) |
-| `target` | pointer | Points to the note input being connected to (e.g. a device's note input port) |
+| `fromSocket` | pointer | The note output socket this cable connects **from** — use `track.fields.noteOutput.location` |
+| `toSocket` | pointer | The note input socket this cable connects **to** — use `device.fields.noteInput.location` |
 
 ## Example
 
 ```typescript
-await document.modify((t) => {
-  const synth = t.create("pulverisateur", {
-    positionX: 100,
-    positionY: 100,
-    displayName: "Lead Synth",
-  });
+// Use createTransaction() to build everything in one operation
+const t = await document.createTransaction();
 
-  const track = t.create("noteTrack", {
-    displayName: "Melody",
-  });
-
-  // Connect the note track to the synthesizer
-  t.create("noteCable", {
-    source: track.fields.noteOutput,
-    target: synth.fields.noteInput,
-  });
+const synth = t.create("pulverisateur", {
+  positionX: 100,
+  positionY: 100,
+  displayName: "Lead Synth",
 });
+
+const track = t.create("noteTrack", {
+  player: synth.location,
+  orderAmongTracks: 1000,
+  displayName: "Melody",
+});
+
+// Connect the note track output to the synthesizer note input
+// Use .location on the field, not on the entity
+t.create("noteCable", {
+  fromSocket: track.fields.noteOutput.location,
+  toSocket: synth.fields.noteInput.location,
+});
+
+t.send();
 ```
 
 ## See also
 
 - [Entity Reference](../entity-reference.md) — full list of all entity types
-- [audioCable](audioCable.md) — connects audio outputs to audio inputs
+- [desktopAudioCable](desktopAudioCable.md) — connects audio outputs to audio inputs
 - [noteTrack](noteTrack.md) — common source of note data
 - [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.md) — step-by-step guide

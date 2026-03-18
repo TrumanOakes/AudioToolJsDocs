@@ -8,7 +8,11 @@ nav_order: 4
 
 All modifications to a Nexus document go through a <span class="tooltip" data-tooltip="The tool used to prepare and apply changes to a document.">**transaction builder**</span>. This page explains how <span class="tooltip" data-tooltip="A grouped set of changes made to a document as one operation.">transactions</span> work and what operations are available.
 
-## The modify() method
+## Two ways to make changes
+
+Nexus has two transaction APIs. Both build and commit a set of changes atomically.
+
+### `document.modify()` — recommended for most cases
 
 Call `document.modify()` with a callback to open a transaction:
 
@@ -23,6 +27,28 @@ await document.modify((t) => {
 - All operations inside the callback are applied together — if any one fails, none of them go through.
 - If any operation fails validation, the entire transaction is rejected.
 - `modify()` returns a Promise that resolves when the transaction is committed.
+
+### `document.createTransaction()` — lower-level alternative
+
+`createTransaction()` gives you an explicit transaction object. Build your changes, then call `.send()` to commit:
+
+```typescript
+const t = await document.createTransaction();
+
+const synth = t.create("pulverisateur", { positionX: 100, positionY: 100 });
+const channel = t.create("mixerChannel", {});
+
+t.create("desktopAudioCable", {
+  fromSocket: synth.fields.audioOutput.location,
+  toSocket: channel.fields.audioInput.location,
+});
+
+t.send(); // commits all three creates at once
+```
+
+> This is the pattern used in all official Nexus examples. It makes it easy to reference entities created earlier in the same transaction — for example, using `synth.fields.audioOutput.location` on the line after creating `synth`.
+
+Both APIs produce identical results. Use `modify()` when you want automatic queuing, or `createTransaction()` when you prefer explicit control.
 
 ## The three operations
 

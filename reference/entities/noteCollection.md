@@ -11,6 +11,8 @@ nav_exclude: true
 
 A noteCollection is a container that holds a set of `note` entities. One or more `noteRegion` entities can reference the same noteCollection, which means the same musical phrase can be reused across multiple regions in the timeline without duplicating the note data.
 
+> **Pointer syntax:** Fields that reference other entities use the **`.location`** property. Pass `entity.location` wherever a pointer field is expected.
+
 ## Fields
 
 A noteCollection has no required creation fields of its own — it is a container whose content comes from `note` entities that point to it.
@@ -25,29 +27,30 @@ A noteCollection has no required creation fields of its own — it is a containe
 import { utils } from "@audiotool/nexus";
 const { Ticks } = utils;
 
-let collection;
+// Use createTransaction() to build everything in one operation
+const t = await document.createTransaction();
 
-// Step 1: create the collection
-await document.modify((t) => {
-  collection = t.create("noteCollection", {});
+// Create the collection first — notes will reference it
+const collection = t.create("noteCollection", {});
+
+// Add notes — use collection.location for the pointer field
+t.create("note", {
+  collection: collection.location,
+  positionTicks: 0,
+  durationTicks: Ticks.Beat,
+  pitch: 60,       // middle C
+  velocity: 100,
 });
 
-// Step 2: add notes to it
-await document.modify((t) => {
-  t.create("note", {
-    collection: collection,
-    positionTicks: 0,
-    pitch: 60,       // middle C
-    velocity: 100,
-  });
-
-  t.create("note", {
-    collection: collection,
-    positionTicks: Ticks.Beat,
-    pitch: 64,       // E4
-    velocity: 90,
-  });
+t.create("note", {
+  collection: collection.location,
+  positionTicks: Ticks.Beat,
+  durationTicks: Ticks.Beat,
+  pitch: 64,       // E4
+  velocity: 90,
 });
+
+t.send();
 ```
 
 ## See also

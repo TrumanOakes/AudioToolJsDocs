@@ -62,28 +62,31 @@ All device entities accept `positionX`, `positionY`, and `displayName` as fields
 
 ## Creating a synth and connecting it to the mixer
 
-A typical setup involves creating a synthesizer, a mixer channel, and connecting them with an audio cable:
+A typical setup involves creating a synthesizer, a mixer channel, and connecting them with an audio cable. Use `createTransaction()` so you can reference the newly created entities' socket fields immediately:
 
 ```typescript
-await document.modify((t) => {
-  // Create a synthesizer
-  const synth = t.create("pulverisateur", {
-    positionX: 100,
-    positionY: 100,
-  });
+const t = await document.createTransaction();
 
-  // Create a mixer channel
-  const channel = t.create("mixerChannel", {});
-
-  // Connect synth output to mixer channel input via an audio cable
-  const cable = t.create("audioCable", {
-    // source: synth output
-    // target: channel input
-  });
+// Create a synthesizer
+const synth = t.create("pulverisateur", {
+  positionX: 100,
+  positionY: 100,
 });
+
+// Create a mixer channel
+const channel = t.create("mixerChannel", {});
+
+// Connect synth audio output → channel audio input
+// Use .location on the field socket, not on the entity
+t.create("desktopAudioCable", {
+  fromSocket: synth.fields.audioOutput.location,
+  toSocket: channel.fields.audioInput.location,
+});
+
+t.send();
 ```
 
-The `audioCable` entity connects audio outputs to audio inputs. See [Entity Reference](../reference/entity-reference.md) for the exact field definitions for `audioCable`.
+The `desktopAudioCable` entity connects audio outputs to audio inputs. See [desktopAudioCable](../reference/entities/desktopAudioCable.md) for full field details.
 
 ## Updating a device parameter
 

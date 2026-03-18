@@ -9,16 +9,30 @@ nav_exclude: true
 
 **Module:** `@audiotool/nexus/entities`
 
-A noteRegion is a block on a `noteTrack` in the timeline that marks where a collection of notes plays. It defines the position and length of the block in the arrangement and points to the `noteCollection` that contains the actual note data.
+A noteRegion is a block placed on a `noteTrack` in the timeline. It marks where a collection of notes plays in the arrangement. The region points to a `noteCollection` (which holds the actual note data) and defines its position, length, looping behaviour, and display properties through a nested `region` object.
+
+> **Pointer syntax:** Fields that reference other entities use the **`.location`** property. Pass `entity.location` wherever a pointer field is expected.
 
 ## Fields
 
 | Field | Type | Description |
 |-------|------|-------------|
+| `collection` | pointer | Points to the `noteCollection` containing the notes — use `collection.location` |
+| `track` | pointer | Points to the `noteTrack` this region sits on — use `track.location` |
+| `region` | object | Nested object that defines the region's timing and display (see sub-fields below) |
+
+### `region` sub-fields
+
+| Sub-field | Type | Description |
+|-----------|------|-------------|
 | `positionTicks` | `number` | Start position of the region on the timeline, measured in ticks |
-| `durationTicks` | `number` | Length of the region in ticks |
-| `collection` | pointer | Points to the `noteCollection` that holds the notes played by this region |
-| `track` | pointer | Points to the `noteTrack` this region belongs to |
+| `durationTicks` | `number` | Total length of the region in ticks |
+| `loopDurationTicks` | `number` | How many ticks of the collection loop within the region. Set equal to `durationTicks` for no looping |
+| `loopOffsetTicks` | `number` | How far into the collection the loop starts. Set to `0` for standard playback |
+| `collectionOffsetTicks` | `number` | Offset into the noteCollection to start reading from. Set to `0` for standard playback |
+| `colorIndex` | `number` | Color used to display the region block in the timeline |
+| `displayName` | `string` | Label shown on the region block in the timeline |
+| `isEnabled` | `boolean` | When `false`, the region is muted and its notes do not play |
 
 > One tick = `1/3840` of a quarter note. See [Utilities](../utilities.md) for `Ticks` constants.
 
@@ -28,22 +42,33 @@ A noteRegion is a block on a `noteTrack` in the timeline that marks where a coll
 import { utils } from "@audiotool/nexus";
 const { Ticks } = utils;
 
-let track, collection;
+// Use createTransaction() to build several entities in one operation
+const t = await document.createTransaction();
 
-await document.modify((t) => {
-  track = t.create("noteTrack", { displayName: "Melody" });
-  collection = t.create("noteCollection", {});
+const track = t.create("noteTrack", {
+  player: myDevice.location,       // device that plays this track's notes
+  orderAmongTracks: 1000,
 });
 
-await document.modify((t) => {
-  // Place a region at bar 1, lasting 4 beats
-  t.create("noteRegion", {
-    positionTicks: 0,
-    durationTicks: Ticks.SemiBreve, // one bar (4 beats in 4/4)
-    collection: collection,
-    track: track,
-  });
+const collection = t.create("noteCollection", {});
+
+// noteRegion — timing lives inside the nested `region` object
+t.create("noteRegion", {
+  collection: collection.location, // pointer uses .location
+  track: track.location,           // pointer uses .location
+  region: {
+    positionTicks: 0,              // starts at bar 1
+    durationTicks: Ticks.Beat * 4, // 4 beats long
+    loopDurationTicks: Ticks.Beat * 4, // same as durationTicks = no extra looping
+    loopOffsetTicks: 0,
+    collectionOffsetTicks: 0,
+    colorIndex: 3,
+    displayName: "Verse 1",
+    isEnabled: true,
+  },
 });
+
+t.send();
 ```
 
 ## See also

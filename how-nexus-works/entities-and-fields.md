@@ -78,7 +78,7 @@ Utility entities handle document-level configuration and connections.
 | Entity | Description |
 |--------|-------------|
 | [`configuration`](../reference/entities/configuration.md) | Document-level settings |
-| [`audioCable`](../reference/entities/audioCable.md) | Connects audio device outputs to inputs |
+| [`desktopAudioCable`](../reference/entities/desktopAudioCable.md) | Connects audio device outputs to inputs |
 | [`noteCable`](../reference/entities/noteCable.md) | Connects note/MIDI outputs to inputs |
 | [`groove`](../reference/entities/groove.md) | Groove/swing quantization |
 | [`microtuningOctave`](../reference/entities/microtuningOctave.md) | Per-octave microtuning definition |

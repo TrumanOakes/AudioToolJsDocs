@@ -38,6 +38,18 @@ const highVelocityNotes = document.queryEntities
   .get();
 ```
 
+### Get a specific entity by ID
+
+If you know an entity's ID, use `mustGetEntity()` to retrieve it directly. It throws if the entity is not found, which makes bugs easier to catch:
+
+```typescript
+const entity = document.queryEntities.mustGetEntity("some-entity-id");
+console.log(entity.type);   // "tinyGain"
+console.log(entity.fields); // typed fields for that entity
+```
+
+> Compare with `.find()` on a query result, which returns `undefined` if not found. Use `mustGetEntity()` when the entity must exist.
+
 ### When to use queries
 
 - When you need the current state once (not ongoing)
@@ -76,6 +88,19 @@ document.events.onRemove("tinyGain", (entity) => {
   console.log("tinyGain removed:", entity.id);
 });
 ```
+
+### onPointingTo — when a pointer to an entity changes
+
+`onPointingTo()` fires whenever any entity gains or loses a pointer to the given entity. This is useful for tracking relationships — for example, watching when a cable is connected or disconnected from a specific device socket:
+
+```typescript
+// Fire whenever any entity creates or removes a pointer to this synth
+document.events.onPointingTo(synth, (entity) => {
+  console.log("A connection to the synth changed:", entity.type, entity.id);
+});
+```
+
+> This event fires for any type of pointer change — a cable being connected, a track's `player` field being reassigned, etc.
 
 ### When to use events
 

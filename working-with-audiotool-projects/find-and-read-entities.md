@@ -89,7 +89,7 @@ Any entity type key can be used in a query. Common examples:
 | All audio devices | `"tinyGain"`, `"pulverisateur"`, `"gakki"`, etc. |
 | All tracks | `"noteTrack"`, `"audioTrack"`, `"automationTrack"` |
 | All mixer channels | `"mixerChannel"` |
-| All cables | `"audioCable"`, `"noteCable"` |
+| All cables | `"desktopAudioCable"`, `"noteCable"` |
 
 See [Entity Reference](../reference/entity-reference.md) for the complete list of entity type keys.
 

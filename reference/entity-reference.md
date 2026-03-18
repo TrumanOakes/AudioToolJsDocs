@@ -88,7 +88,7 @@ Mixer entities control signal routing and the mixing console.
 | [`mixerGroup`](entities/mixerGroup.md) | Group channel entities |
 | [`mixerSidechain`](entities/mixerSidechain.md) | Sidechain routing cables |
 
-Audio devices connect to mixer channels via [`audioCable`](entities/audioCable.md) entities that link device audio outputs to channel inputs.
+Audio devices connect to mixer channels via [`desktopAudioCable`](entities/desktopAudioCable.md) entities that link device audio outputs to channel inputs.
 
 ---
 
@@ -123,12 +123,17 @@ Timeline entities form the arrangement view: tracks, regions, and the content wi
 | Entity Key | Description |
 |------------|-------------|
 | [`configuration`](entities/configuration.md) | Document-level configuration settings (BPM, time signature, etc.) |
-| [`audioCable`](entities/audioCable.md) | Connects audio outputs to audio inputs |
+| [`desktopAudioCable`](entities/desktopAudioCable.md) | Connects audio device outputs to audio inputs (e.g. synth → mixer channel) |
 | [`noteCable`](entities/noteCable.md) | Connects note/MIDI outputs to inputs |
 | [`groove`](entities/groove.md) | Groove/swing quantization pattern |
 | [`microtuningOctave`](entities/microtuningOctave.md) | Per-octave microtuning definition |
 | [`sample`](entities/sample.md) | Reference to an audio sample file |
 | [`vst3Plugin`](entities/vst3Plugin.md) | VST3 plugin instance |
+| [`tonematrixPattern`](entities/tonematrixPattern.md) | Step-sequencer pattern used by the Tonematrix device |
+| [`mixerDelayAux`](entities/mixerDelayAux.md) | Delay-specific auxiliary send/return bus |
+| [`mixerReverbAux`](entities/mixerReverbAux.md) | Reverb-specific auxiliary send/return bus |
+| [`matrixArpeggiatorPattern`](entities/matrixArpeggiatorPattern.md) | Pattern for the matrix arpeggiator |
+| [`matrixArpeggiatorPatternStep`](entities/matrixArpeggiatorPatternStep.md) | An individual step within a matrix arpeggiator pattern |
 
 ---
 

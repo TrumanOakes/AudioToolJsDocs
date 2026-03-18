@@ -332,13 +332,15 @@ for (const device of connected) {
 
 ### `TransactionBuilder`
 
-The `t` object passed into your `document.modify(t => ...)` callback. Provides the three mutation operations: `create`, `update`, and `remove`.
+The `t` object passed into your `document.modify(t => ...)` callback, or the object returned by `document.createTransaction()`. Provides the three mutation operations: `create`, `update`, and `remove`.
 
 | Method | Description |
 |--------|-------------|
 | `t.create(type, fields)` | Create a new entity and return a reference to it |
 | `t.update(field, value)` | Set a new value on an existing entity's field |
 | `t.remove(entity)` | Remove an entity from the document |
+
+**With `document.modify()`:**
 
 ```typescript
 // All three operations in one transaction
@@ -360,6 +362,26 @@ await document.modify((t) => {
   t.remove(gain);
 });
 ```
+
+**With `document.createTransaction()`** — lower-level alternative used in official examples:
+
+```typescript
+// createTransaction() returns the TransactionBuilder directly
+// Call .send() to commit when you're done
+const t = await document.createTransaction();
+
+const synth = t.create("pulverisateur", { positionX: 100, positionY: 100 });
+const channel = t.create("mixerChannel", {});
+
+t.create("desktopAudioCable", {
+  fromSocket: synth.fields.audioOutput.location,
+  toSocket: channel.fields.audioInput.location,
+});
+
+t.send(); // commits all three creates at once
+```
+
+> Both APIs produce identical results. `createTransaction()` is useful when you need to reference `.location` on entities you just created in the same transaction batch.
 
 ---
 
