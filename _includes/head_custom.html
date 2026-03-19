@@ -64,7 +64,7 @@
 }
 </style>
 
-<script>
+<script>{% raw %}
 (function () {
   // Map of page path slug → next page relative URL.
   // Special case: Getting Started > Overview skips to Authorization and Setup.
@@ -120,7 +120,7 @@
     a.href = href;
     a.className = 'next-page-btn';
     a.setAttribute('aria-label', 'Next page');
-    a.innerHTML = 'Next <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg>';
+    a.textContent = 'Next \u203a';
     document.body.appendChild(a);
   }
 
@@ -129,4 +129,4 @@
     if (href) injectButton(href);
   });
 })();
-</script>
+{% endraw %}</script>
