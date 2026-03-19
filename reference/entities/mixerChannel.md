@@ -20,6 +20,8 @@ A mixerChannel is an individual channel strip in the Audiotool mixer. Audio devi
 | `positionX` | `number` | Horizontal position on the Audiotool desktop |
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 | `displayName` | `string` | Label shown on the channel strip in the DAW UI |
+| `displayParameters` | object | Visual ordering and layout settings for this channel strip in the mixer |
+| `displayParameters.orderAmongStrips` | `number` | Controls the left-to-right position of this channel in the mixer. Use the current maximum + 1 to append to the right |
 
 > For volume, panning, send levels, and other channel parameters, refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
 
@@ -37,8 +39,12 @@ const synth = t.create("pulverisateur", {
 });
 
 // Create a mixer channel for it
+// orderAmongStrips controls its left-to-right position in the mixer
 const channel = t.create("mixerChannel", {
   displayName: "Synth Channel",
+  displayParameters: {
+    orderAmongStrips: 1,   // place it first in the mixer
+  },
 });
 
 // Connect the synth audio output to the channel audio input

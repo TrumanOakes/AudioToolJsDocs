@@ -9,34 +9,40 @@ nav_exclude: true
 
 **Module:** `@audiotool/nexus/entities`
 
-A tonematrixPattern holds the step-sequencer grid state for a `tonematrix` device. The Tonematrix is a 16×16 (or similar) step sequencer — each pattern stores which steps are active. You create a pattern and associate it with a Tonematrix device to program its sequence.
+A tonematrixPattern holds the step-sequencer grid data for a `tonematrix` device. Each pattern is attached to one of the Tonematrix's 8 pattern slots and stores a 16×16 grid of on/off steps. You can create multiple patterns per device (one per slot) to build up different sequences.
 
-> **Pointer syntax:** Fields that reference other entities use the **`.location`** property. Pass `entity.location` wherever a pointer field is expected.
+> **Pointer syntax:** The `slot` field uses the **`.location`** property on an **array element** of the device's `patternSlots` field.
 
 ## Fields
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `device` | pointer | Points to the `tonematrix` device this pattern belongs to — use `device.location` |
+| `slot` | pointer | Which pattern slot on the `tonematrix` this pattern occupies — use `device.fields.patternSlots.array[n].location` (index 0–7) |
+| `steps` | array | A 16-element array of step objects. Each step has a `notes` array of 16 booleans (true = step is active). Use `createTypedArray()` from `@audiotool/nexus/utils` to build this |
 
-> For the full grid data fields (step states, pitch rows, etc.), refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> The Tonematrix has 8 pattern slots (`array[0]` through `array[7]`). At most one pattern can occupy each slot.
 
 ## Example
 
 ```typescript
-// Use createTransaction() to build the device and its pattern together
+import { createTypedArray } from "@audiotool/nexus/utils";
+
 const t = await document.createTransaction();
 
 // Create the Tonematrix device
-const matrix = t.create("tonematrix", {
+const tm = t.create("tonematrix", {
   positionX: 100,
   positionY: 100,
   displayName: "Arp Matrix",
 });
 
-// Create a pattern for it
+// Create a pattern for slot 0 with a random 16×16 grid
+// slot uses array[n].location — the pointer to the nth pattern slot
 t.create("tonematrixPattern", {
-  device: matrix.location,   // pointer uses .location
+  slot: tm.fields.patternSlots.array[0].location,
+  steps: createTypedArray(16, () => ({
+    notes: createTypedArray(16, () => Math.random() > 0.74),
+  })),
 });
 
 t.send();
@@ -46,4 +52,5 @@ t.send();
 
 - [Entity Reference](../entity-reference.md) — full list of all entity types
 - [tonematrix](tonematrix.md) — the step sequencer device this pattern belongs to
-- [Making Changes](../../how-nexus-works/making-changes.md) — `createTransaction()` and `modify()` explained
+- [Utilities](../utilities.md) — `createTypedArray` helper used to build the steps array
+- [Making Changes](../../how-nexus-works/making-changes.md) — `createTransaction()` explained

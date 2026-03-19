@@ -45,6 +45,10 @@ The type returned by `document.queryEntities.ofTypes(...)`. Provides a fluent AP
 |--------|-------------|
 | `.get()` | Returns all matching entities as an array (snapshot, not live) |
 | `.where(predicate)` | Filters results by a field condition before calling `.get()` |
+| `queryEntities.get()` | Get **all** entities in the document regardless of type |
+| `queryEntities.mustGetEntity(id)` | Get a specific entity by ID — throws if not found |
+| `queryEntities.mustGetEntityAs(id, type)` | Same as above but returns the entity typed to the given type key |
+| `queryEntities.pointingTo.entities(id).get()` | Find all entities that have a pointer field pointing to the given entity ID |
 
 ```typescript
 // Get all notes
@@ -59,6 +63,22 @@ const loudNotes = document.queryEntities
 // Query multiple types at once
 const allTracks = document.queryEntities
   .ofTypes("noteTrack", "audioTrack", "automationTrack")
+  .get();
+
+// Get ALL entities in the document (no type filter)
+const everything = document.queryEntities.get();
+
+// Get a specific entity by ID — throws if not found
+const entity = document.queryEntities.mustGetEntity("some-id");
+
+// Typed version — returns the entity as the given type
+const sampleEntity = document.queryEntities.mustGetEntityAs(entityId, "sample");
+console.log(sampleEntity.fields.sampleName.value);
+
+// Find all entities pointing to a given entity ID
+// (e.g. find all noteRegions that reference a specific noteCollection)
+const regions = document.queryEntities
+  .pointingTo.entities(collection.id)
   .get();
 ```
 
@@ -81,13 +101,15 @@ const middleCNotes = query.get();
 
 ### `NexusEventManager`
 
-The interface of `document.events`. Provides methods to subscribe to entity lifecycle events: creation, field updates, and removal.
+The interface of `document.events`. Provides methods to subscribe to entity lifecycle events: creation, field updates, removal, and pointer changes.
 
-| Method | Description |
-|--------|-------------|
-| `.onCreate(type, handler)` | Fires when a new entity of the given type is created |
-| `.onUpdate(field, handler)` | Fires when a specific field value changes |
-| `.onRemove(type, handler)` | Fires when an entity of the given type is removed |
+| Method | Signature | Description |
+|--------|-----------|-------------|
+| `.onCreate(type, handler)` | `(type, handler) => Terminable` | Fires when a new entity of the given type is created. Handler can **return a cleanup function** that fires when that specific entity is later removed |
+| `.onUpdate(field, handler, callNow?)` | `(field, handler, boolean?) => Terminable` | Fires when a specific field value changes. Pass `false` as third arg to skip the immediate call with the current value |
+| `.onRemove(type, handler)` | `(type, handler) => Terminable` | Fires when an entity of the given type is removed |
+| `.onRemove(entity, handler)` | `(entity, handler) => Terminable` | Fires when a **specific** entity is removed |
+| `.onPointingTo(entity, handler)` | `(entity, handler) => Terminable` | Fires when any entity gains or loses a pointer to the given entity |
 
 Each method returns a <span class="tooltip" data-tooltip="An object with a .terminate() method that cancels the subscription when you no longer need it.">terminable</span> you can use to unsubscribe.
 
@@ -97,19 +119,40 @@ const sub = document.events.onCreate("note", (note) => {
   console.log("New note at tick:", note.fields.positionTicks);
 });
 
-// onUpdate — react to field changes
-let gainEntity;
-await document.modify((t) => {
-  gainEntity = t.create("tinyGain", { gain: 1.0 });
+// onCreate with cleanup function — handler return value is called when that entity is removed
+document.events.onCreate("noteRegion", (region) => {
+  console.log("Region created:", region.id);
+
+  // Return a cleanup function — Nexus calls this when this specific region is removed
+  return () => {
+    console.log("Region removed:", region.id);
+  };
 });
 
+// onUpdate — react to field changes
+// Third argument (default true): call handler immediately with the current value.
+// Pass false to only fire on future changes, not the current value.
 document.events.onUpdate(gainEntity.fields.gain, (newValue) => {
   console.log("Gain changed to:", newValue);
 });
 
-// onRemove — react to deletions
+document.events.onUpdate(gainEntity.fields.gain, (newValue) => {
+  console.log("Gain future change:", newValue);
+}, false);  // false = don't call for current value, only future changes
+
+// onRemove by type
 document.events.onRemove("tinyGain", (entity) => {
-  console.log("Removed:", entity.id);
+  console.log("A tinyGain was removed:", entity.id);
+});
+
+// onRemove by entity — fire only when this specific entity is removed
+document.events.onRemove(specificGainEntity, () => {
+  console.log("This specific gain was removed");
+});
+
+// onPointingTo — fire when any entity gains or loses a pointer to the given entity
+document.events.onPointingTo(synth, (entity) => {
+  console.log("A cable or track now points to/from the synth:", entity.type);
 });
 
 // Clean up when done
@@ -134,6 +177,22 @@ await document.modify((t) => {
   t.update(gainEntity.fields.gain, 0.75);       // writable
   t.update(gainEntity.fields.displayName, "FX"); // writable
 });
+```
+
+**Pointer fields and `.value.entityId`:**
+
+Fields that point to other entities (like `note.fields.collection`) are a special case. Their `.value` returns an object with an `entityId` property — the ID of the pointed-to entity. Use this to look up the target:
+
+```typescript
+// A pointer field's .value contains { entityId: string }
+const region = document.queryEntities.ofTypes("audioRegion").get()[0];
+
+// Get the entity ID that this pointer field points to
+const pointedEntityId = region.fields.sample.value.entityId;
+
+// Then look up the actual entity
+const sampleEntity = document.queryEntities.mustGetEntityAs(pointedEntityId, "sample");
+console.log(sampleEntity.fields.sampleName.value);
 ```
 
 ---
@@ -382,6 +441,29 @@ t.send(); // commits all three creates at once
 ```
 
 > Both APIs produce identical results. `createTransaction()` is useful when you need to reference `.location` on entities you just created in the same transaction batch.
+
+**`t.entities` — query within a transaction:**
+
+The `TransactionBuilder` also exposes an `.entities` query property that works exactly like `document.queryEntities`, but it **includes entities you've just created in the current transaction** (uncommitted). This is useful when you need to find or inspect entities that were created earlier in the same `createTransaction()` call:
+
+```typescript
+const t = await document.createTransaction();
+
+// Create several mixer channels
+t.create("mixerChannel", { displayParameters: { orderAmongStrips: 1 } });
+t.create("mixerChannel", { displayParameters: { orderAmongStrips: 2 } });
+
+// Query within the transaction — sees the two channels just created above
+const channels = t.entities.ofTypes("mixerChannel").get();
+const maxOrder = Math.max(
+  ...channels.map(c => c.fields.displayParameters.fields.orderAmongStrips.value)
+);
+
+// Can also use pointingTo within the transaction
+const cables = t.entities
+  .pointingTo.locations(synth.fields.audioOutput.location)
+  .get();
+```
 
 ---
 
