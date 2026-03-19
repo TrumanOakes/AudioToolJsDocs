@@ -109,8 +109,9 @@
     path = path.replace(/\/+$/, '').replace(/\.html$/, '');
     // Extract the last two path segments: section/page
     var parts = path.split('/').filter(Boolean);
-    if (parts.length < 2) return null;
     var key = parts.slice(-2).join('/');
+    console.log('[next-btn] pathname:', window.location.pathname, '| key:', key, '| next:', nextMap[key] || 'none');
+    if (parts.length < 2) return null;
     return nextMap[key] || null;
   }
 
