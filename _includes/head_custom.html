@@ -1,5 +1,4 @@
 <style>
-/* Floating Next button */
 .next-page-btn {
   position: fixed;
   bottom: 1.5rem;
@@ -25,11 +24,7 @@
   color: #fff;
   text-decoration: none;
 }
-.next-page-btn svg {
-  flex-shrink: 0;
-}
 
-/* Tooltip/hover explanation pattern for glossary terms */
 .tooltip {
   position: relative;
   cursor: help;
@@ -64,69 +59,4 @@
 }
 </style>
 
-<script>{% raw %}
-(function () {
-  // Map of page path slug → next page relative URL.
-  // Special case: Getting Started > Overview skips to Authorization and Setup.
-  var nextMap = {
-    // Getting Started
-    'getting-started/overview':                   'authorization-and-setup.html',
-    'getting-started/whats-new':                  'authorization-and-setup.html',
-    'getting-started/authorization-and-setup':    'examples-and-next-steps.html',
-    // How Nexus Works
-    'how-nexus-works/system-overview':            'documents.html',
-    'how-nexus-works/documents':                  'entities-and-fields.html',
-    'how-nexus-works/entities-and-fields':        'making-changes.html',
-    'how-nexus-works/making-changes':             'queries-and-events.html',
-    'how-nexus-works/queries-and-events':         'package-structure.html',
-    'how-nexus-works/package-structure':          'tips-and-patterns.html',
-    // Working With Audiotool Projects
-    'working-with-audiotool-projects/sign-in-and-connect':                  'open-or-create-a-project-context.html',
-    'working-with-audiotool-projects/open-or-create-a-project-context':     'create-devices.html',
-    'working-with-audiotool-projects/create-devices':                        'work-with-timeline-data.html',
-    'working-with-audiotool-projects/work-with-timeline-data':               'find-and-read-entities.html',
-    'working-with-audiotool-projects/find-and-read-entities':                'listen-for-changes.html',
-    'working-with-audiotool-projects/listen-for-changes':                    'make-safe-changes.html',
-    'working-with-audiotool-projects/make-safe-changes':                     'work-offline-for-testing.html',
-    'working-with-audiotool-projects/work-offline-for-testing':              'use-platform-apis-through-the-client.html',
-    // Errors and Fixes
-    'errors-and-fixes/before-you-debug':          'authorization-problems.html',
-    'errors-and-fixes/authorization-problems':    'setup-problems.html',
-    'errors-and-fixes/setup-problems':            'validation-errors.html',
-    'errors-and-fixes/validation-errors':         'query-and-event-confusion.html',
-    'errors-and-fixes/query-and-event-confusion': 'offline-vs-synced-behavior.html',
-    // Reference
-    'reference/quick-answers':                    'package-entry-points.html',
-    'reference/package-entry-points':             'document-model.html',
-    'reference/document-model':                   'entity-reference.html',
-    'reference/entity-reference':                 'utilities.html',
-    'reference/utilities':                        'platform-api-types.html',
-  };
-
-  function getNextUrl() {
-    var path = window.location.pathname;
-    // Normalize: strip trailing slash and .html extension
-    path = path.replace(/\/+$/, '').replace(/\.html$/, '');
-    // Extract the last two path segments: section/page
-    var parts = path.split('/').filter(Boolean);
-    var key = parts.slice(-2).join('/');
-    console.log('[next-btn] pathname:', window.location.pathname, '| key:', key, '| next:', nextMap[key] || 'none');
-    if (parts.length < 2) return null;
-    return nextMap[key] || null;
-  }
-
-  function injectButton(href) {
-    var a = document.createElement('a');
-    a.href = href;
-    a.className = 'next-page-btn';
-    a.setAttribute('aria-label', 'Next page');
-    a.textContent = 'Next \u203a';
-    document.body.appendChild(a);
-  }
-
-  document.addEventListener('DOMContentLoaded', function () {
-    var href = getNextUrl();
-    if (href) injectButton(href);
-  });
-})();
-{% endraw %}</script>
+<script src="{{ '/assets/js/next-button.js' | relative_url }}"></script>
