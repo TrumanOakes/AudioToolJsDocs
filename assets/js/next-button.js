@@ -37,17 +37,27 @@
     return nextMap[key] || null;
   }
 
-  function injectButton(href) {
-    var a = document.createElement('a');
-    a.href = href;
-    a.className = 'next-page-btn';
-    a.setAttribute('aria-label', 'Next page');
-    a.textContent = 'Next \u203a';
-    document.body.appendChild(a);
-  }
-
   document.addEventListener('DOMContentLoaded', function () {
     var href = getNextUrl();
-    if (href) injectButton(href);
+    if (!href) return;
+
+    // Floating button (bottom-right corner)
+    var floating = document.createElement('a');
+    floating.href = href;
+    floating.className = 'next-page-btn next-page-btn--floating';
+    floating.setAttribute('aria-label', 'Next page');
+    floating.textContent = 'Next \u203a';
+    document.body.appendChild(floating);
+
+    // Inline button at the end of <main> content
+    var main = document.querySelector('div#main-content main');
+    if (main) {
+      var inline = document.createElement('a');
+      inline.href = href;
+      inline.className = 'next-page-btn next-page-btn--inline';
+      inline.setAttribute('aria-label', 'Next page');
+      inline.textContent = 'Next \u203a';
+      main.appendChild(inline);
+    }
   });
 })();

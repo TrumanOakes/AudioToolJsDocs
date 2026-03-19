@@ -1,9 +1,5 @@
 <style>
 .next-page-btn {
-  position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
-  z-index: 1000;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -23,6 +19,23 @@
   box-shadow: 0 3px 12px rgba(0,0,0,0.5);
   color: #fff;
   text-decoration: none;
+}
+
+/* Floating variant */
+.next-page-btn--floating {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+}
+
+/* Inline variant — shown at the bottom of the page content */
+.next-page-btn--inline {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3rem;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
 }
 
 .tooltip {
