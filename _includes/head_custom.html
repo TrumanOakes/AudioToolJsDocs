@@ -1,4 +1,34 @@
 <style>
+/* Floating Next button */
+.next-page-btn {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  background: #1f6feb;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+.next-page-btn:hover {
+  background: #388bfd;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.5);
+  color: #fff;
+  text-decoration: none;
+}
+.next-page-btn svg {
+  flex-shrink: 0;
+}
+
 /* Tooltip/hover explanation pattern for glossary terms */
 .tooltip {
   position: relative;
@@ -33,3 +63,65 @@
   opacity: 1;
 }
 </style>
+
+<script>
+(function () {
+  // Map of page path slug → next page relative URL.
+  // Special case: Getting Started > Overview skips to Authorization and Setup.
+  var nextMap = {
+    // Getting Started
+    'getting-started/overview':                   '/getting-started/authorization-and-setup/',
+    'getting-started/whats-new':                  '/getting-started/authorization-and-setup/',
+    'getting-started/authorization-and-setup':    '/getting-started/examples-and-next-steps/',
+    // How Nexus Works
+    'how-nexus-works/system-overview':            '/how-nexus-works/documents/',
+    'how-nexus-works/documents':                  '/how-nexus-works/entities-and-fields/',
+    'how-nexus-works/entities-and-fields':        '/how-nexus-works/making-changes/',
+    'how-nexus-works/making-changes':             '/how-nexus-works/queries-and-events/',
+    'how-nexus-works/queries-and-events':         '/how-nexus-works/package-structure/',
+    'how-nexus-works/package-structure':          '/how-nexus-works/tips-and-patterns/',
+    // Working With Audiotool Projects
+    'working-with-audiotool-projects/sign-in-and-connect':                  '/working-with-audiotool-projects/open-or-create-a-project-context/',
+    'working-with-audiotool-projects/open-or-create-a-project-context':     '/working-with-audiotool-projects/create-devices/',
+    'working-with-audiotool-projects/create-devices':                        '/working-with-audiotool-projects/work-with-timeline-data/',
+    'working-with-audiotool-projects/work-with-timeline-data':               '/working-with-audiotool-projects/find-and-read-entities/',
+    'working-with-audiotool-projects/find-and-read-entities':                '/working-with-audiotool-projects/listen-for-changes/',
+    'working-with-audiotool-projects/listen-for-changes':                    '/working-with-audiotool-projects/make-safe-changes/',
+    'working-with-audiotool-projects/make-safe-changes':                     '/working-with-audiotool-projects/work-offline-for-testing/',
+    'working-with-audiotool-projects/work-offline-for-testing':              '/working-with-audiotool-projects/use-platform-apis-through-the-client/',
+    // Errors and Fixes
+    'errors-and-fixes/before-you-debug':          '/errors-and-fixes/authorization-problems/',
+    'errors-and-fixes/authorization-problems':    '/errors-and-fixes/setup-problems/',
+    'errors-and-fixes/setup-problems':            '/errors-and-fixes/validation-errors/',
+    'errors-and-fixes/validation-errors':         '/errors-and-fixes/query-and-event-confusion/',
+    'errors-and-fixes/query-and-event-confusion': '/errors-and-fixes/offline-vs-synced-behavior/',
+    // Reference
+    'reference/quick-answers':                    '/reference/package-entry-points/',
+    'reference/package-entry-points':             '/reference/document-model/',
+    'reference/document-model':                   '/reference/entity-reference/',
+    'reference/entity-reference':                 '/reference/utilities/',
+    'reference/utilities':                        '/reference/platform-api-types/',
+  };
+
+  function getNextUrl() {
+    var path = window.location.pathname.replace(/\/+$/, '');
+    // Strip leading slash and match against map keys
+    var stripped = path.replace(/^\//, '');
+    return nextMap[stripped] || null;
+  }
+
+  function injectButton(href) {
+    var a = document.createElement('a');
+    a.href = href;
+    a.className = 'next-page-btn';
+    a.setAttribute('aria-label', 'Next page');
+    a.innerHTML = 'Next <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M6.22 3.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L9.94 8 6.22 4.28a.75.75 0 0 1 0-1.06z"/></svg>';
+    document.body.appendChild(a);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var href = getNextUrl();
+    if (href) injectButton(href);
+  });
+})();
+</script>
