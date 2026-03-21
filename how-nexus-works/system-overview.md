@@ -32,11 +32,15 @@ Both modes expose the same API — the same `modify()`, `events`, and `queryEnti
 
 ## Architecture diagram
 
-<img src="{{ '/assets/images/architecture-diagram.svg' | relative_url }}"
-     alt="Nexus Architecture Diagram"
-     style="width:100%; max-width:860px; display:block; margin: 2rem 0;" />
+<iframe
+  src="{{ '/assets/diagrams/architecture-slides.html' | relative_url }}"
+  width="100%"
+  height="560"
+  style="border: 1px solid #e5e7eb; border-radius: 10px; display: block; margin: 2rem 0;"
+  title="Nexus Architecture Diagrams"
+></iframe>
 
-A document — whether synced or offline — contains a flat collection of entities. Each entity holds typed fields: primitive values (numbers, strings, booleans) or pointer fields that reference other entities by ID. Pointers are how relationships are expressed: a `note` points to its parent `noteCollection`, a cable points to the device sockets it connects. This flat-but-linked structure keeps individual entities small and queryable without deep object nesting.
+The five slides above illustrate the main concepts: document types, entity structure, audio signal flow, pointer references, and timeline organization. A document — whether synced or offline — contains a flat collection of entities. Each entity holds typed fields: primitive values (numbers, strings, booleans) or pointer fields that reference other entities by ID. Pointers are how relationships are expressed: a `note` points to its parent `noteCollection`, a cable points to the device sockets it connects. This flat-but-linked structure keeps individual entities small and queryable without deep object nesting.
 
 ---
 
