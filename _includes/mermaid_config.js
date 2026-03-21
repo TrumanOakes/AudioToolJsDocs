@@ -1,1 +1,1 @@
-{}
+mermaid.initialize({ startOnLoad: true });

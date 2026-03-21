@@ -34,30 +34,23 @@ Both modes expose the same API — the same `modify()`, `events`, and `queryEnti
 ## Architecture diagram
 
 ```mermaid
-graph TD
-    subgraph Synced["Synced Document (live, multi-user)"]
-        SD[SyncedDocument]
+graph LR
+    subgraph DocTypes["Document Types"]
+        SD["🔴 SyncedDocument\n(live · multi-user · persisted)"]
+        OD["⚫ OfflineDocument\n(local · testing · no backend)"]
     end
 
-    subgraph Offline["Offline Document (local-only, no backend)"]
-        OD[OfflineDocument]
+    DocTypes --> Entities
+
+    subgraph Entities["Entities (flat collection)"]
+        E1["tinyGain\n─────────────\ngain: number\ndisplayName: string\npositionX: number\npositionY: number"]
+        E2["note\n─────────────\npitch: number\nvelocity: number\npositionTicks: number\ncollection → noteCollection"]
+        E3["mixerChannel\n─────────────\nvolume: number\npan: number\naudioInput → desktopAudioCable"]
     end
 
-    SD --> E1[Entity: tinyGain]
-    SD --> E2[Entity: note]
-    SD --> E3[Entity: mixerChannel]
-    OD --> E4[Entity: tinyGain]
-    OD --> E5[Entity: note]
-
-    E1 --> F1[Fields: gain, displayName, positionX, positionY]
-    E2 --> F2[Fields: pitch, velocity, positionTicks]
-    E3 --> F3[Fields: displayName, volume, pan]
-
-    F2 -->|pointer: collection| E6[Entity: noteCollection]
-    E6 --> F6[Fields: ...]
-
-    F3 -->|pointer: audioInput| E7[Entity: desktopAudioCable]
-    E7 -->|pointer: fromSocket| E1
+    E2 -- "pointer" --> E4["noteCollection\n─────────────\n(contains notes)"]
+    E3 -- "pointer" --> E5["desktopAudioCable\n─────────────\nfromSocket → tinyGain\ntoSocket → mixerChannel"]
+    E5 -- "pointer" --> E1
 ```
 
 A document — whether synced or offline — contains a flat collection of entities. Each entity holds typed fields: primitive values (numbers, strings, booleans) or pointer fields that reference other entities by ID. Pointers are how relationships are expressed: a `note` points to its parent `noteCollection`, a cable points to the device sockets it connects. This flat-but-linked structure keeps individual entities small and queryable without deep object nesting.
