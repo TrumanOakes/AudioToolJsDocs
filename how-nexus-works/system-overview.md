@@ -2,7 +2,6 @@
 title: System Overview
 parent: How Nexus Works
 nav_order: 1
-mermaid: true
 ---
 
 # System Overview
@@ -33,25 +32,9 @@ Both modes expose the same API — the same `modify()`, `events`, and `queryEnti
 
 ## Architecture diagram
 
-```mermaid
-graph LR
-    subgraph DocTypes["Document Types"]
-        SD["🔴 SyncedDocument\n(live · multi-user · persisted)"]
-        OD["⚫ OfflineDocument\n(local · testing · no backend)"]
-    end
-
-    DocTypes --> Entities
-
-    subgraph Entities["Entities (flat collection)"]
-        E1["tinyGain\n─────────────\ngain: number\ndisplayName: string\npositionX: number\npositionY: number"]
-        E2["note\n─────────────\npitch: number\nvelocity: number\npositionTicks: number\ncollection → noteCollection"]
-        E3["mixerChannel\n─────────────\nvolume: number\npan: number\naudioInput → desktopAudioCable"]
-    end
-
-    E2 -- "pointer" --> E4["noteCollection\n─────────────\n(contains notes)"]
-    E3 -- "pointer" --> E5["desktopAudioCable\n─────────────\nfromSocket → tinyGain\ntoSocket → mixerChannel"]
-    E5 -- "pointer" --> E1
-```
+<img src="{{ '/assets/images/architecture-diagram.svg' | relative_url }}"
+     alt="Nexus Architecture Diagram"
+     style="width:100%; max-width:860px; display:block; margin: 2rem 0;" />
 
 A document — whether synced or offline — contains a flat collection of entities. Each entity holds typed fields: primitive values (numbers, strings, booleans) or pointer fields that reference other entities by ID. Pointers are how relationships are expressed: a `note` points to its parent `noteCollection`, a cable points to the device sockets it connects. This flat-but-linked structure keeps individual entities small and queryable without deep object nesting.
 

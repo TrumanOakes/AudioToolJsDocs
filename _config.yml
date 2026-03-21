@@ -22,9 +22,6 @@ aux_links_new_tab: true
 
 footer_content: '<a href="https://developer.audiotool.com">Developer Hub</a> &middot; <a href="https://github.com/audiotool/nexus">GitHub</a> &middot; <a href="https://new.audiotool.com">Audiotool DAW</a> &middot; <a href="https://discord.gg/5Cde4Zvret">Discord</a>'
 
-mermaid:
-  version: "10.9.0"
-
 callouts_level: quiet
 callouts:
   highlight:
