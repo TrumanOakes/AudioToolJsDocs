@@ -2,6 +2,7 @@
 title: System Overview
 parent: How Nexus Works
 nav_order: 1
+mermaid: true
 ---
 
 # System Overview
