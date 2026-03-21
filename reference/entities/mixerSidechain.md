@@ -26,4 +26,4 @@ A mixerSidechain entity represents a sidechain routing connection in the Audioto
 - [Entity Reference](../entity-reference.md) — full list of all entity types
 - [mixerMaster](mixerMaster.md) — the master output
 - [mixerChannel](mixerChannel.md) — individual channel strips
-- [audioCable](audioCable.md) — signal routing cables
+- [desktopAudioCable]({{ '/reference/entities/desktopAudioCable.html' | relative_url }}) — signal routing cables

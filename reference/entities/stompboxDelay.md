@@ -43,4 +43,4 @@ await document.modify((t) => {
 - [Entity Reference](../entity-reference.md) — full list of all entity types
 - [stompboxSlope](stompboxSlope.md) — another Stompbox effect: a filter
 - [Create Devices](../../working-with-audiotool-projects/create-devices.md) — step-by-step guide to creating and connecting devices
-- [audioCable](audioCable.md) — route audio through this effect
+- [desktopAudioCable]({{ '/reference/entities/desktopAudioCable.html' | relative_url }}) — route audio through this effect

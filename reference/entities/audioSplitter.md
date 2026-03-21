@@ -36,4 +36,4 @@ await document.modify((t) => {
 - [Entity Reference](../entity-reference.md) — full list of all entity types
 - [Create Devices](../../working-with-audiotool-projects/create-devices.md) — step-by-step guide to creating and connecting devices
 - [audioMerger](audioMerger.md) — the reverse: merge multiple signals into one
-- [audioCable](audioCable.md) — connect signals into and out of this device
+- [desktopAudioCable]({{ '/reference/entities/desktopAudioCable.html' | relative_url }}) — connect signals into and out of this device

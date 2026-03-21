@@ -24,4 +24,4 @@ A vst3Plugin entity represents an instance of a VST3 plugin loaded in the projec
 ## See also
 
 - [Entity Reference](../entity-reference.md) — full list of all entity types
-- [audioCable](audioCable.md) — connect this plugin into the audio signal chain
+- [desktopAudioCable]({{ '/reference/entities/desktopAudioCable.html' | relative_url }}) — connect this plugin into the audio signal chain

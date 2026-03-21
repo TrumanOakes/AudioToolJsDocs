@@ -26,4 +26,4 @@ A mixerGroup entity represents a group channel in the Audiotool mixer. Group cha
 - [Entity Reference](../entity-reference.md) — full list of all entity types
 - [mixerMaster](mixerMaster.md) — the master output
 - [mixerChannel](mixerChannel.md) — individual channel strips that can be routed to a group
-- [audioCable](audioCable.md) — signal routing cables
+- [desktopAudioCable]({{ '/reference/entities/desktopAudioCable.html' | relative_url }}) — signal routing cables

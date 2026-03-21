@@ -38,4 +38,4 @@ console.log("Master display name:", master.fields.displayName);
 
 - [Entity Reference](../entity-reference.md) — full list of all entity types
 - [mixerChannel](mixerChannel.md) — individual channel strips that feed into the master
-- [audioCable](audioCable.md) — cables that route signals through the mixer
+- [desktopAudioCable]({{ '/reference/entities/desktopAudioCable.html' | relative_url }}) — cables that route signals through the mixer

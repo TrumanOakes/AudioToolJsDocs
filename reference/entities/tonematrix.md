@@ -42,5 +42,5 @@ document.events.onCreate("tonematrix", (tm) => {
 
 - [Entity Reference](../entity-reference.md) — full list of all entity types
 - [Create Devices](../../working-with-audiotool-projects/create-devices.md) — step-by-step guide to creating and connecting devices
-- [audioCable](audioCable.md) — connect this device's audio output to a mixer channel
+- [desktopAudioCable]({{ '/reference/entities/desktopAudioCable.html' | relative_url }}) — connect this device's audio output to a mixer channel
 - [Queries and Events](../../how-nexus-works/queries-and-events.md) — reacting to entity creation with `events.onCreate`
