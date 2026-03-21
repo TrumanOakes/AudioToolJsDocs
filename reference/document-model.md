@@ -529,6 +529,10 @@ const location: SchemaLocation = schemaPathToSchemaLocation(path);
 
 ### `getSchemaLocationDetails(location)`
 
+```ts
+getSchemaLocationDetails(location: SchemaLocation): SchemaLocationDetails
+```
+
 Returns information about a schema location — what field it refers to, its type, and related metadata.
 
 ```typescript
@@ -543,6 +547,10 @@ console.log(details); // schema metadata for the gain field
 
 ### `schemaLocationToSchemaPath(location)`
 
+```ts
+schemaLocationToSchemaPath(location: SchemaLocation): SchemaPath
+```
+
 Converts a `SchemaLocation` to a `SchemaPath`. Useful when you need a serializable or loggable representation of a schema location.
 
 ```typescript
@@ -555,6 +563,10 @@ console.log(path); // human-readable schema path string
 ---
 
 ### `schemaPathToSchemaLocation(path)`
+
+```ts
+schemaPathToSchemaLocation(path: SchemaPath): SchemaLocation
+```
 
 Converts a `SchemaPath` back to a `SchemaLocation`. The inverse of `schemaLocationToSchemaPath`.
 

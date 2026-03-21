@@ -30,6 +30,39 @@ Nexus supports two document modes:
 
 Both modes expose the same API — the same `modify()`, `events`, and `queryEntities` interface. This means code written against an offline document will work against a synced document too, which makes testing much easier.
 
+## Architecture diagram
+
+```mermaid
+graph TD
+    subgraph Synced["Synced Document (live, multi-user)"]
+        SD[SyncedDocument]
+    end
+
+    subgraph Offline["Offline Document (local-only, no backend)"]
+        OD[OfflineDocument]
+    end
+
+    SD --> E1[Entity: tinyGain]
+    SD --> E2[Entity: note]
+    SD --> E3[Entity: mixerChannel]
+    OD --> E4[Entity: tinyGain]
+    OD --> E5[Entity: note]
+
+    E1 --> F1[Fields: gain, displayName, positionX, positionY]
+    E2 --> F2[Fields: pitch, velocity, positionTicks]
+    E3 --> F3[Fields: displayName, volume, pan]
+
+    F2 -->|pointer: collection| E6[Entity: noteCollection]
+    E6 --> F6[Fields: ...]
+
+    F3 -->|pointer: audioInput| E7[Entity: desktopAudioCable]
+    E7 -->|pointer: fromSocket| E1
+```
+
+A document — whether synced or offline — contains a flat collection of entities. Each entity holds typed fields: primitive values (numbers, strings, booleans) or pointer fields that reference other entities by ID. Pointers are how relationships are expressed: a `note` points to its parent `noteCollection`, a cable points to the device sockets it connects. This flat-but-linked structure keeps individual entities small and queryable without deep object nesting.
+
+---
+
 ## Entities
 
 An **entity** is a small object with:

@@ -33,6 +33,10 @@ const projects = await client.api.projectService.listProjects({});
 
 ### `createAudiotoolClient`
 
+```ts
+createAudiotoolClient(opts: { status: LoginStatus } | { pat: string }): Promise<AudiotoolClient>
+```
+
 Creates an authenticated Audiotool client.
 
 **Accepts:**

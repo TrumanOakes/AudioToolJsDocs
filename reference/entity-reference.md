@@ -71,9 +71,6 @@ Audio devices represent processing units placed on the Audiotool desktop. They f
 | [`audioSplitter`](entities/audioSplitter.md) | Splits one audio signal into multiple outputs |
 | [`crossfader`](entities/crossfader.md) | Crossfader device |
 
-{: .note }
-The `stompbox*` prefix covers a family of effect devices. `stompboxDelay` and `stompboxSlope` are the best-documented variants. For the complete list of Stompbox types and their fields see the [official TypeDoc](https://developer.audiotool.com/js-package-documentation/).
-
 ---
 
 ## Mixer Entities
