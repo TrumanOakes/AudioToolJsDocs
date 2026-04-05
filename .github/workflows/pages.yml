@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - "claude/github-pages-deployment-SPyTT"
+      - "claude/install-audiotool-nexu-RI2hZ"
   workflow_dispatch:
 
 permissions:
