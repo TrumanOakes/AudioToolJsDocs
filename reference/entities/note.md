@@ -32,7 +32,7 @@ import { utils } from "@audiotool/nexus";
 const { Ticks } = utils;
 
 // Use createTransaction() to build everything in one operation
-const t = await document.createTransaction();
+const t = await nexus.createTransaction();
 
 const collection = t.create("noteCollection", {});
 

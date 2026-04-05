@@ -28,7 +28,7 @@ The stompboxSlope is a filter effect device in Audiotool. It can operate in seve
 ## Example
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("stompboxSlope", {
     positionX: 600,
     positionY: 300,

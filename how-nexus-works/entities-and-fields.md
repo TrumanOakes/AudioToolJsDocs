@@ -118,7 +118,7 @@ When you create an entity that needs to reference another, you pass the referenc
 Creating an entity:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("tinyGain", {
     positionX: 100,
     positionY: 200,
@@ -130,13 +130,13 @@ await document.modify((t) => {
 Querying existing entities:
 
 ```typescript
-const gains = document.queryEntities.ofTypes("tinyGain").get();
+const gains = nexus.queryEntities.ofTypes("tinyGain").get();
 ```
 
 Listening for new entities:
 
 ```typescript
-document.events.onCreate("note", (entity) => {
+nexus.events.onCreate("note", (entity) => {
   console.log("New note at tick:", entity.fields.positionTicks);
 });
 ```

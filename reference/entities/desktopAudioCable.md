@@ -26,7 +26,7 @@ Pointer fields in Nexus use the **`.location`** property — this gives a refere
 import { utils } from "@audiotool/nexus";
 
 // Using createTransaction() — the standard way to batch multiple creates
-const t = await document.createTransaction();
+const t = await nexus.createTransaction();
 
 // Create a synthesizer
 const synth = t.create("pulverisateur", {

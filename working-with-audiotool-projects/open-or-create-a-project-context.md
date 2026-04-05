@@ -13,7 +13,7 @@ Once you have an <span class="tooltip" data-tooltip="The main object your app us
 To connect to a real Audiotool project:
 
 ```typescript
-const document = await client.createSyncedDocument({
+const nexus = await client.createSyncedDocument({
   mode: "online",
   project: "https://beta.audiotool.com/studio?project=abc123"
 });
@@ -24,7 +24,7 @@ The `project` value is the URL of an Audiotool project. You can get this from th
 After creating the document, start syncing:
 
 ```typescript
-await document.start();
+await nexus.start();
 ```
 
 Until `start()` is called, the document exists but is not connected. Always call `start()` before reading events or making changes.
@@ -36,7 +36,7 @@ For development and testing — no project URL, no auth, no network required:
 ```typescript
 import { createOfflineDocument } from "@audiotool/nexus";
 
-const document = await createOfflineDocument();
+const nexus = await createOfflineDocument();
 // No start() needed — immediately ready
 ```
 
@@ -45,7 +45,7 @@ Offline documents use the same API as synced documents. Switch to synced when yo
 To suppress validation errors during rapid prototyping:
 
 ```typescript
-const document = await createOfflineDocument({ validated: false });
+const nexus = await createOfflineDocument({ validated: false });
 ```
 
 ## Stop the document
@@ -53,7 +53,7 @@ const document = await createOfflineDocument({ validated: false });
 When you are done, stop syncing:
 
 ```typescript
-await document.stop();
+await nexus.stop();
 ```
 
 This finalizes any pending changes and makes the document read-only. You can still query entities, but `modify()` will throw.

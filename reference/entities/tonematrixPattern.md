@@ -27,7 +27,7 @@ A tonematrixPattern holds the step-sequencer grid data for a `tonematrix` device
 ```typescript
 import { createTypedArray } from "@audiotool/nexus/utils";
 
-const t = await document.createTransaction();
+const t = await nexus.createTransaction();
 
 // Create the Tonematrix device
 const tm = t.create("tonematrix", {

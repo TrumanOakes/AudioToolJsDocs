@@ -65,27 +65,27 @@ const { sessions } = await client.api.projectService.listSessions({
 
 ### `SampleService`
 
-Upload, download, list, update, and delete audio sample files.
+List, register, and delete audio sample files. Uploading is a three-step process handled partly outside the SDK — `createSample` returns an upload URL, you upload the file to it directly, then call `uploadSampleFinished` to notify the server. To get a download URL for an existing sample, use `getSample`.
 
 ```typescript
 // List all samples in the account
 const { samples } = await client.api.sampleService.listSamples({});
 
-// Create sample metadata (registers a new sample slot)
+// Step 1: Register a new sample — returns metadata including an upload URL
 const { sample } = await client.api.sampleService.createSample({
   name: "kick-drum.wav",
 });
+// sample.uploadUrl is a signed URL — PUT your audio bytes there directly
 
-// Upload the actual audio file
-await client.api.sampleService.uploadSample({
-  id: sample.id,
-  data: audioBytes, // Uint8Array of audio file content
-});
+// Step 2: Upload your audio file to the signed URL (outside the SDK)
+// await fetch(sample.uploadUrl, { method: "PUT", body: audioBytes });
 
-// Download a sample's audio data
-const audio = await client.api.sampleService.downloadSample({
-  id: sample.id,
-});
+// Step 3: Notify the server that your upload is complete
+await client.api.sampleService.uploadSampleFinished({ id: sample.id });
+
+// Get a sample (returns metadata including a download URL)
+const { sample: fetched } = await client.api.sampleService.getSample({ id: sample.id });
+// fetched.downloadUrl is a signed URL to download the audio data
 
 // Delete a sample
 await client.api.sampleService.deleteSample({ id: sample.id });

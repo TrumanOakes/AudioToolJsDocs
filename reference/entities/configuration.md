@@ -12,7 +12,7 @@ nav_exclude: true
 The configuration entity holds document-level settings for an Audiotool project — things like tempo (BPM) and time signature. There is exactly one configuration entity per document. Query for it rather than creating it.
 
 {: .important }
-There is always exactly one `configuration` per document. Do not create or remove it. Query for the existing one using `document.queryEntities.ofTypes("configuration").get()`.
+There is always exactly one `configuration` per document. Do not create or remove it. Query for the existing one using `nexus.queryEntities.ofTypes("configuration").get()`.
 
 ## Fields
 
@@ -26,12 +26,12 @@ There is always exactly one `configuration` per document. Do not create or remov
 
 ```typescript
 // Read the current project BPM
-const configs = document.queryEntities.ofTypes("configuration").get();
+const configs = nexus.queryEntities.ofTypes("configuration").get();
 const config = configs[0];
 console.log("Project BPM:", config.fields.bpm);
 
 // Update the BPM
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.update(config.fields.bpm, 140);
 });
 ```

@@ -1,0 +1,25 @@
+{
+  "name": "audiotooljsdocs",
+  "version": "1.0.0",
+  "description": "@audiotool/nexus documentation site",
+  "type": "module",
+  "scripts": {
+    "docs": "typedoc && node scripts/add-frontmatter.mjs",
+    "docs:typedoc": "typedoc",
+    "docs:frontmatter": "node scripts/add-frontmatter.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:41351/git/TrumanOakes/AudioToolJsDocs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@audiotool/nexus": "^0.0.12"
+  },
+  "devDependencies": {
+    "typedoc": "^0.28.18",
+    "typedoc-plugin-markdown": "^4.11.0"
+  }
+}

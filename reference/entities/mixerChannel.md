@@ -29,7 +29,7 @@ A mixerChannel is an individual channel strip in the Audiotool mixer. Audio devi
 
 ```typescript
 // Use createTransaction() to build everything in one operation
-const t = await document.createTransaction();
+const t = await nexus.createTransaction();
 
 // Create a synthesizer
 const synth = t.create("pulverisateur", {

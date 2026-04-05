@@ -24,7 +24,7 @@ The graphicalEQ is a graphical equalizer effect device in Audiotool. It lets you
 ## Example
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("graphicalEQ", {
     positionX: 600,
     positionY: 200,

@@ -32,7 +32,7 @@ Each channel of the Kobolt is a `KoboltChannel` entity with these fields:
 ## Example
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("kobolt", {
     positionX: 100,
     positionY: 200,

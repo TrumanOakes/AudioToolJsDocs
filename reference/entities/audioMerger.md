@@ -22,7 +22,7 @@ An audioMerger is a utility device in Audiotool that combines multiple incoming 
 ## Example
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("audioMerger", {
     positionX: 700,
     positionY: 200,

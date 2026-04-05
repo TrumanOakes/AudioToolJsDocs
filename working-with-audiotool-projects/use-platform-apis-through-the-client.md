@@ -53,21 +53,28 @@ const sessions = await client.api.projectService.listSessions({
 
 ## SampleService — manage audio samples
 
+Uploading a sample is a two-step process: first register the sample to get an upload URL, upload the file yourself to that URL, then notify the server the upload is complete.
+
 ```typescript
 // List samples
-const samples = await client.api.sampleService.listSamples({});
+const { samples } = await client.api.sampleService.listSamples({});
 
-// Create sample metadata
-const sample = await client.api.sampleService.createSample({ ... });
+// Step 1: Register the sample — returns an upload URL
+const { sample } = await client.api.sampleService.createSample({ name: "kick.wav" });
+// sample.uploadUrl contains the URL to PUT/POST your audio file to
 
-// Upload a sample file
-await client.api.sampleService.uploadSample({ ... });
+// Step 2: Upload the file to the URL returned by createSample (outside the SDK)
+// await fetch(sample.uploadUrl, { method: "PUT", body: audioBytes });
 
-// Download a sample by name
-const data = await client.api.sampleService.downloadSample({ ... });
+// Step 3: Notify the server the upload is complete
+await client.api.sampleService.uploadSampleFinished({ id: sample.id });
+
+// Get a sample's metadata (includes a download URL)
+const { sample: fetched } = await client.api.sampleService.getSample({ id: sample.id });
+// fetched.downloadUrl contains the URL to fetch the audio data from
 
 // Delete a sample
-await client.api.sampleService.deleteSample({ ... });
+await client.api.sampleService.deleteSample({ id: sample.id });
 ```
 
 ## ProjectRoleService — manage collaborators

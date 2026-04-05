@@ -16,7 +16,7 @@ Field types for all <span class="tooltip" data-tooltip="A single item inside a p
 Create entities using the `t.create()` method with the entity key and an initial fields object:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("tinyGain", { positionX: 100, positionY: 200 });
 });
 ```

@@ -26,7 +26,7 @@ A tinyGain is a simple volume control device on the Audiotool desktop. It sits i
 // Create a tinyGain device
 let gainDevice;
 
-await document.modify((t) => {
+await nexus.modify((t) => {
   gainDevice = t.create("tinyGain", {
     positionX: 400,
     positionY: 200,
@@ -36,7 +36,7 @@ await document.modify((t) => {
 });
 
 // Later, update the gain value
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.update(gainDevice.fields.gain, 0.8);
 });
 ```

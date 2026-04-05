@@ -12,12 +12,12 @@ All modifications to a Nexus document go through a <span class="tooltip" data-to
 
 Nexus has two transaction APIs. Both build and commit a set of changes atomically.
 
-### `document.modify()` — recommended for most cases
+### `nexus.modify()` — recommended for most cases
 
-Call `document.modify()` with a callback to open a transaction:
+Call `nexus.modify()` with a callback to open a transaction:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   // t is the transaction builder
   t.create("tinyGain", { positionX: 100, positionY: 200 });
 });
@@ -28,12 +28,12 @@ await document.modify((t) => {
 - If any operation fails validation, the entire transaction is rejected.
 - `modify()` returns a Promise that resolves when the transaction is committed.
 
-### `document.createTransaction()` — lower-level alternative
+### `nexus.createTransaction()` — lower-level alternative
 
 `createTransaction()` gives you an explicit transaction object. Build your changes, then call `.send()` to commit:
 
 ```typescript
-const t = await document.createTransaction();
+const t = await nexus.createTransaction();
 
 const synth = t.create("pulverisateur", { positionX: 100, positionY: 100 });
 const channel = t.create("mixerChannel", {});
@@ -57,7 +57,7 @@ Both APIs produce identical results. Use `modify()` when you want automatic queu
 Creates a new entity of the given type with the specified initial fields:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("tonematrix", {});
   t.create("tinyGain", { positionX: 100, positionY: 200 });
   t.create("note", {
@@ -75,7 +75,7 @@ Fields you omit will use their schema defaults. You can create multiple entities
 Updates the value of a specific field on an existing entity:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.update(gainEntity.fields.gain, 0.75);
   t.update(gainEntity.fields.displayName, "Main Gain");
 });
@@ -88,7 +88,7 @@ You reference the field via `entity.fields.fieldName`. You cannot update an enti
 Removes an entity from the document:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.remove(gainEntity);
 });
 ```
@@ -117,7 +117,7 @@ If validation fails, `modify()` throws a transaction error. See [Validation Erro
 To disable validation (for rapid prototyping with an offline document):
 
 ```typescript
-const document = await createOfflineDocument({ validated: false });
+const nexus = await createOfflineDocument({ validated: false });
 ```
 
 ## Type safety

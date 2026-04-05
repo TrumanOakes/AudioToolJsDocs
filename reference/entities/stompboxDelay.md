@@ -26,7 +26,7 @@ The stompboxDelay is a delay effect device in Audiotool. It repeats the incoming
 ## Example
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("stompboxDelay", {
     positionX: 500,
     positionY: 300,

@@ -43,7 +43,7 @@ import { utils } from "@audiotool/nexus";
 const { Ticks } = utils;
 
 // Use createTransaction() to build several entities in one operation
-const t = await document.createTransaction();
+const t = await nexus.createTransaction();
 
 const track = t.create("noteTrack", {
   player: myDevice.location,       // device that plays this track's notes

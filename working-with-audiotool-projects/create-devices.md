@@ -10,10 +10,10 @@ Audio devices are the synthesizers, drum machines, effects, and utility units in
 
 ## Creating a device
 
-Use `document.modify()` to create any device entity:
+Use `nexus.modify()` to create any device entity:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("tinyGain", {
     positionX: 100,
     positionY: 200,
@@ -65,7 +65,7 @@ All device entities accept `positionX`, `positionY`, and `displayName` as fields
 A typical setup involves creating a synthesizer, a mixer channel, and connecting them with an audio cable. Use `createTransaction()` so you can reference the newly created entities' socket fields immediately:
 
 ```typescript
-const t = await document.createTransaction();
+const t = await nexus.createTransaction();
 
 // Create a synthesizer
 const synth = t.create("pulverisateur", {
@@ -95,12 +95,12 @@ After creating a device, update its parameters with `t.update()`:
 ```typescript
 let gainDevice;
 
-await document.modify((t) => {
+await nexus.modify((t) => {
   gainDevice = t.create("tinyGain", {});
 });
 
 // Later, change the gain value
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.update(gainDevice.fields.gain, 0.8);
 });
 ```
@@ -110,8 +110,8 @@ await document.modify((t) => {
 To find all currently existing devices of a particular type:
 
 ```typescript
-const gains = document.queryEntities.ofTypes("tinyGain").get();
-const synths = document.queryEntities.ofTypes("pulverisateur", "gakki", "bassline").get();
+const gains = nexus.queryEntities.ofTypes("tinyGain").get();
+const synths = nexus.queryEntities.ofTypes("pulverisateur", "gakki", "bassline").get();
 ```
 
 ## Next step

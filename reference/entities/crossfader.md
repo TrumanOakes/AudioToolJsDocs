@@ -24,7 +24,7 @@ The crossfader is a utility device in Audiotool that blends between two audio in
 ## Example
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("crossfader", {
     positionX: 900,
     positionY: 200,

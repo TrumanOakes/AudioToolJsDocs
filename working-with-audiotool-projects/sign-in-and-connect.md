@@ -50,19 +50,21 @@ const client = await createAudiotoolClient({ status });
 
 `createAudiotoolClient` accepts the result from `getLoginStatus` or a <span class="tooltip" data-tooltip="A private token that lets your app access an Audiotool account without using a browser login flow.">Personal Access Token</span>. It returns a ready-to-use client.
 
-## Server apps — Personal Access Token
+## Server-side scripts — Personal Access Token
 
-For <span class="tooltip" data-tooltip="An app or script that runs outside the browser, such as in Node.js, Bun, or Deno.">server apps</span> — Node.js, Bun, or Deno scripts and bots:
+> **For browser apps, use the OAuth flow above.** PATs expose full account access and must never appear in browser-facing code.
+
+For server-side automation only — Node.js, Bun, or Deno scripts, CI jobs, bots:
 
 ```typescript
 const client = await createAudiotoolClient({
-  pat: process.env.AUDIOTOOL_PAT
+  pat: process.env.AUDIOTOOL_PAT // always load from environment — never hardcode
 });
 ```
 
 No browser, no redirect, no `getLoginStatus` call needed. The client is immediately ready.
 
-PATs grant full access to the account. Store them in environment variables — never in code or version control.
+PATs grant full access to the account. Store them in environment variables and rotate them if compromised.
 
 ## After connecting
 

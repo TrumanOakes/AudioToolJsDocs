@@ -22,7 +22,7 @@ An audioSplitter is a utility device in Audiotool that takes one incoming audio 
 ## Example
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("audioSplitter", {
     positionX: 800,
     positionY: 200,

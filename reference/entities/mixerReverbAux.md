@@ -25,7 +25,7 @@ A mixerReverbAux is a reverb-specific auxiliary send/return bus in the Audiotool
 
 ```typescript
 // Use createTransaction() to build the mixer routing
-const t = await document.createTransaction();
+const t = await nexus.createTransaction();
 
 // Create a mixer channel
 const channel = t.create("mixerChannel", {

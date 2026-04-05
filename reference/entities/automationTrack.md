@@ -25,7 +25,7 @@ An automationTrack is a lane in the Audiotool timeline dedicated to automating a
 ```typescript
 let gainDevice;
 
-await document.modify((t) => {
+await nexus.modify((t) => {
   gainDevice = t.create("tinyGain", {
     positionX: 100,
     positionY: 200,
@@ -33,7 +33,7 @@ await document.modify((t) => {
   });
 });
 
-await document.modify((t) => {
+await nexus.modify((t) => {
   // Create an automation track targeting the gain field
   t.create("automationTrack", {
     displayName: "Volume Fade",

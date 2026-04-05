@@ -1,0 +1,31 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "./node_modules/@audiotool/nexus/dist/index.d.ts",
+    "./node_modules/@audiotool/nexus/dist/document.d.ts",
+    "./node_modules/@audiotool/nexus/dist/entities.d.ts",
+    "./node_modules/@audiotool/nexus/dist/utils.d.ts",
+    "./node_modules/@audiotool/nexus/dist/api.d.ts"
+  ],
+  "entryPointStrategy": "resolve",
+  "plugin": ["typedoc-plugin-markdown"],
+  "out": "api-reference/generated",
+  "skipErrorChecking": true,
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "excludeExternals": false,
+  "readme": "none",
+  "name": "@audiotool/nexus API Reference",
+  "hidePageHeader": false,
+  "hideBreadcrumbs": true,
+  "hidePageTitle": false,
+  "outputFileStrategy": "modules",
+  "flattenOutputFiles": false,
+  "fileExtension": ".md",
+  "entryFileName": "README",
+  "indexFormat": "table",
+  "parametersFormat": "table",
+  "enumMembersFormat": "table",
+  "typeDeclarationFormat": "table",
+  "propertyMembersFormat": "table"
+}

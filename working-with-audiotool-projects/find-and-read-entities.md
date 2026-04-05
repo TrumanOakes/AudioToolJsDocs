@@ -12,11 +12,11 @@ Use <span class="tooltip" data-tooltip="A way to search for and retrieve specifi
 
 ```typescript
 // Get all entities of a specific type
-const notes = document.queryEntities.ofTypes("note").get();
-const gains = document.queryEntities.ofTypes("tinyGain").get();
+const notes = nexus.queryEntities.ofTypes("note").get();
+const gains = nexus.queryEntities.ofTypes("tinyGain").get();
 
 // Get multiple types at once
-const devices = document.queryEntities
+const devices = nexus.queryEntities
   .ofTypes("pulverisateur", "gakki", "bassline")
   .get();
 ```
@@ -25,17 +25,18 @@ const devices = document.queryEntities
 
 ## Filter by field value
 
+`EntityQuery` doesn't have a `.where()` predicate filter — filter the array returned by `.get()` using standard JavaScript `.filter()`:
+
 ```typescript
 // Find notes with velocity above 90
-const loud = document.queryEntities
+const loud = nexus.queryEntities
   .ofTypes("note")
-  .where(n => n.fields.velocity > 90)
-  .get();
+  .get()
+  .filter(n => n.fields.velocity.value > 90);
 
 // Find the master mixer entity
-const master = document.queryEntities
-  .ofTypes("mixerMaster")
-  .get()[0]; // there is always exactly one
+const master = nexus.queryEntities.ofTypes("mixerMaster").getOne();
+// or .get()[0] — there is always exactly one
 ```
 
 ## Read entity fields
@@ -43,7 +44,7 @@ const master = document.queryEntities
 Entity objects expose their fields under `.fields`:
 
 ```typescript
-const notes = document.queryEntities.ofTypes("note").get();
+const notes = nexus.queryEntities.ofTypes("note").get();
 
 for (const note of notes) {
   console.log(`Pitch: ${note.fields.pitch}, Tick: ${note.fields.positionTicks}`);
@@ -57,7 +58,7 @@ Field values reflect the current state of the document. To track changes over ti
 If you know an entity's ID:
 
 ```typescript
-const allNotes = document.queryEntities.ofTypes("note").get();
+const allNotes = nexus.queryEntities.ofTypes("note").get();
 const target = allNotes.find(n => n.id === "some-entity-id");
 ```
 
@@ -66,17 +67,17 @@ const target = allNotes.find(n => n.id === "some-entity-id");
 The most robust pattern is to load initial state with a query, then subscribe to events to stay current:
 
 ```typescript
-await document.start();
+await nexus.start();
 
 // Initial load
-const existingNotes = document.queryEntities.ofTypes("note").get();
+const existingNotes = nexus.queryEntities.ofTypes("note").get();
 for (const note of existingNotes) {
   addNoteToUI(note);
 }
 
 // Track future changes
-document.events.onCreate("note", addNoteToUI);
-document.events.onRemove("note", removeNoteFromUI);
+nexus.events.onCreate("note", addNoteToUI);
+nexus.events.onRemove("note", removeNoteFromUI);
 ```
 
 ## Available entity types for queries

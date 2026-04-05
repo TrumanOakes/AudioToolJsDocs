@@ -12,7 +12,7 @@ nav_exclude: true
 The mixerMaster is the master output entity of the Audiotool mixer. Every project document has exactly one mixerMaster — it is created automatically and cannot be removed. All audio in the project ultimately flows through the master to reach the final output.
 
 {: .important }
-There is always exactly one `mixerMaster` per document. Do not create or remove it. Query for the existing one using `document.queryEntities.ofTypes("mixerMaster").get()`.
+There is always exactly one `mixerMaster` per document. Do not create or remove it. Query for the existing one using `nexus.queryEntities.ofTypes("mixerMaster").get()`.
 
 ## Fields
 
@@ -28,7 +28,7 @@ There is always exactly one `mixerMaster` per document. Do not create or remove 
 
 ```typescript
 // The mixerMaster already exists — query for it rather than creating it
-const masters = document.queryEntities.ofTypes("mixerMaster").get();
+const masters = nexus.queryEntities.ofTypes("mixerMaster").get();
 const master = masters[0]; // There is always exactly one
 
 console.log("Master display name:", master.fields.displayName);

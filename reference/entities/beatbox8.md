@@ -26,7 +26,7 @@ All device entities share these common placement fields:
 ## Example
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("beatbox8", {
     positionX: 100,
     positionY: 300,

@@ -24,7 +24,7 @@ The tonematrix is a step sequencer synthesizer in Audiotool. It presents a grid 
 
 ```typescript
 // Create a tonematrix device
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("tonematrix", {
     positionX: 100,
     positionY: 200,
@@ -33,7 +33,7 @@ await document.modify((t) => {
 });
 
 // Listen for tonematrix creation events
-document.events.onCreate("tonematrix", (tm) => {
+nexus.events.onCreate("tonematrix", (tm) => {
   console.log("tonematrix added, pattern index:", tm.fields.patternIndex);
 });
 ```

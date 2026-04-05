@@ -1,0 +1,8 @@
+# Dependencies
+node_modules/
+
+# TypeDoc generated output (regenerated in CI)
+api-reference/generated/
+
+# OS files
+.DS_Store

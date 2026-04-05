@@ -25,7 +25,7 @@ A matrixArpeggiatorPatternStep is a single step within a `matrixArpeggiatorPatte
 
 ```typescript
 // Use createTransaction() to create the pattern and its steps together
-const t = await document.createTransaction();
+const t = await nexus.createTransaction();
 
 // Create the parent pattern
 const pattern = t.create("matrixArpeggiatorPattern", {});

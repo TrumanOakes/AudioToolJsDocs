@@ -22,7 +22,7 @@ An audioTrack is a lane in the Audiotool timeline that holds audio clips. You pl
 ## Example
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("audioTrack", {
     displayName: "Vocals",
   });

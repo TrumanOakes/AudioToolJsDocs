@@ -16,7 +16,7 @@ Chrome, Firefox, Node.js, Bun, and Deno. The OAuth browser login flow requires a
 
 ---
 
-**Q: Do I need to call `document.start()` every time?**
+**Q: Do I need to call `nexus.start()` every time?**
 
 Yes — for synced documents. `start()` initiates the backend connection. Without it, events will not fire and the document state will not be populated. Offline documents (`createOfflineDocument()`) do not require `start()`.
 
@@ -75,7 +75,7 @@ The return value of `t.create()` inside `modify()` is the new entity object:
 
 ```typescript
 let newGain;
-await document.modify((t) => {
+await nexus.modify((t) => {
   newGain = t.create("tinyGain", {});
 });
 // newGain is now available

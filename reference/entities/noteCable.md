@@ -24,7 +24,7 @@ A noteCable connects a note output socket (from a track or sequencer) to a note 
 
 ```typescript
 // Use createTransaction() to build everything in one operation
-const t = await document.createTransaction();
+const t = await nexus.createTransaction();
 
 const synth = t.create("pulverisateur", {
   positionX: 100,

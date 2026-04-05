@@ -15,20 +15,20 @@ A **document** is the central object you work with in Nexus. It represents a sin
 A <span class="tooltip" data-tooltip="A document connected to Audiotool in real time, so changes can update as the project changes.">synced document</span> connects to a live Audiotool project. Changes are immediately sent to Audiotool and visible to all other connected collaborators (other bots, other users in the DAW). Created via `client.createSyncedDocument(...)`.
 
 ```typescript
-const document = await client.createSyncedDocument({
+const nexus = await client.createSyncedDocument({
   mode: "online",
   project: "https://beta.audiotool.com/studio?project=abc123"
 });
 
-await document.start();
-// document is now live
+await nexus.start();
+// nexus is now live
 ```
 
 A synced document must be explicitly **started** before it syncs, and **stopped** when you are done:
 
 ```typescript
-await document.stop();
-// pending changes are finalized; document becomes read-only
+await nexus.stop();
+// pending changes are finalized; nexus becomes read-only
 ```
 
 ### OfflineDocument
@@ -38,7 +38,7 @@ An <span class="tooltip" data-tooltip="A document used locally without a live co
 ```typescript
 import { createOfflineDocument } from "@audiotool/nexus";
 
-const document = await createOfflineDocument();
+const nexus = await createOfflineDocument();
 // immediately ready — no start() required
 ```
 
@@ -47,7 +47,7 @@ An offline document is always immediately available and never needs `start()` or
 Offline documents support an optional `validated` flag:
 
 ```typescript
-const document = await createOfflineDocument({ validated: false });
+const nexus = await createOfflineDocument({ validated: false });
 ```
 
 Disabling validation lets you experiment freely without transactions throwing errors. Re-enable it before testing production-like behavior.
@@ -58,11 +58,11 @@ Both document types expose the same interface:
 
 | Property / Method | Description |
 |-------------------|-------------|
-| `document.modify(fn)` | Open a transaction and apply changes |
-| `document.events` | Subscribe to entity create/update/remove events |
-| `document.queryEntities` | Query the current set of entities |
-| `document.start()` | Begin syncing (SyncedDocument only) |
-| `document.stop()` | Finalize and stop syncing (SyncedDocument only) |
+| `nexus.modify(fn)` | Open a transaction and apply changes |
+| `nexus.events` | Subscribe to entity create/update/remove events |
+| `nexus.queryEntities` | Query the current set of entities |
+| `nexus.start()` | Begin syncing (SyncedDocument only) |
+| `nexus.stop()` | Finalize and stop syncing (SyncedDocument only) |
 
 ## Next step
 

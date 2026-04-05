@@ -21,7 +21,7 @@ A matrixArpeggiatorPattern defines the sequence of steps for a matrix arpeggiato
 
 ```typescript
 // Use createTransaction() to build the pattern and its steps together
-const t = await document.createTransaction();
+const t = await nexus.createTransaction();
 
 // Create the arpeggiator pattern
 const pattern = t.create("matrixArpeggiatorPattern", {});

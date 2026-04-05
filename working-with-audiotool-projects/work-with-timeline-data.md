@@ -46,7 +46,7 @@ Use `createTransaction()` so that you can reference newly created entities' loca
 import { utils } from "@audiotool/nexus";
 const { Ticks } = utils;
 
-const t = await document.createTransaction();
+const t = await nexus.createTransaction();
 
 // 1. Create the synthesizer that will play the track
 const synth = t.create("pulverisateur", {
@@ -134,16 +134,16 @@ A `note` entity has three fields:
 
 ```typescript
 // Find all note tracks
-const tracks = document.queryEntities.ofTypes("noteTrack").get();
+const tracks = nexus.queryEntities.ofTypes("noteTrack").get();
 
 // Find all notes
-const notes = document.queryEntities.ofTypes("note").get();
+const notes = nexus.queryEntities.ofTypes("note").get();
 
 // Find notes at a specific position
-const beat1Notes = document.queryEntities
+const beat1Notes = nexus.queryEntities
   .ofTypes("note")
-  .where(n => n.fields.positionTicks === 0)
-  .get();
+  .get()
+  .filter(n => n.fields.positionTicks.value === 0);
 ```
 
 ## Next step

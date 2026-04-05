@@ -242,7 +242,7 @@ function connectToInput(observable: ObservableValue<number>) {
 
 ### `Terminable`
 
-Any object with a `.terminate()` method. Event subscriptions from `document.events` and from Nexus utilities all return a `Terminable` — call `.terminate()` when you no longer need the subscription to avoid memory leaks.
+Any object with a `.terminate()` method. Event subscriptions from `nexus.events` and from Nexus utilities all return a `Terminable` — call `.terminate()` when you no longer need the subscription to avoid memory leaks.
 
 ```typescript
 import type { Terminable } from "@audiotool/nexus/utils";
@@ -251,10 +251,10 @@ import type { Terminable } from "@audiotool/nexus/utils";
 const subscriptions: Terminable[] = [];
 
 subscriptions.push(
-  document.events.onCreate("note", handleNote)
+  nexus.events.onCreate("note", handleNote)
 );
 subscriptions.push(
-  document.events.onRemove("note", handleNoteRemoved)
+  nexus.events.onRemove("note", handleNoteRemoved)
 );
 
 // Later — remove all subscriptions at once

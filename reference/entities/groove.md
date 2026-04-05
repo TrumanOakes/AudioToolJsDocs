@@ -22,7 +22,7 @@ A groove entity defines a groove or swing quantization pattern. Applying a groov
 ## Example
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("groove", {
     displayName: "Swing 16ths",
   });

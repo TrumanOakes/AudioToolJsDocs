@@ -19,12 +19,12 @@ const client = await createAudiotoolClient({
   pat: "at_pat_your_token_here"
 });
 
-const document = await client.createSyncedDocument({
+const nexus = await client.createSyncedDocument({
   mode: "online",
   project: "https://beta.audiotool.com/studio?project=abc123"
 });
 
-await document.start();
+await nexus.start();
 
 const projects = await client.api.projectService.listProjects({});
 ```
@@ -87,11 +87,11 @@ import type { AudiotoolClient } from "@audiotool/nexus";
 
 // Pass the client to helper functions with a typed annotation
 async function openProject(client: AudiotoolClient, url: string) {
-  const document = await client.createSyncedDocument({
+  const nexus = await client.createSyncedDocument({
     mode: "online",
     project: url,
   });
-  await document.start();
+  await nexus.start();
   return document;
 }
 ```

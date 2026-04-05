@@ -24,7 +24,7 @@ The autoFilter is an effect device in Audiotool that automatically sweeps a filt
 ## Example
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("autoFilter", {
     positionX: 500,
     positionY: 200,

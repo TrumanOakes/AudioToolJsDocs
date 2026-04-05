@@ -70,10 +70,10 @@ Rather than nesting objects inside one another, the document uses flat entities 
 
 ## The modification system
 
-You cannot change a document directly. All changes go through a <span class="tooltip" data-tooltip="The tool used to prepare and apply changes to a document.">**transaction builder**</span> obtained via `document.modify()`:
+You cannot change a document directly. All changes go through a <span class="tooltip" data-tooltip="The tool used to prepare and apply changes to a document.">**transaction builder**</span> obtained via `nexus.modify()`:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("tinyGain", { positionX: 100, positionY: 200 });
   t.update(entity.fields.gain, 0.8);
   t.remove(entity);
@@ -97,11 +97,11 @@ Nexus applies all operations in a single `modify()` call together as one unit �
 The document fires events whenever entities change. You subscribe to these events to react to changes made by your code or by other collaborators:
 
 ```typescript
-document.events.onCreate("tonematrix", (entity) => {
+nexus.events.onCreate("tonematrix", (entity) => {
   console.log("A tonematrix was added:", entity);
 });
 
-document.events.onUpdate(entity.fields.gain, (newValue) => {
+nexus.events.onUpdate(entity.fields.gain, (newValue) => {
   console.log("Gain changed to:", newValue);
 });
 ```
@@ -113,7 +113,7 @@ document.events.onUpdate(entity.fields.gain, (newValue) => {
 Instead of subscribing to events, you can also inspect the current state of the document at any moment using queries:
 
 ```typescript
-const notes = document.queryEntities.ofTypes("note").get();
+const notes = nexus.queryEntities.ofTypes("note").get();
 ```
 
 Queries give you a snapshot of current entity state. Events give you a live stream of changes. Use both as appropriate.
@@ -125,8 +125,8 @@ Queries give you a snapshot of current entity state. Events give you a live stre
 A synced document has a lifecycle:
 
 1. **Create** — `client.createSyncedDocument(...)` creates the document object but does not begin syncing.
-2. **Start** — `await document.start()` begins syncing with the backend. Events fire and modifications are transmitted.
-3. **Stop** — `await document.stop()` finalizes any pending changes and transitions the document to read-only. After stopping, you can still query entities but cannot modify them.
+2. **Start** — `await nexus.start()` begins syncing with the backend. Events fire and modifications are transmitted.
+3. **Stop** — `await nexus.stop()` finalizes any pending changes and transitions the document to read-only. After stopping, you can still query entities but cannot modify them.
 
 Offline documents have no start/stop lifecycle — they are immediately ready for modifications.
 

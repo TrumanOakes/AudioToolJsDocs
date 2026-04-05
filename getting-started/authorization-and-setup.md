@@ -90,19 +90,22 @@ if (status.type === "logged-in") {
 
 > **Note:** The very first call to `getLoginStatus` always reports the user as logged out, even if they authenticated previously. This is expected behavior — the OAuth redirect happens asynchronously.
 
-### <span class="tooltip" data-tooltip="An app or script that runs outside the browser, such as in Node.js, Bun, or Deno.">Server apps</span> (<span class="tooltip" data-tooltip="A private token that lets your app access an Audiotool account without using a browser login flow.">Personal Access Token</span>)
+### <span class="tooltip" data-tooltip="An app or script that runs outside the browser, such as in Node.js, Bun, or Deno.">Server-side scripts only</span> (<span class="tooltip" data-tooltip="A private token that lets your app access an Audiotool account without using a browser login flow.">Personal Access Token</span>)
 
-Use this option if your app runs outside the browser and does not need a user to sign in through a browser-based <span class="tooltip" data-tooltip="The step-by-step process of checking whether a user is signed in and, if not, starting the sign-in process.">login flow</span>. For Node.js, Bun, or Deno apps, use a <span class="tooltip" data-tooltip="A private token that lets your app access an Audiotool account without using a browser login flow.">Personal Access Token</span>:
+> **For browser apps, always use the OAuth flow above.** PATs are not suitable for browser apps — exposing a PAT in client-side code gives anyone who reads your source full access to the account.
+
+PATs are intended for server-side automation: Node.js scripts, CI/CD jobs, bots, or other non-browser environments where no user login flow is available.
 
 ```typescript
 import { createAudiotoolClient } from "@audiotool/nexus";
 
+// Load from an environment variable — never hardcode a PAT
 const client = await createAudiotoolClient({
-  pat: "at_pat_your_token_here"
+  pat: process.env.AUDIOTOOL_PAT
 });
 ```
 
-> **Warning:** A <span class="tooltip" data-tooltip="A private token that lets your app access an Audiotool account without using a browser login flow.">Personal Access Token (PAT)</span> gives full access to your account. Never commit it to version control or share it publicly. Store it in <span class="tooltip" data-tooltip="A safe way to store private values like tokens outside of your source code.">environment variables</span>.
+> **Security:** A PAT gives full access to the associated account. Store it in environment variables, never in source code or version control.
 
 ## Step 7 — Start the dev server
 

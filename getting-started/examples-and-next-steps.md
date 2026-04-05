@@ -21,28 +21,28 @@ const client = await createAudiotoolClient({
 });
 
 // 2. Open a synced document for a specific Audiotool project
-const document = await client.createSyncedDocument({
+const nexus = await client.createSyncedDocument({
   mode: "online",
   project: "https://beta.audiotool.com/studio?project=abc123"
 });
 
 // 3. Start syncing
-await document.start();
+await nexus.start();
 
 // 4. List all projects accessible to this token
 const projects = await client.api.projectService.listProjects({});
 console.log(projects);
 
 // 5. Stop when done
-await document.stop();
+await nexus.stop();
 ```
 
 ## Listen for entity creation events
 
 ```typescript
-await document.start();
+await nexus.start();
 
-document.events.onCreate("tonematrix", (entity) => {
+nexus.events.onCreate("tonematrix", (entity) => {
   console.log("A tonematrix was created:", entity);
 });
 ```
@@ -54,7 +54,7 @@ document.events.onCreate("tonematrix", (entity) => {
 ```typescript
 let gainEntity;
 
-await document.modify((t) => {
+await nexus.modify((t) => {
   gainEntity = t.create("tinyGain", {
     positionX: 100,
     positionY: 200,
@@ -62,7 +62,7 @@ await document.modify((t) => {
 });
 
 // Later, update the gain value
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.update(gainEntity.fields.gain, 0.75);
 });
 ```
@@ -72,7 +72,7 @@ await document.modify((t) => {
 ## Query the current state of the document
 
 ```typescript
-const notes = document.queryEntities.ofTypes("note").get();
+const notes = nexus.queryEntities.ofTypes("note").get();
 console.log(`There are ${notes.length} notes in the project.`);
 ```
 
@@ -86,9 +86,9 @@ Use an <span class="tooltip" data-tooltip="A document used locally without a liv
 import { createOfflineDocument } from "@audiotool/nexus";
 
 // No auth or network required
-const document = await createOfflineDocument();
+const nexus = await createOfflineDocument();
 
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("tinyGain", {});
 });
 ```

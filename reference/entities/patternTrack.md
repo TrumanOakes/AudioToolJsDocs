@@ -22,7 +22,7 @@ A patternTrack is a lane in the Audiotool timeline that uses pattern-based seque
 ## Example
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("patternTrack", {
     displayName: "Beat Pattern",
   });

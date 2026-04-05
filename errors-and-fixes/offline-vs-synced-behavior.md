@@ -44,10 +44,10 @@ On synced documents, there is network latency. Events and query results may arri
 Unlike synced documents, offline documents start empty. There are no pre-existing entities to replay. If your code expects an initial set of entities (like a `mixerMaster`), you need to create them yourself when testing offline:
 
 ```typescript
-const document = await createOfflineDocument();
+const nexus = await createOfflineDocument();
 
 // Set up the initial state you need for testing
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("mixerMaster", {});
   // add other initial entities
 });
@@ -59,7 +59,7 @@ All entity state is lost when the script ends or the page reloads. This is expec
 
 ## "I stopped the document but now query/modify is broken"
 
-After calling `document.stop()`, the document is read-only. `modify()` will throw. You can still use `queryEntities` to read data, but no further changes can be made.
+After calling `nexus.stop()`, the document is read-only. `modify()` will throw. You can still use `queryEntities` to read data, but no further changes can be made.
 
 If you need to make more changes, you must create a new document connection.
 
