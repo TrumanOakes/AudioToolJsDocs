@@ -27,9 +27,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
 
-      - name: Install dependencies
+      - name: Clone nexus source
+        run: git clone --depth 1 https://github.com/audiotool/nexus.git /tmp/nexus-src
+
+      - name: Install nexus dependencies
+        run: npm ci
+        working-directory: /tmp/nexus-src
+
+      - name: Install docs tools
         run: npm ci
 
       - name: Generate API reference

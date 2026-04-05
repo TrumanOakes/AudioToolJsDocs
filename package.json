@@ -15,9 +15,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@audiotool/nexus": ">=0.0.12"
-  },
   "devDependencies": {
     "typedoc": "^0.28.18",
     "typedoc-plugin-markdown": "^4.11.0"

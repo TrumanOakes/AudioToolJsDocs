@@ -1,12 +1,13 @@
 {
   "$schema": "https://typedoc.org/schema.json",
   "entryPoints": [
-    "./node_modules/@audiotool/nexus/dist/index.d.ts",
-    "./node_modules/@audiotool/nexus/dist/document.d.ts",
-    "./node_modules/@audiotool/nexus/dist/entities.d.ts",
-    "./node_modules/@audiotool/nexus/dist/utils.d.ts",
-    "./node_modules/@audiotool/nexus/dist/api.d.ts"
+    "/tmp/nexus-src/src/exports/index.ts",
+    "/tmp/nexus-src/src/exports/document.ts",
+    "/tmp/nexus-src/src/exports/entities.ts",
+    "/tmp/nexus-src/src/exports/utils.ts",
+    "/tmp/nexus-src/src/exports/api.ts"
   ],
+  "tsconfig": "/tmp/nexus-src/tsconfig.json",
   "entryPointStrategy": "resolve",
   "plugin": ["typedoc-plugin-markdown"],
   "out": "api-reference/generated",
@@ -14,6 +15,7 @@
   "excludePrivate": true,
   "excludeInternal": true,
   "excludeExternals": false,
+  "exclude": ["**/*.test.ts"],
   "readme": "none",
   "name": "@audiotool/nexus API Reference",
   "hidePageHeader": false,

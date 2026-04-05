@@ -5,7 +5,7 @@
  * compatible with the Just the Docs theme.
  */
 
-import { readdir, readFile, writeFile } from "node:fs/promises";
+import { readdir, readFile, writeFile, rm } from "node:fs/promises";
 import { join, basename, relative } from "node:path";
 
 const GENERATED_DIR = join(import.meta.dirname, "..", "api-reference", "generated");
@@ -86,6 +86,11 @@ async function processFile(filePath, navOrder) {
 }
 
 async function main() {
+  // Remove _media directory — these are project docs from the nexus repo
+  // that would conflict with our hand-written guides
+  const mediaDir = join(GENERATED_DIR, "_media");
+  await rm(mediaDir, { recursive: true, force: true });
+
   const files = await getAllMarkdownFiles(GENERATED_DIR);
   console.log(`Processing ${files.length} generated markdown files...`);
 
