@@ -20,7 +20,7 @@
   "hidePageHeader": false,
   "hideBreadcrumbs": true,
   "hidePageTitle": false,
-  "outputFileStrategy": "modules",
+  "outputFileStrategy": "members",
   "flattenOutputFiles": false,
   "fileExtension": ".md",
   "entryFileName": "README",

@@ -2,7 +2,12 @@
 
 /**
  * Post-processes TypeDoc-generated markdown files to add Jekyll frontmatter
- * compatible with the Just the Docs theme.
+ * compatible with the Just the Docs theme (3-level nesting).
+ *
+ * With outputFileStrategy: "members", TypeDoc produces:
+ *   generated/README.md                         ← top-level index
+ *   generated/<module>/README.md                ← module index
+ *   generated/<module>/<kind>/<MemberName>.md   ← per-symbol page
  */
 
 import { readdir, readFile, writeFile, rm } from "node:fs/promises";
@@ -11,22 +16,21 @@ import { join, basename, relative } from "node:path";
 const GENERATED_DIR = join(import.meta.dirname, "..", "api-reference", "generated");
 const PARENT_TITLE = "API Reference";
 
-/** Map of filename stems to friendly display titles */
+/** Map of directory names to sidebar-friendly module titles */
 const MODULE_TITLES = {
-  "README": "Overview",
   "index": "nexus (index)",
   "document": "document",
   "entities": "entities",
   "utils": "utils",
 };
 
-async function getAllMarkdownFiles(dir, base = dir) {
+async function getAllMarkdownFiles(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   const files = [];
   for (const entry of entries) {
     const fullPath = join(dir, entry.name);
     if (entry.isDirectory()) {
-      files.push(...await getAllMarkdownFiles(fullPath, base));
+      files.push(...await getAllMarkdownFiles(fullPath));
     } else if (entry.name.endsWith(".md")) {
       files.push(fullPath);
     }
@@ -34,70 +38,123 @@ async function getAllMarkdownFiles(dir, base = dir) {
   return files;
 }
 
-async function processFile(filePath, navOrder) {
-  const content = await readFile(filePath, "utf-8");
+function classifyFile(relPath) {
+  const parts = relPath.replace(/\.md$/, "").split("/");
 
-  // Skip if already has frontmatter
-  if (content.startsWith("---\n")) return;
-
-  const rel = relative(GENERATED_DIR, filePath).replace(/\.md$/, "");
-  const title = MODULE_TITLES[rel] || basename(rel);
-
-  // Determine parent: top-level files are children of "API Reference",
-  // nested files use their directory as a grandparent chain
-  const isTopLevel = !rel.includes("/");
-  const depth = rel.split("/").length;
-
-  let frontmatter;
-  if (rel === "README") {
-    // The generated index — redirect to our hand-written parent
-    frontmatter = [
-      "---",
-      `title: "Generated Index"`,
-      `parent: ${PARENT_TITLE}`,
-      `nav_order: 1`,
-      "---",
-    ].join("\n");
-  } else if (isTopLevel) {
-    frontmatter = [
-      "---",
-      `title: "${title}"`,
-      `parent: ${PARENT_TITLE}`,
-      `nav_order: ${navOrder}`,
-      `nav_exclude: false`,
-      "---",
-    ].join("\n");
-  } else {
-    // Nested pages — exclude from nav to avoid clutter
-    frontmatter = [
-      "---",
-      `title: "${title}"`,
-      `parent: ${PARENT_TITLE}`,
-      `nav_exclude: true`,
-      "---",
-    ].join("\n");
+  if (parts.length === 1 && parts[0] === "README") {
+    return { type: "top-readme" };
   }
+  if (parts.length === 2 && parts[1] === "README") {
+    return { type: "module-readme", module: parts[0] };
+  }
+  if (parts.length === 3) {
+    return { type: "member", module: parts[0], memberName: parts[2] };
+  }
+
+  // Unexpected depth — warn and exclude from nav
+  return { type: "unknown", relPath };
+}
+
+function buildFrontmatter(file, navOrder) {
+  const lines = ["---"];
+
+  switch (file.type) {
+    case "top-readme":
+      lines.push(`title: "Overview"`);
+      lines.push(`parent: "${PARENT_TITLE}"`);
+      lines.push(`nav_order: 0`);
+      break;
+
+    case "module-readme": {
+      const title = MODULE_TITLES[file.module] || file.module;
+      lines.push(`title: "${title}"`);
+      lines.push(`parent: "${PARENT_TITLE}"`);
+      lines.push(`has_children: true`);
+      lines.push(`nav_order: ${navOrder}`);
+      break;
+    }
+
+    case "member": {
+      const parentTitle = MODULE_TITLES[file.module] || file.module;
+      lines.push(`title: "${file.memberName}"`);
+      lines.push(`parent: "${parentTitle}"`);
+      lines.push(`grand_parent: "${PARENT_TITLE}"`);
+      lines.push(`nav_order: ${navOrder}`);
+      break;
+    }
+
+    default:
+      lines.push(`title: "${file.relPath}"`);
+      lines.push(`nav_exclude: true`);
+      break;
+  }
+
+  lines.push("---");
+  return lines.join("\n");
+}
+
+async function processFile(filePath, frontmatter) {
+  const content = await readFile(filePath, "utf-8");
+  if (content.startsWith("---\n")) return;
 
   const newContent = frontmatter + "\n\n" + content;
   await writeFile(filePath, newContent, "utf-8");
-  console.log(`  Added frontmatter to: ${rel}.md`);
+  console.log(`  ${relative(GENERATED_DIR, filePath)}`);
 }
 
 async function main() {
-  // Remove _media directory — these are project docs from the nexus repo
-  // that would conflict with our hand-written guides
-  const mediaDir = join(GENERATED_DIR, "_media");
-  await rm(mediaDir, { recursive: true, force: true });
+  // Remove _media directory (nexus project docs that conflict with our guides)
+  await rm(join(GENERATED_DIR, "_media"), { recursive: true, force: true });
 
-  const files = await getAllMarkdownFiles(GENERATED_DIR);
-  console.log(`Processing ${files.length} generated markdown files...`);
+  const allFiles = await getAllMarkdownFiles(GENERATED_DIR);
+  const classified = allFiles.map(f => {
+    const rel = relative(GENERATED_DIR, f);
+    return { path: f, rel, ...classifyFile(rel) };
+  });
 
-  // Sort for deterministic nav_order
-  files.sort((a, b) => a.localeCompare(b));
+  // Warn about unexpected files
+  const unknown = classified.filter(f => f.type === "unknown");
+  for (const f of unknown) {
+    console.warn(`  WARNING: unexpected path depth, excluding from nav: ${f.rel}`);
+  }
 
-  let navOrder = 2; // Start at 2 since README gets 1
-  for (const file of files) {
-    await processFile(file, navOrder++);
+  // Top-level README
+  const topReadmes = classified.filter(f => f.type === "top-readme");
+
+  // Module READMEs — sorted alphabetically for deterministic nav_order
+  const moduleReadmes = classified.filter(f => f.type === "module-readme")
+    .sort((a, b) => a.module.localeCompare(b.module));
+
+  // Member files — grouped by module, sorted alphabetically within each
+  const members = classified.filter(f => f.type === "member");
+  const membersByModule = Object.groupBy(members, m => m.module);
+
+  const total = topReadmes.length + moduleReadmes.length + members.length + unknown.length;
+  console.log(`Processing ${total} generated markdown files...`);
+
+  // Process top-level README
+  for (const f of topReadmes) {
+    await processFile(f.path, buildFrontmatter(f, 0));
+  }
+
+  // Process module READMEs
+  let moduleOrder = 1;
+  for (const f of moduleReadmes) {
+    await processFile(f.path, buildFrontmatter(f, moduleOrder++));
+  }
+
+  // Process members
+  for (const [, moduleMembers] of Object.entries(membersByModule || {})) {
+    moduleMembers.sort((a, b) => a.memberName.localeCompare(b.memberName));
+    let memberOrder = 1;
+    for (const f of moduleMembers) {
+      await processFile(f.path, buildFrontmatter(f, memberOrder++));
+    }
+  }
+
+  // Process unknown files (nav_exclude)
+  for (const f of unknown) {
+    await processFile(f.path, buildFrontmatter(f, 0));
   }
 
   console.log("Done.");
