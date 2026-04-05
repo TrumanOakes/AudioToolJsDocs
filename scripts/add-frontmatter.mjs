@@ -18,8 +18,6 @@ const MODULE_TITLES = {
   "document": "document",
   "entities": "entities",
   "utils": "utils",
-  "api/README": "api",
-  "api/namespaces/sample": "api / sample namespace",
 };
 
 async function getAllMarkdownFiles(dir, base = dir) {

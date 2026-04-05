@@ -4,8 +4,7 @@
     "/tmp/nexus-src/src/exports/index.ts",
     "/tmp/nexus-src/src/exports/document.ts",
     "/tmp/nexus-src/src/exports/entities.ts",
-    "/tmp/nexus-src/src/exports/utils.ts",
-    "/tmp/nexus-src/src/exports/api.ts"
+    "/tmp/nexus-src/src/exports/utils.ts"
   ],
   "tsconfig": "/tmp/nexus-src/tsconfig.json",
   "entryPointStrategy": "resolve",
