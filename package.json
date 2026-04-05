@@ -16,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@audiotool/nexus": "^0.0.12"
+    "@audiotool/nexus": ">=0.0.12"
   },
   "devDependencies": {
     "typedoc": "^0.28.18",
