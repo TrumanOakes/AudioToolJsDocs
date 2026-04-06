@@ -22,5 +22,4 @@ This section is generated directly from the package's TypeScript declarations us
 
 ## Browse the API
 
-See the child pages below for the full generated reference, or use the site search to find specific types, functions, or classes.
-
+Expand the modules in the sidebar to browse individual types, classes, interfaces, and functions. You can also use the site search to jump directly to a specific symbol.
