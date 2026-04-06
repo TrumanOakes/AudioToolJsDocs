@@ -10,8 +10,8 @@
  *   generated/<module>/<kind>/<MemberName>.md   ← per-symbol page
  */
 
-import { readdir, readFile, writeFile, rm } from "node:fs/promises";
-import { join, basename, relative } from "node:path";
+import { readdir, readFile, writeFile } from "node:fs/promises";
+import { join, relative } from "node:path";
 
 const GENERATED_DIR = join(import.meta.dirname, "..", "api-reference", "generated");
 const PARENT_TITLE = "API Reference";
@@ -23,6 +23,27 @@ const MODULE_TITLES = {
   "document": "document",
   "entities": "entities",
   "utils": "utils",
+};
+
+/** Links from auto-generated module READMEs back to hand-written guide pages */
+const MODULE_GUIDES = {
+  "api": { title: "Platform API Types", path: "../../reference/platform-api-types.md" },
+  "document": { title: "Document Model", path: "../../reference/document-model.md" },
+  "entities": { title: "Entity Reference", path: "../../reference/entity-reference.md" },
+  "index": { title: "Package Entry Points", path: "../../reference/package-entry-points.md" },
+  "utils": { title: "Utilities", path: "../../reference/utilities.md" },
+};
+
+/** Supplementary descriptions for pages where TypeDoc extracted no JSDoc */
+const SUPPLEMENTARY_DESCRIPTIONS = {
+  "api/functions/createAudiotoolAPI.md":
+    "Factory function that creates an `AudiotoolAPI` instance for direct REST API access without opening a document.",
+  "api/type-aliases/NeverThrowingFetch.md":
+    "The function type returned by `neverThrowingFetch()`. A `fetch` wrapper that returns errors as values instead of throwing.",
+  "api/type-aliases/NexusPreset.md":
+    "Represents a device preset within a Nexus document — contains preset metadata and the entity type it applies to.",
+  "api/type-aliases/RetryOptions.md":
+    "Configuration options for retry behavior on transient network failures.",
 };
 
 async function getAllMarkdownFiles(dir) {
@@ -44,7 +65,11 @@ function classifyFile(relPath) {
 
   // generated/README.md — TypeDoc artifact, not useful in nav
   if (parts.length === 1 && parts[0] === "README") {
-    return { type: "top-readme" };
+    return { type: "nav-exclude" };
+  }
+  // generated/_media/*.md — nexus repo docs, keep as link targets but exclude from nav
+  if (parts[0] === "_media") {
+    return { type: "nav-exclude" };
   }
   // generated/<module>/README.md — module index page
   if (parts.length === 2 && parts[1] === "README") {
@@ -56,7 +81,7 @@ function classifyFile(relPath) {
   }
   // generated/<module>/namespaces/<ns>/README.md — namespace index, exclude from nav
   if (parts.length === 4 && parts[1] === "namespaces" && parts[3] === "README") {
-    return { type: "namespace-readme" };
+    return { type: "nav-exclude" };
   }
   // generated/<module>/namespaces/<ns>/<kind>/<Name>.md — flatten into parent module
   if (parts.length === 5 && parts[1] === "namespaces") {
@@ -72,8 +97,7 @@ function buildFrontmatter(file, navOrder) {
   const lines = ["---"];
 
   switch (file.type) {
-    case "top-readme":
-    case "namespace-readme":
+    case "nav-exclude":
       lines.push(`nav_exclude: true`);
       break;
 
@@ -105,19 +129,90 @@ function buildFrontmatter(file, navOrder) {
   return lines.join("\n");
 }
 
-async function processFile(filePath, frontmatter) {
+async function processFile(filePath, frontmatter, { injectNavExclude = false } = {}) {
   const content = await readFile(filePath, "utf-8");
-  if (content.startsWith("---\n")) return;
+
+  if (content.startsWith("---\n")) {
+    // File already has frontmatter — optionally inject nav_exclude into it
+    if (injectNavExclude && !content.includes("nav_exclude:")) {
+      const endIdx = content.indexOf("\n---", 4);
+      if (endIdx !== -1) {
+        const patched = content.slice(0, endIdx) + "\nnav_exclude: true" + content.slice(endIdx);
+        await writeFile(filePath, patched, "utf-8");
+        console.log(`  + nav_exclude: ${relative(GENERATED_DIR, filePath)}`);
+      }
+    }
+    return;
+  }
 
   const newContent = frontmatter + "\n\n" + content;
   await writeFile(filePath, newContent, "utf-8");
   console.log(`  ${relative(GENERATED_DIR, filePath)}`);
 }
 
-async function main() {
-  // Remove _media directory (nexus project docs that conflict with our guides)
-  await rm(join(GENERATED_DIR, "_media"), { recursive: true, force: true });
+/** Append a "See also" backlink to module READMEs pointing to hand-written guides */
+async function appendModuleGuideLinks(moduleReadmes) {
+  for (const f of moduleReadmes) {
+    const guide = MODULE_GUIDES[f.module];
+    if (!guide) continue;
 
+    const content = await readFile(f.path, "utf-8");
+    const backlink = `\n\n---\n\nFor curated examples and practical context, see the [${guide.title}](${guide.path}) guide.\n`;
+
+    if (content.includes(guide.path)) continue; // already has link
+    await writeFile(f.path, content + backlink, "utf-8");
+    console.log(`  + backlink: ${relative(GENERATED_DIR, f.path)}`);
+  }
+}
+
+/** Inject descriptions into pages where TypeDoc extracted none */
+async function patchEmptyDescriptions() {
+  for (const [relPath, description] of Object.entries(SUPPLEMENTARY_DESCRIPTIONS)) {
+    const filePath = join(GENERATED_DIR, relPath);
+    let content;
+    try {
+      content = await readFile(filePath, "utf-8");
+    } catch {
+      continue; // file doesn't exist in this build
+    }
+
+    // Check if there's already a description between the heading and "Defined in:"
+    // Pattern: # heading\n\n> signature\n\nDefined in: ...
+    // If "Defined in:" immediately follows the signature with no paragraph between, inject.
+    const definedInIdx = content.indexOf("\nDefined in:");
+    if (definedInIdx === -1) continue;
+
+    // Look for existing description: a non-empty line between "> **..." signature and "Defined in:"
+    const beforeDefined = content.slice(0, definedInIdx);
+    const lines = beforeDefined.split("\n");
+
+    // Find the signature line (starts with ">")
+    let sigLineIdx = -1;
+    for (let i = lines.length - 1; i >= 0; i--) {
+      if (lines[i].startsWith("> ")) {
+        sigLineIdx = i;
+        break;
+      }
+    }
+    if (sigLineIdx === -1) continue;
+
+    // Check if there's any non-empty content between signature and "Defined in:"
+    const between = lines.slice(sigLineIdx + 1).filter(l => l.trim().length > 0);
+    if (between.length > 0) continue; // already has content
+
+    // Insert description after the "Defined in:" line
+    const afterDefined = content.slice(definedInIdx);
+    const definedLineEnd = afterDefined.indexOf("\n", 1);
+    const definedLine = afterDefined.slice(0, definedLineEnd + 1);
+    const rest = afterDefined.slice(definedLineEnd + 1);
+
+    const patched = beforeDefined + definedLine + "\n" + description + "\n" + rest;
+    await writeFile(filePath, patched, "utf-8");
+    console.log(`  + description: ${relPath}`);
+  }
+}
+
+async function main() {
   const allFiles = await getAllMarkdownFiles(GENERATED_DIR);
   const classified = allFiles.map(f => {
     const rel = relative(GENERATED_DIR, f);
@@ -126,8 +221,8 @@ async function main() {
 
   const unknown = classified.filter(f => f.type === "unknown");
 
-  // Top-level README + namespace READMEs (nav-excluded)
-  const navExcluded = classified.filter(f => f.type === "top-readme" || f.type === "namespace-readme");
+  // Nav-excluded files (top-level README, _media/ files, namespace READMEs)
+  const navExcluded = classified.filter(f => f.type === "nav-exclude");
 
   // Module READMEs — sorted alphabetically for deterministic nav_order
   const moduleReadmes = classified.filter(f => f.type === "module-readme")
@@ -140,9 +235,9 @@ async function main() {
   const total = navExcluded.length + moduleReadmes.length + members.length + unknown.length;
   console.log(`Processing ${total} generated markdown files...`);
 
-  // Process nav-excluded files (top-level README, namespace READMEs)
+  // Process nav-excluded files (inject nav_exclude into pre-existing frontmatter too)
   for (const f of navExcluded) {
-    await processFile(f.path, buildFrontmatter(f, 0));
+    await processFile(f.path, buildFrontmatter(f, 0), { injectNavExclude: true });
   }
 
   // Process module READMEs
@@ -164,6 +259,12 @@ async function main() {
   for (const f of unknown) {
     await processFile(f.path, buildFrontmatter(f, 0));
   }
+
+  // Post-processing: add guide backlinks to module READMEs
+  await appendModuleGuideLinks(moduleReadmes);
+
+  // Post-processing: patch empty descriptions
+  await patchEmptyDescriptions();
 
   console.log("Done.");
 }
