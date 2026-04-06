@@ -1,6 +1,7 @@
 {
   "$schema": "https://typedoc.org/schema.json",
   "entryPoints": [
+    "/tmp/nexus-src/src/exports/api.ts",
     "/tmp/nexus-src/src/exports/index.ts",
     "/tmp/nexus-src/src/exports/document.ts",
     "/tmp/nexus-src/src/exports/entities.ts",

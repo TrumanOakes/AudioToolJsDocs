@@ -18,6 +18,7 @@ const PARENT_TITLE = "API Reference";
 
 /** Map of directory names to sidebar-friendly module titles */
 const MODULE_TITLES = {
+  "api": "api",
   "index": "nexus (index)",
   "document": "document",
   "entities": "entities",
@@ -41,17 +42,29 @@ async function getAllMarkdownFiles(dir) {
 function classifyFile(relPath) {
   const parts = relPath.replace(/\.md$/, "").split("/");
 
+  // generated/README.md — TypeDoc artifact, not useful in nav
   if (parts.length === 1 && parts[0] === "README") {
     return { type: "top-readme" };
   }
+  // generated/<module>/README.md — module index page
   if (parts.length === 2 && parts[1] === "README") {
     return { type: "module-readme", module: parts[0] };
   }
+  // generated/<module>/<kind>/<Name>.md — direct member
   if (parts.length === 3) {
     return { type: "member", module: parts[0], memberName: parts[2] };
   }
+  // generated/<module>/namespaces/<ns>/README.md — namespace index, exclude from nav
+  if (parts.length === 4 && parts[1] === "namespaces" && parts[3] === "README") {
+    return { type: "namespace-readme" };
+  }
+  // generated/<module>/namespaces/<ns>/<kind>/<Name>.md — flatten into parent module
+  if (parts.length === 5 && parts[1] === "namespaces") {
+    return { type: "member", module: parts[0], memberName: parts[4] };
+  }
 
-  // Unexpected depth — warn and exclude from nav
+  // Truly unexpected depth — warn and exclude from nav
+  console.warn(`  WARNING: unexpected path depth, excluding from nav: ${relPath}`);
   return { type: "unknown", relPath };
 }
 
@@ -60,9 +73,8 @@ function buildFrontmatter(file, navOrder) {
 
   switch (file.type) {
     case "top-readme":
-      lines.push(`title: "Overview"`);
-      lines.push(`parent: "${PARENT_TITLE}"`);
-      lines.push(`nav_order: 0`);
+    case "namespace-readme":
+      lines.push(`nav_exclude: true`);
       break;
 
     case "module-readme": {
@@ -112,14 +124,10 @@ async function main() {
     return { path: f, rel, ...classifyFile(rel) };
   });
 
-  // Warn about unexpected files
   const unknown = classified.filter(f => f.type === "unknown");
-  for (const f of unknown) {
-    console.warn(`  WARNING: unexpected path depth, excluding from nav: ${f.rel}`);
-  }
 
-  // Top-level README
-  const topReadmes = classified.filter(f => f.type === "top-readme");
+  // Top-level README + namespace READMEs (nav-excluded)
+  const navExcluded = classified.filter(f => f.type === "top-readme" || f.type === "namespace-readme");
 
   // Module READMEs — sorted alphabetically for deterministic nav_order
   const moduleReadmes = classified.filter(f => f.type === "module-readme")
@@ -129,11 +137,11 @@ async function main() {
   const members = classified.filter(f => f.type === "member");
   const membersByModule = Object.groupBy(members, m => m.module);
 
-  const total = topReadmes.length + moduleReadmes.length + members.length + unknown.length;
+  const total = navExcluded.length + moduleReadmes.length + members.length + unknown.length;
   console.log(`Processing ${total} generated markdown files...`);
 
-  // Process top-level README
-  for (const f of topReadmes) {
+  // Process nav-excluded files (top-level README, namespace READMEs)
+  for (const f of navExcluded) {
     await processFile(f.path, buildFrontmatter(f, 0));
   }
 
