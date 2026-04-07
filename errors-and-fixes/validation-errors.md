@@ -82,11 +82,22 @@ t.update(entity.fields.gain, 0.8);
 
 ### Value out of range
 
+> `value 2 out of range [0, 1] (path: <uuid>.feedback_factor)`
+
 Numeric fields have defined minimum and maximum values. Passing a value outside that range throws.
 
 ```typescript
-// WRONG — positionTicks must be >= 0
-t.create("note", { positionTicks: -1, pitch: 60, velocity: 100 });
+// WRONG — feedbackFactor must be within [0, 1]
+await nexus.modify((t) => {
+  const delay = t.create("stompboxDelay", {});
+  t.update(delay.fields.feedbackFactor, 2.0); // Error: out of range
+});
+
+// Correct
+await nexus.modify((t) => {
+  const delay = t.create("stompboxDelay", {});
+  t.update(delay.fields.feedbackFactor, 0.75); // within [0, 1]
+});
 ```
 
 **Tip:** When updating a field with a value that comes from user input (sliders, text fields), use `tryUpdate()` instead of `update()`. It returns a string describing the error instead of throwing, so you can show it to the user:
@@ -102,53 +113,69 @@ await nexus.modify((t) => {
 
 ### Update immutable field
 
-Fields marked `"immut"` cannot be changed after the entity is created. Attempting `t.update()` on one throws.
+> `Argument of type 'PrimitiveField<NexusLocation, "immut">' is not assignable to parameter of type 'PrimitiveField<NexusLocation, "mut">'`
+
+Fields marked `"immut"` cannot be changed after the entity is created. Attempting `t.update()` on one is caught by TypeScript at compile time.
 
 ```typescript
-// note.fields.collection is immutable — you cannot move a note between collections
-// WRONG:
+// WRONG — note.fields.collection is immutable
 t.update(note.fields.collection, newCollectionRef);
+// TS error: "immut" is not assignable to "mut"
+```
 
-// Workaround: clone the note with different initial values instead
+**Workaround:** Clone the entity with different initial values using `t.clone()` or `t.cloneLinked()` (which also clones entities that point to the original):
+
+```typescript
 const cloned = t.clone(note, { collection: newCollectionRef });
 t.remove(note);
 ```
 
 ### Required pointer field not set
 
-Some entities have pointer fields that must reference another entity. Creating the entity without setting those fields throws.
+> `required pointer on <uuid>.from_socket 'type: <...>.AudioConnection'`
+
+Some entities have pointer fields that must reference another entity. Creating the entity without setting those fields — or resetting a required pointer to empty — throws.
 
 ```typescript
-// WRONG — audioRegion requires its sample field to be set
-t.create("audioRegion", { positionTicks: 0, durationTicks: 480 });
-//                                            ^ missing sample pointer
-
-// Correct
-t.create("audioRegion", {
-  positionTicks: 0,
-  durationTicks: 480,
-  sample: sampleEntity.fields.id.location,
+// WRONG — desktopAudioCable requires both fromSocket and toSocket
+t.create("desktopAudioCable", {
+  fromSocket: chorus.fields.audioOutput.location,
+  // missing toSocket — throws
 });
+
+// WRONG — resetting a required pointer to empty
+t.update(cable.fields.fromSocket, new NexusLocation()); // throws
 ```
+
+**Fix:** Remove and recreate the cable if you need to change its connections.
 
 ### Location points to wrong target type
 
-Pointer fields have a defined set of entity types they can point to. Pointing to an incompatible type throws.
+> `pointer type mismatch from: <uuid>.to_socket 'type: <...>DesktopAudioCable' (TargetType: AudioInput) to: <uuid> (is: [AutomatableParameter])`
+
+Pointer fields have a defined set of target types they can point to. Pointing to an incompatible type throws.
 
 ```typescript
-// WRONG — a desktopAudioCable's fromSocket must point to an audio output socket
-// pointing it at a note entity would fail
+// WRONG — connecting audio output to a notes input
 t.create("desktopAudioCable", {
-  fromSocket: noteEntity.fields.positionTicks.location, // wrong target type
-  toSocket: channel.fields.audioInput.location,
+  fromSocket: delay.fields.audioOutput.location,
+  toSocket: tonematrix.fields.notesInput.location, // wrong target type
+});
+
+// Correct — connect audio output to audio input
+t.create("desktopAudioCable", {
+  fromSocket: delay.fields.audioOutput.location,
+  toSocket: reverb.fields.audioInput.location, // AudioOutput → AudioInput
 });
 ```
 
 ### Multiple instances of singleton entities
 
+> `duplicate of unique entity type <...>.Config`
+
 Some entity types may only have one instance in the document. Creating a second one throws. Singleton types are:
 
-- `configuration`
+- `config`
 - `mixerMaster`
 - `mixerAuxDelay`
 - `mixerAuxReverb`
@@ -158,33 +185,61 @@ Some entity types may only have one instance in the document. Creating a second 
 
 ```typescript
 await nexus.modify((t) => {
-  // Only create if one doesn't already exist
-  const existing = t.entities.ofTypes("configuration").getOne();
-  const config = existing ?? t.create("configuration", {});
+  const existing = t.entities.ofTypes("config").getOne();
+  const config = existing ?? t.create("config", {});
   // use config...
+});
+```
+
+This works well with nested singletons too — use `??` to check each dependency:
+
+```typescript
+await nexus.modify((t) => {
+  const config =
+    t.entities.ofTypes("config").getOne() ??
+    t.create("config", {
+      defaultGroove: (
+        t.entities.ofTypes("groove").getOne() ?? t.create("groove", {})
+      ).location,
+    });
 });
 ```
 
 ### Duplicate `orderAmongTracks` value
 
-Several fields must be unique across all entities in the document. `orderAmongTracks` is one of them — two tracks cannot share the same ordering value. Other fields with the same uniqueness constraint include `orderAmongStrips` on mixer channels.
+> `duplicate order_among_tracks value`
+
+Several fields must be unique across all entities in the document. If two entities share the same ordering value, the transaction throws.
+
+Fields with this uniqueness constraint:
+
+- `AudioTrack.orderAmongTracks`
+- `NoteTrack.orderAmongTracks`
+- `AutomationTrack.orderAmongTracks`
+- `PatternTrack.orderAmongTracks`
+- `MixerStripDisplayParameters.orderAmongStrips` (used by `MixerChannel`, `MixerGroup`, `MixerAux`, `MixerDelayAux`, `MixerReverbAux`)
+- `CentroidChannel.orderAmongChannels` (among channels belonging to the same centroid)
+- `RasselbockPattern.effectOrder`
 
 Before creating a new track, query the current maximum order value and increment:
 
 ```typescript
 await nexus.modify((t) => {
-  const existingTracks = t.entities.ofTypes("noteTrack").get();
-  const maxOrder = existingTracks.reduce(
-    (max, track) => Math.max(max, track.fields.orderAmongTracks.value),
-    -1
-  );
-  t.create("noteTrack", { orderAmongTracks: maxOrder + 1 });
+  const existingTracks = t.entities
+    .ofTypes("noteTrack", "audioTrack", "automationTrack", "patternTrack")
+    .get()
+    .map((track) => track.fields.orderAmongTracks.value);
+
+  const nextOrder = Math.max(0, ...existingTracks) + 1;
+  t.create("noteTrack", { orderAmongTracks: nextOrder });
 });
 ```
 
 ### Unique automation event positions
 
-Two automation events on the same automation track cannot share the same tick position. If you need to update a value at a position that already has an event, remove the existing event first:
+> `duplicate tick value of event in automation collection (collection: <uuid>)`
+
+Two automation events in the same automation collection cannot share the same tick position. If you need to update a value at a position that already has an event, remove the existing event first:
 
 ```typescript
 await nexus.modify((t) => {
@@ -203,18 +258,23 @@ await nexus.modify((t) => {
 
 ### Multiple audio connections to the same socket
 
+> `multiple pointers to field accepting at most one (field: <uuid>.decay)`
+
 Each audio input socket can only have one cable connected to it. Connecting a second cable to the same socket throws.
 
-Clear existing connections before adding a new one:
+Note that removing a cable and creating a new one to the same socket **within the same transaction** still fails — the socket appears occupied for the duration of the transaction. You must query and remove all existing connections first, then create the new one:
 
 ```typescript
 await nexus.modify((t) => {
-  // Disconnect anything already connected to the target socket
-  const existing = t.entities
+  // Remove ALL existing cables pointing to the target sockets
+  t.entities
     .ofTypes("desktopAudioCable")
-    .pointingTo.locations(device.fields.audioInput.location)
-    .get();
-  for (const cable of existing) t.remove(cable);
+    .pointingTo.locations(
+      device.fields.audioInput.location,
+      source.fields.audioOutput.location,
+    )
+    .get()
+    .forEach((cable) => t.remove(cable));
 
   // Now safely connect
   t.create("desktopAudioCable", {
@@ -225,6 +285,10 @@ await nexus.modify((t) => {
 ```
 
 ### Update or pointer to a removed entity
+
+> `could not find entity: <uuid>`
+>
+> `pointer to non existing entity <uuid> (declared at: <uuid>.entity 'type: <...>.NoteTrack)`
 
 Updating a field on an entity that was already removed in this transaction — or pointing to such an entity — throws.
 
@@ -240,6 +304,8 @@ await nexus.modify((t) => {
 ```
 
 ### Removal of a pointed-to entity
+
+> `entity is referenced: <uuid>`
 
 Removing an entity while other entities still hold pointer fields pointing to it throws.
 
