@@ -6,8 +6,9 @@ import { join, resolve } from "node:path";
 const GENERATED_DIR = join(import.meta.dirname, "..", "api-reference", "generated");
 const NEXUS_SRC_DIR = resolve(process.env.NEXUS_SRC_DIR || "/tmp/nexus-src");
 const NEXUS_DOCS_DIR = join(NEXUS_SRC_DIR, "src", "docs");
-const GENERATED_MEDIA_DIR = join(GENERATED_DIR, "_media");
-const GENERATED_MEDIA_IMAGES_DIR = join(GENERATED_MEDIA_DIR, "images");
+const GENERATED_TYPEDOC_MEDIA_DIR = join(GENERATED_DIR, "_media");
+const GENERATED_PUBLIC_MEDIA_DIR = join(GENERATED_DIR, "media");
+const GENERATED_PUBLIC_MEDIA_IMAGES_DIR = join(GENERATED_PUBLIC_MEDIA_DIR, "images");
 
 async function getAllMarkdownFiles(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -52,12 +53,12 @@ function convertReadmeHtmlLinksToDirectoryLinks(content) {
 
 function rewriteMediaDocLinks(content) {
   return content.replace(
-    /\]\(([^)]+)_media\/(login|api|overview|entities)\.html(#[^)]+)?\)/g,
+    /\]\(([^)]*?)_media\/(login|api|overview|entities)\.html(#[^)]+)?\)/g,
     (match, prefix = "", name, hash = "") => {
       if (prefix.startsWith("http://") || prefix.startsWith("https://") || prefix.startsWith("mailto:")) {
         return match;
       }
-      return `](${prefix}_media/${name}/${hash ? hash.slice(1) : ""})`;
+      return `](${prefix}media/${name}.html${hash})`;
     },
   );
 }
@@ -65,10 +66,21 @@ function rewriteMediaDocLinks(content) {
 async function ensureMediaAssets() {
   const sourceImagesDir = join(NEXUS_DOCS_DIR, "images");
   const sourceEntitiesDoc = join(NEXUS_DOCS_DIR, "entities.md");
-  await mkdir(GENERATED_MEDIA_IMAGES_DIR, { recursive: true });
-  await cp(sourceImagesDir, GENERATED_MEDIA_IMAGES_DIR, { recursive: true, force: true });
+  await cp(GENERATED_TYPEDOC_MEDIA_DIR, GENERATED_PUBLIC_MEDIA_DIR, { recursive: true, force: true });
+  await mkdir(GENERATED_PUBLIC_MEDIA_IMAGES_DIR, { recursive: true });
+  await cp(sourceImagesDir, GENERATED_PUBLIC_MEDIA_IMAGES_DIR, { recursive: true, force: true });
   const entitiesContent = await readFile(sourceEntitiesDoc, "utf-8");
-  await writeFile(join(GENERATED_MEDIA_DIR, "entities.md"), entitiesContent, "utf-8");
+  const withFrontmatter = entitiesContent.startsWith("---\n")
+    ? entitiesContent
+    : `---\nnav_exclude: true\n---\n\n${entitiesContent}`;
+  await writeFile(join(GENERATED_PUBLIC_MEDIA_DIR, "entities.md"), withFrontmatter, "utf-8");
+
+  const overviewPath = join(GENERATED_PUBLIC_MEDIA_DIR, "overview.md");
+  const overviewContent = await readFile(overviewPath, "utf-8");
+  const normalizedOverview = overviewContent.replace(/\]\(\.\/entities\.html\)/g, "](./entities.md)");
+  if (normalizedOverview !== overviewContent) {
+    await writeFile(overviewPath, normalizedOverview, "utf-8");
+  }
 }
 
 async function main() {
