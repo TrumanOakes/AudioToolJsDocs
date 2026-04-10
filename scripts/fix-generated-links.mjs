@@ -33,6 +33,23 @@ function convertInternalMdLinksToHtml(content) {
   });
 }
 
+function convertReadmeHtmlLinksToDirectoryLinks(content) {
+  return content.replace(/\]\(([^)]+README\.html)(#[^)]+)?\)/g, (match, path, hash = "") => {
+    if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("mailto:")) {
+      return match;
+    }
+
+    let directoryPath;
+    if (path === "README.html") {
+      directoryPath = "./";
+    } else {
+      directoryPath = path.slice(0, -"README.html".length);
+    }
+
+    return `](${directoryPath}${hash})`;
+  });
+}
+
 async function ensureMediaAssets() {
   const sourceImagesDir = join(NEXUS_DOCS_DIR, "images");
   const sourceEntitiesDoc = join(NEXUS_DOCS_DIR, "entities.md");
@@ -47,7 +64,8 @@ async function main() {
   const files = await getAllMarkdownFiles(GENERATED_DIR);
   for (const file of files) {
     const content = await readFile(file, "utf-8");
-    const updated = convertInternalMdLinksToHtml(content);
+    const withHtmlLinks = convertInternalMdLinksToHtml(content);
+    const updated = convertReadmeHtmlLinksToDirectoryLinks(withHtmlLinks);
     if (updated !== content) {
       await writeFile(file, updated, "utf-8");
     }
