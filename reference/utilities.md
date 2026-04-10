@@ -255,7 +255,7 @@ subscriptions.push(
   nexus.events.onCreate("note", handleNote)
 );
 subscriptions.push(
-  nexus.events.onRemove("note", handleNoteRemoved)
+  nexus.events.onRemove("*", handleNoteRemoved)
 );
 
 // Later — remove all subscriptions at once

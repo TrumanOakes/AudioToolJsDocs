@@ -1,15 +1,15 @@
 ---
-title: microtuningOctave
+title: microTuningOctave
 parent: Entity Reference
 grand_parent: Reference
 nav_exclude: true
 ---
 
-# microtuningOctave
+# microTuningOctave
 
 **Module:** `@audiotool/nexus/entities`
 
-A microtuningOctave entity defines custom tuning offsets for each note within an octave. Standard MIDI tuning spaces all 12 semitones equally (12-tone equal temperament), but microtuning lets you shift individual pitches to recreate historical temperaments, just intonation, or other tuning systems.
+A microTuningOctave entity defines custom tuning offsets for each note within an octave. Standard MIDI tuning spaces all 12 semitones equally (12-tone equal temperament), but microtuning lets you shift individual pitches to recreate historical temperaments, just intonation, or other tuning systems.
 
 ## Fields
 

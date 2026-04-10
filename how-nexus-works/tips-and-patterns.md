@@ -49,7 +49,7 @@ The return value of `t.create()` is the new entity object. Capture it if you nee
 ```typescript
 await nexus.modify((t) => {
   const gain = t.create("tinyGain", {});
-  const cable = t.create("audioCable", {
+  const cable = t.create("desktopAudioCable", {
     // point the cable at the gain device
   });
 });
@@ -102,7 +102,7 @@ For server-side scripts or automation (Node.js, CI jobs, bots), Personal Access 
 
 ```typescript
 const client = await createAudiotoolClient({
-  pat: process.env.AUDIOTOOL_PAT // load from env — never hardcode
+  authorization: process.env.AUDIOTOOL_PAT // load from env — never hardcode
 });
 ```
 
@@ -119,7 +119,7 @@ const initial = nexus.queryEntities.ofTypes("note").get();
 renderNotes(initial);
 
 nexus.events.onCreate("note", addNote);
-nexus.events.onRemove("note", removeNote);
+nexus.events.onRemove("*", removeNote);
 nexus.events.onUpdate(/* specific field */, updateNote);
 ```
 

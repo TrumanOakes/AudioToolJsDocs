@@ -51,7 +51,7 @@ t.send(); // commit all three creates at once
 ## See also
 
 - [Entity Reference](../entity-reference.md) — full list of all entity types
-- [noteCable](noteCable.md) — the note/MIDI equivalent: connects note outputs to note inputs
+- [desktopNoteCable](desktopNoteCable.md) — the note/MIDI equivalent: connects note outputs to note inputs
 - [mixerChannel](mixerChannel.md) — common destination for audio cables from devices
 - [Create Devices](../../working-with-audiotool-projects/create-devices.md) — full guide including signal routing
 - [Making Changes](../../how-nexus-works/making-changes.md) — `createTransaction()` and `modify()` explained

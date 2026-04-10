@@ -17,11 +17,10 @@ The main entry point for the <span class="tooltip" data-tooltip="The JavaScript 
 import { createAudiotoolClient } from "@audiotool/nexus";
 
 const client = await createAudiotoolClient({
-  pat: "at_pat_your_token_here"
+  authorization: "at_pat_your_token_here"
 });
 
 const nexus = await client.createSyncedDocument({
-  mode: "online",
   project: "https://beta.audiotool.com/studio?project=abc123"
 });
 
@@ -35,14 +34,14 @@ const projects = await client.api.projectService.listProjects({});
 ### [`createAudiotoolClient`](../api-reference/generated/index/functions/createAudiotoolClient.md)
 
 ```ts
-createAudiotoolClient(opts: { status: LoginStatus } | { pat: string }): Promise<AudiotoolClient>
+createAudiotoolClient(opts: { authorization: LoginStatus | string }): Promise<AudiotoolClient>
 ```
 
 Creates an authenticated Audiotool client.
 
 **Accepts:**
-- `{ status: LoginStatus }` — a login status object from `getLoginStatus()`
-- `{ pat: string }` — a Personal Access Token
+- `{ authorization: LoginStatus }` — a login status object from `getLoginStatus()`
+- `{ authorization: string }` — a Personal Access Token
 
 **Returns:** `Promise<AudiotoolClient>`
 
@@ -66,8 +65,8 @@ The returned document is immediately ready — no `start()` call required. Use t
 ```typescript
 getLoginStatus(opts: {
   clientId: string;
-  redirectUri: string;
-  scopes: string[];
+  redirectUrl: string;
+  scope: string;
 }): Promise<LoginStatus>
 ```
 
@@ -89,11 +88,10 @@ import type { AudiotoolClient } from "@audiotool/nexus";
 // Pass the client to helper functions with a typed annotation
 async function openProject(client: AudiotoolClient, url: string) {
   const nexus = await client.createSyncedDocument({
-    mode: "online",
     project: url,
   });
   await nexus.start();
-  return document;
+  return nexus;
 }
 ```
 
@@ -107,7 +105,7 @@ The union type returned by `getLoginStatus()` — either a `LoggedInStatus` or a
 import type { LoginStatus } from "@audiotool/nexus";
 
 function handleLogin(status: LoginStatus) {
-  if ("logout" in status) {
+  if (status.loggedIn) {
     // It's a LoggedInStatus — user is authenticated
     console.log("Logged in");
   } else {
@@ -183,7 +181,7 @@ async function watchNotes(doc: SyncedDocument) {
   await doc.start(); // begin receiving updates
 
   doc.events.onCreate("note", (note) => {
-    console.log("Collaborator added a note:", note.fields.pitch);
+    console.log("Collaborator added a note:", note.fields.pitch.value);
   });
 }
 ```

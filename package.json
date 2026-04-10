@@ -4,8 +4,9 @@
   "description": "@audiotool/nexus documentation site",
   "type": "module",
   "scripts": {
-    "docs": "typedoc && node scripts/add-frontmatter.mjs",
-    "docs:typedoc": "typedoc",
+    "docs": "npm run docs:prepare-src && npm run docs:typedoc && node scripts/add-frontmatter.mjs",
+    "docs:prepare-src": "node scripts/prepare-nexus-src.mjs",
+    "docs:typedoc": "typedoc --options typedoc.json",
     "docs:frontmatter": "node scripts/add-frontmatter.mjs"
   },
   "repository": {

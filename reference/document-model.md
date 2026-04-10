@@ -31,8 +31,8 @@ const gains = nexus.queryEntities.ofTypes("tinyGain").get();
 for (const gain of gains) {
   console.log(gain.id);              // "a1b2c3d4e5f6..."
   console.log(gain.entityType);      // "tinyGain"
-  console.log(gain.fields.gain);     // current gain value
-  console.log(gain.fields.displayName); // label
+  console.log(gain.fields.gain.value);     // current gain value
+  console.log(gain.fields.displayName.value); // label
 }
 ```
 
@@ -67,8 +67,8 @@ const allTracks = nexus.queryEntities
 // Get ALL entities in the document (no type filter)
 const everything = nexus.queryEntities.get();
 
-// Get one entity of a type (useful for singletons like "configuration")
-const config = nexus.queryEntities.ofTypes("configuration").getOne();
+// Get one entity of a type (useful for singletons like "config")
+const config = nexus.queryEntities.ofTypes("config").getOne();
 
 // Check if an entity still exists
 if (nexus.queryEntities.has(someEntity)) { ... }
@@ -126,16 +126,16 @@ The interface of `nexus.events`. Provides methods to subscribe to entity lifecyc
 |--------|-----------|-------------|
 | `.onCreate(type, handler)` | `(type, handler) => Terminable` | Fires when a new entity of the given type is created. Handler can **return a cleanup function** that fires when that specific entity is later removed |
 | `.onUpdate(field, handler, callNow?)` | `(field, handler, boolean?) => Terminable` | Fires when a specific field value changes. Pass `false` as third arg to skip the immediate call with the current value |
-| `.onRemove(type, handler)` | `(type, handler) => Terminable` | Fires when an entity of the given type is removed |
+| `.onRemove("*", handler)` | `("*", handler) => Terminable` | Fires when any entity is removed |
 | `.onRemove(entity, handler)` | `(entity, handler) => Terminable` | Fires when a **specific** entity is removed |
-| `.onPointingTo(entity, handler)` | `(entity, handler) => Terminable` | Fires when any entity gains or loses a pointer to the given entity |
+| `.onPointingTo(location, handler)` | `(location, handler) => Terminable` | Fires when any pointer starts pointing to the given location |
 
 Each method returns a <span class="tooltip" data-tooltip="An object with a .terminate() method that cancels the subscription when you no longer need it.">terminable</span> you can use to unsubscribe.
 
 ```typescript
 // onCreate — react to new entities
 const sub = nexus.events.onCreate("note", (note) => {
-  console.log("New note at tick:", note.fields.positionTicks);
+  console.log("New note at tick:", note.fields.positionTicks.value);
 });
 
 // onCreate with cleanup function — handler return value is called when that entity is removed
@@ -160,7 +160,7 @@ nexus.events.onUpdate(gainEntity.fields.gain, (newValue) => {
 }, false);  // false = don't call for current value, only future changes
 
 // onRemove by type
-nexus.events.onRemove("tinyGain", (entity) => {
+nexus.events.onRemove("*", (entity) => {
   console.log("A tinyGain was removed:", entity.id);
 });
 
@@ -170,8 +170,8 @@ nexus.events.onRemove(specificGainEntity, () => {
 });
 
 // onPointingTo — fire when any entity gains or loses a pointer to the given entity
-nexus.events.onPointingTo(synth, (entity) => {
-  console.log("A cable or track now points to/from the synth:", entity.entityType);
+nexus.events.onPointingTo(synth.fields.audioOutput.location, (from) => {
+  console.log("A pointer now targets synth output from:", from.toString());
 });
 
 // Clean up when done
@@ -367,7 +367,7 @@ import type { EntityWithOverwrites } from "@audiotool/nexus/document";
 
 ### [`NexusEntityUnion`](../api-reference/generated/document/type-aliases/NexusEntityUnion.md)
 
-A union type of every possible `NexusEntity` in the schema. Useful when writing code that can receive any entity type and then narrows by `.type`.
+A union type of every possible `NexusEntity` in the schema. Useful when writing code that can receive any entity type and then narrows by `.entityType`.
 
 ```typescript
 import type { NexusEntityUnion } from "@audiotool/nexus/document";
@@ -375,10 +375,10 @@ import type { NexusEntityUnion } from "@audiotool/nexus/document";
 function handleAnyEntity(entity: NexusEntityUnion) {
   if (entity.entityType === "note") {
     // TypeScript narrows — fields are typed for note
-    console.log("pitch:", entity.fields.pitch);
+    console.log("pitch:", entity.fields.pitch.value);
   } else if (entity.entityType === "tinyGain") {
     // TypeScript narrows — fields are typed for tinyGain
-    console.log("gain:", entity.fields.gain);
+    console.log("gain:", entity.fields.gain.value);
   }
 }
 ```
@@ -402,7 +402,7 @@ const connected = nexus.queryEntities
   .get();
 
 for (const device of connected) {
-  console.log("Connected device:", device.id, device.type);
+  console.log("Connected device:", device.id, device.entityType);
 }
 ```
 

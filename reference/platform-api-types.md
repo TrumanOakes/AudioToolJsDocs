@@ -109,14 +109,14 @@ for (const role of roles) {
 }
 
 // Add a collaborator
-await client.api.projectRoleService.addProjectRole({
+await client.api.projectRoleService.createProjectRole({
   projectId: "abc123",
   userId: "user456",
   role: ProjectRoleType.EDITOR,
 });
 
 // Remove a collaborator
-await client.api.projectRoleService.removeProjectRole({
+await client.api.projectRoleService.deleteProjectRole({
   projectId: "abc123",
   userId: "user456",
 });
@@ -292,7 +292,7 @@ Defines the permission level of a collaborator on a project.
 import { ProjectRoleType } from "@audiotool/nexus/api";
 
 // Add a collaborator as an editor
-await client.api.projectRoleService.addProjectRole({
+await client.api.projectRoleService.createProjectRole({
   projectId: "abc123",
   userId: "user456",
   role: ProjectRoleType.EDITOR,
@@ -324,7 +324,7 @@ The type of device a preset applies to (synthesizer, drum machine, effect, etc.)
 import { PresetDeviceType } from "@audiotool/nexus/api";
 
 // Use when filtering presets by device type
-const presets = await client.api.projectService.listPresets({
+const presets = await client.api.presetService.listPresets({
   deviceType: PresetDeviceType.SYNTHESIZER,
 });
 ```
@@ -339,7 +339,7 @@ How a preset is used — whether it defines a sound, an effect setting, or anoth
 import { PresetUsage } from "@audiotool/nexus/api";
 
 // Use when categorizing or filtering presets
-const soundPresets = await client.api.projectService.listPresets({
+const soundPresets = await client.api.presetService.listPresets({
   usage: PresetUsage.SOUND,
 });
 ```
@@ -411,7 +411,7 @@ Status and mode types for sync tracks — the infrastructure that records and re
 import { SyncTrackStatus } from "@audiotool/nexus/api";
 
 // Check the status of a sync track
-const track = await client.api.projectService.getSyncTrack({ id: "..." });
+const track = await client.api.projectService.getProject({ id: "..." });
 if (track.status === SyncTrackStatus.ACTIVE) {
   console.log("Sync track is live");
 }
@@ -584,7 +584,7 @@ async function waitForOperation(api: AudiotoolAPI, opId: string) {
   let op: Operation;
   do {
     const req: GetOperationRequest = { id: opId };
-    const res: GetOperationResponse = await api.operationService.getOperation(req);
+    const res: GetOperationResponse = await api.projectService.getOperation(req);
     op = res.operation;
     await new Promise(r => setTimeout(r, 1000)); // wait 1s before re-polling
   } while (!op.done);

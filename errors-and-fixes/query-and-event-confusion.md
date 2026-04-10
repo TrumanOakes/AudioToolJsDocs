@@ -52,7 +52,7 @@ let notes = nexus.queryEntities.ofTypes("note").get();
 
 // Keep updated
 nexus.events.onCreate("note", (e) => notes = [...notes, e]);
-nexus.events.onRemove("note", (e) => notes = notes.filter(n => n.id !== e.id));
+nexus.events.onRemove("*", (e) => notes = notes.filter(n => n.id !== e.id));
 ```
 
 ## Calling modify() inside an event handler causes it to hang

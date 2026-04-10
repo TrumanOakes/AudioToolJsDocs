@@ -83,7 +83,7 @@ Mixer entities control signal routing and the mixing console.
 | [`mixerChannel`](entities/mixerChannel.md) · [fields](../api-reference/generated/entities/type-aliases/MixerChannel.md) | Individual channel strip |
 | [`mixerAux`](entities/mixerAux.md) · [fields](../api-reference/generated/entities/type-aliases/MixerAux.md) | Auxiliary send/return entities |
 | [`mixerGroup`](entities/mixerGroup.md) · [fields](../api-reference/generated/entities/type-aliases/MixerGroup.md) | Group channel entities |
-| [`mixerSidechain`](entities/mixerSidechain.md) · [fields](../api-reference/generated/entities/type-aliases/MixerSidechain.md) | Sidechain routing cables |
+| [`mixerSideChainCable`](entities/mixerSideChainCable.md) · [fields](../api-reference/generated/entities/type-aliases/MixerSideChainCable.md) | Sidechain routing cables |
 
 Audio devices connect to mixer channels via [`desktopAudioCable`](entities/desktopAudioCable.md) entities that link device audio outputs to channel inputs.
 
@@ -119,13 +119,13 @@ Timeline entities form the arrangement view: tracks, regions, and the content wi
 
 | Entity Key | Description |
 |------------|-------------|
-| [`configuration`](entities/configuration.md) · [fields](../api-reference/generated/entities/type-aliases/Configuration.md) | Document-level configuration settings (BPM, time signature, etc.) |
+| [`config`](entities/config.md) · [fields](../api-reference/generated/entities/type-aliases/Config.md) | Document-level configuration settings (BPM, time signature, etc.) |
 | [`desktopAudioCable`](entities/desktopAudioCable.md) · [fields](../api-reference/generated/entities/type-aliases/DesktopAudioCable.md) | Connects audio device outputs to audio inputs (e.g. synth → mixer channel) |
-| [`noteCable`](entities/noteCable.md) · [fields](../api-reference/generated/entities/type-aliases/NoteCable.md) | Connects note/MIDI outputs to inputs |
+| [`desktopNoteCable`](entities/desktopNoteCable.md) · [fields](../api-reference/generated/entities/type-aliases/DesktopNoteCable.md) | Connects note/MIDI outputs to inputs |
 | [`groove`](entities/groove.md) · [fields](../api-reference/generated/entities/type-aliases/Groove.md) | Groove/swing quantization pattern |
-| [`microtuningOctave`](entities/microtuningOctave.md) · [fields](../api-reference/generated/entities/type-aliases/MicrotuningOctave.md) | Per-octave microtuning definition |
+| [`microTuningOctave`](entities/microTuningOctave.md) · [fields](../api-reference/generated/entities/type-aliases/MicroTuningOctave.md) | Per-octave microtuning definition |
 | [`sample`](entities/sample.md) · [fields](../api-reference/generated/entities/type-aliases/Sample.md) | Reference to an audio sample file |
-| [`vst3Plugin`](entities/vst3Plugin.md) | VST3 plugin instance |
+| [`spitfireLabsVst3Plugin`](entities/spitfireLabsVst3Plugin.md) · [fields](../api-reference/generated/entities/type-aliases/SpitfireLabsVst3Plugin.md) | VST3 plugin instance |
 | [`tonematrixPattern`](entities/tonematrixPattern.md) · [fields](../api-reference/generated/entities/type-aliases/TonematrixPattern.md) | Step-sequencer pattern used by the Tonematrix device |
 | [`mixerDelayAux`](entities/mixerDelayAux.md) · [fields](../api-reference/generated/entities/type-aliases/MixerDelayAux.md) | Delay-specific auxiliary send/return bus |
 | [`mixerReverbAux`](entities/mixerReverbAux.md) · [fields](../api-reference/generated/entities/type-aliases/MixerReverbAux.md) | Reverb-specific auxiliary send/return bus |

@@ -1,15 +1,15 @@
 ---
-title: mixerSidechain
+title: mixerSideChainCable
 parent: Entity Reference
 grand_parent: Reference
 nav_exclude: true
 ---
 
-# mixerSidechain
+# mixerSideChainCable
 
 **Module:** `@audiotool/nexus/entities`
 
-A mixerSidechain entity represents a sidechain routing connection in the Audiotool mixer. Sidechain routing lets one signal control a processing parameter of another — for example, routing a kick drum to duck (reduce the volume of) a bass synth, a technique common in electronic music production.
+A mixerSideChainCable entity represents a sidechain routing connection in the Audiotool mixer. Sidechain routing lets one signal control a processing parameter of another — for example, routing a kick drum to duck (reduce the volume of) a bass synth, a technique common in electronic music production.
 
 ## Fields
 

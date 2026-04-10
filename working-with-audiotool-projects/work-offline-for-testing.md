@@ -59,9 +59,8 @@ A recommended workflow:
 const nexus = await createOfflineDocument();
 
 // When ready to test live:
-const client = await createAudiotoolClient({ pat: process.env.AUDIOTOOL_PAT });
+const client = await createAudiotoolClient({ authorization: process.env.AUDIOTOOL_PAT });
 const nexus = await client.createSyncedDocument({
-  mode: "online",
   project: "https://beta.audiotool.com/studio?project=..."
 });
 await nexus.start();

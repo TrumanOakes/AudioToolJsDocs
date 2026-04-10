@@ -1,18 +1,18 @@
 ---
-title: configuration
+title: config
 parent: Entity Reference
 grand_parent: Reference
 nav_exclude: true
 ---
 
-# configuration
+# config
 
 **Module:** `@audiotool/nexus/entities`
 
-The configuration entity holds document-level settings for an Audiotool project — things like tempo (BPM) and time signature. There is exactly one configuration entity per document. Query for it rather than creating it.
+The config entity holds document-level settings for an Audiotool project — things like tempo (BPM) and time signature. There is exactly one config entity per document. Query for it rather than creating it.
 
 {: .important }
-There is always exactly one `configuration` per document. Do not create or remove it. Query for the existing one using `nexus.queryEntities.ofTypes("configuration").get()`.
+There is always exactly one `config` per document. Do not create or remove it. Query for the existing one using `nexus.queryEntities.ofTypes("config").get()`.
 
 ## Fields
 
@@ -26,9 +26,9 @@ There is always exactly one `configuration` per document. Do not create or remov
 
 ```typescript
 // Read the current project BPM
-const configs = nexus.queryEntities.ofTypes("configuration").get();
+const configs = nexus.queryEntities.ofTypes("config").get();
 const config = configs[0];
-console.log("Project BPM:", config.fields.bpm);
+console.log("Project BPM:", config.fields.bpm.value);
 
 // Update the BPM
 await nexus.modify((t) => {

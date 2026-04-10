@@ -31,7 +31,7 @@ There is always exactly one `mixerMaster` per document. Do not create or remove 
 const masters = nexus.queryEntities.ofTypes("mixerMaster").get();
 const master = masters[0]; // There is always exactly one
 
-console.log("Master display name:", master.fields.displayName);
+console.log("Master display name:", master.fields.displayName.value);
 ```
 
 ## See also

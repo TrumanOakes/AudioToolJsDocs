@@ -1,15 +1,15 @@
 ---
-title: noteCable
+title: desktopNoteCable
 parent: Entity Reference
 grand_parent: Reference
 nav_exclude: true
 ---
 
-# noteCable
+# desktopNoteCable
 
 **Module:** `@audiotool/nexus/entities`
 
-A noteCable connects a note output socket (from a track or sequencer) to a note input socket (on a device). It is the MIDI equivalent of a `desktopAudioCable` — instead of carrying audio, it carries note trigger data so that notes in a `noteTrack` can play a synthesizer or drum machine.
+A desktopNoteCable connects a note output socket (from a track or sequencer) to a note input socket (on a device). It is the MIDI equivalent of a `desktopAudioCable` — instead of carrying audio, it carries note trigger data so that notes in a `noteTrack` can play a synthesizer or drum machine.
 
 > **Pointer syntax:** Fields that reference other entities use the **`.location`** property on a **field**, not the entity itself. Pass `entity.fields.socketName.location` wherever a pointer field is expected.
 
@@ -40,7 +40,7 @@ const track = t.create("noteTrack", {
 
 // Connect the note track output to the synthesizer note input
 // Use .location on the field, not on the entity
-t.create("noteCable", {
+t.create("desktopNoteCable", {
   fromSocket: track.fields.noteOutput.location,
   toSocket: synth.fields.noteInput.location,
 });

@@ -21,11 +21,11 @@ const PARENT_TITLE = "Reference";
  * Auto-generated member pages appear as children of these guides in the sidebar.
  */
 const MODULE_TITLES = {
-  "api": "Platform API Types",
-  "index": "Package Entry Points",
-  "document": "Document Model",
-  "entities": "Entity Reference",
-  "utils": "Utilities",
+  api: "Platform API Types",
+  index: "Package Entry Points",
+  document: "Document Model",
+  entities: "Entity Reference",
+  utils: "Utilities",
 };
 
 /** Supplementary descriptions for pages where TypeDoc extracted no JSDoc */
@@ -182,7 +182,18 @@ async function patchEmptyDescriptions() {
   }
 }
 
+async function ensureGeneratedDirExists() {
+  try {
+    await readdir(GENERATED_DIR);
+  } catch {
+    throw new Error(
+      `Missing generated API directory at "${GENERATED_DIR}". Run "npm run docs:typedoc" first.`,
+    );
+  }
+}
+
 async function main() {
+  await ensureGeneratedDirExists();
   const allFiles = await getAllMarkdownFiles(GENERATED_DIR);
   const classified = allFiles.map(f => {
     const rel = relative(GENERATED_DIR, f);

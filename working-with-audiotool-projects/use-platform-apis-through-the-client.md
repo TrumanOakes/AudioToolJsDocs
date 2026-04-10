@@ -84,10 +84,10 @@ await client.api.sampleService.deleteSample({ id: sample.id });
 const roles = await client.api.projectRoleService.listProjectRoles({ ... });
 
 // Add a collaborator
-await client.api.projectRoleService.addProjectRole({ ... });
+await client.api.projectRoleService.createProjectRole({ ... });
 
 // Remove a collaborator
-await client.api.projectRoleService.removeProjectRole({ ... });
+await client.api.projectRoleService.deleteProjectRole({ ... });
 ```
 
 ## UserService — manage users

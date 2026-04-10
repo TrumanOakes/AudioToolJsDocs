@@ -1,15 +1,15 @@
 ---
-title: vst3Plugin
+title: spitfireLabsVst3Plugin
 parent: Entity Reference
 grand_parent: Reference
 nav_exclude: true
 ---
 
-# vst3Plugin
+# spitfireLabsVst3Plugin
 
 **Module:** `@audiotool/nexus/entities`
 
-A vst3Plugin entity represents an instance of a VST3 plugin loaded in the project. VST3 is a standard format for third-party audio effects and instruments. This entity tracks the plugin's identity and its saved state within the project.
+A spitfireLabsVst3Plugin entity represents an instance of the Spitfire Labs VST3 plugin loaded in the project. This entity tracks the plugin's identity and saved state within the project.
 
 ## Fields
 
