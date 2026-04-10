@@ -23,7 +23,7 @@ A mixerAux entity represents an auxiliary send and return in the Audiotool mixer
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [mixerMaster](mixerMaster.md) — the master output
-- [mixerChannel](mixerChannel.md) — individual channel strips
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [mixerMaster](mixerMaster.html) — the master output
+- [mixerChannel](mixerChannel.html) — individual channel strips
 - [desktopAudioCable]({{ '/reference/entities/desktopAudioCable.html' | relative_url }}) — signal routing cables

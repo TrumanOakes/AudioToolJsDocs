@@ -23,5 +23,5 @@ A spitfireLabsVst3Plugin entity represents an instance of the Spitfire Labs VST3
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
+- [Entity Reference](../entity-reference.html) — full list of all entity types
 - [desktopAudioCable]({{ '/reference/entities/desktopAudioCable.html' | relative_url }}) — connect this plugin into the audio signal chain

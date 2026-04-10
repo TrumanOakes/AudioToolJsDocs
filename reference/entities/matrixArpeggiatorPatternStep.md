@@ -48,6 +48,6 @@ t.send();
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [matrixArpeggiatorPattern](matrixArpeggiatorPattern.md) — the parent pattern this step belongs to
-- [Making Changes](../../how-nexus-works/making-changes.md) — `createTransaction()` and `modify()` explained
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [matrixArpeggiatorPattern](matrixArpeggiatorPattern.html) — the parent pattern this step belongs to
+- [Making Changes](../../how-nexus-works/making-changes.html) — `createTransaction()` and `modify()` explained

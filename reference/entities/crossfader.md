@@ -35,6 +35,6 @@ await nexus.modify((t) => {
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [Create Devices](../../working-with-audiotool-projects/create-devices.md) — step-by-step guide to creating and connecting devices
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [Create Devices](../../working-with-audiotool-projects/create-devices.html) — step-by-step guide to creating and connecting devices
 - [desktopAudioCable]({{ '/reference/entities/desktopAudioCable.html' | relative_url }}) — connect the two input signals and the output

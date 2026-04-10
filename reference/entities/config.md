@@ -38,6 +38,6 @@ await nexus.modify((t) => {
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.md) — using BPM with tick calculations
-- [Utilities](../utilities.md) — `secondsToTicks` and `ticksToSeconds` for timing math
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.html) — using BPM with tick calculations
+- [Utilities](../utilities.html) — `secondsToTicks` and `ticksToSeconds` for timing math

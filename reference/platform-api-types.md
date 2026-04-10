@@ -11,7 +11,7 @@ has_children: true
 
 Type definitions for the Audiotool REST API services. Use this page to look up service names, request/response types, and enumerations.
 
-For practical usage examples, see [Use Platform APIs Through the Client](../working-with-audiotool-projects/use-platform-apis-through-the-client.md).
+For practical usage examples, see [Use Platform APIs Through the Client](../working-with-audiotool-projects/use-platform-apis-through-the-client.html).
 
 ## Accessing services
 
@@ -607,5 +607,5 @@ import { sample } from "@audiotool/nexus/api";
 
 ## See also
 
-- [Use Platform APIs Through the Client](../working-with-audiotool-projects/use-platform-apis-through-the-client.md) — practical usage guide with more complete examples
-- [Package Entry Points](package-entry-points.md) — main module types
+- [Use Platform APIs Through the Client](../working-with-audiotool-projects/use-platform-apis-through-the-client.html) — practical usage guide with more complete examples
+- [Package Entry Points](package-entry-points.html) — main module types

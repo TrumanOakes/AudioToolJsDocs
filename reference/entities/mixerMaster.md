@@ -36,6 +36,6 @@ console.log("Master display name:", master.fields.displayName.value);
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [mixerChannel](mixerChannel.md) — individual channel strips that feed into the master
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [mixerChannel](mixerChannel.html) — individual channel strips that feed into the master
 - [desktopAudioCable]({{ '/reference/entities/desktopAudioCable.html' | relative_url }}) — cables that route signals through the mixer

@@ -600,10 +600,10 @@ const location = schemaPathToSchemaLocation(path);
 
 ## References
 
-- `TargetType` — re-exported from the [api module](platform-api-types.md)
+- `TargetType` — re-exported from the [api module](platform-api-types.html)
 
 ## See also
 
-- [Making Changes](../how-nexus-works/making-changes.md) — conceptual guide to `TransactionBuilder` and transactions
-- [Queries and Events](../how-nexus-works/queries-and-events.md) — how to use `EntityQuery` and `NexusEventManager`
-- [Entities and Fields](../how-nexus-works/entities-and-fields.md) — conceptual overview of `NexusEntity`, fields, and pointers
+- [Making Changes](../how-nexus-works/making-changes.html) — conceptual guide to `TransactionBuilder` and transactions
+- [Queries and Events](../how-nexus-works/queries-and-events.html) — how to use `EntityQuery` and `NexusEventManager`
+- [Entities and Fields](../how-nexus-works/entities-and-fields.html) — conceptual overview of `NexusEntity`, fields, and pointers

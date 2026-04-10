@@ -59,7 +59,7 @@ t.send();
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [mixerMaster](mixerMaster.md) — the master output all channels feed into
-- [desktopAudioCable](desktopAudioCable.md) — connects device outputs to channel inputs
-- [Create Devices](../../working-with-audiotool-projects/create-devices.md) — full guide including mixer setup
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [mixerMaster](mixerMaster.html) — the master output all channels feed into
+- [desktopAudioCable](desktopAudioCable.html) — connects device outputs to channel inputs
+- [Create Devices](../../working-with-audiotool-projects/create-devices.html) — full guide including mixer setup

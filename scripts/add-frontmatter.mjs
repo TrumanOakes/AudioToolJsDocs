@@ -11,14 +11,21 @@
  */
 
 import { readdir, readFile, writeFile } from "node:fs/promises";
-import { join, relative } from "node:path";
+import { dirname, join, relative } from "node:path";
 
 const GENERATED_DIR = join(import.meta.dirname, "..", "api-reference", "generated");
-const PARENT_TITLE = "Reference";
+const API_ROOT_TITLE = "API";
+const SITE_ROOT_DIR = join(import.meta.dirname, "..");
+
+const MEDIA_GUIDE_DESTINATIONS = {
+  "login.html": join(SITE_ROOT_DIR, "working-with-audiotool-projects", "sign-in-and-connect.md"),
+  "api.html": join(SITE_ROOT_DIR, "reference", "platform-api-types.md"),
+  "overview.html": join(SITE_ROOT_DIR, "reference", "document-model.md"),
+  "entities.html": join(SITE_ROOT_DIR, "reference", "entity-reference.md"),
+};
 
 /**
- * Map module directory names to the hand-written guide page titles.
- * Auto-generated member pages appear as children of these guides in the sidebar.
+ * Map module directory names to API sidebar section titles.
  */
 const MODULE_TITLES = {
   api: "Platform API Types",
@@ -26,6 +33,14 @@ const MODULE_TITLES = {
   document: "Document Model",
   entities: "Entity Reference",
   utils: "Utilities",
+};
+
+const MODULE_NAV_ORDER = {
+  index: 1,
+  document: 2,
+  entities: 3,
+  api: 4,
+  utils: 5,
 };
 
 /** Supplementary descriptions for pages where TypeDoc extracted no JSDoc */
@@ -65,9 +80,9 @@ function classifyFile(relPath) {
   if (parts[0] === "_media") {
     return { type: "nav-exclude" };
   }
-  // generated/<module>/README.md — nav-excluded (hand-written guides are the parents)
+  // generated/<module>/README.md — API module index page
   if (parts.length === 2 && parts[1] === "README") {
-    return { type: "nav-exclude" };
+    return { type: "module-index", module: parts[0] };
   }
   // generated/<module>/<kind>/<Name>.md — direct member
   if (parts.length === 3) {
@@ -99,8 +114,17 @@ function buildFrontmatter(file, navOrder) {
       const parentTitle = MODULE_TITLES[file.module] || file.module;
       lines.push(`title: "${file.memberName}"`);
       lines.push(`parent: "${parentTitle}"`);
-      lines.push(`grand_parent: "${PARENT_TITLE}"`);
+      lines.push(`grand_parent: "${API_ROOT_TITLE}"`);
       lines.push(`nav_order: ${navOrder}`);
+      break;
+    }
+
+    case "module-index": {
+      const moduleTitle = MODULE_TITLES[file.module] || file.module;
+      lines.push(`title: "${moduleTitle}"`);
+      lines.push(`parent: "${API_ROOT_TITLE}"`);
+      lines.push(`nav_order: ${MODULE_NAV_ORDER[file.module] || 99}`);
+      lines.push(`has_children: true`);
       break;
     }
 
@@ -114,23 +138,70 @@ function buildFrontmatter(file, navOrder) {
   return lines.join("\n");
 }
 
+function normalizeLinks(content, filePath) {
+  const withHtmlLinks = content.replace(/\]\(([^)]+\.md)(#[^)]+)?\)/g, (match, path, hash = "") => {
+    if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("mailto:")) {
+      return match;
+    }
+    return `](${path.slice(0, -3)}.html${hash})`;
+  });
+
+  const withReadmeDirs = withHtmlLinks.replace(/\]\(([^)]+README\.html)(#[^)]+)?\)/g, (match, path, hash = "") => {
+    if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("mailto:")) {
+      return match;
+    }
+
+    const directoryPath = path === "README.html"
+      ? "./"
+      : path.slice(0, -"README.html".length);
+    return `](${directoryPath}${hash})`;
+  });
+
+  return withReadmeDirs.replace(/\]\(([^)]+)\)/g, (match, rawPath) => {
+    if (rawPath.startsWith("http://") || rawPath.startsWith("https://") || rawPath.startsWith("mailto:")) {
+      return match;
+    }
+
+    const [pathPart, hash = ""] = rawPath.split("#");
+    const normalizedPath = pathPart.replace(/^\.\//, "");
+    if (!normalizedPath.includes("_media/")) {
+      return match;
+    }
+
+    const fileName = normalizedPath.slice(normalizedPath.lastIndexOf("/") + 1);
+    const destination = MEDIA_GUIDE_DESTINATIONS[fileName];
+    if (!destination) {
+      return match;
+    }
+
+    const sourceDir = dirname(filePath);
+    const rel = relative(sourceDir, destination)
+      .replace(/\.md$/, ".html")
+      .replaceAll("\\", "/");
+    return `](${rel}${hash ? `#${hash}` : ""})`;
+  });
+}
+
 async function processFile(filePath, frontmatter, { injectNavExclude = false } = {}) {
   const content = await readFile(filePath, "utf-8");
+  let updated = normalizeLinks(content, filePath);
 
-  if (content.startsWith("---\n")) {
+  if (updated.startsWith("---\n")) {
     // File already has frontmatter — optionally inject nav_exclude into it
-    if (injectNavExclude && !content.includes("nav_exclude:")) {
-      const endIdx = content.indexOf("\n---", 4);
+    if (injectNavExclude && !updated.includes("nav_exclude:")) {
+      const endIdx = updated.indexOf("\n---", 4);
       if (endIdx !== -1) {
-        const patched = content.slice(0, endIdx) + "\nnav_exclude: true" + content.slice(endIdx);
-        await writeFile(filePath, patched, "utf-8");
+        updated = updated.slice(0, endIdx) + "\nnav_exclude: true" + updated.slice(endIdx);
         console.log(`  + nav_exclude: ${relative(GENERATED_DIR, filePath)}`);
       }
+    }
+    if (updated !== content) {
+      await writeFile(filePath, updated, "utf-8");
     }
     return;
   }
 
-  const newContent = frontmatter + "\n\n" + content;
+  const newContent = frontmatter + "\n\n" + updated;
   await writeFile(filePath, newContent, "utf-8");
   console.log(`  ${relative(GENERATED_DIR, filePath)}`);
 }
@@ -202,14 +273,17 @@ async function main() {
 
   const unknown = classified.filter(f => f.type === "unknown");
 
-  // Nav-excluded files (top-level README, module READMEs, _media/, namespace READMEs)
+  // Nav-excluded files (top-level README, _media/, namespace READMEs)
   const navExcluded = classified.filter(f => f.type === "nav-exclude");
+
+  // Module index pages
+  const moduleIndexes = classified.filter(f => f.type === "module-index");
 
   // Member files — grouped by module, sorted alphabetically within each
   const members = classified.filter(f => f.type === "member");
   const membersByModule = Object.groupBy(members, m => m.module);
 
-  const total = navExcluded.length + members.length + unknown.length;
+  const total = navExcluded.length + moduleIndexes.length + members.length + unknown.length;
   console.log(`Processing ${total} generated markdown files...`);
 
   // Process nav-excluded files (inject nav_exclude into pre-existing frontmatter too)
@@ -217,7 +291,12 @@ async function main() {
     await processFile(f.path, buildFrontmatter(f, 0), { injectNavExclude: true });
   }
 
-  // Process members — they appear as children of hand-written guide pages
+  // Process module indexes
+  for (const f of moduleIndexes) {
+    await processFile(f.path, buildFrontmatter(f, 0), { injectNavExclude: true });
+  }
+
+  // Process members — they appear as children of API module pages
   for (const [, moduleMembers] of Object.entries(membersByModule || {})) {
     moduleMembers.sort((a, b) => a.memberName.localeCompare(b.memberName));
     let memberOrder = 1;

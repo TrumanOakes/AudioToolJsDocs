@@ -190,6 +190,6 @@ async function watchNotes(doc: SyncedDocument) {
 
 ## See also
 
-- [Document Model](document-model.md) — document and schema types
-- [Entity Reference](entity-reference.md) — all entity field types
-- [Platform API Types](platform-api-types.md) — REST API types
+- [Document Model](document-model.html) — document and schema types
+- [Entity Reference](entity-reference.html) — all entity field types
+- [Platform API Types](platform-api-types.html) — REST API types

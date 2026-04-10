@@ -306,9 +306,9 @@ await serializedOperation(lock, async () => {
 
 ## References
 
-- `SchemaPath` — referenced from the [document module](document-model.md)
+- `SchemaPath` — referenced from the [document module](document-model.html)
 
 ## See also
 
-- [Work With Timeline Data](../working-with-audiotool-projects/work-with-timeline-data.md) — practical use of `Ticks` and time conversion
-- [Tips and Patterns](../how-nexus-works/tips-and-patterns.md) — patterns using `Terminable` subscriptions
+- [Work With Timeline Data](../working-with-audiotool-projects/work-with-timeline-data.html) — practical use of `Ticks` and time conversion
+- [Tips and Patterns](../how-nexus-works/tips-and-patterns.html) — patterns using `Terminable` subscriptions

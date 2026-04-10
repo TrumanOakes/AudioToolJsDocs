@@ -45,8 +45,8 @@ t.send();
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [mixerAux](mixerAux.md) — generic auxiliary send/return bus
-- [mixerReverbAux](mixerReverbAux.md) — reverb-specific aux bus
-- [mixerChannel](mixerChannel.md) — channel strip that sends to this aux
-- [mixerMaster](mixerMaster.md) — the master output
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [mixerAux](mixerAux.html) — generic auxiliary send/return bus
+- [mixerReverbAux](mixerReverbAux.html) — reverb-specific aux bus
+- [mixerChannel](mixerChannel.html) — channel strip that sends to this aux
+- [mixerMaster](mixerMaster.html) — the master output

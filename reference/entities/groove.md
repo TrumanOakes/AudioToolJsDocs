@@ -31,5 +31,5 @@ await nexus.modify((t) => {
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [noteCollection](noteCollection.md) — note containers that can reference a groove
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [noteCollection](noteCollection.html) — note containers that can reference a groove

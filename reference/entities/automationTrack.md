@@ -44,6 +44,6 @@ await nexus.modify((t) => {
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [automationRegion](automationRegion.md) — regions placed on this track
-- [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.md) — step-by-step guide to building timeline content
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [automationRegion](automationRegion.html) — regions placed on this track
+- [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.html) — step-by-step guide to building timeline content

@@ -21,4 +21,4 @@ A microTuningOctave entity defines custom tuning offsets for each note within an
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
+- [Entity Reference](../entity-reference.html) — full list of all entity types

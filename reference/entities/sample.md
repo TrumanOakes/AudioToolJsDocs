@@ -21,6 +21,6 @@ A sample entity is a reference to an audio sample file stored in Audiotool. Devi
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [audioTrack](audioTrack.md) — track that plays back audio regions referencing samples
-- [audioRegion](audioRegion.md) — timeline block that references a sample
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [audioTrack](audioTrack.html) — track that plays back audio regions referencing samples
+- [audioRegion](audioRegion.html) — timeline block that references a sample
