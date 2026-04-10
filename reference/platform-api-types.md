@@ -11,7 +11,7 @@ has_children: true
 
 Type definitions for the Audiotool REST API services. Use this page to look up service names, request/response types, and enumerations.
 
-For practical usage examples, see [Use Platform APIs Through the Client](../working-with-audiotool-projects/use-platform-apis-through-the-client.md).
+For practical usage examples, see [Use Platform APIs Through the Client](../working-with-audiotool-projects/use-platform-apis-through-the-client.html).
 
 ## Accessing services
 
@@ -31,7 +31,7 @@ client.api.audiographService
 
 ## Services
 
-### [`ProjectService`](../api-reference/generated/api/variables/ProjectService.md)
+### [`ProjectService`](../api-reference/generated/api/variables/ProjectService.html)
 
 Create, read, update, and delete projects. Also manages collaborative sessions on a project.
 
@@ -64,7 +64,7 @@ const { sessions } = await client.api.projectService.listSessions({
 
 ---
 
-### [`SampleService`](../api-reference/generated/api/variables/SampleService.md)
+### [`SampleService`](../api-reference/generated/api/variables/SampleService.html)
 
 List, register, and delete audio sample files. Uploading is a three-step process handled partly outside the SDK — `createSample` returns an upload URL, you upload the file to it directly, then call `uploadSampleFinished` to notify the server. To get a download URL for an existing sample, use `getSample`.
 
@@ -94,7 +94,7 @@ await client.api.sampleService.deleteSample({ id: sample.id });
 
 ---
 
-### [`ProjectRoleService`](../api-reference/generated/api/variables/ProjectRoleService.md)
+### [`ProjectRoleService`](../api-reference/generated/api/variables/ProjectRoleService.html)
 
 Manage who has access to a project and at what permission level.
 
@@ -124,7 +124,7 @@ await client.api.projectRoleService.removeProjectRole({
 
 ---
 
-### [`UserService`](../api-reference/generated/api/variables/UserService.md)
+### [`UserService`](../api-reference/generated/api/variables/UserService.html)
 
 Look up and manage user accounts.
 
@@ -151,7 +151,7 @@ await client.api.userService.uploadAvatar({
 
 ---
 
-### [`AudiographService`](../api-reference/generated/api/variables/AudiographService.md)
+### [`AudiographService`](../api-reference/generated/api/variables/AudiographService.html)
 
 Retrieve audio graphs — vector graphics displayed in the Audiotool sample browser to show a waveform-like visualization.
 
@@ -168,7 +168,7 @@ const { graph } = await client.api.audiographService.getAudiograph({
 
 ## Functions
 
-### [`createAudiotoolAPI()`](../api-reference/generated/api/functions/createAudiotoolAPI.md)
+### [`createAudiotoolAPI()`](../api-reference/generated/api/functions/createAudiotoolAPI.html)
 
 Factory function to instantiate the API client directly, without going through `createAudiotoolClient`. Useful when you need the REST API without opening a document.
 
@@ -183,7 +183,7 @@ const { projects } = await api.projectService.listProjects({});
 
 ---
 
-### [`neverThrowingFetch()`](../api-reference/generated/api/functions/neverThrowingFetch.md)
+### [`neverThrowingFetch()`](../api-reference/generated/api/functions/neverThrowingFetch.html)
 
 A `fetch` wrapper that never throws on network errors. Instead of throwing, it returns errors as values — useful when you want predictable error handling without try/catch.
 
@@ -206,7 +206,7 @@ if (result.ok) {
 
 ## Type Aliases
 
-### [`AudiotoolAPI`](../api-reference/generated/api/type-aliases/AudiotoolAPI.md)
+### [`AudiotoolAPI`](../api-reference/generated/api/type-aliases/AudiotoolAPI.html)
 
 The full type of `client.api`. Use this as a type annotation when passing the API object to helper functions.
 
@@ -224,9 +224,9 @@ await listAllProjects(client.api);
 
 ---
 
-### [`RetryingClient`](../api-reference/generated/api/type-aliases/RetryingClient.md) and [`RetryOptions`](../api-reference/generated/api/type-aliases/RetryOptions.md)
+### [`RetryingClient`](../api-reference/generated/api/type-aliases/RetryingClient.html) and [`RetryOptions`](../api-reference/generated/api/type-aliases/RetryOptions.html)
 
-Nexus automatically retries transient network failures. [`RetryingClient`](../api-reference/generated/api/type-aliases/RetryingClient.md) is the interface for a client with retry logic, and [`RetryOptions`](../api-reference/generated/api/type-aliases/RetryOptions.md) configures retry behavior.
+Nexus automatically retries transient network failures. [`RetryingClient`](../api-reference/generated/api/type-aliases/RetryingClient.html) is the interface for a client with retry logic, and [`RetryOptions`](../api-reference/generated/api/type-aliases/RetryOptions.html) configures retry behavior.
 
 ```typescript
 import type { RetryOptions } from "@audiotool/nexus/api";
@@ -240,7 +240,7 @@ const opts: RetryOptions = {
 
 ---
 
-### [`KeepaliveTransport`](../api-reference/generated/api/type-aliases/KeepaliveTransport.md)
+### [`KeepaliveTransport`](../api-reference/generated/api/type-aliases/KeepaliveTransport.html)
 
 Transport type with keepalive support. Used internally by long-running synced document connections to maintain the backend connection.
 
@@ -252,9 +252,9 @@ import type { KeepaliveTransport } from "@audiotool/nexus/api";
 
 ---
 
-### [`NexusPreset`](../api-reference/generated/api/type-aliases/NexusPreset.md) and [`PresetUtil`](../api-reference/generated/api/type-aliases/PresetUtil.md)
+### [`NexusPreset`](../api-reference/generated/api/type-aliases/NexusPreset.html) and [`PresetUtil`](../api-reference/generated/api/type-aliases/PresetUtil.html)
 
-[`NexusPreset`](../api-reference/generated/api/type-aliases/NexusPreset.md) is how a device preset appears within a Nexus document. [`PresetUtil`](../api-reference/generated/api/type-aliases/PresetUtil.md) wraps preset API operations and is accessed via `client.api.presetUtil`.
+[`NexusPreset`](../api-reference/generated/api/type-aliases/NexusPreset.html) is how a device preset appears within a Nexus document. [`PresetUtil`](../api-reference/generated/api/type-aliases/PresetUtil.html) wraps preset API operations and is accessed via `client.api.presetUtil`.
 
 ```typescript
 // Access presets through the client
@@ -266,9 +266,9 @@ const presetUtil = client.api.presetUtil;
 
 ---
 
-### [`NeverThrowingFetch`](../api-reference/generated/api/type-aliases/NeverThrowingFetch.md)
+### [`NeverThrowingFetch`](../api-reference/generated/api/type-aliases/NeverThrowingFetch.html)
 
-The function type returned by [`neverThrowingFetch()`](../api-reference/generated/api/functions/neverThrowingFetch.md). Use this as a type annotation when passing a safe fetch function around your code.
+The function type returned by [`neverThrowingFetch()`](../api-reference/generated/api/functions/neverThrowingFetch.html). Use this as a type annotation when passing a safe fetch function around your code.
 
 ```typescript
 import type { NeverThrowingFetch } from "@audiotool/nexus/api";
@@ -284,7 +284,7 @@ function makeRequest(fetch: NeverThrowingFetch, url: string) {
 
 Enumerations are imported from `@audiotool/nexus/api` and used as values in API requests.
 
-### [`ProjectRoleType`](../api-reference/generated/api/enumerations/ProjectRoleType.md)
+### [`ProjectRoleType`](../api-reference/generated/api/enumerations/ProjectRoleType.html)
 
 Defines the permission level of a collaborator on a project.
 
@@ -301,7 +301,7 @@ await client.api.projectRoleService.addProjectRole({
 
 ---
 
-### [`TrackLicense`](../api-reference/generated/api/enumerations/TrackLicense.md)
+### [`TrackLicense`](../api-reference/generated/api/enumerations/TrackLicense.html)
 
 The license type applied to a project track — controls how the track can be shared and used.
 
@@ -316,7 +316,7 @@ await client.api.projectService.updateProject({
 
 ---
 
-### [`PresetDeviceType`](../api-reference/generated/api/enumerations/PresetDeviceType.md)
+### [`PresetDeviceType`](../api-reference/generated/api/enumerations/PresetDeviceType.html)
 
 The type of device a preset applies to (synthesizer, drum machine, effect, etc.).
 
@@ -331,7 +331,7 @@ const presets = await client.api.projectService.listPresets({
 
 ---
 
-### [`PresetUsage`](../api-reference/generated/api/enumerations/PresetUsage.md)
+### [`PresetUsage`](../api-reference/generated/api/enumerations/PresetUsage.html)
 
 How a preset is used — whether it defines a sound, an effect setting, or another category.
 
@@ -346,7 +346,7 @@ const soundPresets = await client.api.projectService.listPresets({
 
 ---
 
-### [`CommentMode`](../api-reference/generated/api/enumerations/CommentMode.md)
+### [`CommentMode`](../api-reference/generated/api/enumerations/CommentMode.html)
 
 Comment visibility mode — controls whether comments on a project are public or private.
 
@@ -361,7 +361,7 @@ await client.api.projectService.updateProject({
 
 ---
 
-### [`GetAudiographChannels`](../api-reference/generated/api/enumerations/GetAudiographChannels.md)
+### [`GetAudiographChannels`](../api-reference/generated/api/enumerations/GetAudiographChannels.html)
 
 Channel options for retrieving an audio graph visualization (mono or stereo).
 
@@ -376,7 +376,7 @@ const { graph } = await client.api.audiographService.getAudiograph({
 
 ---
 
-### [`GetAudiographResolution`](../api-reference/generated/api/enumerations/GetAudiographResolution.md)
+### [`GetAudiographResolution`](../api-reference/generated/api/enumerations/GetAudiographResolution.html)
 
 Resolution options for the audio graph visualization.
 
@@ -391,7 +391,7 @@ const { graph } = await client.api.audiographService.getAudiograph({
 
 ---
 
-### [`StringFormat`](../api-reference/generated/api/enumerations/StringFormat.md)
+### [`StringFormat`](../api-reference/generated/api/enumerations/StringFormat.html)
 
 String encoding format used in some API fields.
 
@@ -403,7 +403,7 @@ import { StringFormat } from "@audiotool/nexus/api";
 
 ---
 
-### [`SyncTrackMode`](../api-reference/generated/api/enumerations/SyncTrackMode.md), [`SyncTrackStatus`](../api-reference/generated/api/enumerations/SyncTrackStatus.md), [`SyncTrackScreenshotStatus`](../api-reference/generated/api/enumerations/SyncTrackScreenshotStatus.md)
+### [`SyncTrackMode`](../api-reference/generated/api/enumerations/SyncTrackMode.html), [`SyncTrackStatus`](../api-reference/generated/api/enumerations/SyncTrackStatus.html), [`SyncTrackScreenshotStatus`](../api-reference/generated/api/enumerations/SyncTrackScreenshotStatus.html)
 
 Status and mode types for sync tracks — the infrastructure that records and replays collaborative session state.
 
@@ -419,7 +419,7 @@ if (track.status === SyncTrackStatus.ACTIVE) {
 
 ---
 
-### [`SampleConvertDoneErrorType`](../api-reference/generated/api/enumerations/SampleConvertDoneErrorType.md)
+### [`SampleConvertDoneErrorType`](../api-reference/generated/api/enumerations/SampleConvertDoneErrorType.html)
 
 Error codes returned when an audio sample conversion operation fails.
 
@@ -434,7 +434,7 @@ if (result.errorType === SampleConvertDoneErrorType.UNSUPPORTED_FORMAT) {
 
 ---
 
-### [`TargetType`](../api-reference/generated/api/enumerations/TargetType.md)
+### [`TargetType`](../api-reference/generated/api/enumerations/TargetType.html)
 
 Target entity types for certain API operations. Also re-exported from the document module.
 
@@ -607,5 +607,5 @@ import { sample } from "@audiotool/nexus/api";
 
 ## See also
 
-- [Use Platform APIs Through the Client](../working-with-audiotool-projects/use-platform-apis-through-the-client.md) — practical usage guide with more complete examples
-- [Package Entry Points](package-entry-points.md) — main module types
+- [Use Platform APIs Through the Client](../working-with-audiotool-projects/use-platform-apis-through-the-client.html) — practical usage guide with more complete examples
+- [Package Entry Points](package-entry-points.html) — main module types

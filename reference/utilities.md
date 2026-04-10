@@ -23,7 +23,7 @@ const { Ticks, secondsToTicks, ticksToSeconds, AsyncLock } = utils;
 
 ## Variables
 
-### [`Ticks`](../api-reference/generated/utils/variables/Ticks.md)
+### [`Ticks`](../api-reference/generated/utils/variables/Ticks.html)
 
 A constant object with timeline time values. Ticks are the unit used for all timeline positions and durations in Nexus — they are independent of tempo, so the same tick values work at any BPM.
 
@@ -44,7 +44,7 @@ const { Ticks } = utils;
 
 ## Functions
 
-### [`secondsToTicks`](../api-reference/generated/utils/functions/secondsToTicks.md)`(seconds: number, bpm: number): number`
+### [`secondsToTicks`](../api-reference/generated/utils/functions/secondsToTicks.html)`(seconds: number, bpm: number): number`
 
 Converts a duration in seconds to ticks at the given BPM.
 
@@ -52,7 +52,7 @@ Converts a duration in seconds to ticks at the given BPM.
 const ticks = secondsToTicks(2.0, 120); // 2 seconds at 120 BPM
 ```
 
-### [`ticksToSeconds`](../api-reference/generated/utils/functions/ticksToSeconds.md)`(ticks: number, bpm: number): number`
+### [`ticksToSeconds`](../api-reference/generated/utils/functions/ticksToSeconds.html)`(ticks: number, bpm: number): number`
 
 Converts a tick count to a duration in seconds at the given BPM.
 
@@ -60,7 +60,7 @@ Converts a tick count to a duration in seconds at the given BPM.
 const secs = ticksToSeconds(3840, 120); // one beat at 120 BPM = 0.5s
 ```
 
-### [`createTypedArray()`](../api-reference/generated/utils/functions/createTypedArray.md)
+### [`createTypedArray()`](../api-reference/generated/utils/functions/createTypedArray.html)
 
 Creates typed arrays for use with binary data fields.
 
@@ -72,7 +72,7 @@ const { createTypedArray } = utils;
 const bytes = createTypedArray(128); // typed array of 128 bytes
 ```
 
-### [`throw_`](../api-reference/generated/utils/functions/throw.md)`(message: string): never`
+### [`throw_`](../api-reference/generated/utils/functions/throw.html)`(message: string): never`
 
 An error-throwing utility for use in expressions where `throw` statements are not syntactically valid (e.g., as a default value in a nullish coalescing expression).
 
@@ -84,7 +84,7 @@ const value = maybeNull ?? throw_("Expected a value here");
 
 ## Classes
 
-### [`AsyncLock`](../api-reference/generated/utils/classes/AsyncLock.md)
+### [`AsyncLock`](../api-reference/generated/utils/classes/AsyncLock.html)
 
 An async lock that ensures only one block of code runs at a time. Useful if you need to serialize async operations in your own code.
 
@@ -97,7 +97,7 @@ await lock.acquire(async () => {
 });
 ```
 
-### [`HashMap`](../api-reference/generated/utils/classes/HashMap.md)`<K extends Hashable, V>`
+### [`HashMap`](../api-reference/generated/utils/classes/HashMap.html)`<K extends Hashable, V>`
 
 A hash map used internally by Nexus for efficient entity storage. Available for use in your own code if needed. Keys must be `Hashable` (i.e. implement `.hashCode()`).
 
@@ -113,7 +113,7 @@ const val = map.get(key); // "value"
 
 ---
 
-### [`Notifier`](../api-reference/generated/utils/classes/Notifier.md)`<T>`
+### [`Notifier`](../api-reference/generated/utils/classes/Notifier.html)`<T>`
 
 A general-purpose event emitter. Subscribers receive a value of type `T` when the notifier fires. Useful when you want to emit custom events in your own code.
 
@@ -136,7 +136,7 @@ sub.terminate();
 
 ---
 
-### [`ValueNotifier`](../api-reference/generated/utils/classes/ValueNotifier.md)`<T>`
+### [`ValueNotifier`](../api-reference/generated/utils/classes/ValueNotifier.html)`<T>`
 
 A notifier that holds and broadcasts a current value. Subscribers receive the new value whenever it changes. Similar to a reactive variable.
 
@@ -157,7 +157,7 @@ console.log(volume.value); // 0.5
 
 ---
 
-### [`MapValueNotifier`](../api-reference/generated/utils/classes/MapValueNotifier.md)`<K extends Hashable, V>`
+### [`MapValueNotifier`](../api-reference/generated/utils/classes/MapValueNotifier.html)`<K extends Hashable, V>`
 
 A notifier that fires when individual entries in a map are added, updated, or removed. Use it when you need to react to changes in a specific map key rather than the whole map.
 
@@ -177,7 +177,7 @@ entityStates.set("entity-id-1", "active"); // triggers subscriber
 
 ---
 
-### [`SetNotifier`](../api-reference/generated/utils/classes/SetNotifier.md)`<T extends Hashable>`
+### [`SetNotifier`](../api-reference/generated/utils/classes/SetNotifier.html)`<T extends Hashable>`
 
 A notifier for changes to a set — fires when items are added or removed. Use it when you need to track membership in a dynamic collection.
 
@@ -200,7 +200,7 @@ activeIds.delete("entity-abc"); // logs: "Removed: entity-abc"
 
 ## Interfaces
 
-### [`Observable`](../api-reference/generated/utils/interfaces/Observable.md)`<T>`
+### [`Observable`](../api-reference/generated/utils/interfaces/Observable.html)`<T>`
 
 Interface for objects that can be observed for changes. Implement this interface to make your own observable values that can be subscribed to by other code.
 
@@ -218,7 +218,7 @@ class MyObservable implements Observable<number> {
 
 ---
 
-### [`ObservableValue`](../api-reference/generated/utils/interfaces/ObservableValue.md)`<T>`
+### [`ObservableValue`](../api-reference/generated/utils/interfaces/ObservableValue.html)`<T>`
 
 Extends `Observable<T>` with a `.value` property that exposes the current value synchronously. Use this when subscribers need to both read the current state and react to future changes.
 
@@ -241,7 +241,7 @@ function connectToInput(observable: ObservableValue<number>) {
 
 ## Type Aliases
 
-### [`Terminable`](../api-reference/generated/utils/type-aliases/Terminable.md)
+### [`Terminable`](../api-reference/generated/utils/type-aliases/Terminable.html)
 
 Any object with a `.terminate()` method. Event subscriptions from `nexus.events` and from Nexus utilities all return a `Terminable` — call `.terminate()` when you no longer need the subscription to avoid memory leaks.
 
@@ -264,7 +264,7 @@ subscriptions.forEach(s => s.terminate());
 
 ---
 
-### [`Hashable`](../api-reference/generated/utils/type-aliases/Hashable.md)
+### [`Hashable`](../api-reference/generated/utils/type-aliases/Hashable.html)
 
 Objects that can be used as hash map keys. Must implement a `.hashCode()` method that returns a consistent number. Nexus uses this internally for its `HashMap`, `SetNotifier`, and `MapValueNotifier` structures.
 
@@ -283,7 +283,7 @@ class EntityKey implements Hashable {
 
 ---
 
-### [`Lock`](../api-reference/generated/utils/type-aliases/Lock.md)
+### [`Lock`](../api-reference/generated/utils/type-aliases/Lock.html)
 
 The type of a lock instance — the return type of `new AsyncLock()`. Use this as a type annotation when passing locks between functions.
 
@@ -306,9 +306,9 @@ await serializedOperation(lock, async () => {
 
 ## References
 
-- `SchemaPath` — referenced from the [document module](document-model.md)
+- `SchemaPath` — referenced from the [document module](document-model.html)
 
 ## See also
 
-- [Work With Timeline Data](../working-with-audiotool-projects/work-with-timeline-data.md) — practical use of `Ticks` and time conversion
-- [Tips and Patterns](../how-nexus-works/tips-and-patterns.md) — patterns using `Terminable` subscriptions
+- [Work With Timeline Data](../working-with-audiotool-projects/work-with-timeline-data.html) — practical use of `Ticks` and time conversion
+- [Tips and Patterns](../how-nexus-works/tips-and-patterns.html) — patterns using `Terminable` subscriptions

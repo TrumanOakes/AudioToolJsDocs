@@ -18,7 +18,7 @@ An automationTrack is a lane in the Audiotool timeline dedicated to automating a
 | `displayName` | `string` | Label shown on the track in the timeline |
 | `target` | pointer | Points to the specific device parameter (field) being automated |
 
-> For the complete field listing with types, defaults, and ranges, see [AutomationTrack](../../api-reference/generated/entities/type-aliases/AutomationTrack.md).
+> For the complete field listing with types, defaults, and ranges, see [AutomationTrack](../../api-reference/generated/entities/type-aliases/AutomationTrack.html).
 
 ## Example
 
@@ -44,6 +44,6 @@ await nexus.modify((t) => {
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [automationRegion](automationRegion.md) — regions placed on this track
-- [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.md) — step-by-step guide to building timeline content
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [automationRegion](automationRegion.html) — regions placed on this track
+- [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.html) — step-by-step guide to building timeline content

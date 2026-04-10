@@ -20,7 +20,7 @@ There is always exactly one `configuration` per document. Do not create or remov
 |-------|------|-------------|
 | `bpm` | `number` | Project tempo in beats per minute |
 
-> For the complete field listing with types, defaults, and ranges, see [Config](../../api-reference/generated/entities/type-aliases/Config.md).
+> For the complete field listing with types, defaults, and ranges, see [Config](../../api-reference/generated/entities/type-aliases/Config.html).
 
 ## Example
 
@@ -38,6 +38,6 @@ await nexus.modify((t) => {
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.md) — using BPM with tick calculations
-- [Utilities](../utilities.md) — `secondsToTicks` and `ticksToSeconds` for timing math
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.html) — using BPM with tick calculations
+- [Utilities](../utilities.html) — `secondsToTicks` and `ticksToSeconds` for timing math

@@ -17,8 +17,8 @@ A microtuningOctave entity defines custom tuning offsets for each note within an
 |-------|------|-------------|
 | `displayName` | `string` | Label for this microtuning definition |
 
-> For the complete field listing with types, defaults, and ranges, see [MicroTuningOctave](../../api-reference/generated/entities/type-aliases/MicroTuningOctave.md).
+> For the complete field listing with types, defaults, and ranges, see [MicroTuningOctave](../../api-reference/generated/entities/type-aliases/MicroTuningOctave.html).
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
+- [Entity Reference](../entity-reference.html) — full list of all entity types

@@ -1,4 +1,77 @@
 <style>
+.top-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 1rem;
+}
+
+.top-tab {
+  display: inline-flex;
+  align-items: center;
+  height: 2rem;
+  padding: 0 0.75rem;
+  border-radius: 6px;
+  color: var(--body-text-color);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.top-tab:hover {
+  text-decoration: none;
+  border-color: var(--border-color);
+  background-color: var(--body-background-color);
+}
+
+.top-tab.is-active {
+  font-weight: 600;
+  border-color: var(--link-color);
+  color: var(--link-color);
+}
+
+@media (max-width: 50rem) {
+  .top-tabs {
+    width: 100%;
+    margin: 0.5rem 0 0 0;
+    order: 3;
+  }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var mainHeader = document.getElementById("main-header");
+  if (!mainHeader) return;
+
+  var search = mainHeader.querySelector(".search");
+  if (!search) return;
+
+  var tabs = document.createElement("nav");
+  tabs.className = "top-tabs";
+  tabs.setAttribute("aria-label", "Documentation sections");
+
+  var path = window.location.pathname;
+  var isApi = path.indexOf("/api-reference/generated/") !== -1;
+
+  var docsTab = document.createElement("a");
+  docsTab.href = "{{ '/' | relative_url }}";
+  docsTab.className = "top-tab" + (isApi ? "" : " is-active");
+  docsTab.textContent = "Docs";
+
+  var apiTab = document.createElement("a");
+  apiTab.href = "{{ '/api-reference/generated/' | relative_url }}";
+  apiTab.className = "top-tab" + (isApi ? " is-active" : "");
+  apiTab.textContent = "API";
+
+  tabs.appendChild(docsTab);
+  tabs.appendChild(apiTab);
+
+  mainHeader.insertBefore(tabs, search);
+});
+</script>
+<style>
 .next-page-btn {
   display: inline-flex;
   align-items: center;

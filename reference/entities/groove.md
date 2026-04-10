@@ -17,7 +17,7 @@ A groove entity defines a groove or swing quantization pattern. Applying a groov
 |-------|------|-------------|
 | `displayName` | `string` | Label for this groove preset |
 
-> For the complete field listing with types, defaults, and ranges, see [Groove](../../api-reference/generated/entities/type-aliases/Groove.md).
+> For the complete field listing with types, defaults, and ranges, see [Groove](../../api-reference/generated/entities/type-aliases/Groove.html).
 
 ## Example
 
@@ -31,5 +31,5 @@ await nexus.modify((t) => {
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [noteCollection](noteCollection.md) — note containers that can reference a groove
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [noteCollection](noteCollection.html) — note containers that can reference a groove

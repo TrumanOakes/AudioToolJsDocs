@@ -19,9 +19,9 @@ A vst3Plugin entity represents an instance of a VST3 plugin loaded in the projec
 | `positionX` | `number` | Horizontal position on the Audiotool desktop |
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 
-> For the complete field listing with types, defaults, and ranges, see [SpitfireLabsVst3Plugin](../../api-reference/generated/entities/type-aliases/SpitfireLabsVst3Plugin.md).
+> For the complete field listing with types, defaults, and ranges, see [SpitfireLabsVst3Plugin](../../api-reference/generated/entities/type-aliases/SpitfireLabsVst3Plugin.html).
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
+- [Entity Reference](../entity-reference.html) — full list of all entity types
 - [desktopAudioCable]({{ '/reference/entities/desktopAudioCable.html' | relative_url }}) — connect this plugin into the audio signal chain

@@ -19,7 +19,7 @@ A mixerReverbAux is a reverb-specific auxiliary send/return bus in the Audiotool
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 | `displayName` | `string` | Label shown on the aux bus in the DAW UI |
 
-> For the complete field listing with types, defaults, and ranges, see [MixerReverbAux](../../api-reference/generated/entities/type-aliases/MixerReverbAux.md).
+> For the complete field listing with types, defaults, and ranges, see [MixerReverbAux](../../api-reference/generated/entities/type-aliases/MixerReverbAux.html).
 
 ## Example
 
@@ -45,8 +45,8 @@ t.send();
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [mixerAux](mixerAux.md) — generic auxiliary send/return bus
-- [mixerDelayAux](mixerDelayAux.md) — delay-specific aux bus
-- [mixerChannel](mixerChannel.md) — channel strip that sends to this aux
-- [mixerMaster](mixerMaster.md) — the master output
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [mixerAux](mixerAux.html) — generic auxiliary send/return bus
+- [mixerDelayAux](mixerDelayAux.html) — delay-specific aux bus
+- [mixerChannel](mixerChannel.html) — channel strip that sends to this aux
+- [mixerMaster](mixerMaster.html) — the master output
