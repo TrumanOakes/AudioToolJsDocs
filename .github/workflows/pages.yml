@@ -6,6 +6,7 @@ on:
       - master
       - "claude/github-pages-deployment-SPyTT"
       - "claude/install-audiotool-nexu-RI2hZ"
+      - "cursor/fix-docs-correctness-f90d"
   workflow_dispatch:
 
 permissions:
