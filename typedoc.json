@@ -29,5 +29,8 @@
   "parametersFormat": "table",
   "enumMembersFormat": "table",
   "typeDeclarationFormat": "table",
-  "propertyMembersFormat": "table"
+  "propertyMembersFormat": "table",
+  "expandObjects": true,
+  "expandParameters": true,
+  "useCodeBlocks": true
 }
