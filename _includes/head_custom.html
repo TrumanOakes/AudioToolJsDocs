@@ -69,6 +69,62 @@ document.addEventListener("DOMContentLoaded", function () {
   tabs.appendChild(apiTab);
 
   mainHeader.insertBefore(tabs, search);
+
+  if (isApi) {
+    var siteNav = document.getElementById("site-nav");
+    if (!siteNav) return;
+
+    var apiBase = "{{ '/api-reference/generated/' | relative_url }}";
+    var apiSections = [
+      { title: "index", href: "{{ '/api-reference/generated/index/' | relative_url }}" },
+      { title: "entities", href: "{{ '/api-reference/generated/entities/' | relative_url }}" },
+      { title: "document", href: "{{ '/api-reference/generated/document/' | relative_url }}" },
+      { title: "utils", href: "{{ '/api-reference/generated/utils/' | relative_url }}" },
+      { title: "api", href: "{{ '/api-reference/generated/api/' | relative_url }}" },
+    ];
+
+    var normalizePath = function (value) {
+      if (!value) return "/";
+      var normalized = value.replace(/index\.html$/, "");
+      normalized = normalized.replace(/\/+$/, "");
+      return normalized || "/";
+    };
+
+    var currentPath = normalizePath(path);
+    var rootPath = normalizePath(apiBase);
+
+    var list = document.createElement("ul");
+    list.className = "nav-list";
+
+    apiSections.forEach(function (section) {
+      var item = document.createElement("li");
+      item.className = "nav-list-item";
+
+      var link = document.createElement("a");
+      link.className = "nav-list-link";
+      link.textContent = section.title;
+      link.href = section.href;
+
+      var sectionPath = normalizePath(section.href);
+      var isActive =
+        currentPath === sectionPath ||
+        (currentPath.indexOf(sectionPath + "/") === 0);
+
+      if (!isActive && currentPath === rootPath && section.title === "index") {
+        isActive = true;
+      }
+
+      if (isActive) {
+        link.className += " active";
+      }
+
+      item.appendChild(link);
+      list.appendChild(item);
+    });
+
+    siteNav.innerHTML = "";
+    siteNav.appendChild(list);
+  }
 });
 </script>
 <style>
