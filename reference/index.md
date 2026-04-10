@@ -6,4 +6,4 @@ has_children: true
 
 # Reference
 
-Complete API reference for all modules, entity types, utilities, and platform API types exported by `@audiotool/nexus`.
+Complete reference for all modules exported by `@audiotool/nexus`. Each section pairs curated guides with practical examples alongside auto-generated API documentation showing exact type signatures, defaults, and ranges.

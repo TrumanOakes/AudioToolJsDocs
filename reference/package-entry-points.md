@@ -2,10 +2,8 @@
 title: Package Entry Points
 parent: Reference
 nav_order: 2
+has_children: true
 ---
-
-{: .note }
-> For exact type signatures, see the auto-generated [index module reference](../api-reference/generated/index/).
 
 # Package Entry Points
 

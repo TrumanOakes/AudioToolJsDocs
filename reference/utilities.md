@@ -2,10 +2,8 @@
 title: Utilities
 parent: Reference
 nav_order: 5
+has_children: true
 ---
-
-{: .note }
-> For exact type signatures, see the auto-generated [utils module reference](../api-reference/generated/utils/).
 
 # Utilities
 

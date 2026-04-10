@@ -2,10 +2,8 @@
 title: Platform API Types
 parent: Reference
 nav_order: 6
+has_children: true
 ---
-
-{: .note }
-> For exact type signatures and complete property listings, see the auto-generated [api module reference](../api-reference/generated/api/).
 
 # Platform API Types
 

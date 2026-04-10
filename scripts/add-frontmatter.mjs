@@ -14,24 +14,18 @@ import { readdir, readFile, writeFile } from "node:fs/promises";
 import { join, relative } from "node:path";
 
 const GENERATED_DIR = join(import.meta.dirname, "..", "api-reference", "generated");
-const PARENT_TITLE = "API Reference";
+const PARENT_TITLE = "Reference";
 
-/** Map of directory names to sidebar-friendly module titles */
+/**
+ * Map module directory names to the hand-written guide page titles.
+ * Auto-generated member pages appear as children of these guides in the sidebar.
+ */
 const MODULE_TITLES = {
-  "api": "api",
-  "index": "nexus (index)",
-  "document": "document",
-  "entities": "entities",
-  "utils": "utils",
-};
-
-/** Links from auto-generated module READMEs back to hand-written guide pages */
-const MODULE_GUIDES = {
-  "api": { title: "Platform API Types", path: "../../reference/platform-api-types.md" },
-  "document": { title: "Document Model", path: "../../reference/document-model.md" },
-  "entities": { title: "Entity Reference", path: "../../reference/entity-reference.md" },
-  "index": { title: "Package Entry Points", path: "../../reference/package-entry-points.md" },
-  "utils": { title: "Utilities", path: "../../reference/utilities.md" },
+  "api": "Platform API Types",
+  "index": "Package Entry Points",
+  "document": "Document Model",
+  "entities": "Entity Reference",
+  "utils": "Utilities",
 };
 
 /** Supplementary descriptions for pages where TypeDoc extracted no JSDoc */
@@ -71,9 +65,9 @@ function classifyFile(relPath) {
   if (parts[0] === "_media") {
     return { type: "nav-exclude" };
   }
-  // generated/<module>/README.md — module index page
+  // generated/<module>/README.md — nav-excluded (hand-written guides are the parents)
   if (parts.length === 2 && parts[1] === "README") {
-    return { type: "module-readme", module: parts[0] };
+    return { type: "nav-exclude" };
   }
   // generated/<module>/<kind>/<Name>.md — direct member
   if (parts.length === 3) {
@@ -100,15 +94,6 @@ function buildFrontmatter(file, navOrder) {
     case "nav-exclude":
       lines.push(`nav_exclude: true`);
       break;
-
-    case "module-readme": {
-      const title = MODULE_TITLES[file.module] || file.module;
-      lines.push(`title: "${title}"`);
-      lines.push(`parent: "${PARENT_TITLE}"`);
-      lines.push(`has_children: true`);
-      lines.push(`nav_order: ${navOrder}`);
-      break;
-    }
 
     case "member": {
       const parentTitle = MODULE_TITLES[file.module] || file.module;
@@ -148,21 +133,6 @@ async function processFile(filePath, frontmatter, { injectNavExclude = false } =
   const newContent = frontmatter + "\n\n" + content;
   await writeFile(filePath, newContent, "utf-8");
   console.log(`  ${relative(GENERATED_DIR, filePath)}`);
-}
-
-/** Append a "See also" backlink to module READMEs pointing to hand-written guides */
-async function appendModuleGuideLinks(moduleReadmes) {
-  for (const f of moduleReadmes) {
-    const guide = MODULE_GUIDES[f.module];
-    if (!guide) continue;
-
-    const content = await readFile(f.path, "utf-8");
-    const backlink = `\n\n---\n\nFor curated examples and practical context, see the [${guide.title}](${guide.path}) guide.\n`;
-
-    if (content.includes(guide.path)) continue; // already has link
-    await writeFile(f.path, content + backlink, "utf-8");
-    console.log(`  + backlink: ${relative(GENERATED_DIR, f.path)}`);
-  }
 }
 
 /** Inject descriptions into pages where TypeDoc extracted none */
@@ -221,18 +191,14 @@ async function main() {
 
   const unknown = classified.filter(f => f.type === "unknown");
 
-  // Nav-excluded files (top-level README, _media/ files, namespace READMEs)
+  // Nav-excluded files (top-level README, module READMEs, _media/, namespace READMEs)
   const navExcluded = classified.filter(f => f.type === "nav-exclude");
-
-  // Module READMEs — sorted alphabetically for deterministic nav_order
-  const moduleReadmes = classified.filter(f => f.type === "module-readme")
-    .sort((a, b) => a.module.localeCompare(b.module));
 
   // Member files — grouped by module, sorted alphabetically within each
   const members = classified.filter(f => f.type === "member");
   const membersByModule = Object.groupBy(members, m => m.module);
 
-  const total = navExcluded.length + moduleReadmes.length + members.length + unknown.length;
+  const total = navExcluded.length + members.length + unknown.length;
   console.log(`Processing ${total} generated markdown files...`);
 
   // Process nav-excluded files (inject nav_exclude into pre-existing frontmatter too)
@@ -240,13 +206,7 @@ async function main() {
     await processFile(f.path, buildFrontmatter(f, 0), { injectNavExclude: true });
   }
 
-  // Process module READMEs
-  let moduleOrder = 1;
-  for (const f of moduleReadmes) {
-    await processFile(f.path, buildFrontmatter(f, moduleOrder++));
-  }
-
-  // Process members
+  // Process members — they appear as children of hand-written guide pages
   for (const [, moduleMembers] of Object.entries(membersByModule || {})) {
     moduleMembers.sort((a, b) => a.memberName.localeCompare(b.memberName));
     let memberOrder = 1;
@@ -259,9 +219,6 @@ async function main() {
   for (const f of unknown) {
     await processFile(f.path, buildFrontmatter(f, 0));
   }
-
-  // Post-processing: add guide backlinks to module READMEs
-  await appendModuleGuideLinks(moduleReadmes);
 
   // Post-processing: patch empty descriptions
   await patchEmptyDescriptions();

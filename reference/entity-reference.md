@@ -5,9 +5,6 @@ nav_order: 4
 has_children: true
 ---
 
-{: .note }
-> For complete field definitions with types, defaults, and ranges, see the auto-generated [entities module reference](../api-reference/generated/entities/).
-
 # Entity Reference
 
 **Module:** `@audiotool/nexus/entities`

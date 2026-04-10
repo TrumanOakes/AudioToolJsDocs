@@ -2,10 +2,8 @@
 title: Document Model
 parent: Reference
 nav_order: 3
+has_children: true
 ---
-
-{: .note }
-> For exact type signatures and complete property listings, see the auto-generated [document module reference](../api-reference/generated/document/).
 
 # Document Model
 
