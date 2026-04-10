@@ -9,7 +9,7 @@ has_children: true
 
 **Module:** `@audiotool/nexus/entities`
 
-Field types for all <span class="tooltip" data-tooltip="A single item inside a project document, such as a device, note region, or other project object.">entities</span> in the Nexus schema. Click any entity name below to see its fields, types, and a code example.
+Field types for all <span class="tooltip" data-tooltip="A single item inside a project document, such as a device, note region, or other project object.">entities</span> in the Nexus schema. Click an entity name to open its generated API type page, or use the explanation link for the written guide page.
 
 ## How to use entity types
 
@@ -43,33 +43,33 @@ Audio devices represent processing units placed on the Audiotool desktop. They f
 
 | Entity Key | Description |
 |------------|-------------|
-| [`pulverisateur`](entities/pulverisateur.html) · [fields](../api-reference/generated/entities/type-aliases/Pulverisateur.html) | Pulverisateur virtual analog synthesizer |
-| [`gakki`](entities/gakki.html) · [fields](../api-reference/generated/entities/type-aliases/Gakki.html) | Gakki synthesizer |
-| [`bassline`](entities/bassline.html) · [fields](../api-reference/generated/entities/type-aliases/Bassline.html) | Bassline synthesizer |
-| [`kobolt`](entities/kobolt.html) · [fields](../api-reference/generated/entities/type-aliases/Kobolt.html) | Kobolt bass synthesizer (multi-channel, with per-channel gain and panning) |
-| [`tonematrix`](entities/tonematrix.html) · [fields](../api-reference/generated/entities/type-aliases/Tonematrix.html) | Tonematrix step sequencer synthesizer |
+| [`pulverisateur`](../api-reference/generated/entities/type-aliases/Pulverisateur.html) · [explanation](entities/pulverisateur.html) | Pulverisateur virtual analog synthesizer |
+| [`gakki`](../api-reference/generated/entities/type-aliases/Gakki.html) · [explanation](entities/gakki.html) | Gakki synthesizer |
+| [`bassline`](../api-reference/generated/entities/type-aliases/Bassline.html) · [explanation](entities/bassline.html) | Bassline synthesizer |
+| [`kobolt`](../api-reference/generated/entities/type-aliases/Kobolt.html) · [explanation](entities/kobolt.html) | Kobolt bass synthesizer (multi-channel, with per-channel gain and panning) |
+| [`tonematrix`](../api-reference/generated/entities/type-aliases/Tonematrix.html) · [explanation](entities/tonematrix.html) | Tonematrix step sequencer synthesizer |
 
 ### Drum Machines
 
 | Entity Key | Description |
 |------------|-------------|
-| [`beatbox8`](entities/beatbox8.html) · [fields](../api-reference/generated/entities/type-aliases/Beatbox8.html) | Beatbox 8-step drum machine |
-| [`beatbox9`](entities/beatbox9.html) · [fields](../api-reference/generated/entities/type-aliases/Beatbox9.html) | Beatbox 9-step drum machine |
-| [`rasselbock`](entities/rasselbock.html) · [fields](../api-reference/generated/entities/type-aliases/Rasselbock.html) | Rasselbock drum machine |
-| [`machiniste`](entities/machiniste.html) · [fields](../api-reference/generated/entities/type-aliases/Machiniste.html) | Machiniste drum machine |
+| [`beatbox8`](../api-reference/generated/entities/type-aliases/Beatbox8.html) · [explanation](entities/beatbox8.html) | Beatbox 8-step drum machine |
+| [`beatbox9`](../api-reference/generated/entities/type-aliases/Beatbox9.html) · [explanation](entities/beatbox9.html) | Beatbox 9-step drum machine |
+| [`rasselbock`](../api-reference/generated/entities/type-aliases/Rasselbock.html) · [explanation](entities/rasselbock.html) | Rasselbock drum machine |
+| [`machiniste`](../api-reference/generated/entities/type-aliases/Machiniste.html) · [explanation](entities/machiniste.html) | Machiniste drum machine |
 
 ### Filters and Effects
 
 | Entity Key | Description |
 |------------|-------------|
-| [`autoFilter`](entities/autoFilter.html) · [fields](../api-reference/generated/entities/type-aliases/AutoFilter.html) | Auto filter effect |
-| [`graphicalEQ`](entities/graphicalEQ.html) · [fields](../api-reference/generated/entities/type-aliases/GraphicalEQ.html) | Graphical equalizer |
-| [`stompboxDelay`](entities/stompboxDelay.html) · [fields](../api-reference/generated/entities/type-aliases/StompboxDelay.html) | Stompbox delay effect (tempo-synced, with feedback and wet/dry mix) |
-| [`stompboxSlope`](entities/stompboxSlope.html) · [fields](../api-reference/generated/entities/type-aliases/StompboxSlope.html) | Stompbox filter effect (low-pass, high-pass, band-pass, or notch) |
-| [`tinyGain`](entities/tinyGain.html) · [fields](../api-reference/generated/entities/type-aliases/TinyGain.html) | Simple gain/volume utility device |
-| [`audioMerger`](entities/audioMerger.html) · [fields](../api-reference/generated/entities/type-aliases/AudioMerger.html) | Merges multiple audio signals into one |
-| [`audioSplitter`](entities/audioSplitter.html) · [fields](../api-reference/generated/entities/type-aliases/AudioSplitter.html) | Splits one audio signal into multiple outputs |
-| [`crossfader`](entities/crossfader.html) · [fields](../api-reference/generated/entities/type-aliases/Crossfader.html) | Crossfader device |
+| [`autoFilter`](../api-reference/generated/entities/type-aliases/AutoFilter.html) · [explanation](entities/autoFilter.html) | Auto filter effect |
+| [`graphicalEQ`](../api-reference/generated/entities/type-aliases/GraphicalEQ.html) · [explanation](entities/graphicalEQ.html) | Graphical equalizer |
+| [`stompboxDelay`](../api-reference/generated/entities/type-aliases/StompboxDelay.html) · [explanation](entities/stompboxDelay.html) | Stompbox delay effect (tempo-synced, with feedback and wet/dry mix) |
+| [`stompboxSlope`](../api-reference/generated/entities/type-aliases/StompboxSlope.html) · [explanation](entities/stompboxSlope.html) | Stompbox filter effect (low-pass, high-pass, band-pass, or notch) |
+| [`tinyGain`](../api-reference/generated/entities/type-aliases/TinyGain.html) · [explanation](entities/tinyGain.html) | Simple gain/volume utility device |
+| [`audioMerger`](../api-reference/generated/entities/type-aliases/AudioMerger.html) · [explanation](entities/audioMerger.html) | Merges multiple audio signals into one |
+| [`audioSplitter`](../api-reference/generated/entities/type-aliases/AudioSplitter.html) · [explanation](entities/audioSplitter.html) | Splits one audio signal into multiple outputs |
+| [`crossfader`](../api-reference/generated/entities/type-aliases/Crossfader.html) · [explanation](entities/crossfader.html) | Crossfader device |
 
 ---
 
@@ -79,13 +79,13 @@ Mixer entities control signal routing and the mixing console.
 
 | Entity Key | Description |
 |------------|-------------|
-| [`mixerMaster`](entities/mixerMaster.html) · [fields](../api-reference/generated/entities/type-aliases/MixerMaster.html) | Required master output — exactly one per document |
-| [`mixerChannel`](entities/mixerChannel.html) · [fields](../api-reference/generated/entities/type-aliases/MixerChannel.html) | Individual channel strip |
-| [`mixerAux`](entities/mixerAux.html) · [fields](../api-reference/generated/entities/type-aliases/MixerAux.html) | Auxiliary send/return entities |
-| [`mixerGroup`](entities/mixerGroup.html) · [fields](../api-reference/generated/entities/type-aliases/MixerGroup.html) | Group channel entities |
-| [`mixerSideChainCable`](entities/mixerSideChainCable.html) · [fields](../api-reference/generated/entities/type-aliases/MixerSideChainCable.html) | Sidechain routing cables |
+| [`mixerMaster`](../api-reference/generated/entities/type-aliases/MixerMaster.html) · [explanation](entities/mixerMaster.html) | Required master output — exactly one per document |
+| [`mixerChannel`](../api-reference/generated/entities/type-aliases/MixerChannel.html) · [explanation](entities/mixerChannel.html) | Individual channel strip |
+| [`mixerAux`](../api-reference/generated/entities/type-aliases/MixerAux.html) · [explanation](entities/mixerAux.html) | Auxiliary send/return entities |
+| [`mixerGroup`](../api-reference/generated/entities/type-aliases/MixerGroup.html) · [explanation](entities/mixerGroup.html) | Group channel entities |
+| [`mixerSideChainCable`](../api-reference/generated/entities/type-aliases/MixerSideChainCable.html) · [explanation](entities/mixerSideChainCable.html) | Sidechain routing cables |
 
-Audio devices connect to mixer channels via [`desktopAudioCable`](entities/desktopAudioCable.html) entities that link device audio outputs to channel inputs.
+Audio devices connect to mixer channels via [`desktopAudioCable`](../api-reference/generated/entities/type-aliases/DesktopAudioCable.html) entities that link device audio outputs to channel inputs.
 
 ---
 
@@ -95,15 +95,15 @@ Timeline entities form the arrangement view: tracks, regions, and the content wi
 
 | Entity Key | Description |
 |------------|-------------|
-| [`noteTrack`](entities/noteTrack.html) · [fields](../api-reference/generated/entities/type-aliases/NoteTrack.html) | Track for note/MIDI data |
-| [`audioTrack`](entities/audioTrack.html) · [fields](../api-reference/generated/entities/type-aliases/AudioTrack.html) | Track for audio clips |
-| [`automationTrack`](entities/automationTrack.html) · [fields](../api-reference/generated/entities/type-aliases/AutomationTrack.html) | Track for parameter automation |
-| [`patternTrack`](entities/patternTrack.html) · [fields](../api-reference/generated/entities/type-aliases/PatternTrack.html) | Pattern-based sequencing track |
-| [`noteRegion`](entities/noteRegion.html) · [fields](../api-reference/generated/entities/type-aliases/NoteRegion.html) | A region on a note track |
-| [`audioRegion`](entities/audioRegion.html) · [fields](../api-reference/generated/entities/type-aliases/AudioRegion.html) | A region on an audio track |
-| [`automationRegion`](entities/automationRegion.html) · [fields](../api-reference/generated/entities/type-aliases/AutomationRegion.html) | A region on an automation track |
-| [`noteCollection`](entities/noteCollection.html) · [fields](../api-reference/generated/entities/type-aliases/NoteCollection.html) | A container of notes referenced by `noteRegion` entities |
-| [`note`](entities/note.html) · [fields](../api-reference/generated/entities/type-aliases/Note.html) | An individual note with pitch, velocity, and position |
+| [`noteTrack`](../api-reference/generated/entities/type-aliases/NoteTrack.html) · [explanation](entities/noteTrack.html) | Track for note/MIDI data |
+| [`audioTrack`](../api-reference/generated/entities/type-aliases/AudioTrack.html) · [explanation](entities/audioTrack.html) | Track for audio clips |
+| [`automationTrack`](../api-reference/generated/entities/type-aliases/AutomationTrack.html) · [explanation](entities/automationTrack.html) | Track for parameter automation |
+| [`patternTrack`](../api-reference/generated/entities/type-aliases/PatternTrack.html) · [explanation](entities/patternTrack.html) | Pattern-based sequencing track |
+| [`noteRegion`](../api-reference/generated/entities/type-aliases/NoteRegion.html) · [explanation](entities/noteRegion.html) | A region on a note track |
+| [`audioRegion`](../api-reference/generated/entities/type-aliases/AudioRegion.html) · [explanation](entities/audioRegion.html) | A region on an audio track |
+| [`automationRegion`](../api-reference/generated/entities/type-aliases/AutomationRegion.html) · [explanation](entities/automationRegion.html) | A region on an automation track |
+| [`noteCollection`](../api-reference/generated/entities/type-aliases/NoteCollection.html) · [explanation](entities/noteCollection.html) | A container of notes referenced by `noteRegion` entities |
+| [`note`](../api-reference/generated/entities/type-aliases/Note.html) · [explanation](entities/note.html) | An individual note with pitch, velocity, and position |
 
 ### Note fields
 
@@ -119,18 +119,18 @@ Timeline entities form the arrangement view: tracks, regions, and the content wi
 
 | Entity Key | Description |
 |------------|-------------|
-| [`config`](entities/config.html) · [fields](../api-reference/generated/entities/type-aliases/Config.html) | Document-level configuration settings (BPM, time signature, etc.) |
-| [`desktopAudioCable`](entities/desktopAudioCable.html) · [fields](../api-reference/generated/entities/type-aliases/DesktopAudioCable.html) | Connects audio device outputs to audio inputs (e.g. synth → mixer channel) |
-| [`desktopNoteCable`](entities/desktopNoteCable.html) · [fields](../api-reference/generated/entities/type-aliases/DesktopNoteCable.html) | Connects note/MIDI outputs to inputs |
-| [`groove`](entities/groove.html) · [fields](../api-reference/generated/entities/type-aliases/Groove.html) | Groove/swing quantization pattern |
-| [`microTuningOctave`](entities/microTuningOctave.html) · [fields](../api-reference/generated/entities/type-aliases/MicroTuningOctave.html) | Per-octave microtuning definition |
-| [`sample`](entities/sample.html) · [fields](../api-reference/generated/entities/type-aliases/Sample.html) | Reference to an audio sample file |
-| [`spitfireLabsVst3Plugin`](entities/spitfireLabsVst3Plugin.html) · [fields](../api-reference/generated/entities/type-aliases/SpitfireLabsVst3Plugin.html) | VST3 plugin instance |
-| [`tonematrixPattern`](entities/tonematrixPattern.html) · [fields](../api-reference/generated/entities/type-aliases/TonematrixPattern.html) | Step-sequencer pattern used by the Tonematrix device |
-| [`mixerDelayAux`](entities/mixerDelayAux.html) · [fields](../api-reference/generated/entities/type-aliases/MixerDelayAux.html) | Delay-specific auxiliary send/return bus |
-| [`mixerReverbAux`](entities/mixerReverbAux.html) · [fields](../api-reference/generated/entities/type-aliases/MixerReverbAux.html) | Reverb-specific auxiliary send/return bus |
-| [`matrixArpeggiatorPattern`](entities/matrixArpeggiatorPattern.html) · [fields](../api-reference/generated/entities/type-aliases/MatrixArpeggiatorPattern.html) | Pattern for the matrix arpeggiator |
-| [`matrixArpeggiatorPatternStep`](entities/matrixArpeggiatorPatternStep.html) · [fields](../api-reference/generated/entities/type-aliases/MatrixArpeggiatorPatternStep.html) | An individual step within a matrix arpeggiator pattern |
+| [`config`](../api-reference/generated/entities/type-aliases/Config.html) · [explanation](entities/config.html) | Document-level configuration settings (BPM, time signature, etc.) |
+| [`desktopAudioCable`](../api-reference/generated/entities/type-aliases/DesktopAudioCable.html) · [explanation](entities/desktopAudioCable.html) | Connects audio device outputs to audio inputs (e.g. synth → mixer channel) |
+| [`desktopNoteCable`](../api-reference/generated/entities/type-aliases/DesktopNoteCable.html) · [explanation](entities/desktopNoteCable.html) | Connects note/MIDI outputs to inputs |
+| [`groove`](../api-reference/generated/entities/type-aliases/Groove.html) · [explanation](entities/groove.html) | Groove/swing quantization pattern |
+| [`microTuningOctave`](../api-reference/generated/entities/type-aliases/MicroTuningOctave.html) · [explanation](entities/microTuningOctave.html) | Per-octave microtuning definition |
+| [`sample`](../api-reference/generated/entities/type-aliases/Sample.html) · [explanation](entities/sample.html) | Reference to an audio sample file |
+| [`spitfireLabsVst3Plugin`](../api-reference/generated/entities/type-aliases/SpitfireLabsVst3Plugin.html) · [explanation](entities/spitfireLabsVst3Plugin.html) | VST3 plugin instance |
+| [`tonematrixPattern`](../api-reference/generated/entities/type-aliases/TonematrixPattern.html) · [explanation](entities/tonematrixPattern.html) | Step-sequencer pattern used by the Tonematrix device |
+| [`mixerDelayAux`](../api-reference/generated/entities/type-aliases/MixerDelayAux.html) · [explanation](entities/mixerDelayAux.html) | Delay-specific auxiliary send/return bus |
+| [`mixerReverbAux`](../api-reference/generated/entities/type-aliases/MixerReverbAux.html) · [explanation](entities/mixerReverbAux.html) | Reverb-specific auxiliary send/return bus |
+| [`matrixArpeggiatorPattern`](../api-reference/generated/entities/type-aliases/MatrixArpeggiatorPattern.html) · [explanation](entities/matrixArpeggiatorPattern.html) | Pattern for the matrix arpeggiator |
+| [`matrixArpeggiatorPatternStep`](../api-reference/generated/entities/type-aliases/MatrixArpeggiatorPatternStep.html) · [explanation](entities/matrixArpeggiatorPatternStep.html) | An individual step within a matrix arpeggiator pattern |
 
 ---
 

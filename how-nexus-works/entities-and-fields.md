@@ -33,11 +33,11 @@ All device entities share these common fields:
 - `positionY` — vertical position on the desktop
 - `displayName` — label shown in the DAW UI
 
-**Synthesizers:** [`pulverisateur`](../reference/entities/pulverisateur.md), [`gakki`](../reference/entities/gakki.md), [`bassline`](../reference/entities/bassline.md), [`kobolt`](../reference/entities/kobolt.md), [`tonematrix`](../reference/entities/tonematrix.md)
+**Synthesizers:** [`pulverisateur`](../api-reference/generated/entities/type-aliases/Pulverisateur.html), [`gakki`](../api-reference/generated/entities/type-aliases/Gakki.html), [`bassline`](../api-reference/generated/entities/type-aliases/Bassline.html), [`kobolt`](../api-reference/generated/entities/type-aliases/Kobolt.html), [`tonematrix`](../api-reference/generated/entities/type-aliases/Tonematrix.html)
 
-**Drum machines:** [`beatbox8`](../reference/entities/beatbox8.md), [`beatbox9`](../reference/entities/beatbox9.md), [`rasselbock`](../reference/entities/rasselbock.md), [`machiniste`](../reference/entities/machiniste.md)
+**Drum machines:** [`beatbox8`](../api-reference/generated/entities/type-aliases/Beatbox8.html), [`beatbox9`](../api-reference/generated/entities/type-aliases/Beatbox9.html), [`rasselbock`](../api-reference/generated/entities/type-aliases/Rasselbock.html), [`machiniste`](../api-reference/generated/entities/type-aliases/Machiniste.html)
 
-**Filters and effects:** [`autoFilter`](../reference/entities/autoFilter.md), [`graphicalEQ`](../reference/entities/graphicalEQ.md), [`stompboxDelay`](../reference/entities/stompboxDelay.md), [`stompboxSlope`](../reference/entities/stompboxSlope.md), [`tinyGain`](../reference/entities/tinyGain.md), [`audioMerger`](../reference/entities/audioMerger.md), [`audioSplitter`](../reference/entities/audioSplitter.md), [`crossfader`](../reference/entities/crossfader.md)
+**Filters and effects:** [`autoFilter`](../api-reference/generated/entities/type-aliases/AutoFilter.html), [`graphicalEQ`](../api-reference/generated/entities/type-aliases/GraphicalEQ.html), [`stompboxDelay`](../api-reference/generated/entities/type-aliases/StompboxDelay.html), [`stompboxSlope`](../api-reference/generated/entities/type-aliases/StompboxSlope.html), [`tinyGain`](../api-reference/generated/entities/type-aliases/TinyGain.html), [`audioMerger`](../api-reference/generated/entities/type-aliases/AudioMerger.html), [`audioSplitter`](../api-reference/generated/entities/type-aliases/AudioSplitter.html), [`crossfader`](../api-reference/generated/entities/type-aliases/Crossfader.html)
 
 > The system automatically manages device positioning to prevent overlaps.
 
@@ -47,11 +47,11 @@ Mixer entities control signal routing and mixing. They represent the mixer secti
 
 | Entity | Description |
 |--------|-------------|
-| [`mixerMaster`](../reference/entities/mixerMaster.md) | Required master output — one per document |
-| [`mixerChannel`](../reference/entities/mixerChannel.md) | Individual channel strip |
-| [`mixerAux`](../reference/entities/mixerAux.md) | Auxiliary send/return |
-| [`mixerGroup`](../reference/entities/mixerGroup.md) | Group channel |
-| [`mixerSideChainCable`](../reference/entities/mixerSideChainCable.md) | Sidechain routing |
+| [`mixerMaster`](../api-reference/generated/entities/type-aliases/MixerMaster.html) | Required master output — one per document |
+| [`mixerChannel`](../api-reference/generated/entities/type-aliases/MixerChannel.html) | Individual channel strip |
+| [`mixerAux`](../api-reference/generated/entities/type-aliases/MixerAux.html) | Auxiliary send/return |
+| [`mixerGroup`](../api-reference/generated/entities/type-aliases/MixerGroup.html) | Group channel |
+| [`mixerSideChainCable`](../api-reference/generated/entities/type-aliases/MixerSideChainCable.html) | Sidechain routing |
 
 Audio devices connect to the mixer through `desktopAudioCable` entities that link device outputs to mixer channel inputs.
 
@@ -61,15 +61,15 @@ Timeline entities construct the arrangement view — tracks, regions, and the no
 
 | Entity | Description |
 |--------|-------------|
-| [`noteTrack`](../reference/entities/noteTrack.md) | Track for note/MIDI data |
-| [`audioTrack`](../reference/entities/audioTrack.md) | Track for audio clips |
-| [`automationTrack`](../reference/entities/automationTrack.md) | Track for parameter automation |
-| [`patternTrack`](../reference/entities/patternTrack.md) | Pattern-based sequencing track |
-| [`noteRegion`](../reference/entities/noteRegion.md) | A region on a note track |
-| [`audioRegion`](../reference/entities/audioRegion.md) | A region on an audio track |
-| [`automationRegion`](../reference/entities/automationRegion.md) | A region on an automation track |
-| [`noteCollection`](../reference/entities/noteCollection.md) | A collection of notes (referenced by noteRegions) |
-| [`note`](../reference/entities/note.md) | An individual note with `positionTicks`, `pitch`, `velocity` |
+| [`noteTrack`](../api-reference/generated/entities/type-aliases/NoteTrack.html) | Track for note/MIDI data |
+| [`audioTrack`](../api-reference/generated/entities/type-aliases/AudioTrack.html) | Track for audio clips |
+| [`automationTrack`](../api-reference/generated/entities/type-aliases/AutomationTrack.html) | Track for parameter automation |
+| [`patternTrack`](../api-reference/generated/entities/type-aliases/PatternTrack.html) | Pattern-based sequencing track |
+| [`noteRegion`](../api-reference/generated/entities/type-aliases/NoteRegion.html) | A region on a note track |
+| [`audioRegion`](../api-reference/generated/entities/type-aliases/AudioRegion.html) | A region on an audio track |
+| [`automationRegion`](../api-reference/generated/entities/type-aliases/AutomationRegion.html) | A region on an automation track |
+| [`noteCollection`](../api-reference/generated/entities/type-aliases/NoteCollection.html) | A collection of notes (referenced by noteRegions) |
+| [`note`](../api-reference/generated/entities/type-aliases/Note.html) | An individual note with `positionTicks`, `pitch`, `velocity` |
 
 ### Utility entities
 
@@ -77,13 +77,13 @@ Utility entities handle document-level configuration and connections.
 
 | Entity | Description |
 |--------|-------------|
-| [`config`](../reference/entities/config.md) | Document-level settings |
-| [`desktopAudioCable`](../reference/entities/desktopAudioCable.md) | Connects audio device outputs to inputs |
-| [`desktopNoteCable`](../reference/entities/desktopNoteCable.md) | Connects note/MIDI outputs to inputs |
-| [`groove`](../reference/entities/groove.md) | Groove/swing quantization |
-| [`microTuningOctave`](../reference/entities/microTuningOctave.md) | Per-octave microtuning definition |
-| [`sample`](../reference/entities/sample.md) | Reference to an audio sample file |
-| [`spitfireLabsVst3Plugin`](../reference/entities/spitfireLabsVst3Plugin.md) | A VST3 plugin instance |
+| [`config`](../api-reference/generated/entities/type-aliases/Config.html) | Document-level settings |
+| [`desktopAudioCable`](../api-reference/generated/entities/type-aliases/DesktopAudioCable.html) | Connects audio device outputs to inputs |
+| [`desktopNoteCable`](../api-reference/generated/entities/type-aliases/DesktopNoteCable.html) | Connects note/MIDI outputs to inputs |
+| [`groove`](../api-reference/generated/entities/type-aliases/Groove.html) | Groove/swing quantization |
+| [`microTuningOctave`](../api-reference/generated/entities/type-aliases/MicroTuningOctave.html) | Per-octave microtuning definition |
+| [`sample`](../api-reference/generated/entities/type-aliases/Sample.html) | Reference to an audio sample file |
+| [`spitfireLabsVst3Plugin`](../api-reference/generated/entities/type-aliases/SpitfireLabsVst3Plugin.html) | A VST3 plugin instance |
 
 ## Fields and field types
 
@@ -142,5 +142,7 @@ nexus.events.onCreate("note", (entity) => {
 ```
 
 → See the full type definitions in [Entity Reference](../reference/entity-reference.md).
+
+→ For explanation-first pages about entity behavior, see [Reference → entities](../reference/entity-reference.html).
 
 → For step-by-step task guides, see [Create Devices](../working-with-audiotool-projects/create-devices.md) and [Work With Timeline Data](../working-with-audiotool-projects/work-with-timeline-data.md).
