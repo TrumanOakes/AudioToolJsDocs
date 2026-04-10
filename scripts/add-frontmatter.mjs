@@ -28,19 +28,19 @@ const MEDIA_GUIDE_DESTINATIONS = {
  * Map module directory names to API sidebar section titles.
  */
 const MODULE_TITLES = {
-  api: "Platform API Types",
-  index: "Package Entry Points",
-  document: "Document Model",
-  entities: "Entity Reference",
-  utils: "Utilities",
+  api: "api",
+  index: "index",
+  document: "document",
+  entities: "entities",
+  utils: "utils",
 };
 
 const MODULE_NAV_ORDER = {
   index: 1,
-  document: 2,
-  entities: 3,
-  api: 4,
-  utils: 5,
+  entities: 2,
+  document: 3,
+  utils: 4,
+  api: 5,
 };
 
 /** Supplementary descriptions for pages where TypeDoc extracted no JSDoc */
