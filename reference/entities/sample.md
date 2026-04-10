@@ -17,7 +17,7 @@ A sample entity is a reference to an audio sample file stored in Audiotool. Devi
 |-------|------|-------------|
 | `displayName` | `string` | Label shown for the sample in the DAW UI |
 
-> For the complete field listing with types, defaults, and ranges, see [Sample](../../api-reference/generated/entities/type-aliases/Sample.md).
+> For the complete field listing with types, defaults, and ranges, see [Sample](../../api-reference/generated/entities/type-aliases/Sample.html).
 
 ## See also
 

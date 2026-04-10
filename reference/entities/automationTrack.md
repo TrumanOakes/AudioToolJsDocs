@@ -18,7 +18,7 @@ An automationTrack is a lane in the Audiotool timeline dedicated to automating a
 | `displayName` | `string` | Label shown on the track in the timeline |
 | `automatedParameter` | pointer | Points to the specific device parameter (field) being automated |
 
-> For the complete field listing with types, defaults, and ranges, see [AutomationTrack](../../api-reference/generated/entities/type-aliases/AutomationTrack.md).
+> For the complete field listing with types, defaults, and ranges, see [AutomationTrack](../../api-reference/generated/entities/type-aliases/AutomationTrack.html).
 
 ## Example
 

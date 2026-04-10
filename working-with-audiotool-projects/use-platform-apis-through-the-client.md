@@ -18,7 +18,8 @@ client.api.projectService
 client.api.sampleService
 client.api.projectRoleService
 client.api.userService
-client.api.audiographService
+client.api.audioGraphService
+client.api.presets
 ```
 
 All API calls return Promises. Transient network failures are automatically retried — you don't need to add any retry logic yourself.
@@ -111,7 +112,7 @@ await client.api.userService.uploadAvatar({ ... });
 Audio graphs are vector graphics displayed in the Audiotool sample browser.
 
 ```typescript
-const graph = await client.api.audiographService.getAudiograph({ ... });
+const graph = await client.api.audioGraphService.getAudiograph({ ... });
 ```
 
 ## PresetUtil — apply device presets
@@ -119,7 +120,7 @@ const graph = await client.api.audiographService.getAudiograph({ ... });
 Presets are saved device configurations (instrument patches or effect settings). You can apply presets to devices to configure them for a specific sound or purpose.
 
 ```typescript
-const presetUtil = client.api.presetUtil;
+const presetUtil = client.api.presets;
 // Preset IDs can be copied from the preset browser in the Audiotool DAW
 ```
 

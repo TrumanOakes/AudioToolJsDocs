@@ -19,7 +19,7 @@ A spitfireLabsVst3Plugin entity represents an instance of the Spitfire Labs VST3
 | `positionX` | `number` | Horizontal position on the Audiotool desktop |
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 
-> For the complete field listing with types, defaults, and ranges, see [SpitfireLabsVst3Plugin](../../api-reference/generated/entities/type-aliases/SpitfireLabsVst3Plugin.md).
+> For the complete field listing with types, defaults, and ranges, see [SpitfireLabsVst3Plugin](../../api-reference/generated/entities/type-aliases/SpitfireLabsVst3Plugin.html).
 
 ## See also
 

@@ -21,7 +21,7 @@ An automationRegion is a block on an `automationTrack` in the timeline. It holds
 
 > One tick = `1/3840` of a quarter note. See [Utilities](../utilities.md) for `Ticks` constants.
 
-> For the complete field listing with types, defaults, and ranges, see [AutomationRegion](../../api-reference/generated/entities/type-aliases/AutomationRegion.md).
+> For the complete field listing with types, defaults, and ranges, see [AutomationRegion](../../api-reference/generated/entities/type-aliases/AutomationRegion.html).
 
 ## See also
 

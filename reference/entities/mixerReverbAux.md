@@ -19,7 +19,7 @@ A mixerReverbAux is a reverb-specific auxiliary send/return bus in the Audiotool
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 | `displayName` | `string` | Label shown on the aux bus in the DAW UI |
 
-> For the complete field listing with types, defaults, and ranges, see [MixerReverbAux](../../api-reference/generated/entities/type-aliases/MixerReverbAux.md).
+> For the complete field listing with types, defaults, and ranges, see [MixerReverbAux](../../api-reference/generated/entities/type-aliases/MixerReverbAux.html).
 
 ## Example
 

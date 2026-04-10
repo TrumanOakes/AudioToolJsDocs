@@ -20,7 +20,7 @@ There is always exactly one `config` per document. Do not create or remove it. Q
 |-------|------|-------------|
 | `bpm` | `number` | Project tempo in beats per minute |
 
-> For the complete field listing with types, defaults, and ranges, see [Config](../../api-reference/generated/entities/type-aliases/Config.md).
+> For the complete field listing with types, defaults, and ranges, see [Config](../../api-reference/generated/entities/type-aliases/Config.html).
 
 ## Example
 

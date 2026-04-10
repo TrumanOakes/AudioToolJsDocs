@@ -19,7 +19,7 @@ A mixerSideChainCable entity represents a sidechain routing connection in the Au
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 | `displayName` | `string` | Label shown in the DAW UI |
 
-> For the complete field listing with types, defaults, and ranges, see [MixerSideChainCable](../../api-reference/generated/entities/type-aliases/MixerSideChainCable.md).
+> For the complete field listing with types, defaults, and ranges, see [MixerSideChainCable](../../api-reference/generated/entities/type-aliases/MixerSideChainCable.html).
 
 ## See also
 
