@@ -15,7 +15,7 @@ Type definitions for the Nexus document structure, schema, and <span class="tool
 
 ## Interfaces
 
-### [`NexusEntity`](../api-reference/generated/document/interfaces/NexusEntity.md)
+### [`NexusEntity`](../api-reference/generated/document/interfaces/NexusEntity.html)
 
 The core interface that every entity in the document implements. Whether you are holding a `note`, a `tinyGain`, or a `mixerChannel`, you are holding a `NexusEntity`.
 
@@ -31,14 +31,14 @@ const gains = nexus.queryEntities.ofTypes("tinyGain").get();
 for (const gain of gains) {
   console.log(gain.id);              // "a1b2c3d4e5f6..."
   console.log(gain.entityType);      // "tinyGain"
-  console.log(gain.fields.gain);     // current gain value
-  console.log(gain.fields.displayName); // label
+  console.log(gain.fields.gain.value);     // current gain value
+  console.log(gain.fields.displayName.value); // label
 }
 ```
 
 ---
 
-### [`EntityQuery`](../api-reference/generated/document/interfaces/EntityQuery.md)
+### [`EntityQuery`](../api-reference/generated/document/interfaces/EntityQuery.html)
 
 The type returned by `nexus.queryEntities.ofTypes(...)`. Provides a fluent API for filtering and retrieving entities from the current document state.
 
@@ -67,8 +67,8 @@ const allTracks = nexus.queryEntities
 // Get ALL entities in the document (no type filter)
 const everything = nexus.queryEntities.get();
 
-// Get one entity of a type (useful for singletons like "configuration")
-const config = nexus.queryEntities.ofTypes("configuration").getOne();
+// Get one entity of a type (useful for singletons like "config")
+const config = nexus.queryEntities.ofTypes("config").getOne();
 
 // Check if an entity still exists
 if (nexus.queryEntities.has(someEntity)) { ... }
@@ -95,7 +95,7 @@ const cables = nexus.queryEntities
 
 ---
 
-### [`FieldQuery`](../api-reference/generated/document/interfaces/FieldQuery.md)
+### [`FieldQuery`](../api-reference/generated/document/interfaces/FieldQuery.html)
 
 A `FieldQuery` is returned by calling `.fields()` on an `EntityQuery`. It provides methods to filter across the fields of selected entities — for example, finding fields by pointer target type or whether they're pointed to.
 
@@ -118,7 +118,7 @@ const primitiveFields = nexus.queryEntities.fields().primitiveFields();
 
 ---
 
-### [`NexusEventManager`](../api-reference/generated/document/interfaces/NexusEventManager.md)
+### [`NexusEventManager`](../api-reference/generated/document/interfaces/NexusEventManager.html)
 
 The interface of `nexus.events`. Provides methods to subscribe to entity lifecycle events: creation, field updates, removal, and pointer changes.
 
@@ -126,16 +126,16 @@ The interface of `nexus.events`. Provides methods to subscribe to entity lifecyc
 |--------|-----------|-------------|
 | `.onCreate(type, handler)` | `(type, handler) => Terminable` | Fires when a new entity of the given type is created. Handler can **return a cleanup function** that fires when that specific entity is later removed |
 | `.onUpdate(field, handler, callNow?)` | `(field, handler, boolean?) => Terminable` | Fires when a specific field value changes. Pass `false` as third arg to skip the immediate call with the current value |
-| `.onRemove(type, handler)` | `(type, handler) => Terminable` | Fires when an entity of the given type is removed |
+| `.onRemove("*", handler)` | `("*", handler) => Terminable` | Fires when any entity is removed |
 | `.onRemove(entity, handler)` | `(entity, handler) => Terminable` | Fires when a **specific** entity is removed |
-| `.onPointingTo(entity, handler)` | `(entity, handler) => Terminable` | Fires when any entity gains or loses a pointer to the given entity |
+| `.onPointingTo(location, handler)` | `(location, handler) => Terminable` | Fires when any pointer starts pointing to the given location |
 
 Each method returns a <span class="tooltip" data-tooltip="An object with a .terminate() method that cancels the subscription when you no longer need it.">terminable</span> you can use to unsubscribe.
 
 ```typescript
 // onCreate — react to new entities
 const sub = nexus.events.onCreate("note", (note) => {
-  console.log("New note at tick:", note.fields.positionTicks);
+  console.log("New note at tick:", note.fields.positionTicks.value);
 });
 
 // onCreate with cleanup function — handler return value is called when that entity is removed
@@ -160,7 +160,7 @@ nexus.events.onUpdate(gainEntity.fields.gain, (newValue) => {
 }, false);  // false = don't call for current value, only future changes
 
 // onRemove by type
-nexus.events.onRemove("tinyGain", (entity) => {
+nexus.events.onRemove("*", (entity) => {
   console.log("A tinyGain was removed:", entity.id);
 });
 
@@ -170,8 +170,8 @@ nexus.events.onRemove(specificGainEntity, () => {
 });
 
 // onPointingTo — fire when any entity gains or loses a pointer to the given entity
-nexus.events.onPointingTo(synth, (entity) => {
-  console.log("A cable or track now points to/from the synth:", entity.entityType);
+nexus.events.onPointingTo(synth.fields.audioOutput.location, (from) => {
+  console.log("A pointer now targets synth output from:", from.toString());
 });
 
 // Clean up when done
@@ -180,7 +180,7 @@ sub.terminate();
 
 ---
 
-### [`PrimitiveField`](../api-reference/generated/document/interfaces/PrimitiveField.md)
+### [`PrimitiveField`](../api-reference/generated/document/interfaces/PrimitiveField.html)
 
 A field that holds a single primitive value — a number, string, boolean, or byte sequence. Every primitive field on an entity (`gain`, `displayName`, `pitch`, etc.) is a `PrimitiveField`.
 
@@ -216,7 +216,7 @@ console.log(sampleEntity.fields.sampleName.value);
 
 ---
 
-### [`ArrayField`](../api-reference/generated/document/interfaces/ArrayField.md)
+### [`ArrayField`](../api-reference/generated/document/interfaces/ArrayField.html)
 
 A field that holds an ordered list of sub-entities or values. Some entity types use array fields to store variable-length data — for example, the steps in a `MatrixArpeggiatorPattern`.
 
@@ -232,7 +232,7 @@ const steps = pattern.fields.steps; // ArrayField<..., 64>
 
 ---
 
-### [`NexusField`](../api-reference/generated/document/interfaces/NexusField.md)
+### [`NexusField`](../api-reference/generated/document/interfaces/NexusField.html)
 
 The base interface for all field types — both `PrimitiveField` and `ArrayField` extend `NexusField`. You will most often see the more specific subtypes in practice; `NexusField` is the common base.
 
@@ -246,7 +246,7 @@ function logField(field: NexusField) {
 
 ---
 
-### [`NexusObject`](../api-reference/generated/document/interfaces/NexusObject.md)
+### [`NexusObject`](../api-reference/generated/document/interfaces/NexusObject.html)
 
 Represents an object-type field — a structured group of named fields nested inside another field. Entity types that have complex sub-structures use `NexusObject` to wrap them.
 
@@ -258,17 +258,17 @@ const step = pattern.fields.steps[0]; // NexusObject<MatrixArpeggiatorPatternSte
 
 ---
 
-### [`NexusLocation`](../api-reference/generated/document/interfaces/NexusLocation.md)
+### [`NexusLocation`](../api-reference/generated/document/interfaces/NexusLocation.html)
 
 A reference to a specific location within the document schema — used when you need to point at a particular field or entity rather than passing the entity object itself. Automation tracks use `NexusLocation` to identify the device parameter they control.
 
 ```typescript
 // NexusLocation appears when working with automation and reference queries
-// The automation track's `target` field holds a NexusLocation
+// The automation track's `automatedParameter` field stores a NexusLocation value
 const autoTracks = nexus.queryEntities.ofTypes("automationTrack").get();
 
 for (const track of autoTracks) {
-  const targetLocation = track.fields.target; // NexusLocation → the automated parameter
+  const targetLocation = track.fields.automatedParameter.value; // NexusLocation
   console.log("Automating:", targetLocation);
 }
 ```
@@ -303,7 +303,7 @@ function setLabel(field: StringPrimitive) {
 
 ---
 
-### [`EntityTypeKey`](../api-reference/generated/document/type-aliases/EntityTypeKey.md)
+### [`EntityTypeKey`](../api-reference/generated/document/type-aliases/EntityTypeKey.html)
 
 A union of all valid entity type key strings. TypeScript uses this to catch typos in `t.create("typeName")` and `queryEntities.ofTypes("typeName")` calls at compile time.
 
@@ -322,7 +322,7 @@ function createByType(document: any, type: EntityTypeKey) {
 
 ---
 
-### [`EntityDetails`](../api-reference/generated/document/type-aliases/EntityDetails.md)
+### [`EntityDetails`](../api-reference/generated/document/type-aliases/EntityDetails.html)
 
 The complete type definition for a single entity type — its fields and their types. Used internally and in TypeScript generics when you need to work with entity schemas directly.
 
@@ -339,7 +339,7 @@ function inspectEntityFields<K extends EntityTypeKey>(
 
 ---
 
-### [`EntityTypes`](../api-reference/generated/document/type-aliases/EntityTypes.md)
+### [`EntityTypes`](../api-reference/generated/document/type-aliases/EntityTypes.html)
 
 A map of all entity type keys to their `EntityDetails`. The complete schema map for the entire Nexus document model — useful when iterating or inspecting all known entity types.
 
@@ -352,7 +352,7 @@ import type { EntityTypes } from "@audiotool/nexus/document";
 
 ---
 
-### [`EntityWithOverwrites`](../api-reference/generated/document/type-aliases/EntityWithOverwrites.md)
+### [`EntityWithOverwrites`](../api-reference/generated/document/type-aliases/EntityWithOverwrites.html)
 
 An entity type that includes field overwrites applied on top of its base values. Used internally when pending transaction changes are visible before being committed.
 
@@ -365,9 +365,9 @@ import type { EntityWithOverwrites } from "@audiotool/nexus/document";
 
 ---
 
-### [`NexusEntityUnion`](../api-reference/generated/document/type-aliases/NexusEntityUnion.md)
+### [`NexusEntityUnion`](../api-reference/generated/document/type-aliases/NexusEntityUnion.html)
 
-A union type of every possible `NexusEntity` in the schema. Useful when writing code that can receive any entity type and then narrows by `.type`.
+A union type of every possible `NexusEntity` in the schema. Useful when writing code that can receive any entity type and then narrows by `.entityType`.
 
 ```typescript
 import type { NexusEntityUnion } from "@audiotool/nexus/document";
@@ -375,17 +375,17 @@ import type { NexusEntityUnion } from "@audiotool/nexus/document";
 function handleAnyEntity(entity: NexusEntityUnion) {
   if (entity.entityType === "note") {
     // TypeScript narrows — fields are typed for note
-    console.log("pitch:", entity.fields.pitch);
+    console.log("pitch:", entity.fields.pitch.value);
   } else if (entity.entityType === "tinyGain") {
     // TypeScript narrows — fields are typed for tinyGain
-    console.log("gain:", entity.fields.gain);
+    console.log("gain:", entity.fields.gain.value);
   }
 }
 ```
 
 ---
 
-### [`ReferenceQuery`](../api-reference/generated/document/type-aliases/ReferenceQuery.md)
+### [`ReferenceQuery`](../api-reference/generated/document/type-aliases/ReferenceQuery.html)
 
 A query type for finding entities related to another through pointer fields. Because the pointer direction is not always known, `ReferenceQuery` does not change the return type — it narrows the results to a specific relationship.
 
@@ -402,13 +402,13 @@ const connected = nexus.queryEntities
   .get();
 
 for (const device of connected) {
-  console.log("Connected device:", device.id, device.type);
+  console.log("Connected device:", device.id, device.entityType);
 }
 ```
 
 ---
 
-### [`TransactionBuilder`](../api-reference/generated/document/type-aliases/TransactionBuilder.md)
+### [`TransactionBuilder`](../api-reference/generated/document/type-aliases/TransactionBuilder.html)
 
 The `t` object passed into your `nexus.modify(t => ...)` callback, or the object returned by `nexus.createTransaction()`. Provides the three mutation operations: `create`, `update`, and `remove`.
 
@@ -486,7 +486,7 @@ const cables = t.entities
 
 ---
 
-### [`SafeTransactionBuilder`](../api-reference/generated/document/type-aliases/SafeTransactionBuilder.md)
+### [`SafeTransactionBuilder`](../api-reference/generated/document/type-aliases/SafeTransactionBuilder.html)
 
 A stricter variant of `TransactionBuilder` with additional TypeScript-level type enforcement. Enforces that field values exactly match their declared types with no implicit coercions. Use when you want the compiler to catch more potential errors at write time.
 
@@ -508,7 +508,7 @@ async function safeSetGain(
 
 ---
 
-### [`ArrayDetails`](../api-reference/generated/document/type-aliases/ArrayDetails.md), [`ObjectDetails`](../api-reference/generated/document/type-aliases/ObjectDetails.md), [`PrimitiveFieldDetails`](../api-reference/generated/document/type-aliases/PrimitiveFieldDetails.md)
+### [`ArrayDetails`](../api-reference/generated/document/type-aliases/ArrayDetails.html), [`ObjectDetails`](../api-reference/generated/document/type-aliases/ObjectDetails.html), [`PrimitiveFieldDetails`](../api-reference/generated/document/type-aliases/PrimitiveFieldDetails.html)
 
 Schema detail types for array, object, and primitive fields respectively. Used when inspecting field definitions at the type level — for example, in code that introspects the schema to build tooling.
 
@@ -525,7 +525,7 @@ import type {
 
 ---
 
-### [`NexusLocationPrimitive`](../api-reference/generated/document/type-aliases/NexusLocationPrimitive.md), [`SchemaLocation`](../api-reference/generated/document/type-aliases/SchemaLocation.md), [`SchemaPath`](../api-reference/generated/document/type-aliases/SchemaPath.md)
+### [`NexusLocationPrimitive`](../api-reference/generated/document/type-aliases/NexusLocationPrimitive.html), [`SchemaLocation`](../api-reference/generated/document/type-aliases/SchemaLocation.html), [`SchemaPath`](../api-reference/generated/document/type-aliases/SchemaPath.html)
 
 Types for navigating the document schema structure. `SchemaLocation` and `SchemaPath` are two representations of the same concept — a path to a specific location in the schema.
 
@@ -546,7 +546,7 @@ const location: SchemaLocation = schemaPathToSchemaLocation(path);
 
 ## Functions
 
-### [`getSchemaLocationDetails`](../api-reference/generated/document/functions/getSchemaLocationDetails.md)`(location)`
+### [`getSchemaLocationDetails`](../api-reference/generated/document/functions/getSchemaLocationDetails.html)`(location)`
 
 ```ts
 getSchemaLocationDetails(location: SchemaLocation): SchemaLocationDetails
@@ -564,7 +564,7 @@ console.log(details); // schema metadata for the gain field
 
 ---
 
-### [`schemaLocationToSchemaPath`](../api-reference/generated/document/functions/schemaLocationToSchemaPath.md)`(location)`
+### [`schemaLocationToSchemaPath`](../api-reference/generated/document/functions/schemaLocationToSchemaPath.html)`(location)`
 
 ```ts
 schemaLocationToSchemaPath(location: SchemaLocation): SchemaPath
@@ -581,7 +581,7 @@ console.log(path); // human-readable schema path string
 
 ---
 
-### [`schemaPathToSchemaLocation`](../api-reference/generated/document/functions/schemaPathToSchemaLocation.md)`(path)`
+### [`schemaPathToSchemaLocation`](../api-reference/generated/document/functions/schemaPathToSchemaLocation.html)`(path)`
 
 ```ts
 schemaPathToSchemaLocation(path: SchemaPath): SchemaLocation
@@ -600,10 +600,10 @@ const location = schemaPathToSchemaLocation(path);
 
 ## References
 
-- `TargetType` — re-exported from the [api module](platform-api-types.md)
+- `TargetType` — re-exported from the [api module](platform-api-types.html)
 
 ## See also
 
-- [Making Changes](../how-nexus-works/making-changes.md) — conceptual guide to `TransactionBuilder` and transactions
-- [Queries and Events](../how-nexus-works/queries-and-events.md) — how to use `EntityQuery` and `NexusEventManager`
-- [Entities and Fields](../how-nexus-works/entities-and-fields.md) — conceptual overview of `NexusEntity`, fields, and pointers
+- [Making Changes](../how-nexus-works/making-changes.html) — conceptual guide to `TransactionBuilder` and transactions
+- [Queries and Events](../how-nexus-works/queries-and-events.html) — how to use `EntityQuery` and `NexusEventManager`
+- [Entities and Fields](../how-nexus-works/entities-and-fields.html) — conceptual overview of `NexusEntity`, fields, and pointers

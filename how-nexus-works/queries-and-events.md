@@ -68,7 +68,7 @@ nexus.events.onCreate("tonematrix", (entity) => {
 });
 
 nexus.events.onCreate("note", (entity) => {
-  console.log("New note at tick:", entity.fields.positionTicks);
+  console.log("New note at tick:", entity.fields.positionTicks.value);
 });
 ```
 
@@ -84,7 +84,7 @@ nexus.events.onUpdate(gainEntity.fields.gain, (newValue) => {
 ### onRemove — when an entity is deleted
 
 ```typescript
-nexus.events.onRemove("tinyGain", (entity) => {
+nexus.events.onRemove("*", (entity) => {
   console.log("tinyGain removed:", entity.id);
 });
 ```
@@ -94,9 +94,9 @@ nexus.events.onRemove("tinyGain", (entity) => {
 `onPointingTo()` fires whenever any entity gains or loses a pointer to the given entity. This is useful for tracking relationships — for example, watching when a cable is connected or disconnected from a specific device socket:
 
 ```typescript
-// Fire whenever any entity creates or removes a pointer to this synth
-nexus.events.onPointingTo(synth, (entity) => {
-  console.log("A connection to the synth changed:", entity.entityType, entity.id);
+// Fire whenever any pointer starts targeting this output location
+nexus.events.onPointingTo(synth.fields.audioOutput.location, (from) => {
+  console.log("A pointer now targets synth output from:", from.toString());
 });
 ```
 

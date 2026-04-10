@@ -75,12 +75,12 @@ import { getLoginStatus, createAudiotoolClient } from "@audiotool/nexus";
 
 const status = await getLoginStatus({
   clientId: "your_client_id",
-  redirectUri: "http://127.0.0.1:5173/",
-  scopes: ["project:write"],
+  redirectUrl: "http://127.0.0.1:5173/",
+  scope: "project:write",
 });
 
-if (status.type === "logged-in") {
-  const client = await createAudiotoolClient({ status });
+if (status.loggedIn) {
+  const client = await createAudiotoolClient({ authorization: status });
   // proceed with client
 } else {
   // Show a login button
@@ -101,7 +101,7 @@ import { createAudiotoolClient } from "@audiotool/nexus";
 
 // Load from an environment variable — never hardcode a PAT
 const client = await createAudiotoolClient({
-  pat: process.env.AUDIOTOOL_PAT
+  authorization: process.env.AUDIOTOOL_PAT
 });
 ```
 

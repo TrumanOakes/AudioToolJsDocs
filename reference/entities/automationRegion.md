@@ -19,13 +19,13 @@ An automationRegion is a block on an `automationTrack` in the timeline. It holds
 | `durationTicks` | `number` | Length of the region in ticks |
 | `track` | pointer | Points to the `automationTrack` this region belongs to |
 
-> One tick = `1/3840` of a quarter note. See [Utilities](../utilities.md) for `Ticks` constants.
+> One tick = `1/3840` of a quarter note. See [Utilities](../utilities.html) for `Ticks` constants.
 
-> For the complete field listing with types, defaults, and ranges, see [AutomationRegion](../../api-reference/generated/entities/type-aliases/AutomationRegion.md).
+> For the complete field listing with types, defaults, and ranges, see [AutomationRegion](../../api-reference/generated/entities/type-aliases/AutomationRegion.html).
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [automationTrack](automationTrack.md) — the track this region sits on
-- [Utilities](../utilities.md) — `Ticks` constants for timing
-- [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.md) — step-by-step guide
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [automationTrack](automationTrack.html) — the track this region sits on
+- [Utilities](../utilities.html) — `Ticks` constants for timing
+- [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.html) — step-by-step guide

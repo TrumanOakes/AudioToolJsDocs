@@ -16,7 +16,6 @@ A <span class="tooltip" data-tooltip="A document connected to Audiotool in real 
 
 ```typescript
 const nexus = await client.createSyncedDocument({
-  mode: "online",
   project: "https://beta.audiotool.com/studio?project=abc123"
 });
 

@@ -176,7 +176,7 @@ renderTrackList(nexus.queryEntities.ofTypes("noteTrack").get());
 nexus.events.onCreate("noteTrack", () => {
   renderTrackList(nexus.queryEntities.ofTypes("noteTrack").get());
 });
-nexus.events.onRemove("noteTrack", () => {
+nexus.events.onRemove("*", () => {
   renderTrackList(nexus.queryEntities.ofTypes("noteTrack").get());
 });
 ```
