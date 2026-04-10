@@ -19,7 +19,7 @@ A mixerGroup entity represents a group channel in the Audiotool mixer. Group cha
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 | `displayName` | `string` | Label shown in the DAW UI |
 
-> For group volume, routing, and assignment parameters, refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> For the complete field listing with types, defaults, and ranges, see [MixerGroup](../../api-reference/generated/entities/type-aliases/MixerGroup.md).
 
 ## See also
 

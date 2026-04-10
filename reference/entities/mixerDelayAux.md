@@ -19,7 +19,7 @@ A mixerDelayAux is a delay-specific auxiliary send/return bus in the Audiotool m
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 | `displayName` | `string` | Label shown on the aux bus in the DAW UI |
 
-> For delay time, feedback, wet/dry mix, and other effect parameters, refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> For the complete field listing with types, defaults, and ranges, see [MixerDelayAux](../../api-reference/generated/entities/type-aliases/MixerDelayAux.md).
 
 ## Example
 
@@ -38,7 +38,7 @@ t.create("mixerDelayAux", {
 });
 
 // Channel sends are configured via the channel's send level fields
-// See the official TypeDoc for send field names
+// See MixerDelayAux in Entity Reference for send field names
 
 t.send();
 ```

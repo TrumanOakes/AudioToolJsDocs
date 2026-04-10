@@ -17,7 +17,7 @@ A microtuningOctave entity defines custom tuning offsets for each note within an
 |-------|------|-------------|
 | `displayName` | `string` | Label for this microtuning definition |
 
-> For the per-note cent offset fields and the full tuning table format, refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> For the complete field listing with types, defaults, and ranges, see [MicroTuningOctave](../../api-reference/generated/entities/type-aliases/MicroTuningOctave.md).
 
 ## See also
 

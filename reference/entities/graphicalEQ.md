@@ -19,7 +19,7 @@ The graphicalEQ is a graphical equalizer effect device in Audiotool. It lets you
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 | `displayName` | `string` | Label shown on the device in the DAW UI |
 
-> For a full list of band gain parameters and frequency settings, refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> For the complete field listing with types, defaults, and ranges, see [GraphicalEQ](../../api-reference/generated/entities/type-aliases/GraphicalEQ.md).
 
 ## Example
 

@@ -17,7 +17,7 @@ A groove entity defines a groove or swing quantization pattern. Applying a groov
 |-------|------|-------------|
 | `displayName` | `string` | Label for this groove preset |
 
-> For groove pattern data (timing offsets per step, velocity adjustments, etc.), refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> For the complete field listing with types, defaults, and ranges, see [Groove](../../api-reference/generated/entities/type-aliases/Groove.md).
 
 ## Example
 

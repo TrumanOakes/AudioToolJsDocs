@@ -19,7 +19,7 @@ A mixerAux entity represents an auxiliary send and return in the Audiotool mixer
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 | `displayName` | `string` | Label shown in the DAW UI |
 
-> For send level, return gain, and routing parameters, refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> For the complete field listing with types, defaults, and ranges, see [MixerAux](../../api-reference/generated/entities/type-aliases/MixerAux.md).
 
 ## See also
 

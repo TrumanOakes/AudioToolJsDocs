@@ -19,7 +19,7 @@ A mixerSidechain entity represents a sidechain routing connection in the Audioto
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 | `displayName` | `string` | Label shown in the DAW UI |
 
-> For sidechain source, target, and routing parameters, refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> For the complete field listing with types, defaults, and ranges, see [MixerSideChainCable](../../api-reference/generated/entities/type-aliases/MixerSideChainCable.md).
 
 ## See also
 

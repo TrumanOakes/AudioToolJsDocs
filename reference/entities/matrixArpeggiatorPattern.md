@@ -15,7 +15,7 @@ A matrixArpeggiatorPattern defines the sequence of steps for a matrix arpeggiato
 
 ## Fields
 
-> For the full list of pattern configuration fields, refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> For the complete field listing with types, defaults, and ranges, see [MatrixArpeggiatorPattern](../../api-reference/generated/entities/type-aliases/MatrixArpeggiatorPattern.md).
 
 ## Example
 

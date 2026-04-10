@@ -19,7 +19,7 @@ A matrixArpeggiatorPatternStep is a single step within a `matrixArpeggiatorPatte
 |-------|------|-------------|
 | `pattern` | pointer | Points to the `matrixArpeggiatorPattern` this step belongs to — use `pattern.location` |
 
-> For pitch offset, velocity, duration, and other step parameters, refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> For the complete field listing with types, defaults, and ranges, see [MatrixArpeggiatorPatternStep](../../api-reference/generated/entities/type-aliases/MatrixArpeggiatorPatternStep.md).
 
 ## Example
 

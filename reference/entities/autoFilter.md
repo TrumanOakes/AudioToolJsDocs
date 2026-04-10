@@ -19,7 +19,7 @@ The autoFilter is an effect device in Audiotool that automatically sweeps a filt
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 | `displayName` | `string` | Label shown on the device in the DAW UI |
 
-> For a full list of effect-specific parameters (frequency range, rate, depth, etc.) refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> For the complete field listing with types, defaults, and ranges, see [AutoFilter](../../api-reference/generated/entities/type-aliases/AutoFilter.md).
 
 ## Example
 

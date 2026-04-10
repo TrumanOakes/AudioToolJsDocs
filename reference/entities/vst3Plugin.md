@@ -19,7 +19,7 @@ A vst3Plugin entity represents an instance of a VST3 plugin loaded in the projec
 | `positionX` | `number` | Horizontal position on the Audiotool desktop |
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 
-> For plugin identifier fields and parameter state storage, refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> For the complete field listing with types, defaults, and ranges, see [SpitfireLabsVst3Plugin](../../api-reference/generated/entities/type-aliases/SpitfireLabsVst3Plugin.md).
 
 ## See also
 

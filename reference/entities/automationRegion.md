@@ -21,7 +21,7 @@ An automationRegion is a block on an `automationTrack` in the timeline. It holds
 
 > One tick = `1/3840` of a quarter note. See [Utilities](../utilities.md) for `Ticks` constants.
 
-> For automation point data and curve types, refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> For the complete field listing with types, defaults, and ranges, see [AutomationRegion](../../api-reference/generated/entities/type-aliases/AutomationRegion.md).
 
 ## See also
 

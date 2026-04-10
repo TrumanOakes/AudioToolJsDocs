@@ -19,7 +19,7 @@ The crossfader is a utility device in Audiotool that blends between two audio in
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 | `displayName` | `string` | Label shown on the device in the DAW UI |
 
-> For the crossfader position parameter and other controls, refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> For the complete field listing with types, defaults, and ranges, see [Crossfader](../../api-reference/generated/entities/type-aliases/Crossfader.md).
 
 ## Example
 

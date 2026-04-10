@@ -20,7 +20,7 @@ There is always exactly one `configuration` per document. Do not create or remov
 |-------|------|-------------|
 | `bpm` | `number` | Project tempo in beats per minute |
 
-> For the full list of project settings (time signature, loop range, etc.), refer to the official TypeDoc at [developer.audiotool.com/js-package-documentation](https://developer.audiotool.com/js-package-documentation/).
+> For the complete field listing with types, defaults, and ranges, see [Config](../../api-reference/generated/entities/type-aliases/Config.md).
 
 ## Example
 
