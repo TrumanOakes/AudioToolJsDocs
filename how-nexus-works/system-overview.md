@@ -1,17 +1,23 @@
+---
+title: System Overview
+parent: How Nexus Works
+nav_order: 1
+---
+
 # System Overview
 
-This page explains how Audiotool and Nexus work together at a system level — the architecture, the core primitives, and what actually happens when you open a project and start making changes.
+This page explains how the main pieces of <span class="tooltip" data-tooltip="The JavaScript package used to interact with Audiotool projects and data from your own app.">Nexus</span> fit together — what a document is, how entities work, and what happens when you open a project and start making changes.
 
 ## The Audiotool document model
 
-An Audiotool project is stored as a **document** — a structured collection of **entities**. Everything in a project is an entity: audio devices, mixer channels, timeline tracks, individual notes, cables connecting devices, and so on.
+An Audiotool project is stored as a <span class="tooltip" data-tooltip="The structured data that represents the contents of an Audiotool project.">**document**</span> — a collection of <span class="tooltip" data-tooltip="A single item inside a project document, such as a device, note region, or other project object.">**entities**</span>. Everything in a project is an entity: audio devices, mixer channels, timeline tracks, individual notes, cables connecting devices, and so on.
 
-When you open a project in Nexus, you get a **document object** that represents the live state of that project. The document:
+When you open a project in Nexus, you get a document object that represents the live state of that project. The document:
 
 - holds the full set of entities currently in the project
-- emits events when entities are created, updated, or removed
-- exposes a query interface to inspect current state
-- accepts modification transactions that are validated and synced
+- fires <span class="tooltip" data-tooltip="A signal that something changed, such as an entity being created, updated, or removed.">events</span> when entities are created, updated, or removed
+- lets you <span class="tooltip" data-tooltip="A way to search for and retrieve specific entities or data from a document.">query</span> the current state at any moment
+- lets you make changes through a <span class="tooltip" data-tooltip="A grouped set of changes made to a document as one operation.">transaction</span> system that validates and syncs your edits
 
 ## Synced vs offline documents
 
@@ -23,6 +29,20 @@ Nexus supports two document modes:
 | **Offline** | `createOfflineDocument()` | Runs locally with no backend. All changes are lost on shutdown. Useful for testing and development. |
 
 Both modes expose the same API — the same `modify()`, `events`, and `queryEntities` interface. This means code written against an offline document will work against a synced document too, which makes testing much easier.
+
+## Architecture diagram
+
+<iframe
+  src="{{ '/assets/diagrams/architecture-slides.html' | relative_url }}"
+  width="100%"
+  height="560"
+  style="border: 1px solid #e5e7eb; border-radius: 10px; display: block; margin: 2rem 0;"
+  title="Nexus Architecture Diagrams"
+></iframe>
+
+The five slides above illustrate the main concepts: document types, entity structure, audio signal flow, pointer references, and timeline organization. A document — whether synced or offline — contains a flat collection of entities. Each entity holds typed fields: primitive values (numbers, strings, booleans) or pointer fields that reference other entities by ID. Pointers are how relationships are expressed: a `note` points to its parent `noteCollection`, a cable points to the device sockets it connects. This flat-but-linked structure keeps individual entities small and queryable without deep object nesting.
+
+---
 
 ## Entities
 
@@ -40,20 +60,20 @@ You cannot add arbitrary fields to entities. The schema is fixed and validated.
 
 ## Pointers
 
-Some fields in an entity are **pointers** — they reference another entity or a field on another entity. Pointers create semantic relationships between entities.
+Some fields in an entity hold a reference to another entity instead of a plain value. These are called **pointers**. They define how entities relate to each other.
 
-Examples:
-- A `note` entity has a `collection` field that points to the `noteCollection` it belongs to.
-- An `automationTrack` entity points to the device parameter it automates.
+For example:
+- A `note` has a `collection` field that points to the `noteCollection` it belongs to.
+- An `automationTrack` points to the device parameter it controls.
 
-Pointers are how the document structure is organized — rather than nesting data, everything is flat entities linked by pointers.
+Rather than nesting objects inside one another, the document uses flat entities connected by these references.
 
 ## The modification system
 
-You cannot change a document directly. All changes go through a **transaction builder** obtained via `document.modify()`:
+You cannot change a document directly. All changes go through a <span class="tooltip" data-tooltip="The tool used to prepare and apply changes to a document.">**transaction builder**</span> obtained via `nexus.modify()`:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("tinyGain", { positionX: 100, positionY: 200 });
   t.update(entity.fields.gain, 0.8);
   t.remove(entity);
@@ -68,7 +88,7 @@ The three operations are:
 | `t.update(field, value)` | Sets a field on an existing entity |
 | `t.remove(entity)` | Removes an entity from the document |
 
-The transaction builder acquires a document lock before modifications begin. This ensures changes are applied atomically and in order.
+Nexus applies all operations in a single `modify()` call together as one unit — either all changes succeed or none do. Multiple `modify()` calls are queued and run one at a time.
 
 → See [Making Changes](making-changes.md) for a full guide.
 
@@ -77,11 +97,11 @@ The transaction builder acquires a document lock before modifications begin. Thi
 The document fires events whenever entities change. You subscribe to these events to react to changes made by your code or by other collaborators:
 
 ```typescript
-document.events.onCreate("tonematrix", (entity) => {
+nexus.events.onCreate("tonematrix", (entity) => {
   console.log("A tonematrix was added:", entity);
 });
 
-document.events.onUpdate(entity.fields.gain, (newValue) => {
+nexus.events.onUpdate(entity.fields.gain, (newValue) => {
   console.log("Gain changed to:", newValue);
 });
 ```
@@ -93,7 +113,7 @@ document.events.onUpdate(entity.fields.gain, (newValue) => {
 Instead of subscribing to events, you can also inspect the current state of the document at any moment using queries:
 
 ```typescript
-const notes = document.queryEntities.ofTypes("note").get();
+const notes = nexus.queryEntities.ofTypes("note").get();
 ```
 
 Queries give you a snapshot of current entity state. Events give you a live stream of changes. Use both as appropriate.
@@ -105,8 +125,8 @@ Queries give you a snapshot of current entity state. Events give you a live stre
 A synced document has a lifecycle:
 
 1. **Create** — `client.createSyncedDocument(...)` creates the document object but does not begin syncing.
-2. **Start** — `await document.start()` begins syncing with the backend. Events fire and modifications are transmitted.
-3. **Stop** — `await document.stop()` finalizes any pending changes and transitions the document to read-only. After stopping, you can still query entities but cannot modify them.
+2. **Start** — `await nexus.start()` begins syncing with the backend. Events fire and modifications are transmitted.
+3. **Stop** — `await nexus.stop()` finalizes any pending changes and transitions the document to read-only. After stopping, you can still query entities but cannot modify them.
 
 Offline documents have no start/stop lifecycle — they are immediately ready for modifications.
 

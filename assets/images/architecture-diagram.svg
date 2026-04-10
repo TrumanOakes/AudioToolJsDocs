@@ -1,0 +1,207 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="780" viewBox="0 0 860 780" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace, system-ui, -apple-system, sans-serif">
+
+  <!-- Arrowhead marker -->
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#6b7280"/>
+    </marker>
+  </defs>
+
+  <!-- Canvas background -->
+  <rect width="860" height="780" fill="#ffffff"/>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SECTION: Document Types                                 -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <text x="32" y="30" font-size="11" font-family="system-ui, -apple-system, sans-serif" fill="#9ca3af" letter-spacing="0.08em" font-weight="500">DOCUMENT TYPES</text>
+
+  <!-- SyncedDocument panel -->
+  <rect x="24" y="42" width="248" height="102" rx="10" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+  <rect x="24" y="42" width="5" height="102" rx="3" fill="#3b82f6"/>
+
+  <text x="42" y="68" font-size="14" font-weight="700" fill="#111827" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">SyncedDocument</text>
+  <text x="42" y="86" font-size="11" fill="#3b82f6" letter-spacing="0.06em" font-family="system-ui, -apple-system, sans-serif">LIVE · MULTI-USER · PERSISTED</text>
+  <line x1="42" y1="94" x2="260" y2="94" stroke="#bfdbfe" stroke-width="0.5"/>
+  <text x="42" y="110" font-size="12" fill="#374151" font-family="system-ui, -apple-system, sans-serif">Connects to a real Audiotool project.</text>
+  <text x="42" y="128" font-size="12" fill="#374151" font-family="system-ui, -apple-system, sans-serif">Changes broadcast to all collaborators.</text>
+
+  <!-- OfflineDocument panel -->
+  <rect x="296" y="42" width="248" height="102" rx="10" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="296" y="42" width="5" height="102" rx="3" fill="#6b7280"/>
+
+  <text x="314" y="68" font-size="14" font-weight="700" fill="#111827" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">OfflineDocument</text>
+  <text x="314" y="86" font-size="11" fill="#6b7280" letter-spacing="0.06em" font-family="system-ui, -apple-system, sans-serif">LOCAL · TESTING · NO BACKEND</text>
+  <line x1="314" y1="94" x2="532" y2="94" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="314" y="110" font-size="12" fill="#374151" font-family="system-ui, -apple-system, sans-serif">Runs locally with no backend sync.</text>
+  <text x="314" y="128" font-size="12" fill="#374151" font-family="system-ui, -apple-system, sans-serif">Same API as SyncedDocument.</text>
+
+  <!-- Both arrow down to "flat collection of entities" label -->
+  <line x1="148" y1="144" x2="148" y2="168" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <line x1="420" y1="144" x2="420" y2="168" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arrow-gray)"/>
+  <text x="160" y="163" font-size="11" fill="#9ca3af" font-family="system-ui, -apple-system, sans-serif">contains</text>
+  <text x="432" y="163" font-size="11" fill="#9ca3af" font-family="system-ui, -apple-system, sans-serif">contains</text>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SECTION: Entities (flat collection)                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <text x="32" y="193" font-size="11" font-family="system-ui, -apple-system, sans-serif" fill="#9ca3af" letter-spacing="0.08em" font-weight="500">ENTITIES  —  flat collection inside the document</text>
+
+  <!-- Section background panel -->
+  <rect x="24" y="204" width="806" height="246" rx="10" fill="#f3f4f6"/>
+
+  <!-- ─── Entity card: tinyGain ─── -->
+  <rect x="40" y="220" width="200" height="214" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="40" y="220" width="4" height="214" rx="3" fill="#3b82f6"/>
+  <!-- header -->
+  <text x="56" y="244" font-size="14" font-weight="700" fill="#111827" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">tinyGain</text>
+  <text x="56" y="260" font-size="11" fill="#9ca3af" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">id: "a1b2c3…"</text>
+  <line x1="56" y1="268" x2="232" y2="268" stroke="#e5e7eb" stroke-width="0.5"/>
+  <!-- fields -->
+  <text x="56" y="286" font-size="12" font-weight="600" fill="#374151" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">gain</text>
+  <text x="120" y="286" font-size="12" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">: number</text>
+  <text x="56" y="306" font-size="12" font-weight="600" fill="#374151" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">displayName</text>
+  <text x="152" y="306" font-size="12" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">: string</text>
+  <text x="56" y="326" font-size="12" font-weight="600" fill="#374151" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">positionX</text>
+  <text x="140" y="326" font-size="12" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">: number</text>
+  <text x="56" y="346" font-size="12" font-weight="600" fill="#374151" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">positionY</text>
+  <text x="140" y="346" font-size="12" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">: number</text>
+  <text x="56" y="366" font-size="12" font-weight="600" fill="#374151" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">isActive</text>
+  <text x="124" y="366" font-size="12" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">: boolean</text>
+  <line x1="56" y1="374" x2="232" y2="374" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="56" y="390" font-size="11" fill="#9ca3af" font-family="system-ui, -apple-system, sans-serif">plain value fields only</text>
+  <text x="56" y="406" font-size="11" fill="#9ca3af" font-family="system-ui, -apple-system, sans-serif">no pointer fields</text>
+
+  <!-- ─── Entity card: note ─── -->
+  <rect x="264" y="220" width="210" height="214" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="264" y="220" width="4" height="214" rx="3" fill="#3b82f6"/>
+  <!-- header -->
+  <text x="280" y="244" font-size="14" font-weight="700" fill="#111827" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">note</text>
+  <text x="280" y="260" font-size="11" fill="#9ca3af" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">id: "d4e5f6…"</text>
+  <line x1="280" y1="268" x2="466" y2="268" stroke="#e5e7eb" stroke-width="0.5"/>
+  <!-- fields -->
+  <text x="280" y="286" font-size="12" font-weight="600" fill="#374151" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">pitch</text>
+  <text x="328" y="286" font-size="12" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">: number</text>
+  <text x="280" y="306" font-size="12" font-weight="600" fill="#374151" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">velocity</text>
+  <text x="348" y="306" font-size="12" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">: number</text>
+  <text x="280" y="326" font-size="12" font-weight="600" fill="#374151" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">positionTicks</text>
+  <text x="388" y="326" font-size="12" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">: number</text>
+  <line x1="280" y1="334" x2="466" y2="334" stroke="#e5e7eb" stroke-width="0.5"/>
+  <!-- pointer field: collection -->
+  <text x="280" y="352" font-size="12" fill="#3b82f6" font-family="system-ui, -apple-system, sans-serif">→</text>
+  <text x="298" y="352" font-size="12" font-weight="600" fill="#3b82f6" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">collection</text>
+  <text x="280" y="370" font-size="11" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">  pointer → noteCollection</text>
+  <line x1="280" y1="378" x2="466" y2="378" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="280" y="394" font-size="11" fill="#9ca3af" font-family="system-ui, -apple-system, sans-serif">has 1 pointer field</text>
+
+  <!-- ─── Entity card: mixerChannel ─── -->
+  <rect x="498" y="220" width="220" height="214" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="498" y="220" width="4" height="214" rx="3" fill="#3b82f6"/>
+  <!-- header -->
+  <text x="514" y="244" font-size="14" font-weight="700" fill="#111827" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">mixerChannel</text>
+  <text x="514" y="260" font-size="11" fill="#9ca3af" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">id: "g7h8i9…"</text>
+  <line x1="514" y1="268" x2="710" y2="268" stroke="#e5e7eb" stroke-width="0.5"/>
+  <!-- fields -->
+  <text x="514" y="286" font-size="12" font-weight="600" fill="#374151" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">volume</text>
+  <text x="572" y="286" font-size="12" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">: number</text>
+  <text x="514" y="306" font-size="12" font-weight="600" fill="#374151" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">pan</text>
+  <text x="546" y="306" font-size="12" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">: number</text>
+  <text x="514" y="326" font-size="12" font-weight="600" fill="#374151" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">displayName</text>
+  <text x="614" y="326" font-size="12" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">: string</text>
+  <line x1="514" y1="334" x2="710" y2="334" stroke="#e5e7eb" stroke-width="0.5"/>
+  <!-- pointer field: audioInput -->
+  <text x="514" y="352" font-size="12" fill="#3b82f6" font-family="system-ui, -apple-system, sans-serif">→</text>
+  <text x="532" y="352" font-size="12" font-weight="600" fill="#3b82f6" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">audioInput</text>
+  <text x="514" y="370" font-size="11" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">  pointer → desktopAudioCable</text>
+  <line x1="514" y1="378" x2="710" y2="378" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="514" y="394" font-size="11" fill="#9ca3af" font-family="system-ui, -apple-system, sans-serif">has 1 pointer field</text>
+
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- SECTION: Pointer targets                                -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <text x="32" y="482" font-size="11" font-family="system-ui, -apple-system, sans-serif" fill="#9ca3af" letter-spacing="0.08em" font-weight="500">POINTER TARGETS  —  entities referenced by pointer fields</text>
+
+  <!-- Section background panel -->
+  <rect x="24" y="494" width="806" height="162" rx="10" fill="#f3f4f6"/>
+
+  <!-- ─── Entity card: noteCollection ─── -->
+  <rect x="40" y="510" width="200" height="130" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="40" y="510" width="4" height="130" rx="3" fill="#9ca3af"/>
+  <text x="56" y="534" font-size="14" font-weight="700" fill="#111827" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">noteCollection</text>
+  <text x="56" y="550" font-size="11" fill="#9ca3af" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">id: "j0k1l2…"</text>
+  <line x1="56" y1="558" x2="232" y2="558" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="56" y="576" font-size="12" font-weight="600" fill="#374151" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">lengthTicks</text>
+  <text x="152" y="576" font-size="12" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">: number</text>
+  <text x="56" y="596" font-size="12" font-weight="600" fill="#374151" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">isLooping</text>
+  <text x="140" y="596" font-size="12" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">: boolean</text>
+  <line x1="56" y1="604" x2="232" y2="604" stroke="#e5e7eb" stroke-width="0.5"/>
+  <text x="56" y="622" font-size="11" fill="#9ca3af" font-family="system-ui, -apple-system, sans-serif">contains a set of notes</text>
+
+  <!-- ─── Entity card: desktopAudioCable ─── -->
+  <rect x="264" y="510" width="220" height="130" rx="8" fill="#f9fafb" stroke="#e5e7eb" stroke-width="1"/>
+  <rect x="264" y="510" width="4" height="130" rx="3" fill="#9ca3af"/>
+  <text x="280" y="534" font-size="14" font-weight="700" fill="#111827" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">desktopAudioCable</text>
+  <text x="280" y="550" font-size="11" fill="#9ca3af" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">id: "m3n4o5…"</text>
+  <line x1="280" y1="558" x2="476" y2="558" stroke="#e5e7eb" stroke-width="0.5"/>
+  <!-- pointer fields -->
+  <text x="280" y="576" font-size="12" fill="#3b82f6" font-family="system-ui, -apple-system, sans-serif">→</text>
+  <text x="298" y="576" font-size="12" font-weight="600" fill="#3b82f6" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">fromSocket</text>
+  <text x="280" y="592" font-size="11" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">  pointer → tinyGain</text>
+  <text x="280" y="612" font-size="12" fill="#3b82f6" font-family="system-ui, -apple-system, sans-serif">→</text>
+  <text x="298" y="612" font-size="12" font-weight="600" fill="#3b82f6" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">toSocket</text>
+  <text x="280" y="628" font-size="11" fill="#6b7280" font-family="ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace">  pointer → mixerChannel</text>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- POINTER ARROWS                                          -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <!-- note.collection → noteCollection -->
+  <!-- From right edge of note card (474, 352) down and left to top of noteCollection (140, 510) -->
+  <path d="M 369 370 C 369 440, 140 440, 140 510"
+        fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="290" y="438" font-size="11" fill="#6b7280" font-family="system-ui, -apple-system, sans-serif">collection</text>
+
+  <!-- mixerChannel.audioInput → desktopAudioCable -->
+  <!-- From bottom of mixerChannel card (608, 434) down to top of desktopAudioCable (374, 510) -->
+  <path d="M 608 434 C 608 470, 374 470, 374 510"
+        fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="486" y="468" font-size="11" fill="#6b7280" font-family="system-ui, -apple-system, sans-serif">audioInput</text>
+
+  <!-- desktopAudioCable.fromSocket → tinyGain -->
+  <!-- From left edge of desktopAudioCable (264, 576) left to right edge of tinyGain (240, 340) -->
+  <path d="M 264 576 C 220 576, 220 340, 240 340"
+        fill="none" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="196" y="460" font-size="11" fill="#6b7280" font-family="system-ui, -apple-system, sans-serif" transform="rotate(-90, 196, 460)">fromSocket</text>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- LEGEND                                                  -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+
+  <rect x="24" y="672" width="806" height="90" rx="10" fill="#f3f4f6"/>
+  <text x="40" y="695" font-size="11" font-family="system-ui, -apple-system, sans-serif" fill="#9ca3af" letter-spacing="0.08em" font-weight="500">LEGEND</text>
+
+  <!-- Plain value field sample -->
+  <rect x="40" y="706" width="12" height="12" rx="2" fill="#e5e7eb"/>
+  <text x="58" y="717" font-size="12" font-family="system-ui, -apple-system, sans-serif" fill="#374151">Plain value field  (number, string, boolean)</text>
+
+  <!-- Pointer field sample -->
+  <text x="40" y="742" font-size="13" fill="#3b82f6" font-family="system-ui, -apple-system, sans-serif">→</text>
+  <text x="58" y="742" font-size="12" font-family="system-ui, -apple-system, sans-serif" fill="#374151">Pointer field  (references another entity by ID)</text>
+
+  <!-- Arrow sample -->
+  <line x1="330" y1="712" x2="360" y2="712" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="368" y="717" font-size="12" font-family="system-ui, -apple-system, sans-serif" fill="#374151">Pointer relationship between entities</text>
+
+  <!-- Blue border sample -->
+  <rect x="330" y="730" width="4" height="18" rx="2" fill="#3b82f6"/>
+  <text x="340" y="742" font-size="12" font-family="system-ui, -apple-system, sans-serif" fill="#374151">SyncedDocument  </text>
+  <rect x="490" y="730" width="4" height="18" rx="2" fill="#6b7280"/>
+  <text x="500" y="742" font-size="12" font-family="system-ui, -apple-system, sans-serif" fill="#374151">OfflineDocument</text>
+
+</svg>

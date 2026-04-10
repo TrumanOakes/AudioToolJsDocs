@@ -1,15 +1,21 @@
+---
+title: What's New
+parent: Getting Started
+nav_order: 2
+---
+
 # What's New
 
-This page tracks notable changes to the **@audiotool/nexus** package.
+This page tracks notable changes to the **@audiotool/nexus** package and this documentation site.
+
+---
 
 ## v0.0.12 — Current Release
 
-**@audiotool/nexus v0.0.12** is the current documented version.
-
-### Highlights
+### Added
 
 - **Offline document support** — Use `createOfflineDocument()` to work without a live backend connection. Useful for local testing and development workflows.
-- **Validation control** — `createOfflineDocument({ validated: false })` disables strict validation, which reduces transaction errors during rapid prototyping.
+- **Validation control** — `createOfflineDocument({ validated: false })` disables strict validation, reducing transaction errors during rapid prototyping.
 - **Personal Access Tokens (PATs)** — In addition to the OAuth browser flow, you can authenticate using a PAT for server-side use cases:
   ```typescript
   const client = await createAudiotoolClient({ pat: "at_pat_your_token_here" });
@@ -17,7 +23,55 @@ This page tracks notable changes to the **@audiotool/nexus** package.
 - **RetryingClient wrapper** — All API calls are automatically wrapped in a retrying transport, so transient network failures are handled without extra code.
 - **Full entity coverage** — The document schema includes synthesizers, drum machines, effects, mixer entities, timeline tracks, regions, notes, and utility entities.
 
-### Package entry points
+### Changed
+
+<!-- TODO: fill from git log -->
+
+### Fixed
+
+<!-- TODO: fill from git log -->
+
+---
+
+## v0.0.11
+
+### Added
+
+<!-- TODO: fill from git log -->
+
+### Changed
+
+<!-- TODO: fill from git log -->
+
+### Fixed
+
+<!-- TODO: fill from git log -->
+
+---
+
+## v0.0.10
+
+### Added
+
+<!-- TODO: fill from git log -->
+
+### Changed
+
+<!-- TODO: fill from git log -->
+
+### Fixed
+
+<!-- TODO: fill from git log -->
+
+---
+
+## Earlier versions
+
+<!-- TODO: fill from git log -->
+
+---
+
+## Package entry points
 
 The package exports from these modules:
 

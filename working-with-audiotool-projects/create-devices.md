@@ -1,13 +1,19 @@
+---
+title: Create Devices
+parent: Working With Audiotool Projects
+nav_order: 3
+---
+
 # Create Devices
 
-Audio devices are the synthesizers, drum machines, effects, and utility units that make up the audio processing graph in Audiotool. This page shows how to create and connect them.
+Audio devices are the synthesizers, drum machines, effects, and utility units in Audiotool. This page shows how to create and connect them using <span class="tooltip" data-tooltip="A grouped set of changes made to a document as one operation.">transactions</span>.
 
 ## Creating a device
 
-Use `document.modify()` to create any device entity:
+Use `nexus.modify()` to create any device entity:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("tinyGain", {
     positionX: 100,
     positionY: 200,
@@ -26,55 +32,61 @@ All device entities accept `positionX`, `positionY`, and `displayName` as fields
 
 | Entity key | Device name |
 |------------|-------------|
-| `pulverisateur` | Pulverisateur |
-| `gakki` | Gakki |
-| `bassline` | Bassline |
+| [`pulverisateur`](../reference/entities/pulverisateur.md) | Pulverisateur |
+| [`gakki`](../reference/entities/gakki.md) | Gakki |
+| [`bassline`](../reference/entities/bassline.md) | Bassline |
+| [`kobolt`](../reference/entities/kobolt.md) | Kobolt |
+| [`tonematrix`](../reference/entities/tonematrix.md) | Tonematrix |
 
 ### Drum machines
 
 | Entity key | Device name |
 |------------|-------------|
-| `beatbox8` | Beatbox 8 |
-| `beatbox9` | Beatbox 9 |
-| `rasselbock` | Rasselbock |
-| `machiniste` | Machiniste |
+| [`beatbox8`](../reference/entities/beatbox8.md) | Beatbox 8 |
+| [`beatbox9`](../reference/entities/beatbox9.md) | Beatbox 9 |
+| [`rasselbock`](../reference/entities/rasselbock.md) | Rasselbock |
+| [`machiniste`](../reference/entities/machiniste.md) | Machiniste |
 
 ### Filters and effects
 
 | Entity key | Device name |
 |------------|-------------|
-| `autoFilter` | Auto Filter |
-| `graphicalEQ` | Graphical EQ |
-| `stompbox*` | Stompbox effects (various) |
-| `tinyGain` | Tiny Gain |
-| `audioMerger` | Audio Merger |
-| `audioSplitter` | Audio Splitter |
-| `crossfader` | Crossfader |
+| [`autoFilter`](../reference/entities/autoFilter.md) | Auto Filter |
+| [`graphicalEQ`](../reference/entities/graphicalEQ.md) | Graphical EQ |
+| [`stompboxDelay`](../reference/entities/stompboxDelay.md) | Stompbox Delay |
+| [`stompboxSlope`](../reference/entities/stompboxSlope.md) | Stompbox Slope (filter) |
+| [`tinyGain`](../reference/entities/tinyGain.md) | Tiny Gain |
+| [`audioMerger`](../reference/entities/audioMerger.md) | Audio Merger |
+| [`audioSplitter`](../reference/entities/audioSplitter.md) | Audio Splitter |
+| [`crossfader`](../reference/entities/crossfader.md) | Crossfader |
 
 ## Creating a synth and connecting it to the mixer
 
-A typical setup involves creating a synthesizer, a mixer channel, and connecting them with an audio cable:
+A typical setup involves creating a synthesizer, a mixer channel, and connecting them with an audio cable. Use `createTransaction()` so you can reference the newly created entities' socket fields immediately:
 
 ```typescript
-await document.modify((t) => {
-  // Create a synthesizer
-  const synth = t.create("pulverisateur", {
-    positionX: 100,
-    positionY: 100,
-  });
+const t = await nexus.createTransaction();
 
-  // Create a mixer channel
-  const channel = t.create("mixerChannel", {});
-
-  // Connect synth output to mixer channel input via an audio cable
-  const cable = t.create("audioCable", {
-    // source: synth output
-    // target: channel input
-  });
+// Create a synthesizer
+const synth = t.create("pulverisateur", {
+  positionX: 100,
+  positionY: 100,
 });
+
+// Create a mixer channel
+const channel = t.create("mixerChannel", {});
+
+// Connect synth audio output → channel audio input
+// Use .location on the field socket, not on the entity
+t.create("desktopAudioCable", {
+  fromSocket: synth.fields.audioOutput.location,
+  toSocket: channel.fields.audioInput.location,
+});
+
+t.send();
 ```
 
-The `audioCable` entity connects audio outputs to audio inputs. See [Entity Reference](../reference/entity-reference.md) for the exact field definitions for `audioCable`.
+The `desktopAudioCable` entity connects audio outputs to audio inputs. See [desktopAudioCable](../reference/entities/desktopAudioCable.md) for full field details.
 
 ## Updating a device parameter
 
@@ -83,12 +95,12 @@ After creating a device, update its parameters with `t.update()`:
 ```typescript
 let gainDevice;
 
-await document.modify((t) => {
+await nexus.modify((t) => {
   gainDevice = t.create("tinyGain", {});
 });
 
 // Later, change the gain value
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.update(gainDevice.fields.gain, 0.8);
 });
 ```
@@ -98,8 +110,8 @@ await document.modify((t) => {
 To find all currently existing devices of a particular type:
 
 ```typescript
-const gains = document.queryEntities.ofTypes("tinyGain").get();
-const synths = document.queryEntities.ofTypes("pulverisateur", "gakki", "bassline").get();
+const gains = nexus.queryEntities.ofTypes("tinyGain").get();
+const synths = nexus.queryEntities.ofTypes("pulverisateur", "gakki", "bassline").get();
 ```
 
 ## Next step
