@@ -61,8 +61,8 @@ function classifyFile(relPath) {
   if (parts.length === 1 && parts[0] === "README") {
     return { type: "nav-exclude" };
   }
-  // generated/media/*.md — nexus repo docs, keep as link targets but exclude from nav
-  if (parts[0] === "media") {
+  // generated/_media/*.md — nexus repo docs, keep as link targets but exclude from nav
+  if (parts[0] === "_media") {
     return { type: "nav-exclude" };
   }
   // generated/<module>/README.md — nav-excluded (hand-written guides are the parents)
@@ -202,7 +202,7 @@ async function main() {
 
   const unknown = classified.filter(f => f.type === "unknown");
 
-  // Nav-excluded files (top-level README, module READMEs, media/, namespace READMEs)
+  // Nav-excluded files (top-level README, module READMEs, _media/, namespace READMEs)
   const navExcluded = classified.filter(f => f.type === "nav-exclude");
 
   // Member files — grouped by module, sorted alphabetically within each
