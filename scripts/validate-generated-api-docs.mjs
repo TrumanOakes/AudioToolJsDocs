@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { readdir, readFile } from "node:fs/promises";
+import { readdir, readFile, stat } from "node:fs/promises";
 import { join, relative } from "node:path";
 
 const GENERATED_DIR = join(import.meta.dirname, "..", "api-reference", "generated");
@@ -17,6 +17,37 @@ async function getAllMarkdownFiles(dir) {
     }
   }
   return files;
+}
+
+const REQUIRED_INDEX_PATHS = [
+  "README.md",
+  "index.md",
+  "api/README.md",
+  "api/index.md",
+  "index/README.md",
+  "index/index.md",
+  "document/README.md",
+  "document/index.md",
+  "entities/README.md",
+  "entities/index.md",
+  "utils/README.md",
+  "utils/index.md",
+];
+
+async function ensureRequiredIndexes() {
+  const missing = [];
+  for (const relPath of REQUIRED_INDEX_PATHS) {
+    const abs = join(GENERATED_DIR, relPath);
+    try {
+      const s = await stat(abs);
+      if (!s.isFile()) {
+        missing.push(relPath);
+      }
+    } catch {
+      missing.push(relPath);
+    }
+  }
+  return missing;
 }
 
 function findMalformedModuleRows(content) {
@@ -38,6 +69,15 @@ function findMalformedModuleRows(content) {
 }
 
 async function main() {
+  const missingIndexes = await ensureRequiredIndexes();
+  if (missingIndexes.length > 0) {
+    console.error("Missing required generated index files:");
+    for (const rel of missingIndexes) {
+      console.error(`  - ${rel}`);
+    }
+    process.exit(1);
+  }
+
   const files = await getAllMarkdownFiles(GENERATED_DIR);
   const problems = [];
 

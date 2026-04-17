@@ -64,6 +64,17 @@ async function getAllMarkdownFiles(dir) {
   return files;
 }
 
+async function ensureDirectoryIndexes(files) {
+  for (const file of files) {
+    if (!file.endsWith("README.md")) continue;
+    const indexFile = join(dirname(file), "index.md");
+    const readmeContent = await readFile(file, "utf-8");
+    // Keep index.md in lockstep with README.md so legacy GitHub Pages
+    // branch mode can serve /dir/ routes reliably.
+    await writeFile(indexFile, readmeContent, "utf-8");
+  }
+}
+
 function convertInternalMdLinksToHtml(content) {
   return content.replace(/\]\(([^)]+\.md)(#[^)]+)?\)/g, (match, path, hash = "") => {
     if (path.startsWith("http://") || path.startsWith("https://") || path.startsWith("mailto:")) {
@@ -137,6 +148,7 @@ async function main() {
       await writeFile(file, updated, "utf-8");
     }
   }
+  await ensureDirectoryIndexes(files);
   console.log(`Patched internal links in ${files.length} generated markdown files.`);
 }
 
