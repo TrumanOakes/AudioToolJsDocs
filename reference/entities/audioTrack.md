@@ -17,7 +17,7 @@ An audioTrack is a lane in the Audiotool timeline that holds audio clips. You pl
 |-------|------|-------------|
 | `displayName` | `string` | Label shown on the track in the timeline |
 
-> For the complete field listing with types, defaults, and ranges, see [AudioTrack](../../api-reference/generated/entities/type-aliases/AudioTrack.md).
+> For the complete field listing with types, defaults, and ranges, see [AudioTrack](../../api-reference/generated/types/entities.AudioTrack.html).
 
 ## Example
 
@@ -31,7 +31,7 @@ await nexus.modify((t) => {
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [audioRegion](audioRegion.md) — regions placed on this track
-- [sample](sample.md) — audio sample file referenced by audio regions
-- [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.md) — step-by-step guide to building timeline content
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [audioRegion](audioRegion.html) — regions placed on this track
+- [sample](sample.html) — audio sample file referenced by audio regions
+- [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.html) — step-by-step guide to building timeline content

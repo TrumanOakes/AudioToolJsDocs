@@ -1,0 +1,243 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>SampleService | @audiotool/nexus - v0.0.12</title><meta name="description" content="Documentation for @audiotool/nexus"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/custom.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script>
+<style>
+  :root {
+    --typedoc-bg: #0f1117;
+    --typedoc-panel: #161b22;
+    --typedoc-border: #30363d;
+    --typedoc-text: #e6edf3;
+    --typedoc-muted: #9da7b3;
+    --typedoc-link: #58a6ff;
+    --typedoc-link-hover: #79c0ff;
+  }
+
+  body {
+    background: var(--typedoc-bg);
+    color: var(--typedoc-text);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .tsd-page-toolbar {
+    background: var(--typedoc-panel);
+    border-bottom: 1px solid var(--typedoc-border);
+  }
+
+  .tsd-navigation a,
+  .tsd-page-toolbar a,
+  a {
+    color: var(--typedoc-link);
+  }
+
+  a:hover {
+    color: var(--typedoc-link-hover);
+  }
+
+  .tsd-panel {
+    border: 1px solid var(--typedoc-border);
+    background: var(--typedoc-panel);
+    border-radius: 8px;
+  }
+
+  .tsd-page-title h1,
+  .tsd-page-title h2,
+  .tsd-page-title h3,
+  h1, h2, h3 {
+    color: var(--typedoc-text);
+  }
+
+  .col-sidebar {
+    border-left: 1px solid var(--typedoc-border);
+  }
+
+  .typedoc-top-tabs {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 1rem;
+  }
+
+  .typedoc-top-tab {
+    display: inline-flex;
+    align-items: center;
+    height: 2rem;
+    padding: 0 0.75rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    color: var(--typedoc-text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .typedoc-top-tab:hover {
+    border-color: var(--typedoc-border);
+    background: #21262d;
+    color: var(--typedoc-text);
+    text-decoration: none;
+  }
+
+  .typedoc-top-tab.is-active {
+    border-color: var(--typedoc-link);
+    color: var(--typedoc-link);
+    font-weight: 600;
+  }
+</style>
+
+
+<script>
+(function () {
+  function addTopTabs() {
+    var toolbar = document.querySelector(".tsd-toolbar-contents");
+    if (!toolbar) return;
+    if (toolbar.querySelector(".typedoc-top-tabs")) return;
+
+    var tabs = document.createElement("nav");
+    tabs.className = "typedoc-top-tabs";
+    tabs.setAttribute("aria-label", "Documentation sections");
+
+    var path = window.location.pathname;
+    var isApi = path.indexOf("/api-reference/generated/") !== -1;
+
+    var docs = document.createElement("a");
+    docs.href = "/AudioToolJsDocs/";
+    docs.className = "typedoc-top-tab" + (isApi ? "" : " is-active");
+    docs.textContent = "Docs";
+
+    var api = document.createElement("a");
+    api.href = "/AudioToolJsDocs/api-reference/generated/";
+    api.className = "typedoc-top-tab" + (isApi ? " is-active" : "");
+    api.textContent = "API";
+
+    tabs.appendChild(docs);
+    tabs.appendChild(api);
+    toolbar.appendChild(tabs);
+  }
+
+  function inferActiveSection(pathname) {
+    var path = pathname.toLowerCase();
+    var patterns = [{"title":"index","source":"\\/modules\\/index\\.html$|\\/(types|interfaces|classes|enums|variables|functions)\\/index\\.","flags":"i"},{"title":"entities","source":"\\/modules\\/entities\\.html$|\\/(types|interfaces|classes|enums|variables|functions)\\/entities\\.","flags":"i"},{"title":"document","source":"\\/modules\\/document\\.html$|\\/(types|interfaces|classes|enums|variables|functions)\\/document\\.","flags":"i"},{"title":"utils","source":"\\/modules\\/utils\\.html$|\\/(types|interfaces|classes|enums|variables|functions)\\/utils\\.","flags":"i"},{"title":"api","source":"\\/modules\\/api(\\.sample)?\\.html$|\\/(types|interfaces|classes|enums|variables|functions)\\/api\\.","flags":"i"}];
+    for (var i = 0; i < patterns.length; i++) {
+      var pattern = patterns[i];
+      var re = new RegExp(pattern.source, pattern.flags);
+      if (re.test(path)) {
+        return pattern.title;
+      }
+    }
+    return "index";
+  }
+
+  function replaceSiteMenuWithApiSections() {
+    var nav = document.querySelector(".site-menu nav.tsd-navigation:not(#tsd-sidebar-links)");
+    if (!nav) return;
+
+    var list = document.createElement("ul");
+    list.className = "tsd-small-nested-navigation";
+
+    var sections = [
+      { title: "index", href: "/AudioToolJsDocs/api-reference/generated/modules/index.html" },
+      { title: "entities", href: "/AudioToolJsDocs/api-reference/generated/modules/entities.html" },
+      { title: "document", href: "/AudioToolJsDocs/api-reference/generated/modules/document.html" },
+      { title: "utils", href: "/AudioToolJsDocs/api-reference/generated/modules/utils.html" },
+      { title: "api", href: "/AudioToolJsDocs/api-reference/generated/modules/api.html" }
+    ];
+
+    var active = inferActiveSection(window.location.pathname);
+
+    for (var i = 0; i < sections.length; i++) {
+      var section = sections[i];
+      var li = document.createElement("li");
+      var a = document.createElement("a");
+      a.href = section.href;
+      a.textContent = section.title;
+      if (section.title === active) {
+        a.className = "current";
+      }
+      li.appendChild(a);
+      list.appendChild(li);
+    }
+
+    var heading = nav.querySelector("a");
+    nav.innerHTML = "";
+    if (heading) {
+      nav.appendChild(heading);
+    }
+    nav.appendChild(list);
+  }
+
+  function run() {
+    addTopTabs();
+    replaceSiteMenuWithApiSections();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run);
+  } else {
+    run();
+  }
+})();
+</script>
+
+</head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="../index.html" class="title">@audiotool/nexus - v0.0.12</a><div id="tsd-toolbar-links"><a href="https://developer.audiotool.com">Developer Hub</a><a href="https://github.com/audiotool/nexus">GitHub</a></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><ul class="tsd-breadcrumb" aria-label="Breadcrumb"><li><a href="../modules/api.html">api</a></li><li><a href="" aria-current="page">SampleService</a></li></ul><h1>Variable SampleService<code class="tsd-tag">Const</code></h1></div><div class="tsd-signature"><span class="tsd-kind-variable">SampleService</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">methods</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>        <span class="tsd-kind-property">createSample</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>            <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.CreateSampleRequest.html" class="tsd-signature-type tsd-kind-class">CreateSampleRequest</a><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;CreateSample&quot;</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.CreateSampleResponse.html" class="tsd-signature-type tsd-kind-class">CreateSampleResponse</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">deleteSample</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>            <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.DeleteSampleRequest.html" class="tsd-signature-type tsd-kind-class">DeleteSampleRequest</a><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;DeleteSample&quot;</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.DeleteSampleResponse.html" class="tsd-signature-type tsd-kind-class">DeleteSampleResponse</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">getSample</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>            <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.GetSampleRequest.html" class="tsd-signature-type tsd-kind-class">GetSampleRequest</a><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;GetSample&quot;</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.GetSampleResponse.html" class="tsd-signature-type tsd-kind-class">GetSampleResponse</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">listen</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>            <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.ListenRequest.html" class="tsd-signature-type tsd-kind-class">ListenRequest</a><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ServerStreaming</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;Listen&quot;</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.ListenResponse.html" class="tsd-signature-type tsd-kind-class">ListenResponse</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">listSamples</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>            <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.ListSamplesRequest.html" class="tsd-signature-type tsd-kind-class">ListSamplesRequest</a><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;ListSamples&quot;</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.ListSamplesResponse.html" class="tsd-signature-type tsd-kind-class">ListSamplesResponse</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">updateSample</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>            <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.UpdateSampleRequest.html" class="tsd-signature-type tsd-kind-class">UpdateSampleRequest</a><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;UpdateSample&quot;</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.UpdateSampleResponse.html" class="tsd-signature-type tsd-kind-class">UpdateSampleResponse</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">uploadSampleFinished</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>            <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.UploadSampleFinishedRequest.html" class="tsd-signature-type tsd-kind-class">UploadSampleFinishedRequest</a><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;UploadSampleFinished&quot;</span><span class="tsd-signature-symbol">;</span><br/>            <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.UploadSampleFinishedResponse.html" class="tsd-signature-type tsd-kind-class">UploadSampleFinishedResponse</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">typeName</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;audiotool.sample.v1.SampleService&quot;</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol"> = ...</span></div><div class="tsd-comment tsd-typography"><p>The samples service definition.</p>
+</div><div class="tsd-type-declaration"><h4>Type Declaration</h4><ul class="tsd-parameters"><li class="tsd-parameter"><h5 id="methods"><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">methods</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">createSample</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>        <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.CreateSampleRequest.html" class="tsd-signature-type tsd-kind-class">CreateSampleRequest</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;CreateSample&quot;</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.CreateSampleResponse.html" class="tsd-signature-type tsd-kind-class">CreateSampleResponse</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">deleteSample</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>        <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.DeleteSampleRequest.html" class="tsd-signature-type tsd-kind-class">DeleteSampleRequest</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;DeleteSample&quot;</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.DeleteSampleResponse.html" class="tsd-signature-type tsd-kind-class">DeleteSampleResponse</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">getSample</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>        <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.GetSampleRequest.html" class="tsd-signature-type tsd-kind-class">GetSampleRequest</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;GetSample&quot;</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.GetSampleResponse.html" class="tsd-signature-type tsd-kind-class">GetSampleResponse</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">listen</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>        <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.ListenRequest.html" class="tsd-signature-type tsd-kind-class">ListenRequest</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ServerStreaming</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;Listen&quot;</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.ListenResponse.html" class="tsd-signature-type tsd-kind-class">ListenResponse</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">listSamples</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>        <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.ListSamplesRequest.html" class="tsd-signature-type tsd-kind-class">ListSamplesRequest</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;ListSamples&quot;</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.ListSamplesResponse.html" class="tsd-signature-type tsd-kind-class">ListSamplesResponse</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">updateSample</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>        <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.UpdateSampleRequest.html" class="tsd-signature-type tsd-kind-class">UpdateSampleRequest</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;UpdateSample&quot;</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.UpdateSampleResponse.html" class="tsd-signature-type tsd-kind-class">UpdateSampleResponse</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">uploadSampleFinished</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>        <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.UploadSampleFinishedRequest.html" class="tsd-signature-type tsd-kind-class">UploadSampleFinishedRequest</a><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;UploadSampleFinished&quot;</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.UploadSampleFinishedResponse.html" class="tsd-signature-type tsd-kind-class">UploadSampleFinishedResponse</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></h5><ul class="tsd-parameters"><li class="tsd-parameter"><h5><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">createSample</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.CreateSampleRequest.html" class="tsd-signature-type tsd-kind-class">CreateSampleRequest</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;CreateSample&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.CreateSampleResponse.html" class="tsd-signature-type tsd-kind-class">CreateSampleResponse</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></h5><div class="tsd-comment tsd-typography"><p>Create a sample.</p>
+</div><div class="tsd-comment tsd-typography"><div class="tsd-tag-generated"><h4 class="tsd-anchor-link" id="generated">Generated<a href="#generated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>from rpc audiotool.sample.v1.SampleService.CreateSample</p>
+</div></div></li><li class="tsd-parameter"><h5><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">deleteSample</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.DeleteSampleRequest.html" class="tsd-signature-type tsd-kind-class">DeleteSampleRequest</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;DeleteSample&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.DeleteSampleResponse.html" class="tsd-signature-type tsd-kind-class">DeleteSampleResponse</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></h5><div class="tsd-comment tsd-typography"><p>Deletes a sample.</p>
+<p>A sample can be deleted if it is not used by a project (document-service) and if the user has
+the correct permissions.</p>
+</div><div class="tsd-comment tsd-typography"><div class="tsd-tag-generated"><h4 class="tsd-anchor-link" id="generated-1">Generated<a href="#generated-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>from rpc audiotool.sample.v1.SampleService.DeleteSample</p>
+</div></div></li><li class="tsd-parameter"><h5><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">getSample</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.GetSampleRequest.html" class="tsd-signature-type tsd-kind-class">GetSampleRequest</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;GetSample&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.GetSampleResponse.html" class="tsd-signature-type tsd-kind-class">GetSampleResponse</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></h5><div class="tsd-comment tsd-typography"><p>Gets a sample.</p>
+</div><div class="tsd-comment tsd-typography"><div class="tsd-tag-generated"><h4 class="tsd-anchor-link" id="generated-2">Generated<a href="#generated-2" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>from rpc audiotool.sample.v1.SampleService.GetSample</p>
+</div></div></li><li class="tsd-parameter"><h5><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">listen</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.ListenRequest.html" class="tsd-signature-type tsd-kind-class">ListenRequest</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ServerStreaming</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;Listen&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.ListenResponse.html" class="tsd-signature-type tsd-kind-class">ListenResponse</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></h5><div class="tsd-comment tsd-typography"><p>Listen for samples.</p>
+<p>This is a server streaming RPC. The client sends a request and gets a stream of responses.
+This can be used when a sample is created and announced as being uploaded in a
+collaborative session, the other clients can listen for the sample and start processing it as
+soon as it is ready.</p>
+<p>The server will have a history which lasts for a certain time frame and size and sends out
+historical events to the client. This makes it easy to retrieve non-racy events.</p>
+</div><div class="tsd-comment tsd-typography"><div class="tsd-tag-generated"><h4 class="tsd-anchor-link" id="generated-3">Generated<a href="#generated-3" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>from rpc audiotool.sample.v1.SampleService.Listen</p>
+</div></div></li><li class="tsd-parameter"><h5><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">listSamples</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.ListSamplesRequest.html" class="tsd-signature-type tsd-kind-class">ListSamplesRequest</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;ListSamples&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.ListSamplesResponse.html" class="tsd-signature-type tsd-kind-class">ListSamplesResponse</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></h5><div class="tsd-comment tsd-typography"><p>Lists the samples.</p>
+</div><div class="tsd-comment tsd-typography"><div class="tsd-tag-generated"><h4 class="tsd-anchor-link" id="generated-4">Generated<a href="#generated-4" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>from rpc audiotool.sample.v1.SampleService.ListSamples</p>
+</div></div></li><li class="tsd-parameter"><h5><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">updateSample</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.UpdateSampleRequest.html" class="tsd-signature-type tsd-kind-class">UpdateSampleRequest</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;UpdateSample&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.UpdateSampleResponse.html" class="tsd-signature-type tsd-kind-class">UpdateSampleResponse</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></h5><div class="tsd-comment tsd-typography"><p>Updates a sample.</p>
+</div><div class="tsd-comment tsd-typography"><div class="tsd-tag-generated"><h4 class="tsd-anchor-link" id="generated-5">Generated<a href="#generated-5" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>from rpc audiotool.sample.v1.SampleService.UpdateSample</p>
+</div></div></li><li class="tsd-parameter"><h5><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">uploadSampleFinished</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{</span><br/>    <span class="tsd-kind-property">I</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.UploadSampleFinishedRequest.html" class="tsd-signature-type tsd-kind-class">UploadSampleFinishedRequest</a><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">kind</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Unary</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;UploadSampleFinished&quot;</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-kind-property">O</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">typeof</span> <a href="../classes/api.UploadSampleFinishedResponse.html" class="tsd-signature-type tsd-kind-class">UploadSampleFinishedResponse</a><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></h5><div class="tsd-comment tsd-typography"><p>UploadSampleFinished is called from the client when the upload of a sample is finished so the
+server can start processing the Data. An URL for the upload will be returned by CreateSample.</p>
+</div><div class="tsd-comment tsd-typography"><div class="tsd-tag-generated"><h4 class="tsd-anchor-link" id="generated-6">Generated<a href="#generated-6" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>from rpc audiotool.sample.v1.SampleService.UploadSampleFinished</p>
+</div></div></li></ul></li><li class="tsd-parameter"><h5 id="typename"><code class="tsd-tag">Readonly</code><span class="tsd-kind-property">typeName</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;audiotool.sample.v1.SampleService&quot;</span></h5></li></ul></div><div class="tsd-comment tsd-typography"><div class="tsd-tag-generated"><h4 class="tsd-anchor-link" id="generated-7">Generated<a href="#generated-7" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>from service audiotool.sample.v1.SampleService</p>
+</div></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/sample/v1/sample_service_connect.ts#L28">gen/audiotool/sample/v1/sample_service_connect.ts:28</a></li></ul></aside></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div></div><div class="site-menu"><nav id="tsd-sidebar-links" class="tsd-navigation"><a href="https://developer.audiotool.com" class="tsd-nav-link">Developer Hub</a><a href="https://github.com/audiotool/nexus" class="tsd-nav-link">GitHub</a></nav><nav class="tsd-navigation"><a href="../index.html">@audiotool/nexus - v0.0.12</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p><script>
+(() => {
+  const marker = "/api-reference/generated";
+  const path = window.location.pathname;
+  const idx = path.indexOf(marker);
+  const root = idx >= 0 ? (path.slice(0, idx) || "") + "/" : "/";
+  const docsHref = root;
+  const apiHref = root + "api-reference/generated/";
+  const toolbar = document.querySelector(".tsd-page-toolbar .tsd-toolbar-contents");
+  if (!toolbar) return;
+
+  const tabs = document.createElement("nav");
+  tabs.className = "docs-api-tabs";
+  tabs.setAttribute("aria-label", "Documentation sections");
+
+  const docsTab = document.createElement("a");
+  docsTab.href = docsHref;
+  docsTab.className = "docs-api-tab";
+  docsTab.textContent = "Docs";
+
+  const apiTab = document.createElement("a");
+  apiTab.href = apiHref;
+  apiTab.className = "docs-api-tab is-active";
+  apiTab.textContent = "API";
+
+  tabs.appendChild(docsTab);
+  tabs.appendChild(apiTab);
+
+  const titleLink = toolbar.querySelector("a.title");
+  if (titleLink && titleLink.nextSibling) {
+    toolbar.insertBefore(tabs, titleLink.nextSibling);
+  } else {
+    toolbar.prepend(tabs);
+  }
+})();
+</script></footer><div class="overlay"></div></body></html>

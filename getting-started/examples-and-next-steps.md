@@ -17,12 +17,11 @@ import { createAudiotoolClient } from "@audiotool/nexus";
 
 // 1. Create an authenticated client using a Personal Access Token
 const client = await createAudiotoolClient({
-  pat: "at_pat_your_token_here"
+  authorization: "at_pat_your_token_here"
 });
 
 // 2. Open a synced document for a specific Audiotool project
 const nexus = await client.createSyncedDocument({
-  mode: "online",
   project: "https://beta.audiotool.com/studio?project=abc123"
 });
 

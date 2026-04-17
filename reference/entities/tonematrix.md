@@ -34,7 +34,7 @@ await nexus.modify((t) => {
 
 // Listen for tonematrix creation events
 nexus.events.onCreate("tonematrix", (tm) => {
-  console.log("tonematrix added, pattern index:", tm.fields.patternIndex);
+  console.log("tonematrix added, pattern index:", tm.fields.patternIndex.value);
 });
 ```
 

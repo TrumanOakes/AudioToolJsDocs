@@ -29,8 +29,8 @@ nexus.events.onCreate("tonematrix", (entity) => {
 });
 
 nexus.events.onCreate("note", (entity) => {
-  console.log("Note added at tick:", entity.fields.positionTicks);
-  console.log("Pitch:", entity.fields.pitch);
+  console.log("Note added at tick:", entity.fields.positionTicks.value);
+  console.log("Pitch:", entity.fields.pitch.value);
 });
 ```
 
@@ -55,7 +55,7 @@ for (const gain of gains) {
 ## onRemove — react to deleted entities
 
 ```typescript
-nexus.events.onRemove("tinyGain", (entity) => {
+nexus.events.onRemove("*", (entity) => {
   console.log("Gain device removed:", entity.id);
 });
 ```

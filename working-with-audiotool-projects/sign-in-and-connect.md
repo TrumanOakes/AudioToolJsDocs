@@ -17,8 +17,8 @@ import { getLoginStatus, createAudiotoolClient } from "@audiotool/nexus";
 
 const status = await getLoginStatus({
   clientId: "your_client_id",
-  redirectUri: "http://127.0.0.1:5173/",
-  scopes: ["project:write"],
+  redirectUrl: "http://127.0.0.1:5173/",
+  scope: "project:write",
 });
 ```
 
@@ -29,9 +29,9 @@ const status = await getLoginStatus({
 ### 2. Handle both states
 
 ```typescript
-if (status.type === "logged-in") {
+if (status.loggedIn) {
   // User is authenticated — create a client
-  const client = await createAudiotoolClient({ status });
+  const client = await createAudiotoolClient({ authorization: status });
   // ...use client
 } else {
   // Show a login button
@@ -40,12 +40,12 @@ if (status.type === "logged-in") {
 }
 ```
 
-When `status.login()` is called, the browser redirects to Audiotool's OAuth page. After the user authorizes, it redirects back to your `redirectUri`. Call `getLoginStatus` again on page load — this time it will return `LoggedInStatus`.
+When `status.login()` is called, the browser redirects to Audiotool's OAuth page. After the user authorizes, it redirects back to your `redirectUrl`. Call `getLoginStatus` again on page load — this time it will return `LoggedInStatus`.
 
 ### 3. Create the client
 
 ```typescript
-const client = await createAudiotoolClient({ status });
+const client = await createAudiotoolClient({ authorization: status });
 ```
 
 `createAudiotoolClient` accepts the result from `getLoginStatus` or a <span class="tooltip" data-tooltip="A private token that lets your app access an Audiotool account without using a browser login flow.">Personal Access Token</span>. It returns a ready-to-use client.
@@ -58,7 +58,7 @@ For server-side automation only — Node.js, Bun, or Deno scripts, CI jobs, bots
 
 ```typescript
 const client = await createAudiotoolClient({
-  pat: process.env.AUDIOTOOL_PAT // always load from environment — never hardcode
+  authorization: process.env.AUDIOTOOL_PAT // always load from environment — never hardcode
 });
 ```
 

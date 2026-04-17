@@ -32,33 +32,33 @@ All device entities accept `positionX`, `positionY`, and `displayName` as fields
 
 | Entity key | Device name |
 |------------|-------------|
-| [`pulverisateur`](../reference/entities/pulverisateur.md) | Pulverisateur |
-| [`gakki`](../reference/entities/gakki.md) | Gakki |
-| [`bassline`](../reference/entities/bassline.md) | Bassline |
-| [`kobolt`](../reference/entities/kobolt.md) | Kobolt |
-| [`tonematrix`](../reference/entities/tonematrix.md) | Tonematrix |
+| [`pulverisateur`](../api-reference/generated/types/entities.Pulverisateur.html) | Pulverisateur |
+| [`gakki`](../api-reference/generated/types/entities.Gakki.html) | Gakki |
+| [`bassline`](../api-reference/generated/types/entities.Bassline.html) | Bassline |
+| [`kobolt`](../api-reference/generated/types/entities.Kobolt.html) | Kobolt |
+| [`tonematrix`](../api-reference/generated/types/entities.Tonematrix.html) | Tonematrix |
 
 ### Drum machines
 
 | Entity key | Device name |
 |------------|-------------|
-| [`beatbox8`](../reference/entities/beatbox8.md) | Beatbox 8 |
-| [`beatbox9`](../reference/entities/beatbox9.md) | Beatbox 9 |
-| [`rasselbock`](../reference/entities/rasselbock.md) | Rasselbock |
-| [`machiniste`](../reference/entities/machiniste.md) | Machiniste |
+| [`beatbox8`](../api-reference/generated/types/entities.Beatbox8.html) | Beatbox 8 |
+| [`beatbox9`](../api-reference/generated/types/entities.Beatbox9.html) | Beatbox 9 |
+| [`rasselbock`](../api-reference/generated/types/entities.Rasselbock.html) | Rasselbock |
+| [`machiniste`](../api-reference/generated/types/entities.Machiniste.html) | Machiniste |
 
 ### Filters and effects
 
 | Entity key | Device name |
 |------------|-------------|
-| [`autoFilter`](../reference/entities/autoFilter.md) | Auto Filter |
-| [`graphicalEQ`](../reference/entities/graphicalEQ.md) | Graphical EQ |
-| [`stompboxDelay`](../reference/entities/stompboxDelay.md) | Stompbox Delay |
-| [`stompboxSlope`](../reference/entities/stompboxSlope.md) | Stompbox Slope (filter) |
-| [`tinyGain`](../reference/entities/tinyGain.md) | Tiny Gain |
-| [`audioMerger`](../reference/entities/audioMerger.md) | Audio Merger |
-| [`audioSplitter`](../reference/entities/audioSplitter.md) | Audio Splitter |
-| [`crossfader`](../reference/entities/crossfader.md) | Crossfader |
+| [`autoFilter`](../api-reference/generated/types/entities.AutoFilter.html) | Auto Filter |
+| [`graphicalEQ`](../api-reference/generated/types/entities.GraphicalEQ.html) | Graphical EQ |
+| [`stompboxDelay`](../api-reference/generated/types/entities.StompboxDelay.html) | Stompbox Delay |
+| [`stompboxSlope`](../api-reference/generated/types/entities.StompboxSlope.html) | Stompbox Slope (filter) |
+| [`tinyGain`](../api-reference/generated/types/entities.TinyGain.html) | Tiny Gain |
+| [`audioMerger`](../api-reference/generated/types/entities.AudioMerger.html) | Audio Merger |
+| [`audioSplitter`](../api-reference/generated/types/entities.AudioSplitter.html) | Audio Splitter |
+| [`crossfader`](../api-reference/generated/types/entities.Crossfader.html) | Crossfader |
 
 ## Creating a synth and connecting it to the mixer
 
@@ -86,7 +86,7 @@ t.create("desktopAudioCable", {
 t.send();
 ```
 
-The `desktopAudioCable` entity connects audio outputs to audio inputs. See [desktopAudioCable](../reference/entities/desktopAudioCable.md) for full field details.
+The `desktopAudioCable` entity connects audio outputs to audio inputs. See [desktopAudioCable](../api-reference/generated/types/entities.DesktopAudioCable.html) for full field details.
 
 ## Updating a device parameter
 

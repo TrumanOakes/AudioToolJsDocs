@@ -47,7 +47,7 @@ Entity objects expose their fields under `.fields`:
 const notes = nexus.queryEntities.ofTypes("note").get();
 
 for (const note of notes) {
-  console.log(`Pitch: ${note.fields.pitch}, Tick: ${note.fields.positionTicks}`);
+  console.log(`Pitch: ${note.fields.pitch.value}, Tick: ${note.fields.positionTicks.value}`);
 }
 ```
 
@@ -77,7 +77,7 @@ for (const note of existingNotes) {
 
 // Track future changes
 nexus.events.onCreate("note", addNoteToUI);
-nexus.events.onRemove("note", removeNoteFromUI);
+nexus.events.onRemove("*", removeNoteFromUI);
 ```
 
 ## Available entity types for queries
@@ -90,7 +90,7 @@ Any entity type key can be used in a query. Common examples:
 | All audio devices | `"tinyGain"`, `"pulverisateur"`, `"gakki"`, etc. |
 | All tracks | `"noteTrack"`, `"audioTrack"`, `"automationTrack"` |
 | All mixer channels | `"mixerChannel"` |
-| All cables | `"desktopAudioCable"`, `"noteCable"` |
+| All cables | `"desktopAudioCable"`, `"desktopNoteCable"` |
 
 See [Entity Reference](../reference/entity-reference.md) for the complete list of entity type keys.
 

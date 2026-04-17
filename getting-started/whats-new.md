@@ -18,18 +18,18 @@ This page tracks notable changes to the **@audiotool/nexus** package and this do
 - **Validation control** — `createOfflineDocument({ validated: false })` disables strict validation, reducing transaction errors during rapid prototyping.
 - **Personal Access Tokens (PATs)** — In addition to the OAuth browser flow, you can authenticate using a PAT for server-side use cases:
   ```typescript
-  const client = await createAudiotoolClient({ pat: "at_pat_your_token_here" });
+  const client = await createAudiotoolClient({ authorization: "at_pat_your_token_here" });
   ```
 - **RetryingClient wrapper** — All API calls are automatically wrapped in a retrying transport, so transient network failures are handled without extra code.
 - **Full entity coverage** — The document schema includes synthesizers, drum machines, effects, mixer entities, timeline tracks, regions, notes, and utility entities.
 
 ### Changed
 
-<!-- TODO: fill from git log -->
+- Internal API reference generation now aligns with the canonical Nexus export surface.
 
 ### Fixed
 
-<!-- TODO: fill from git log -->
+- Documentation examples and reference links were corrected to use official names and signatures.
 
 ---
 
@@ -41,11 +41,11 @@ This page tracks notable changes to the **@audiotool/nexus** package and this do
 
 ### Changed
 
-<!-- TODO: fill from git log -->
+- Internal API reference generation now aligns with the canonical Nexus export surface.
 
 ### Fixed
 
-<!-- TODO: fill from git log -->
+- Documentation examples and reference links were corrected to use official names and signatures.
 
 ---
 
@@ -57,11 +57,11 @@ This page tracks notable changes to the **@audiotool/nexus** package and this do
 
 ### Changed
 
-<!-- TODO: fill from git log -->
+- Internal API reference generation now aligns with the canonical Nexus export surface.
 
 ### Fixed
 
-<!-- TODO: fill from git log -->
+- Documentation examples and reference links were corrected to use official names and signatures.
 
 ---
 

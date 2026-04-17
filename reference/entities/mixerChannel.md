@@ -23,7 +23,7 @@ A mixerChannel is an individual channel strip in the Audiotool mixer. Audio devi
 | `displayParameters` | object | Visual ordering and layout settings for this channel strip in the mixer |
 | `displayParameters.orderAmongStrips` | `number` | Controls the left-to-right position of this channel in the mixer. Use the current maximum + 1 to append to the right |
 
-> For the complete field listing with types, defaults, and ranges, see [MixerChannel](../../api-reference/generated/entities/type-aliases/MixerChannel.md).
+> For the complete field listing with types, defaults, and ranges, see [MixerChannel](../../api-reference/generated/types/entities.MixerChannel.html).
 
 ## Example
 
@@ -59,7 +59,7 @@ t.send();
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [mixerMaster](mixerMaster.md) — the master output all channels feed into
-- [desktopAudioCable](desktopAudioCable.md) — connects device outputs to channel inputs
-- [Create Devices](../../working-with-audiotool-projects/create-devices.md) — full guide including mixer setup
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [mixerMaster](mixerMaster.html) — the master output all channels feed into
+- [desktopAudioCable](desktopAudioCable.html) — connects device outputs to channel inputs
+- [Create Devices](../../working-with-audiotool-projects/create-devices.html) — full guide including mixer setup

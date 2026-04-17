@@ -17,7 +17,7 @@ A patternTrack is a lane in the Audiotool timeline that uses pattern-based seque
 |-------|------|-------------|
 | `displayName` | `string` | Label shown on the track in the timeline |
 
-> For the complete field listing with types, defaults, and ranges, see [PatternTrack](../../api-reference/generated/entities/type-aliases/PatternTrack.md).
+> For the complete field listing with types, defaults, and ranges, see [PatternTrack](../../api-reference/generated/types/entities.PatternTrack.html).
 
 ## Example
 
@@ -31,6 +31,6 @@ await nexus.modify((t) => {
 
 ## See also
 
-- [Entity Reference](../entity-reference.md) — full list of all entity types
-- [noteTrack](noteTrack.md) — for freeform MIDI/note data
-- [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.md) — step-by-step guide to building timeline content
+- [Entity Reference](../entity-reference.html) — full list of all entity types
+- [noteTrack](noteTrack.html) — for freeform MIDI/note data
+- [Work With Timeline Data](../../working-with-audiotool-projects/work-with-timeline-data.html) — step-by-step guide to building timeline content

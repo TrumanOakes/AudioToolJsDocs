@@ -6,6 +6,8 @@ on:
       - master
       - "claude/github-pages-deployment-SPyTT"
       - "claude/install-audiotool-nexu-RI2hZ"
+      - "cursor/fix-docs-correctness-f90d"
+      - "cursor/fix-generated-live-links-f90d"
   workflow_dispatch:
 
 permissions:
@@ -41,6 +43,9 @@ jobs:
 
       - name: Generate API reference
         run: npm run docs
+
+      - name: Rewrite written-doc links to TypeDoc reflections
+        run: node scripts/rewrite-api-links-to-typedoc.mjs
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
