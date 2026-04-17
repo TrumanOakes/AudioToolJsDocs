@@ -25,7 +25,7 @@
   "flattenOutputFiles": false,
   "fileExtension": ".md",
   "entryFileName": "README",
-  "indexFormat": "table",
+  "indexFormat": "list",
   "parametersFormat": "table",
   "enumMembersFormat": "table",
   "typeDeclarationFormat": "table",

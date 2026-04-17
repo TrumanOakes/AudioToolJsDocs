@@ -17,6 +17,39 @@ const MEDIA_GUIDE_DESTINATIONS = {
   "entities.html": join(SITE_ROOT_DIR, "reference", "entity-reference.md"),
 };
 
+function trimPipes(value) {
+  return value.replace(/^\s*\|\s*/, "").replace(/\s*\|\s*$/, "");
+}
+
+/**
+ * Some entity module descriptions include inline metadata tables:
+ *   key | value
+ *   --- | ---
+ *   type | entity key
+ * These rows break module index table rendering when embedded in a single
+ * markdown cell. Collapse them into semicolon-separated text before Jekyll render.
+ */
+function collapseEntityMetadataRows(content) {
+  return content.replace(/\| \[([^\]]+)\]\(([^)]+)\) \| ([^\n]+) \|/g, (match, title, href, rawDescription) => {
+    if (!rawDescription.includes("key | value")) {
+      return match;
+    }
+
+    const normalized = trimPipes(rawDescription)
+      .replace(/\s*--- \| ---\s*/g, "; ")
+      .replace(/\s*\|/g, ": ")
+      .replace(/\s{2,}/g, " ")
+      .replace(/;\s*:\s*/g, "; ")
+      .trim();
+
+    const safeDescription = normalized.endsWith(";")
+      ? normalized.slice(0, -1).trim()
+      : normalized;
+
+    return `| [${title}](${href}) | ${safeDescription} |`;
+  });
+}
+
 async function getAllMarkdownFiles(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   const files = [];
@@ -98,7 +131,8 @@ async function main() {
     const content = await readFile(file, "utf-8");
     const withHtmlLinks = convertInternalMdLinksToHtml(content);
     const withDirectoryLinks = convertReadmeHtmlLinksToDirectoryLinks(withHtmlLinks);
-    const updated = rewriteMediaDocLinks(withDirectoryLinks, file);
+    const withCollapsedEntityRows = collapseEntityMetadataRows(withDirectoryLinks);
+    const updated = rewriteMediaDocLinks(withCollapsedEntityRows, file);
     if (updated !== content) {
       await writeFile(file, updated, "utf-8");
     }

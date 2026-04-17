@@ -4,11 +4,12 @@
   "description": "@audiotool/nexus documentation site",
   "type": "module",
   "scripts": {
-    "docs": "npm run docs:prepare-src && npm run docs:typedoc && node scripts/add-frontmatter.mjs && node scripts/fix-generated-links.mjs",
+    "docs": "npm run docs:prepare-src && npm run docs:typedoc && node scripts/add-frontmatter.mjs && node scripts/fix-generated-links.mjs && node scripts/validate-generated-api-docs.mjs",
     "docs:prepare-src": "node scripts/prepare-nexus-src.mjs",
     "docs:typedoc": "typedoc --options typedoc.json",
     "docs:frontmatter": "node scripts/add-frontmatter.mjs",
-    "docs:fix-links": "node scripts/fix-generated-links.mjs"
+    "docs:fix-links": "node scripts/fix-generated-links.mjs",
+    "docs:validate-generated": "node scripts/validate-generated-api-docs.mjs"
   },
   "repository": {
     "type": "git",
