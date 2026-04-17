@@ -21,7 +21,7 @@ An audioRegion is a block on an `audioTrack` in the timeline. It marks where an 
 
 > One tick = `1/3840` of a quarter note. See [Utilities](../utilities.html) for `Ticks` constants.
 
-> For the complete field listing with types, defaults, and ranges, see [AudioRegion](../../api-reference/generated/entities/type-aliases/AudioRegion.html).
+> For the complete field listing with types, defaults, and ranges, see [AudioRegion](../../api-reference/generated/types/entities.AudioRegion.html).
 
 ## See also
 

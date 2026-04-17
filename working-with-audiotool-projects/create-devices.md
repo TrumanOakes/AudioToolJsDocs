@@ -32,33 +32,33 @@ All device entities accept `positionX`, `positionY`, and `displayName` as fields
 
 | Entity key | Device name |
 |------------|-------------|
-| [`pulverisateur`](../api-reference/generated/entities/type-aliases/Pulverisateur.html) | Pulverisateur |
-| [`gakki`](../api-reference/generated/entities/type-aliases/Gakki.html) | Gakki |
-| [`bassline`](../api-reference/generated/entities/type-aliases/Bassline.html) | Bassline |
-| [`kobolt`](../api-reference/generated/entities/type-aliases/Kobolt.html) | Kobolt |
-| [`tonematrix`](../api-reference/generated/entities/type-aliases/Tonematrix.html) | Tonematrix |
+| [`pulverisateur`](../api-reference/generated/types/entities.Pulverisateur.html) | Pulverisateur |
+| [`gakki`](../api-reference/generated/types/entities.Gakki.html) | Gakki |
+| [`bassline`](../api-reference/generated/types/entities.Bassline.html) | Bassline |
+| [`kobolt`](../api-reference/generated/types/entities.Kobolt.html) | Kobolt |
+| [`tonematrix`](../api-reference/generated/types/entities.Tonematrix.html) | Tonematrix |
 
 ### Drum machines
 
 | Entity key | Device name |
 |------------|-------------|
-| [`beatbox8`](../api-reference/generated/entities/type-aliases/Beatbox8.html) | Beatbox 8 |
-| [`beatbox9`](../api-reference/generated/entities/type-aliases/Beatbox9.html) | Beatbox 9 |
-| [`rasselbock`](../api-reference/generated/entities/type-aliases/Rasselbock.html) | Rasselbock |
-| [`machiniste`](../api-reference/generated/entities/type-aliases/Machiniste.html) | Machiniste |
+| [`beatbox8`](../api-reference/generated/types/entities.Beatbox8.html) | Beatbox 8 |
+| [`beatbox9`](../api-reference/generated/types/entities.Beatbox9.html) | Beatbox 9 |
+| [`rasselbock`](../api-reference/generated/types/entities.Rasselbock.html) | Rasselbock |
+| [`machiniste`](../api-reference/generated/types/entities.Machiniste.html) | Machiniste |
 
 ### Filters and effects
 
 | Entity key | Device name |
 |------------|-------------|
-| [`autoFilter`](../api-reference/generated/entities/type-aliases/AutoFilter.html) | Auto Filter |
-| [`graphicalEQ`](../api-reference/generated/entities/type-aliases/GraphicalEQ.html) | Graphical EQ |
-| [`stompboxDelay`](../api-reference/generated/entities/type-aliases/StompboxDelay.html) | Stompbox Delay |
-| [`stompboxSlope`](../api-reference/generated/entities/type-aliases/StompboxSlope.html) | Stompbox Slope (filter) |
-| [`tinyGain`](../api-reference/generated/entities/type-aliases/TinyGain.html) | Tiny Gain |
-| [`audioMerger`](../api-reference/generated/entities/type-aliases/AudioMerger.html) | Audio Merger |
-| [`audioSplitter`](../api-reference/generated/entities/type-aliases/AudioSplitter.html) | Audio Splitter |
-| [`crossfader`](../api-reference/generated/entities/type-aliases/Crossfader.html) | Crossfader |
+| [`autoFilter`](../api-reference/generated/types/entities.AutoFilter.html) | Auto Filter |
+| [`graphicalEQ`](../api-reference/generated/types/entities.GraphicalEQ.html) | Graphical EQ |
+| [`stompboxDelay`](../api-reference/generated/types/entities.StompboxDelay.html) | Stompbox Delay |
+| [`stompboxSlope`](../api-reference/generated/types/entities.StompboxSlope.html) | Stompbox Slope (filter) |
+| [`tinyGain`](../api-reference/generated/types/entities.TinyGain.html) | Tiny Gain |
+| [`audioMerger`](../api-reference/generated/types/entities.AudioMerger.html) | Audio Merger |
+| [`audioSplitter`](../api-reference/generated/types/entities.AudioSplitter.html) | Audio Splitter |
+| [`crossfader`](../api-reference/generated/types/entities.Crossfader.html) | Crossfader |
 
 ## Creating a synth and connecting it to the mixer
 
@@ -86,7 +86,7 @@ t.create("desktopAudioCable", {
 t.send();
 ```
 
-The `desktopAudioCable` entity connects audio outputs to audio inputs. See [desktopAudioCable](../api-reference/generated/entities/type-aliases/DesktopAudioCable.html) for full field details.
+The `desktopAudioCable` entity connects audio outputs to audio inputs. See [desktopAudioCable](../api-reference/generated/types/entities.DesktopAudioCable.html) for full field details.
 
 ## Updating a device parameter
 

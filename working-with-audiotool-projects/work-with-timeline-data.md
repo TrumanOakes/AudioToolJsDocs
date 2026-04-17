@@ -101,24 +101,24 @@ t.create("note", {
 t.send();
 ```
 
-See [noteRegion](../api-reference/generated/entities/type-aliases/NoteRegion.html), [noteTrack](../api-reference/generated/entities/type-aliases/NoteTrack.html), and [note](../api-reference/generated/entities/type-aliases/Note.html) for full field details.
+See [noteRegion](../api-reference/generated/types/entities.NoteRegion.html), [noteTrack](../api-reference/generated/types/entities.NoteTrack.html), and [note](../api-reference/generated/types/entities.Note.html) for full field details.
 
 ## Track types
 
 | Entity | Description |
 |--------|-------------|
-| [`noteTrack`](../api-reference/generated/entities/type-aliases/NoteTrack.html) · [explanation](../reference/entities/noteTrack.html) | Track for MIDI/note data |
-| [`audioTrack`](../api-reference/generated/entities/type-aliases/AudioTrack.html) · [explanation](../reference/entities/audioTrack.html) | Track for audio clips |
-| [`automationTrack`](../api-reference/generated/entities/type-aliases/AutomationTrack.html) · [explanation](../reference/entities/automationTrack.html) | Track for parameter automation curves |
-| [`patternTrack`](../api-reference/generated/entities/type-aliases/PatternTrack.html) · [explanation](../reference/entities/patternTrack.html) | Track for pattern-based sequencing |
+| [`noteTrack`](../api-reference/generated/types/entities.NoteTrack.html) · [explanation](../reference/entities/noteTrack.html) | Track for MIDI/note data |
+| [`audioTrack`](../api-reference/generated/types/entities.AudioTrack.html) · [explanation](../reference/entities/audioTrack.html) | Track for audio clips |
+| [`automationTrack`](../api-reference/generated/types/entities.AutomationTrack.html) · [explanation](../reference/entities/automationTrack.html) | Track for parameter automation curves |
+| [`patternTrack`](../api-reference/generated/types/entities.PatternTrack.html) · [explanation](../reference/entities/patternTrack.html) | Track for pattern-based sequencing |
 
 ## Region types
 
 | Entity | Description |
 |--------|-------------|
-| [`noteRegion`](../api-reference/generated/entities/type-aliases/NoteRegion.html) · [explanation](../reference/entities/noteRegion.html) | A region on a note track, references a `noteCollection` |
-| [`audioRegion`](../api-reference/generated/entities/type-aliases/AudioRegion.html) · [explanation](../reference/entities/audioRegion.html) | A region on an audio track, references a `sample` |
-| [`automationRegion`](../api-reference/generated/entities/type-aliases/AutomationRegion.html) · [explanation](../reference/entities/automationRegion.html) | A region on an automation track |
+| [`noteRegion`](../api-reference/generated/types/entities.NoteRegion.html) · [explanation](../reference/entities/noteRegion.html) | A region on a note track, references a `noteCollection` |
+| [`audioRegion`](../api-reference/generated/types/entities.AudioRegion.html) · [explanation](../reference/entities/audioRegion.html) | A region on an audio track, references a `sample` |
+| [`automationRegion`](../api-reference/generated/types/entities.AutomationRegion.html) · [explanation](../reference/entities/automationRegion.html) | A region on an automation track |
 
 ## Note fields
 

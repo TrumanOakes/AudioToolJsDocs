@@ -19,7 +19,7 @@ A matrixArpeggiatorPatternStep is a single step within a `matrixArpeggiatorPatte
 |-------|------|-------------|
 | `pattern` | pointer | Points to the `matrixArpeggiatorPattern` this step belongs to — use `pattern.location` |
 
-> For the complete field listing with types, defaults, and ranges, see [MatrixArpeggiatorPatternStep](../../api-reference/generated/entities/type-aliases/MatrixArpeggiatorPatternStep.html).
+> For the complete field listing with types, defaults, and ranges, see [MatrixArpeggiatorPatternStep](../../api-reference/generated/types/entities.MatrixArpeggiatorPatternStep.html).
 
 ## Example
 

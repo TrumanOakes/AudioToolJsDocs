@@ -17,7 +17,7 @@ An audioTrack is a lane in the Audiotool timeline that holds audio clips. You pl
 |-------|------|-------------|
 | `displayName` | `string` | Label shown on the track in the timeline |
 
-> For the complete field listing with types, defaults, and ranges, see [AudioTrack](../../api-reference/generated/entities/type-aliases/AudioTrack.html).
+> For the complete field listing with types, defaults, and ranges, see [AudioTrack](../../api-reference/generated/types/entities.AudioTrack.html).
 
 ## Example
 

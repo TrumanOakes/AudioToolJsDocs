@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
   docsTab.textContent = "Docs";
 
   var apiTab = document.createElement("a");
-  apiTab.href = "{{ '/api-reference/generated/' | relative_url }}";
+  apiTab.href = "{{ '/api-reference/generated/modules/index.html' | relative_url }}";
   apiTab.className = "top-tab" + (isApi ? " is-active" : "");
   apiTab.textContent = "API";
 
@@ -76,11 +76,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     var apiBase = "{{ '/api-reference/generated/' | relative_url }}";
     var apiSections = [
-      { title: "index", href: "{{ '/api-reference/generated/index/' | relative_url }}" },
-      { title: "entities", href: "{{ '/api-reference/generated/entities/' | relative_url }}" },
-      { title: "document", href: "{{ '/api-reference/generated/document/' | relative_url }}" },
-      { title: "utils", href: "{{ '/api-reference/generated/utils/' | relative_url }}" },
-      { title: "api", href: "{{ '/api-reference/generated/api/' | relative_url }}" },
+      { title: "index", href: "{{ '/api-reference/generated/modules/index.html' | relative_url }}" },
+      { title: "entities", href: "{{ '/api-reference/generated/modules/entities.html' | relative_url }}" },
+      { title: "document", href: "{{ '/api-reference/generated/modules/document.html' | relative_url }}" },
+      { title: "utils", href: "{{ '/api-reference/generated/modules/utils.html' | relative_url }}" },
+      { title: "api", href: "{{ '/api-reference/generated/modules/api.html' | relative_url }}" },
     ];
 
     var normalizePath = function (value) {

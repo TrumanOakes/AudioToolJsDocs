@@ -19,7 +19,7 @@ A mixerAux entity represents an auxiliary send and return in the Audiotool mixer
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 | `displayName` | `string` | Label shown in the DAW UI |
 
-> For the complete field listing with types, defaults, and ranges, see [MixerAux](../../api-reference/generated/entities/type-aliases/MixerAux.html).
+> For the complete field listing with types, defaults, and ranges, see [MixerAux](../../api-reference/generated/types/entities.MixerAux.html).
 
 ## See also
 

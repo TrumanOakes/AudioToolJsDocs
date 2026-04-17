@@ -23,7 +23,7 @@ A mixerChannel is an individual channel strip in the Audiotool mixer. Audio devi
 | `displayParameters` | object | Visual ordering and layout settings for this channel strip in the mixer |
 | `displayParameters.orderAmongStrips` | `number` | Controls the left-to-right position of this channel in the mixer. Use the current maximum + 1 to append to the right |
 
-> For the complete field listing with types, defaults, and ranges, see [MixerChannel](../../api-reference/generated/entities/type-aliases/MixerChannel.html).
+> For the complete field listing with types, defaults, and ranges, see [MixerChannel](../../api-reference/generated/types/entities.MixerChannel.html).
 
 ## Example
 

@@ -17,7 +17,7 @@ A patternTrack is a lane in the Audiotool timeline that uses pattern-based seque
 |-------|------|-------------|
 | `displayName` | `string` | Label shown on the track in the timeline |
 
-> For the complete field listing with types, defaults, and ranges, see [PatternTrack](../../api-reference/generated/entities/type-aliases/PatternTrack.html).
+> For the complete field listing with types, defaults, and ranges, see [PatternTrack](../../api-reference/generated/types/entities.PatternTrack.html).
 
 ## Example
 

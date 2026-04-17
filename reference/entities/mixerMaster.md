@@ -22,7 +22,7 @@ There is always exactly one `mixerMaster` per document. Do not create or remove 
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 | `displayName` | `string` | Label shown on the mixer master in the DAW UI |
 
-> For the complete field listing with types, defaults, and ranges, see [MixerMaster](../../api-reference/generated/entities/type-aliases/MixerMaster.html).
+> For the complete field listing with types, defaults, and ranges, see [MixerMaster](../../api-reference/generated/types/entities.MixerMaster.html).
 
 ## Example
 

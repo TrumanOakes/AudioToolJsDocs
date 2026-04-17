@@ -15,7 +15,7 @@ Type definitions for the Nexus document structure, schema, and <span class="tool
 
 ## Interfaces
 
-### [`NexusEntity`](../api-reference/generated/document/interfaces/NexusEntity.html)
+### [`NexusEntity`](../api-reference/generated/interfaces/document.NexusEntity.html)
 
 The core interface that every entity in the document implements. Whether you are holding a `note`, a `tinyGain`, or a `mixerChannel`, you are holding a `NexusEntity`.
 
@@ -38,7 +38,7 @@ for (const gain of gains) {
 
 ---
 
-### [`EntityQuery`](../api-reference/generated/document/interfaces/EntityQuery.html)
+### [`EntityQuery`](../api-reference/generated/interfaces/document.EntityQuery.html)
 
 The type returned by `nexus.queryEntities.ofTypes(...)`. Provides a fluent API for filtering and retrieving entities from the current document state.
 
@@ -95,7 +95,7 @@ const cables = nexus.queryEntities
 
 ---
 
-### [`FieldQuery`](../api-reference/generated/document/interfaces/FieldQuery.html)
+### [`FieldQuery`](../api-reference/generated/interfaces/document.FieldQuery.html)
 
 A `FieldQuery` is returned by calling `.fields()` on an `EntityQuery`. It provides methods to filter across the fields of selected entities — for example, finding fields by pointer target type or whether they're pointed to.
 
@@ -118,7 +118,7 @@ const primitiveFields = nexus.queryEntities.fields().primitiveFields();
 
 ---
 
-### [`NexusEventManager`](../api-reference/generated/document/interfaces/NexusEventManager.html)
+### [`NexusEventManager`](../api-reference/generated/interfaces/document.NexusEventManager.html)
 
 The interface of `nexus.events`. Provides methods to subscribe to entity lifecycle events: creation, field updates, removal, and pointer changes.
 
@@ -180,7 +180,7 @@ sub.terminate();
 
 ---
 
-### [`PrimitiveField`](../api-reference/generated/document/interfaces/PrimitiveField.html)
+### [`PrimitiveField`](../api-reference/generated/interfaces/document.PrimitiveField.html)
 
 A field that holds a single primitive value — a number, string, boolean, or byte sequence. Every primitive field on an entity (`gain`, `displayName`, `pitch`, etc.) is a `PrimitiveField`.
 
@@ -216,7 +216,7 @@ console.log(sampleEntity.fields.sampleName.value);
 
 ---
 
-### [`ArrayField`](../api-reference/generated/document/interfaces/ArrayField.html)
+### [`ArrayField`](../api-reference/generated/interfaces/document.ArrayField.html)
 
 A field that holds an ordered list of sub-entities or values. Some entity types use array fields to store variable-length data — for example, the steps in a `MatrixArpeggiatorPattern`.
 
@@ -232,7 +232,7 @@ const steps = pattern.fields.steps; // ArrayField<..., 64>
 
 ---
 
-### [`NexusField`](../api-reference/generated/document/interfaces/NexusField.html)
+### [`NexusField`](../api-reference/generated/interfaces/document.NexusField.html)
 
 The base interface for all field types — both `PrimitiveField` and `ArrayField` extend `NexusField`. You will most often see the more specific subtypes in practice; `NexusField` is the common base.
 
@@ -246,7 +246,7 @@ function logField(field: NexusField) {
 
 ---
 
-### [`NexusObject`](../api-reference/generated/document/interfaces/NexusObject.html)
+### [`NexusObject`](../api-reference/generated/interfaces/document.NexusObject.html)
 
 Represents an object-type field — a structured group of named fields nested inside another field. Entity types that have complex sub-structures use `NexusObject` to wrap them.
 
@@ -258,7 +258,7 @@ const step = pattern.fields.steps[0]; // NexusObject<MatrixArpeggiatorPatternSte
 
 ---
 
-### [`NexusLocation`](../api-reference/generated/document/interfaces/NexusLocation.html)
+### [`NexusLocation`](../api-reference/generated/interfaces/document.NexusLocation.html)
 
 A reference to a specific location within the document schema — used when you need to point at a particular field or entity rather than passing the entity object itself. Automation tracks use `NexusLocation` to identify the device parameter they control.
 
@@ -303,7 +303,7 @@ function setLabel(field: StringPrimitive) {
 
 ---
 
-### [`EntityTypeKey`](../api-reference/generated/document/type-aliases/EntityTypeKey.html)
+### [`EntityTypeKey`](../api-reference/generated/types/document.EntityTypeKey.html)
 
 A union of all valid entity type key strings. TypeScript uses this to catch typos in `t.create("typeName")` and `queryEntities.ofTypes("typeName")` calls at compile time.
 
@@ -322,7 +322,7 @@ function createByType(document: any, type: EntityTypeKey) {
 
 ---
 
-### [`EntityDetails`](../api-reference/generated/document/type-aliases/EntityDetails.html)
+### [`EntityDetails`](../api-reference/generated/types/document.EntityDetails.html)
 
 The complete type definition for a single entity type — its fields and their types. Used internally and in TypeScript generics when you need to work with entity schemas directly.
 
@@ -339,7 +339,7 @@ function inspectEntityFields<K extends EntityTypeKey>(
 
 ---
 
-### [`EntityTypes`](../api-reference/generated/document/type-aliases/EntityTypes.html)
+### [`EntityTypes`](../api-reference/generated/types/document.EntityTypes.html)
 
 A map of all entity type keys to their `EntityDetails`. The complete schema map for the entire Nexus document model — useful when iterating or inspecting all known entity types.
 
@@ -352,7 +352,7 @@ import type { EntityTypes } from "@audiotool/nexus/document";
 
 ---
 
-### [`EntityWithOverwrites`](../api-reference/generated/document/type-aliases/EntityWithOverwrites.html)
+### [`EntityWithOverwrites`](../api-reference/generated/types/document.EntityWithOverwrites.html)
 
 An entity type that includes field overwrites applied on top of its base values. Used internally when pending transaction changes are visible before being committed.
 
@@ -365,7 +365,7 @@ import type { EntityWithOverwrites } from "@audiotool/nexus/document";
 
 ---
 
-### [`NexusEntityUnion`](../api-reference/generated/document/type-aliases/NexusEntityUnion.html)
+### [`NexusEntityUnion`](../api-reference/generated/types/document.NexusEntityUnion.html)
 
 A union type of every possible `NexusEntity` in the schema. Useful when writing code that can receive any entity type and then narrows by `.entityType`.
 
@@ -385,7 +385,7 @@ function handleAnyEntity(entity: NexusEntityUnion) {
 
 ---
 
-### [`ReferenceQuery`](../api-reference/generated/document/type-aliases/ReferenceQuery.html)
+### [`ReferenceQuery`](../api-reference/generated/types/document.ReferenceQuery.html)
 
 A query type for finding entities related to another through pointer fields. Because the pointer direction is not always known, `ReferenceQuery` does not change the return type — it narrows the results to a specific relationship.
 
@@ -408,7 +408,7 @@ for (const device of connected) {
 
 ---
 
-### [`TransactionBuilder`](../api-reference/generated/document/type-aliases/TransactionBuilder.html)
+### [`TransactionBuilder`](../api-reference/generated/types/document.TransactionBuilder.html)
 
 The `t` object passed into your `nexus.modify(t => ...)` callback, or the object returned by `nexus.createTransaction()`. Provides the three mutation operations: `create`, `update`, and `remove`.
 
@@ -486,7 +486,7 @@ const cables = t.entities
 
 ---
 
-### [`SafeTransactionBuilder`](../api-reference/generated/document/type-aliases/SafeTransactionBuilder.html)
+### [`SafeTransactionBuilder`](../api-reference/generated/types/document.SafeTransactionBuilder.html)
 
 A stricter variant of `TransactionBuilder` with additional TypeScript-level type enforcement. Enforces that field values exactly match their declared types with no implicit coercions. Use when you want the compiler to catch more potential errors at write time.
 
@@ -508,7 +508,7 @@ async function safeSetGain(
 
 ---
 
-### [`ArrayDetails`](../api-reference/generated/document/type-aliases/ArrayDetails.html), [`ObjectDetails`](../api-reference/generated/document/type-aliases/ObjectDetails.html), [`PrimitiveFieldDetails`](../api-reference/generated/document/type-aliases/PrimitiveFieldDetails.html)
+### [`ArrayDetails`](../api-reference/generated/types/document.ArrayDetails.html), [`ObjectDetails`](../api-reference/generated/types/document.ObjectDetails.html), [`PrimitiveFieldDetails`](../api-reference/generated/types/document.PrimitiveFieldDetails.html)
 
 Schema detail types for array, object, and primitive fields respectively. Used when inspecting field definitions at the type level — for example, in code that introspects the schema to build tooling.
 
@@ -525,7 +525,7 @@ import type {
 
 ---
 
-### [`NexusLocationPrimitive`](../api-reference/generated/document/type-aliases/NexusLocationPrimitive.html), [`SchemaLocation`](../api-reference/generated/document/type-aliases/SchemaLocation.html), [`SchemaPath`](../api-reference/generated/document/type-aliases/SchemaPath.html)
+### [`NexusLocationPrimitive`](../api-reference/generated/types/document.NexusLocationPrimitive.html), [`SchemaLocation`](../api-reference/generated/types/document.SchemaLocation.html), [`SchemaPath`](../api-reference/generated/types/document.SchemaPath.html)
 
 Types for navigating the document schema structure. `SchemaLocation` and `SchemaPath` are two representations of the same concept — a path to a specific location in the schema.
 
@@ -546,7 +546,7 @@ const location: SchemaLocation = schemaPathToSchemaLocation(path);
 
 ## Functions
 
-### [`getSchemaLocationDetails`](../api-reference/generated/document/functions/getSchemaLocationDetails.html)`(location)`
+### [`getSchemaLocationDetails`](../api-reference/generated/functions/document.getSchemaLocationDetails.html)`(location)`
 
 ```ts
 getSchemaLocationDetails(location: SchemaLocation): SchemaLocationDetails
@@ -564,7 +564,7 @@ console.log(details); // schema metadata for the gain field
 
 ---
 
-### [`schemaLocationToSchemaPath`](../api-reference/generated/document/functions/schemaLocationToSchemaPath.html)`(location)`
+### [`schemaLocationToSchemaPath`](../api-reference/generated/functions/document.schemaLocationToSchemaPath.html)`(location)`
 
 ```ts
 schemaLocationToSchemaPath(location: SchemaLocation): SchemaPath
@@ -581,7 +581,7 @@ console.log(path); // human-readable schema path string
 
 ---
 
-### [`schemaPathToSchemaLocation`](../api-reference/generated/document/functions/schemaPathToSchemaLocation.html)`(path)`
+### [`schemaPathToSchemaLocation`](../api-reference/generated/functions/document.schemaPathToSchemaLocation.html)`(path)`
 
 ```ts
 schemaPathToSchemaLocation(path: SchemaPath): SchemaLocation

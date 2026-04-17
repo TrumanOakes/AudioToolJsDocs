@@ -31,7 +31,7 @@ const projects = await client.api.projectService.listProjects({});
 
 ## Functions
 
-### [`createAudiotoolClient`](../api-reference/generated/index/functions/createAudiotoolClient.html)
+### [`createAudiotoolClient`](../api-reference/generated/functions/index.createAudiotoolClient.html)
 
 ```ts
 createAudiotoolClient(opts: { authorization: LoginStatus | string }): Promise<AudiotoolClient>
@@ -45,7 +45,7 @@ Creates an authenticated Audiotool client.
 
 **Returns:** `Promise<AudiotoolClient>`
 
-### [`createOfflineDocument`](../api-reference/generated/index/functions/createOfflineDocument.html)
+### [`createOfflineDocument`](../api-reference/generated/functions/index.createOfflineDocument.html)
 
 ```typescript
 createOfflineDocument(opts?: { validated?: boolean }): Promise<OfflineDocument>
@@ -60,7 +60,7 @@ Creates a nexus document that operates without backend synchronization. All chan
 
 The returned document is immediately ready — no `start()` call required. Use this for development and testing.
 
-### [`getLoginStatus`](../api-reference/generated/index/functions/getLoginStatus.html)
+### [`getLoginStatus`](../api-reference/generated/functions/index.getLoginStatus.html)
 
 ```typescript
 getLoginStatus(opts: {
@@ -78,7 +78,7 @@ Returns the current OAuth login status. Used to implement login/logout UI in bro
 
 ## Exported Type Aliases
 
-### [`AudiotoolClient`](../api-reference/generated/index/type-aliases/AudiotoolClient.html)
+### [`AudiotoolClient`](../api-reference/generated/types/index.AudiotoolClient.html)
 
 The authenticated client object returned by `createAudiotoolClient()`. Use this to open documents and call REST API services.
 
@@ -97,7 +97,7 @@ async function openProject(client: AudiotoolClient, url: string) {
 
 ---
 
-### [`LoginStatus`](../api-reference/generated/index/type-aliases/LoginStatus.html)
+### [`LoginStatus`](../api-reference/generated/types/index.LoginStatus.html)
 
 The union type returned by `getLoginStatus()` — either a `LoggedInStatus` or a `LoggedOutStatus`. Check which one you have before taking action.
 
@@ -117,7 +117,7 @@ function handleLogin(status: LoginStatus) {
 
 ---
 
-### [`LoggedInStatus`](../api-reference/generated/index/type-aliases/LoggedInStatus.html)
+### [`LoggedInStatus`](../api-reference/generated/types/index.LoggedInStatus.html)
 
 The user is authenticated. Has a `.logout()` method to end the session.
 
@@ -134,7 +134,7 @@ function showUserMenu(status: LoggedInStatus) {
 
 ---
 
-### [`LoggedOutStatus`](../api-reference/generated/index/type-aliases/LoggedOutStatus.html)
+### [`LoggedOutStatus`](../api-reference/generated/types/index.LoggedOutStatus.html)
 
 The user is not authenticated. Has a `.login()` method to start the OAuth login flow.
 
@@ -150,7 +150,7 @@ function showLoginPrompt(status: LoggedOutStatus) {
 
 ---
 
-### [`OfflineDocument`](../api-reference/generated/index/type-aliases/OfflineDocument.html)
+### [`OfflineDocument`](../api-reference/generated/types/index.OfflineDocument.html)
 
 A local-only document with no backend connection. Changes are discarded on reload. Returned by `createOfflineDocument()`. Exposes the same `modify()`, `events`, and `queryEntities` API as a synced document.
 
@@ -170,7 +170,7 @@ async function buildTestDocument(): Promise<OfflineDocument> {
 
 ---
 
-### [`SyncedDocument`](../api-reference/generated/index/type-aliases/SyncedDocument.html)
+### [`SyncedDocument`](../api-reference/generated/types/index.SyncedDocument.html)
 
 A document connected to a real Audiotool project in real time. Changes are persisted and broadcast to all collaborators. Returned by `client.createSyncedDocument()` after calling `.start()`.
 

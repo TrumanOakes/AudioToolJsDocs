@@ -15,7 +15,7 @@ A matrixArpeggiatorPattern defines the sequence of steps for a matrix arpeggiato
 
 ## Fields
 
-> For the complete field listing with types, defaults, and ranges, see [MatrixArpeggiatorPattern](../../api-reference/generated/entities/type-aliases/MatrixArpeggiatorPattern.html).
+> For the complete field listing with types, defaults, and ranges, see [MatrixArpeggiatorPattern](../../api-reference/generated/types/entities.MatrixArpeggiatorPattern.html).
 
 ## Example
 

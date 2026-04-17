@@ -19,7 +19,7 @@ A mixerDelayAux is a delay-specific auxiliary send/return bus in the Audiotool m
 | `positionY` | `number` | Vertical position on the Audiotool desktop |
 | `displayName` | `string` | Label shown on the aux bus in the DAW UI |
 
-> For the complete field listing with types, defaults, and ranges, see [MixerDelayAux](../../api-reference/generated/entities/type-aliases/MixerDelayAux.html).
+> For the complete field listing with types, defaults, and ranges, see [MixerDelayAux](../../api-reference/generated/types/entities.MixerDelayAux.html).
 
 ## Example
 

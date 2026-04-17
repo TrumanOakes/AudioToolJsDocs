@@ -44,6 +44,9 @@ jobs:
       - name: Generate API reference
         run: npm run docs
 
+      - name: Rewrite written-doc links to TypeDoc reflections
+        run: node scripts/rewrite-api-links-to-typedoc.mjs
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

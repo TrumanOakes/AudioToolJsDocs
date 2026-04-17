@@ -17,7 +17,7 @@ A groove entity defines a groove or swing quantization pattern. Applying a groov
 |-------|------|-------------|
 | `displayName` | `string` | Label for this groove preset |
 
-> For the complete field listing with types, defaults, and ranges, see [Groove](../../api-reference/generated/entities/type-aliases/Groove.html).
+> For the complete field listing with types, defaults, and ranges, see [Groove](../../api-reference/generated/types/entities.Groove.html).
 
 ## Example
 
