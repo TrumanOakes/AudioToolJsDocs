@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { access, readdir } from "node:fs/promises";
+import { access, readdir, readFile } from "node:fs/promises";
 import { constants } from "node:fs";
 import { join } from "node:path";
 
@@ -54,14 +54,26 @@ async function main() {
     missing.push(".nojekyll");
   }
 
+  // Legacy markdown artifacts must not be present in native TypeDoc HTML output.
+  if (files.includes("media")) {
+    const mediaEntries = await readdir(join(GENERATED_DIR, "media"));
+    if (mediaEntries.some((entry) => entry.endsWith(".md"))) {
+      missing.push("media/*.md (legacy artifact detected)");
+    }
+  }
+
   for (const check of REQUIRED_CONTENT_CHECKS) {
     const abs = join(GENERATED_DIR, check.path);
     if (!await exists(abs)) continue;
-    const content = await (await import("node:fs/promises")).readFile(abs, "utf-8");
+    const content = await readFile(abs, "utf-8");
     for (const marker of check.mustInclude) {
       if (!content.includes(marker)) {
         missing.push(`${check.path} missing marker "${marker}"`);
       }
+    }
+
+    if (content.includes("../media/") && content.includes(".md")) {
+      missing.push(`${check.path} still contains legacy ../media/*.md links`);
     }
   }
 
