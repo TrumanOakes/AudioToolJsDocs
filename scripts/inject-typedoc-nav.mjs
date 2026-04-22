@@ -6,14 +6,8 @@ import { join } from "node:path";
 const GENERATED_DIR = join(import.meta.dirname, "..", "api-reference", "generated");
 const DOCS_BASE = "/AudioToolJsDocs/";
 const API_BASE = "/AudioToolJsDocs/api-reference/generated/";
-
-const SECTION_PATTERNS = [
-  { title: "index", test: /\/modules\/index\.html$|\/(types|interfaces|classes|enums|variables|functions)\/index\./i },
-  { title: "entities", test: /\/modules\/entities\.html$|\/(types|interfaces|classes|enums|variables|functions)\/entities\./i },
-  { title: "document", test: /\/modules\/document\.html$|\/(types|interfaces|classes|enums|variables|functions)\/document\./i },
-  { title: "utils", test: /\/modules\/utils\.html$|\/(types|interfaces|classes|enums|variables|functions)\/utils\./i },
-  { title: "api", test: /\/modules\/api(\.sample)?\.html$|\/(types|interfaces|classes|enums|variables|functions)\/api\./i },
-];
+const INJECTION_START = "<!-- AUTIOTOOL_TYPEDOC_NAV_INJECTION_START -->";
+const INJECTION_END = "<!-- AUTIOTOOL_TYPEDOC_NAV_INJECTION_END -->";
 
 async function getAllHtmlFiles(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -60,60 +54,8 @@ function buildTabsAndSidebarScript() {
     toolbar.appendChild(tabs);
   }
 
-  function inferActiveSection(pathname) {
-    var path = pathname.toLowerCase();
-    var patterns = ${JSON.stringify(SECTION_PATTERNS.map((s) => ({ title: s.title, source: s.test.source, flags: s.test.flags })))};
-    for (var i = 0; i < patterns.length; i++) {
-      var pattern = patterns[i];
-      var re = new RegExp(pattern.source, pattern.flags);
-      if (re.test(path)) {
-        return pattern.title;
-      }
-    }
-    return "index";
-  }
-
-  function replaceSiteMenuWithApiSections() {
-    var nav = document.querySelector(".site-menu nav.tsd-navigation:not(#tsd-sidebar-links)");
-    if (!nav) return;
-
-    var list = document.createElement("ul");
-    list.className = "tsd-small-nested-navigation";
-
-    var sections = [
-      { title: "index", href: "${API_BASE}modules/index.html" },
-      { title: "entities", href: "${API_BASE}modules/entities.html" },
-      { title: "document", href: "${API_BASE}modules/document.html" },
-      { title: "utils", href: "${API_BASE}modules/utils.html" },
-      { title: "api", href: "${API_BASE}modules/api.html" }
-    ];
-
-    var active = inferActiveSection(window.location.pathname);
-
-    for (var i = 0; i < sections.length; i++) {
-      var section = sections[i];
-      var li = document.createElement("li");
-      var a = document.createElement("a");
-      a.href = section.href;
-      a.textContent = section.title;
-      if (section.title === active) {
-        a.className = "current";
-      }
-      li.appendChild(a);
-      list.appendChild(li);
-    }
-
-    var heading = nav.querySelector("a");
-    nav.innerHTML = "";
-    if (heading) {
-      nav.appendChild(heading);
-    }
-    nav.appendChild(list);
-  }
-
   function run() {
     addTopTabs();
-    replaceSiteMenuWithApiSections();
   }
 
   if (document.readyState === "loading") {
@@ -218,15 +160,27 @@ function buildThemeOverrides() {
 }
 
 function replaceHead(content, injection) {
-  if (content.includes("typedoc-top-tabs")) {
-    return content;
+  if (content.includes(INJECTION_START) && content.includes(INJECTION_END)) {
+    return content.replace(
+      new RegExp(`${INJECTION_START}[\\s\\S]*?${INJECTION_END}`, "m"),
+      injection,
+    );
   }
+
+  // Backward compatibility for previously injected head block that rewrote
+  // the TypeDoc sidebar into module-list-only links.
+  const legacyInjectedBlockRegex =
+    /<style>[\s\S]*?\.typedoc-top-tabs[\s\S]*?<\/style>\s*<script>[\s\S]*?replaceSiteMenuWithApiSections[\s\S]*?<\/script>\s*/m;
+  if (legacyInjectedBlockRegex.test(content)) {
+    return content.replace(legacyInjectedBlockRegex, `${injection}\n`);
+  }
+
   return content.replace("</head>", `${injection}\n</head>`);
 }
 
 async function main() {
   const files = await getAllHtmlFiles(GENERATED_DIR);
-  const injection = `${buildThemeOverrides()}\n${buildTabsAndSidebarScript()}`;
+  const injection = `${INJECTION_START}\n${buildThemeOverrides()}\n${buildTabsAndSidebarScript()}\n${INJECTION_END}`;
 
   for (const file of files) {
     const original = await readFile(file, "utf-8");
