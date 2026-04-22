@@ -1,0 +1,260 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>DesktopAudioCable | @audiotool/nexus - v0.0.12</title><meta name="description" content="Documentation for @audiotool/nexus"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/custom.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script>
+<!-- AUTIOTOOL_TYPEDOC_NAV_INJECTION_START -->
+
+<style>
+  :root {
+    --typedoc-bg: #0f1117;
+    --typedoc-panel: #161b22;
+    --typedoc-border: #30363d;
+    --typedoc-text: #e6edf3;
+    --typedoc-muted: #9da7b3;
+    --typedoc-link: #58a6ff;
+    --typedoc-link-hover: #79c0ff;
+  }
+
+  body {
+    background: var(--typedoc-bg);
+    color: var(--typedoc-text);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .tsd-page-toolbar {
+    background: var(--typedoc-panel);
+    border-bottom: 1px solid var(--typedoc-border);
+  }
+
+  .tsd-navigation a,
+  .tsd-page-toolbar a,
+  a {
+    color: var(--typedoc-link);
+  }
+
+  a:hover {
+    color: var(--typedoc-link-hover);
+  }
+
+  .tsd-panel {
+    border: 1px solid var(--typedoc-border);
+    background: var(--typedoc-panel);
+    border-radius: 8px;
+  }
+
+  .tsd-page-title h1,
+  .tsd-page-title h2,
+  .tsd-page-title h3,
+  h1, h2, h3 {
+    color: var(--typedoc-text);
+  }
+
+  .col-sidebar {
+    border-left: 1px solid var(--typedoc-border);
+  }
+
+  .typedoc-top-tabs {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 1rem;
+  }
+
+  .typedoc-top-tab {
+    display: inline-flex;
+    align-items: center;
+    height: 2rem;
+    padding: 0 0.75rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    color: var(--typedoc-text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .typedoc-top-tab:hover {
+    border-color: var(--typedoc-border);
+    background: #21262d;
+    color: var(--typedoc-text);
+    text-decoration: none;
+  }
+
+  .typedoc-top-tab.is-active {
+    border-color: var(--typedoc-link);
+    color: var(--typedoc-link);
+    font-weight: 600;
+  }
+</style>
+
+
+<script>
+(function () {
+  function addTopTabs() {
+    var toolbar = document.querySelector(".tsd-toolbar-contents");
+    if (!toolbar) return;
+    if (toolbar.querySelector(".typedoc-top-tabs")) return;
+
+    var tabs = document.createElement("nav");
+    tabs.className = "typedoc-top-tabs";
+    tabs.setAttribute("aria-label", "Documentation sections");
+
+    var path = window.location.pathname;
+    var isApi = path.indexOf("/api-reference/generated/") !== -1;
+
+    var docs = document.createElement("a");
+    docs.href = "/AudioToolJsDocs/";
+    docs.className = "typedoc-top-tab" + (isApi ? "" : " is-active");
+    docs.textContent = "Docs";
+
+    var api = document.createElement("a");
+    api.href = "/AudioToolJsDocs/api-reference/generated/";
+    api.className = "typedoc-top-tab" + (isApi ? " is-active" : "");
+    api.textContent = "API";
+
+    tabs.appendChild(docs);
+    tabs.appendChild(api);
+    toolbar.appendChild(tabs);
+  }
+
+  function run() {
+    addTopTabs();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run);
+  } else {
+    run();
+  }
+})();
+</script>
+
+<!-- AUTIOTOOL_TYPEDOC_NAV_INJECTION_END -->
+</head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="../index.html" class="title">@audiotool/nexus - v0.0.12</a><div id="tsd-toolbar-links"><a href="https://developer.audiotool.com">Developer Hub</a><a href="https://github.com/audiotool/nexus">GitHub</a></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><ul class="tsd-breadcrumb" aria-label="Breadcrumb"><li><a href="../modules/entities.html">entities</a></li><li><a href="" aria-current="page">DesktopAudioCable</a></li></ul><h1>Type Alias DesktopAudioCable</h1></div><section class="tsd-panel tsd-comment"><div class="tsd-comment tsd-typography"><table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>entity</td>
+</tr>
+<tr>
+<td>key</td>
+<td><code>&quot;desktopAudioCable&quot;</code></td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#listenable" class="tsd-kind-enum-member">api.TargetType.Listenable</a></td>
+</tr>
+</tbody>
+</table>
+<p>A cable connecting an audio output to an audio input on the desktop.</p>
+</div></section><div class="tsd-signature"><span class="tsd-signature-keyword">type</span> <span class="tsd-kind-type-alias">DesktopAudioCable</span> <span class="tsd-signature-symbol">=</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#colorindex">colorIndex</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#fromsocket">fromSocket</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/document.NexusLocation.html" class="tsd-signature-type tsd-kind-interface">NexusLocation</a><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#tosocket">toSocket</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/document.NexusLocation.html" class="tsd-signature-type tsd-kind-interface">NexusLocation</a><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/desktop_audio_cable/v1/desktop_audio_cable_nexus.ts#L20">gen/audiotool/document/v1/entity/desktop_audio_cable/v1/desktop_audio_cable_nexus.ts:20</a></li></ul></aside><section class="tsd-panel-group tsd-index-group"><section class="tsd-panel tsd-index-panel"><details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h5 class="tsd-index-heading uppercase">Index</h5></summary><div class="tsd-accordion-details"><section class="tsd-index-section"><h3 class="tsd-index-heading">Properties</h3><div class="tsd-index-list"><a href="#colorindex" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>color<wbr/>Index</span></a>
+<a href="#fromsocket" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>from<wbr/>Socket</span></a>
+<a href="#tosocket" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>to<wbr/>Socket</span></a>
+</div></section></div></details></section></section><details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h2>Properties</h2></summary><section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="colorindex"><span>color<wbr/>Index</span><a href="#colorindex" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">colorIndex</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Index of the color. The meaning of the color index is implementation-specific.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>0</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[0, 41]</td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/desktop_audio_cable/v1/desktop_audio_cable_nexus.ts#L49">gen/audiotool/document/v1/entity/desktop_audio_cable/v1/desktop_audio_cable_nexus.ts:49</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="fromsocket"><span>from<wbr/>Socket</span><a href="#fromsocket" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">fromSocket</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/document.NexusLocation.html" class="tsd-signature-type tsd-kind-interface">NexusLocation</a><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Pointer to an audio output from which the cable transports audio.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>no default, required</td>
+</tr>
+<tr>
+<td>required</td>
+<td>true</td>
+</tr>
+<tr>
+<td>targets</td>
+<td><a href="../enums/api.TargetType.html#audiooutput" class="tsd-kind-enum-member">api.TargetType.AudioOutput</a>, meaning one of: <br /><a href="entities.AudioDevice.html#audiooutput" class="tsd-kind-property">entities.AudioDevice.audioOutput</a>, <br /><a href="entities.AudioMerger.html#audiooutput" class="tsd-kind-property">entities.AudioMerger.audioOutput</a>, <br /><a href="entities.AudioSplitter.html#audiooutputa" class="tsd-kind-property">entities.AudioSplitter.audioOutputA</a>, <br /><a href="entities.AudioSplitter.html#audiooutputb" class="tsd-kind-property">entities.AudioSplitter.audioOutputB</a>, <br /><a href="entities.AudioSplitter.html#audiooutputc" class="tsd-kind-property">entities.AudioSplitter.audioOutputC</a>, <br /><a href="entities.AutoFilter.html#audiooutput" class="tsd-kind-property">entities.AutoFilter.audioOutput</a>, <br /><a href="entities.BandSplitter.html#highaudiooutput" class="tsd-kind-property">entities.BandSplitter.highAudioOutput</a>, <br /><a href="entities.BandSplitter.html#midaudiooutput" class="tsd-kind-property">entities.BandSplitter.midAudioOutput</a>, <br /><a href="entities.BandSplitter.html#lowaudiooutput" class="tsd-kind-property">entities.BandSplitter.lowAudioOutput</a>, <br /><a href="entities.Bassline.html#audiooutput" class="tsd-kind-property">entities.Bassline.audioOutput</a>, <br /><a href="entities.Beatbox8.html#audiooutput" class="tsd-kind-property">entities.Beatbox8.audioOutput</a>, <br /><a href="entities.Beatbox8Bassdrum.html#audiooutput" class="tsd-kind-property">entities.Beatbox8Bassdrum.audioOutput</a>, <br /><a href="entities.Beatbox8Snaredrum.html#audiooutput" class="tsd-kind-property">entities.Beatbox8Snaredrum.audioOutput</a>, <br /><a href="entities.Beatbox8TomCongaLow.html#audiooutput" class="tsd-kind-property">entities.Beatbox8TomCongaLow.audioOutput</a>, <br /><a href="entities.Beatbox8TomCongaMid.html#audiooutput" class="tsd-kind-property">entities.Beatbox8TomCongaMid.audioOutput</a>, <br /><a href="entities.Beatbox8TomCongaHigh.html#audiooutput" class="tsd-kind-property">entities.Beatbox8TomCongaHigh.audioOutput</a>, <br /><a href="entities.Beatbox8RimClaves.html#audiooutput" class="tsd-kind-property">entities.Beatbox8RimClaves.audioOutput</a>, <br /><a href="entities.Beatbox8ClapMaracas.html#audiooutput" class="tsd-kind-property">entities.Beatbox8ClapMaracas.audioOutput</a>, <br /><a href="entities.Beatbox8Cowbell.html#audiooutput" class="tsd-kind-property">entities.Beatbox8Cowbell.audioOutput</a>, <br /><a href="entities.Beatbox8Cymbal.html#audiooutput" class="tsd-kind-property">entities.Beatbox8Cymbal.audioOutput</a>, <br /><a href="entities.Beatbox8OpenHihat.html#audiooutput" class="tsd-kind-property">entities.Beatbox8OpenHihat.audioOutput</a>, <br /><a href="entities.Beatbox8ClosedHihat.html#audiooutput" class="tsd-kind-property">entities.Beatbox8ClosedHihat.audioOutput</a>, <br /><a href="entities.Beatbox9.html#audiooutput" class="tsd-kind-property">entities.Beatbox9.audioOutput</a>, <br /><a href="entities.Beatbox9Bassdrum.html#audiooutput" class="tsd-kind-property">entities.Beatbox9Bassdrum.audioOutput</a>, <br /><a href="entities.Beatbox9Snaredrum.html#audiooutput" class="tsd-kind-property">entities.Beatbox9Snaredrum.audioOutput</a>, <br /><a href="entities.Beatbox9Tom.html#audiooutput" class="tsd-kind-property">entities.Beatbox9Tom.audioOutput</a>, <br /><a href="entities.Beatbox9Rim.html#audiooutput" class="tsd-kind-property">entities.Beatbox9Rim.audioOutput</a>, <br /><a href="entities.Beatbox9Clap.html#audiooutput" class="tsd-kind-property">entities.Beatbox9Clap.audioOutput</a>, <br /><a href="entities.Beatbox9Hihat.html#audiooutput" class="tsd-kind-property">entities.Beatbox9Hihat.audioOutput</a>, <br /><a href="entities.Beatbox9Crash.html#audiooutput" class="tsd-kind-property">entities.Beatbox9Crash.audioOutput</a>, <br /><a href="entities.Beatbox9Ride.html#audiooutput" class="tsd-kind-property">entities.Beatbox9Ride.audioOutput</a>, <br /><a href="entities.Centroid.html#audiooutput" class="tsd-kind-property">entities.Centroid.audioOutput</a>, <br /><a href="entities.CentroidAux.html#audiooutput" class="tsd-kind-property">entities.CentroidAux.audioOutput</a>, <br /><a href="entities.Crossfader.html#audiooutput" class="tsd-kind-property">entities.Crossfader.audioOutput</a>, <br /><a href="entities.Curve.html#audiooutput" class="tsd-kind-property">entities.Curve.audioOutput</a>, <br /><a href="entities.Exciter.html#audiooutput" class="tsd-kind-property">entities.Exciter.audioOutput</a>, <br /><a href="entities.Gakki.html#audiooutput" class="tsd-kind-property">entities.Gakki.audioOutput</a>, <br /><a href="entities.GraphicalEQ.html#audiooutput" class="tsd-kind-property">entities.GraphicalEQ.audioOutput</a>, <br /><a href="entities.Gravity.html#audiooutput" class="tsd-kind-property">entities.Gravity.audioOutput</a>, <br /><a href="entities.Heisenberg.html#audiooutput" class="tsd-kind-property">entities.Heisenberg.audioOutput</a>, <br /><a href="entities.Helmholtz.html#audiooutput" class="tsd-kind-property">entities.Helmholtz.audioOutput</a>, <br /><a href="entities.Kobolt.html#audiooutput" class="tsd-kind-property">entities.Kobolt.audioOutput</a>, <br /><a href="entities.Machiniste.html#mainoutput" class="tsd-kind-property">entities.Machiniste.mainOutput</a>, <br /><a href="entities.MachinisteChannel.html#channeloutput" class="tsd-kind-property">entities.MachinisteChannel.channelOutput</a>, <br /><a href="entities.Minimixer.html#mainoutput" class="tsd-kind-property">entities.Minimixer.mainOutput</a>, <br /><a href="entities.Minimixer.html#auxsendoutput" class="tsd-kind-property">entities.Minimixer.auxSendOutput</a>, <br /><a href="entities.MixerAux.html#insertoutput" class="tsd-kind-property">entities.MixerAux.insertOutput</a>, <br /><a href="entities.MixerGroup.html#insertoutput" class="tsd-kind-property">entities.MixerGroup.insertOutput</a>, <br /><a href="entities.MixerMaster.html#insertoutput" class="tsd-kind-property">entities.MixerMaster.insertOutput</a>, <br /><a href="entities.Panorama.html#audiooutput" class="tsd-kind-property">entities.Panorama.audioOutput</a>, <br /><a href="entities.Pulsar.html#audiooutput" class="tsd-kind-property">entities.Pulsar.audioOutput</a>, <br /><a href="entities.Pulverisateur.html#audiooutput" class="tsd-kind-property">entities.Pulverisateur.audioOutput</a>, <br /><a href="entities.Quantum.html#audiooutput" class="tsd-kind-property">entities.Quantum.audioOutput</a>, <br /><a href="entities.Quasar.html#audiooutput" class="tsd-kind-property">entities.Quasar.audioOutput</a>, <br /><a href="entities.Rasselbock.html#masteroutput" class="tsd-kind-property">entities.Rasselbock.masterOutput</a>, <br /><a href="entities.RasselbockChannel.html#audiooutput" class="tsd-kind-property">entities.RasselbockChannel.audioOutput</a>, <br /><a href="entities.RingModulator.html#audiooutput" class="tsd-kind-property">entities.RingModulator.audioOutput</a>, <br /><a href="entities.Space.html#audiooutput" class="tsd-kind-property">entities.Space.audioOutput</a>, <br /><a href="entities.SpitfireLabsVst3Plugin.html#audiooutput" class="tsd-kind-property">entities.SpitfireLabsVst3Plugin.audioOutput</a>, <br /><a href="entities.StereoEnhancer.html#audiooutput" class="tsd-kind-property">entities.StereoEnhancer.audioOutput</a>, <br /><a href="entities.StompboxChorus.html#audiooutput" class="tsd-kind-property">entities.StompboxChorus.audioOutput</a>, <br /><a href="entities.StompboxCompressor.html#audiooutput" class="tsd-kind-property">entities.StompboxCompressor.audioOutput</a>, <br /><a href="entities.StompboxCrusher.html#audiooutput" class="tsd-kind-property">entities.StompboxCrusher.audioOutput</a>, <br /><a href="entities.StompboxDelay.html#audiooutput" class="tsd-kind-property">entities.StompboxDelay.audioOutput</a>, <br /><a href="entities.StompboxFlanger.html#audiooutput" class="tsd-kind-property">entities.StompboxFlanger.audioOutput</a>, <br /><a href="entities.StompboxGate.html#audiooutput" class="tsd-kind-property">entities.StompboxGate.audioOutput</a>, <br /><a href="entities.StompboxParametricEqualizer.html#audiooutput" class="tsd-kind-property">entities.StompboxParametricEqualizer.audioOutput</a>, <br /><a href="entities.StompboxPhaser.html#audiooutput" class="tsd-kind-property">entities.StompboxPhaser.audioOutput</a>, <br /><a href="entities.StompboxPitchDelay.html#audiooutput" class="tsd-kind-property">entities.StompboxPitchDelay.audioOutput</a>, <br /><a href="entities.StompboxReverb.html#audiooutput" class="tsd-kind-property">entities.StompboxReverb.audioOutput</a>, <br /><a href="entities.StompboxSlope.html#audiooutput" class="tsd-kind-property">entities.StompboxSlope.audioOutput</a>, <br /><a href="entities.StompboxStereoDetune.html#audiooutput" class="tsd-kind-property">entities.StompboxStereoDetune.audioOutput</a>, <br /><a href="entities.StompboxTube.html#audiooutput" class="tsd-kind-property">entities.StompboxTube.audioOutput</a>, <br /><a href="entities.TinyGain.html#audiooutput" class="tsd-kind-property">entities.TinyGain.audioOutput</a>, <br /><a href="entities.Tonematrix.html#audiooutput" class="tsd-kind-property">entities.Tonematrix.audioOutput</a>, <br /><a href="entities.Waveshaper.html#audiooutput" class="tsd-kind-property">entities.Waveshaper.audioOutput</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/desktop_audio_cable/v1/desktop_audio_cable_nexus.ts#L30">gen/audiotool/document/v1/entity/desktop_audio_cable/v1/desktop_audio_cable_nexus.ts:30</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="tosocket"><span>to<wbr/>Socket</span><a href="#tosocket" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">toSocket</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/document.NexusLocation.html" class="tsd-signature-type tsd-kind-interface">NexusLocation</a><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Pointer to an audio input to which the cable transports audio.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>no default, required</td>
+</tr>
+<tr>
+<td>required</td>
+<td>true</td>
+</tr>
+<tr>
+<td>targets</td>
+<td><a href="../enums/api.TargetType.html#audioinput" class="tsd-kind-enum-member">api.TargetType.AudioInput</a>, meaning one of: <br /><a href="entities.AudioMerger.html#audioinputa" class="tsd-kind-property">entities.AudioMerger.audioInputA</a>, <br /><a href="entities.AudioMerger.html#audioinputb" class="tsd-kind-property">entities.AudioMerger.audioInputB</a>, <br /><a href="entities.AudioMerger.html#audioinputc" class="tsd-kind-property">entities.AudioMerger.audioInputC</a>, <br /><a href="entities.AudioSplitter.html#audioinput" class="tsd-kind-property">entities.AudioSplitter.audioInput</a>, <br /><a href="entities.AutoFilter.html#audioinput" class="tsd-kind-property">entities.AutoFilter.audioInput</a>, <br /><a href="entities.AutoFilter.html#sidechaininput" class="tsd-kind-property">entities.AutoFilter.sideChainInput</a>, <br /><a href="entities.BandSplitter.html#audioinput" class="tsd-kind-property">entities.BandSplitter.audioInput</a>, <br /><a href="entities.Bassline.html#audioinput" class="tsd-kind-property">entities.Bassline.audioInput</a>, <br /><a href="entities.CentroidAux.html#audioinput" class="tsd-kind-property">entities.CentroidAux.audioInput</a>, <br /><a href="entities.CentroidChannel.html#audioinput" class="tsd-kind-property">entities.CentroidChannel.audioInput</a>, <br /><a href="entities.CrossfaderChannel.html#audioinput" class="tsd-kind-property">entities.CrossfaderChannel.audioInput</a>, <br /><a href="entities.Curve.html#audioinput" class="tsd-kind-property">entities.Curve.audioInput</a>, <br /><a href="entities.Exciter.html#audioinput" class="tsd-kind-property">entities.Exciter.audioInput</a>, <br /><a href="entities.GraphicalEQ.html#audioinput" class="tsd-kind-property">entities.GraphicalEQ.audioInput</a>, <br /><a href="entities.Gravity.html#audioinput" class="tsd-kind-property">entities.Gravity.audioInput</a>, <br /><a href="entities.Gravity.html#sidechaininput" class="tsd-kind-property">entities.Gravity.sideChainInput</a>, <br /><a href="entities.Helmholtz.html#audioinput" class="tsd-kind-property">entities.Helmholtz.audioInput</a>, <br /><a href="entities.KoboltChannel.html#audioinput" class="tsd-kind-property">entities.KoboltChannel.audioInput</a>, <br /><a href="entities.Minimixer.html#auxreturninput" class="tsd-kind-property">entities.Minimixer.auxReturnInput</a>, <br /><a href="entities.MinimixerChannel.html#audioinput" class="tsd-kind-property">entities.MinimixerChannel.audioInput</a>, <br /><a href="entities.MixerAux.html#insertinput" class="tsd-kind-property">entities.MixerAux.insertInput</a>, <br /><a href="entities.MixerChannel.html#audioinput" class="tsd-kind-property">entities.MixerChannel.audioInput</a>, <br /><a href="entities.MixerGroup.html#insertinput" class="tsd-kind-property">entities.MixerGroup.insertInput</a>, <br /><a href="entities.MixerMaster.html#insertinput" class="tsd-kind-property">entities.MixerMaster.insertInput</a>, <br /><a href="entities.Panorama.html#audioinput" class="tsd-kind-property">entities.Panorama.audioInput</a>, <br /><a href="entities.Pulsar.html#audioinput" class="tsd-kind-property">entities.Pulsar.audioInput</a>, <br /><a href="entities.Pulverisateur.html#audioinput" class="tsd-kind-property">entities.Pulverisateur.audioInput</a>, <br /><a href="entities.Quantum.html#audioinput" class="tsd-kind-property">entities.Quantum.audioInput</a>, <br /><a href="entities.Quasar.html#audioinput" class="tsd-kind-property">entities.Quasar.audioInput</a>, <br /><a href="entities.Rasselbock.html#audioinput" class="tsd-kind-property">entities.Rasselbock.audioInput</a>, <br /><a href="entities.RingModulator.html#audioinput1" class="tsd-kind-property">entities.RingModulator.audioInput1</a>, <br /><a href="entities.RingModulator.html#audioinput2" class="tsd-kind-property">entities.RingModulator.audioInput2</a>, <br /><a href="entities.StereoEnhancer.html#audioinput" class="tsd-kind-property">entities.StereoEnhancer.audioInput</a>, <br /><a href="entities.StompboxChorus.html#audioinput" class="tsd-kind-property">entities.StompboxChorus.audioInput</a>, <br /><a href="entities.StompboxCompressor.html#audioinput" class="tsd-kind-property">entities.StompboxCompressor.audioInput</a>, <br /><a href="entities.StompboxCompressor.html#sidechaininput" class="tsd-kind-property">entities.StompboxCompressor.sideChainInput</a>, <br /><a href="entities.StompboxCrusher.html#audioinput" class="tsd-kind-property">entities.StompboxCrusher.audioInput</a>, <br /><a href="entities.StompboxDelay.html#audioinput" class="tsd-kind-property">entities.StompboxDelay.audioInput</a>, <br /><a href="entities.StompboxFlanger.html#audioinput" class="tsd-kind-property">entities.StompboxFlanger.audioInput</a>, <br /><a href="entities.StompboxGate.html#audioinput" class="tsd-kind-property">entities.StompboxGate.audioInput</a>, <br /><a href="entities.StompboxGate.html#sidechaininput" class="tsd-kind-property">entities.StompboxGate.sideChainInput</a>, <br /><a href="entities.StompboxParametricEqualizer.html#audioinput" class="tsd-kind-property">entities.StompboxParametricEqualizer.audioInput</a>, <br /><a href="entities.StompboxPhaser.html#audioinput" class="tsd-kind-property">entities.StompboxPhaser.audioInput</a>, <br /><a href="entities.StompboxPitchDelay.html#audioinput" class="tsd-kind-property">entities.StompboxPitchDelay.audioInput</a>, <br /><a href="entities.StompboxReverb.html#audioinput" class="tsd-kind-property">entities.StompboxReverb.audioInput</a>, <br /><a href="entities.StompboxSlope.html#audioinput" class="tsd-kind-property">entities.StompboxSlope.audioInput</a>, <br /><a href="entities.StompboxStereoDetune.html#audioinput" class="tsd-kind-property">entities.StompboxStereoDetune.audioInput</a>, <br /><a href="entities.StompboxTube.html#audioinput" class="tsd-kind-property">entities.StompboxTube.audioInput</a>, <br /><a href="entities.TinyGain.html#audioinput" class="tsd-kind-property">entities.TinyGain.audioInput</a>, <br /><a href="entities.Waveshaper.html#audioinput" class="tsd-kind-property">entities.Waveshaper.audioInput</a>, <br /><a href="entities.Waveshaper.html#sidechaininput" class="tsd-kind-property">entities.Waveshaper.sideChainInput</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/desktop_audio_cable/v1/desktop_audio_cable_nexus.ts#L40">gen/audiotool/document/v1/entity/desktop_audio_cable/v1/desktop_audio_cable_nexus.ts:40</a></li></ul></aside></section></section></details></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Properties</summary><div><a href="#colorindex"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>color<wbr/>Index</span></a><a href="#fromsocket"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>from<wbr/>Socket</span></a><a href="#tosocket"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>to<wbr/>Socket</span></a></div></details></div></details></div><div class="site-menu"><nav id="tsd-sidebar-links" class="tsd-navigation"><a href="https://developer.audiotool.com" class="tsd-nav-link">Developer Hub</a><a href="https://github.com/audiotool/nexus" class="tsd-nav-link">GitHub</a></nav><nav class="tsd-navigation"><a href="../index.html">@audiotool/nexus - v0.0.12</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p><script>
+(() => {
+  const marker = "/api-reference/generated";
+  const path = window.location.pathname;
+  const idx = path.indexOf(marker);
+  const root = idx >= 0 ? (path.slice(0, idx) || "") + "/" : "/";
+  const docsHref = root;
+  const apiHref = root + "api-reference/generated/";
+  const toolbar = document.querySelector(".tsd-page-toolbar .tsd-toolbar-contents");
+  if (!toolbar) return;
+
+  const tabs = document.createElement("nav");
+  tabs.className = "docs-api-tabs";
+  tabs.setAttribute("aria-label", "Documentation sections");
+
+  const docsTab = document.createElement("a");
+  docsTab.href = docsHref;
+  docsTab.className = "docs-api-tab";
+  docsTab.textContent = "Docs";
+
+  const apiTab = document.createElement("a");
+  apiTab.href = apiHref;
+  apiTab.className = "docs-api-tab is-active";
+  apiTab.textContent = "API";
+
+  tabs.appendChild(docsTab);
+  tabs.appendChild(apiTab);
+
+  const titleLink = toolbar.querySelector("a.title");
+  if (titleLink && titleLink.nextSibling) {
+    toolbar.insertBefore(tabs, titleLink.nextSibling);
+  } else {
+    toolbar.prepend(tabs);
+  }
+})();
+</script></footer><div class="overlay"></div></body></html>

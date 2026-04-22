@@ -1,0 +1,8 @@
+# Dependencies
+node_modules/
+
+# TypeDoc generated output
+# NOTE: kept tracked because Pages is currently branch/legacy mode.
+
+# OS files
+.DS_Store

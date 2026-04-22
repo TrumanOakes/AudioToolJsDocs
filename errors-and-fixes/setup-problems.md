@@ -1,3 +1,9 @@
+---
+title: Setup Problems
+parent: Errors and Fixes
+nav_order: 3
+---
+
 # Setup Problems
 
 Problems that occur during project setup, dev server configuration, or package installation.

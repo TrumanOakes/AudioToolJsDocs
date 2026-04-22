@@ -1,0 +1,204 @@
+<style>
+.top-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 1rem;
+}
+
+.top-tab {
+  display: inline-flex;
+  align-items: center;
+  height: 2rem;
+  padding: 0 0.75rem;
+  border-radius: 6px;
+  color: var(--body-text-color);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.top-tab:hover {
+  text-decoration: none;
+  border-color: var(--border-color);
+  background-color: var(--body-background-color);
+}
+
+.top-tab.is-active {
+  font-weight: 600;
+  border-color: var(--link-color);
+  color: var(--link-color);
+}
+
+@media (max-width: 50rem) {
+  .top-tabs {
+    width: 100%;
+    margin: 0.5rem 0 0 0;
+    order: 3;
+  }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var mainHeader = document.getElementById("main-header");
+  if (!mainHeader) return;
+
+  var search = mainHeader.querySelector(".search");
+  if (!search) return;
+
+  var tabs = document.createElement("nav");
+  tabs.className = "top-tabs";
+  tabs.setAttribute("aria-label", "Documentation sections");
+
+  var path = window.location.pathname;
+  var isApi = path.indexOf("/api-reference/generated/") !== -1;
+
+  var docsTab = document.createElement("a");
+  docsTab.href = "{{ '/' | relative_url }}";
+  docsTab.className = "top-tab" + (isApi ? "" : " is-active");
+  docsTab.textContent = "Docs";
+
+  var apiTab = document.createElement("a");
+  apiTab.href = "{{ '/api-reference/generated/modules/index.html' | relative_url }}";
+  apiTab.className = "top-tab" + (isApi ? " is-active" : "");
+  apiTab.textContent = "API";
+
+  tabs.appendChild(docsTab);
+  tabs.appendChild(apiTab);
+
+  mainHeader.insertBefore(tabs, search);
+
+  if (isApi) {
+    var siteNav = document.getElementById("site-nav");
+    if (!siteNav) return;
+
+    var apiBase = "{{ '/api-reference/generated/' | relative_url }}";
+    var apiSections = [
+      { title: "index", href: "{{ '/api-reference/generated/modules/index.html' | relative_url }}" },
+      { title: "entities", href: "{{ '/api-reference/generated/modules/entities.html' | relative_url }}" },
+      { title: "document", href: "{{ '/api-reference/generated/modules/document.html' | relative_url }}" },
+      { title: "utils", href: "{{ '/api-reference/generated/modules/utils.html' | relative_url }}" },
+      { title: "api", href: "{{ '/api-reference/generated/modules/api.html' | relative_url }}" },
+    ];
+
+    var normalizePath = function (value) {
+      if (!value) return "/";
+      var normalized = value.replace(/index\.html$/, "");
+      normalized = normalized.replace(/\/+$/, "");
+      return normalized || "/";
+    };
+
+    var currentPath = normalizePath(path);
+    var rootPath = normalizePath(apiBase);
+
+    var list = document.createElement("ul");
+    list.className = "nav-list";
+
+    apiSections.forEach(function (section) {
+      var item = document.createElement("li");
+      item.className = "nav-list-item";
+
+      var link = document.createElement("a");
+      link.className = "nav-list-link";
+      link.textContent = section.title;
+      link.href = section.href;
+
+      var sectionPath = normalizePath(section.href);
+      var isActive =
+        currentPath === sectionPath ||
+        (currentPath.indexOf(sectionPath + "/") === 0);
+
+      if (!isActive && currentPath === rootPath && section.title === "index") {
+        isActive = true;
+      }
+
+      if (isActive) {
+        link.className += " active";
+      }
+
+      item.appendChild(link);
+      list.appendChild(item);
+    });
+
+    siteNav.innerHTML = "";
+    siteNav.appendChild(list);
+  }
+});
+</script>
+<style>
+.next-page-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  background: #1f6feb;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+}
+.next-page-btn:hover {
+  background: #388bfd;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.5);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Floating variant */
+.next-page-btn--floating {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+}
+
+/* Inline variant — shown at the bottom of the page content */
+.next-page-btn--inline {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3rem;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+}
+
+.tooltip {
+  position: relative;
+  cursor: help;
+  border-bottom: 1px dotted currentColor;
+  display: inline;
+}
+
+.tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e2126;
+  color: #e0e0e0;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  width: 270px;
+  text-align: left;
+  white-space: normal;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 9999;
+  border: 1px solid #444;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+}
+</style>
+
+<script src="{{ '/assets/js/next-button.js' | relative_url }}"></script>

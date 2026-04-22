@@ -1,8 +1,15 @@
+---
+title: Utilities
+parent: Reference
+nav_order: 5
+has_children: true
+---
+
 # Utilities
 
 **Module:** `@audiotool/nexus/utils`
 
-Utility functions, classes, and types used across the package. Includes timing helpers, async primitives, and observable/notification patterns.
+Utility functions, classes, and types from `@audiotool/nexus/utils`. Includes timing helpers for timeline work, async coordination utilities, and observable value patterns.
 
 ## Import
 
@@ -16,9 +23,9 @@ const { Ticks, secondsToTicks, ticksToSeconds, AsyncLock } = utils;
 
 ## Variables
 
-### `Ticks`
+### [`Ticks`](../api-reference/generated/variables/utils.Ticks.html)
 
-A constant object providing timeline time measurement values. A "tick" is the finest resolution at which events can be scheduled on the timeline. Tick values are independent of tempo.
+A constant object with timeline time values. Ticks are the unit used for all timeline positions and durations in Nexus — they are independent of tempo, so the same tick values work at any BPM.
 
 ```typescript
 import { utils } from "@audiotool/nexus";
@@ -37,7 +44,7 @@ const { Ticks } = utils;
 
 ## Functions
 
-### `secondsToTicks(seconds: number, bpm: number): number`
+### [`secondsToTicks`](../api-reference/generated/functions/utils.secondsToTicks.html)`(seconds: number, bpm: number): number`
 
 Converts a duration in seconds to ticks at the given BPM.
 
@@ -45,7 +52,7 @@ Converts a duration in seconds to ticks at the given BPM.
 const ticks = secondsToTicks(2.0, 120); // 2 seconds at 120 BPM
 ```
 
-### `ticksToSeconds(ticks: number, bpm: number): number`
+### [`ticksToSeconds`](../api-reference/generated/functions/utils.ticksToSeconds.html)`(ticks: number, bpm: number): number`
 
 Converts a tick count to a duration in seconds at the given BPM.
 
@@ -53,11 +60,19 @@ Converts a tick count to a duration in seconds at the given BPM.
 const secs = ticksToSeconds(3840, 120); // one beat at 120 BPM = 0.5s
 ```
 
-### `createTypedArray()`
+### [`createTypedArray()`](../api-reference/generated/functions/utils.createTypedArray.html)
 
 Creates typed arrays for use with binary data fields.
 
-### `throw_(message: string): never`
+```typescript
+import { utils } from "@audiotool/nexus";
+const { createTypedArray } = utils;
+
+// Create a typed byte array for a binary field (e.g. sample data, preset bytes)
+const bytes = createTypedArray(128); // typed array of 128 bytes
+```
+
+### [`throw_`](../api-reference/generated/functions/utils.throw.html)`(message: string): never`
 
 An error-throwing utility for use in expressions where `throw` statements are not syntactically valid (e.g., as a default value in a nullish coalescing expression).
 
@@ -69,9 +84,9 @@ const value = maybeNull ?? throw_("Expected a value here");
 
 ## Classes
 
-### `AsyncLock`
+### [`AsyncLock`](../api-reference/generated/classes/utils.AsyncLock.html)
 
-An asynchronous mutual-exclusion lock. Ensures that only one piece of code runs in the critical section at a time.
+An async lock that ensures only one block of code runs at a time. Useful if you need to serialize async operations in your own code.
 
 ```typescript
 const lock = new AsyncLock();
@@ -82,55 +97,218 @@ await lock.acquire(async () => {
 });
 ```
 
-### `HashMap<K extends Hashable, V>`
+### [`HashMap`](../api-reference/generated/classes/utils.HashMap.html)`<K extends Hashable, V>`
 
-A hash map keyed by `Hashable` objects (objects that implement a hash function). Used internally for efficient entity storage.
+A hash map used internally by Nexus for efficient entity storage. Available for use in your own code if needed. Keys must be `Hashable` (i.e. implement `.hashCode()`).
 
-### `Notifier<T>`
+```typescript
+import { utils } from "@audiotool/nexus";
+const { HashMap } = utils;
 
-A general-purpose event emitter. Subscribers receive a value of type `T` when the notifier fires.
+// Create a map to track entities by a key
+const map = new HashMap<SomeHashableKey, string>();
+map.set(key, "value");
+const val = map.get(key); // "value"
+```
 
-### `ValueNotifier<T>`
+---
 
-A notifier that holds and broadcasts a current value. Subscribers receive the new value whenever it changes.
+### [`Notifier`](../api-reference/generated/classes/utils.Notifier.html)`<T>`
 
-### `MapValueNotifier<K extends Hashable, V>`
+A general-purpose event emitter. Subscribers receive a value of type `T` when the notifier fires. Useful when you want to emit custom events in your own code.
 
-A notifier for changes to individual entries in a map.
+```typescript
+import { utils } from "@audiotool/nexus";
+const { Notifier } = utils;
 
-### `SetNotifier<T extends Hashable>`
+const notifier = new Notifier<string>();
 
-A notifier for changes to a set of values (additions and removals).
+// Subscribe — returns a Terminable you can use to unsubscribe
+const sub = notifier.subscribe((message) => {
+  console.log("Received:", message);
+});
+
+notifier.notify("hello"); // logs: "Received: hello"
+
+// Clean up when done
+sub.terminate();
+```
+
+---
+
+### [`ValueNotifier`](../api-reference/generated/classes/utils.ValueNotifier.html)`<T>`
+
+A notifier that holds and broadcasts a current value. Subscribers receive the new value whenever it changes. Similar to a reactive variable.
+
+```typescript
+import { utils } from "@audiotool/nexus";
+const { ValueNotifier } = utils;
+
+const volume = new ValueNotifier<number>(1.0);
+
+// Subscribe to changes
+volume.subscribe((newValue) => {
+  console.log("Volume changed to:", newValue);
+});
+
+volume.value = 0.5; // logs: "Volume changed to: 0.5"
+console.log(volume.value); // 0.5
+```
+
+---
+
+### [`MapValueNotifier`](../api-reference/generated/classes/utils.MapValueNotifier.html)`<K extends Hashable, V>`
+
+A notifier that fires when individual entries in a map are added, updated, or removed. Use it when you need to react to changes in a specific map key rather than the whole map.
+
+```typescript
+import { utils } from "@audiotool/nexus";
+const { MapValueNotifier } = utils;
+
+const entityStates = new MapValueNotifier<string, string>();
+
+// Subscribe to changes for a specific key
+entityStates.subscribe("entity-id-1", (newState) => {
+  console.log("Entity state changed:", newState);
+});
+
+entityStates.set("entity-id-1", "active"); // triggers subscriber
+```
+
+---
+
+### [`SetNotifier`](../api-reference/generated/classes/utils.SetNotifier.html)`<T extends Hashable>`
+
+A notifier for changes to a set — fires when items are added or removed. Use it when you need to track membership in a dynamic collection.
+
+```typescript
+import { utils } from "@audiotool/nexus";
+const { SetNotifier } = utils;
+
+const activeIds = new SetNotifier<string>();
+
+activeIds.subscribe({
+  onAdd: (id) => console.log("Added:", id),
+  onRemove: (id) => console.log("Removed:", id),
+});
+
+activeIds.add("entity-abc");    // logs: "Added: entity-abc"
+activeIds.delete("entity-abc"); // logs: "Removed: entity-abc"
+```
 
 ---
 
 ## Interfaces
 
-### `Observable<T>`
+### [`Observable`](../api-reference/generated/interfaces/utils.Observable.html)`<T>`
 
-Interface for objects that can be observed for changes. Implement this to make your own observable values.
+Interface for objects that can be observed for changes. Implement this interface to make your own observable values that can be subscribed to by other code.
 
-### `ObservableValue<T>`
+```typescript
+import type { Observable } from "@audiotool/nexus/utils";
 
-Extends `Observable<T>` with a `.value` property exposing the current value.
+class MyObservable implements Observable<number> {
+  subscribe(handler: (value: number) => void) {
+    // Store the handler and call it when the value changes
+    // Return a Terminable to allow unsubscribing
+    return { terminate: () => { /* remove handler */ } };
+  }
+}
+```
+
+---
+
+### [`ObservableValue`](../api-reference/generated/interfaces/utils.ObservableValue.html)`<T>`
+
+Extends `Observable<T>` with a `.value` property that exposes the current value synchronously. Use this when subscribers need to both read the current state and react to future changes.
+
+```typescript
+import type { ObservableValue } from "@audiotool/nexus/utils";
+
+// ValueNotifier implements ObservableValue<T>
+function connectToInput(observable: ObservableValue<number>) {
+  // Read the current value immediately
+  console.log("Current:", observable.value);
+
+  // Subscribe to future changes
+  observable.subscribe((newValue) => {
+    console.log("Changed to:", newValue);
+  });
+}
+```
 
 ---
 
 ## Type Aliases
 
-| Type | Description |
-|------|-------------|
-| `Hashable` | Objects that can be used as hash map keys (must implement `.hashCode()`) |
-| `Lock` | Type of a lock instance |
-| `Terminable` | Objects that can be disposed — have a `.terminate()` method |
+### [`Terminable`](../api-reference/generated/types/utils.Terminable.html)
+
+Any object with a `.terminate()` method. Event subscriptions from `nexus.events` and from Nexus utilities all return a `Terminable` — call `.terminate()` when you no longer need the subscription to avoid memory leaks.
+
+```typescript
+import type { Terminable } from "@audiotool/nexus/utils";
+
+// Store subscriptions as Terminable and clean them up together
+const subscriptions: Terminable[] = [];
+
+subscriptions.push(
+  nexus.events.onCreate("note", handleNote)
+);
+subscriptions.push(
+  nexus.events.onRemove("*", handleNoteRemoved)
+);
+
+// Later — remove all subscriptions at once
+subscriptions.forEach(s => s.terminate());
+```
+
+---
+
+### [`Hashable`](../api-reference/generated/types/utils.Hashable.html)
+
+Objects that can be used as hash map keys. Must implement a `.hashCode()` method that returns a consistent number. Nexus uses this internally for its `HashMap`, `SetNotifier`, and `MapValueNotifier` structures.
+
+```typescript
+import type { Hashable } from "@audiotool/nexus/utils";
+
+class EntityKey implements Hashable {
+  constructor(private id: string) {}
+
+  hashCode(): number {
+    // Simple hash — use a better algorithm for production code
+    return this.id.split("").reduce((h, c) => h + c.charCodeAt(0), 0);
+  }
+}
+```
+
+---
+
+### [`Lock`](../api-reference/generated/types/utils.Lock.html)
+
+The type of a lock instance — the return type of `new AsyncLock()`. Use this as a type annotation when passing locks between functions.
+
+```typescript
+import type { Lock } from "@audiotool/nexus/utils";
+import { utils } from "@audiotool/nexus";
+const { AsyncLock } = utils;
+
+async function serializedOperation(lock: Lock, work: () => Promise<void>) {
+  await lock.acquire(work);
+}
+
+const lock: Lock = new AsyncLock();
+await serializedOperation(lock, async () => {
+  await doExclusiveWork();
+});
+```
 
 ---
 
 ## References
 
-- `SchemaPath` — referenced from the [document module](document-model.md)
+- `SchemaPath` — referenced from the [document module](document-model.html)
 
 ## See also
 
-- [Work With Timeline Data](../working-with-audiotool-projects/work-with-timeline-data.md) — practical use of `Ticks` and time conversion
-- [Tips and Patterns](../how-nexus-works/tips-and-patterns.md) — patterns using `Terminable` subscriptions
+- [Work With Timeline Data](../working-with-audiotool-projects/work-with-timeline-data.html) — practical use of `Ticks` and time conversion
+- [Tips and Patterns](../how-nexus-works/tips-and-patterns.html) — patterns using `Terminable` subscriptions

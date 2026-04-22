@@ -1,6 +1,12 @@
+---
+title: Sign In and Connect
+parent: Working With Audiotool Projects
+nav_order: 1
+---
+
 # Sign In and Connect
 
-This page covers the full authentication flow for browser apps and the Personal Access Token alternative for server environments — and how to go from a login to a connected client.
+This page shows how to sign in and create an <span class="tooltip" data-tooltip="The main object your app uses to connect to Audiotool and work with projects, documents, and APIs.">AudiotoolClient</span>. For setup instructions and a detailed explanation of the two auth methods, see [Authorization and Setup](../getting-started/authorization-and-setup.md).
 
 ## Browser apps — OAuth flow
 
@@ -11,21 +17,21 @@ import { getLoginStatus, createAudiotoolClient } from "@audiotool/nexus";
 
 const status = await getLoginStatus({
   clientId: "your_client_id",
-  redirectUri: "http://127.0.0.1:5173/",
-  scopes: ["project:write"],
+  redirectUrl: "http://127.0.0.1:5173/",
+  scope: "project:write",
 });
 ```
 
-`getLoginStatus` returns a `LoginStatus` — either `LoggedInStatus` or `LoggedOutStatus`.
+`getLoginStatus` checks whether the user is already signed in.
 
-> The **first call always returns `LoggedOutStatus`**, even if the user authenticated before. This is expected — OAuth works via a redirect, and the result is only available after the redirect completes.
+> The **first call always reports logged out**, even if the user authenticated before. This is expected — <span class="tooltip" data-tooltip="A login method that lets users sign in through Audiotool and grant your app permission without sharing their password directly.">OAuth</span> works via a browser redirect, and the result is only available after the redirect completes.
 
 ### 2. Handle both states
 
 ```typescript
-if (status.type === "logged-in") {
+if (status.loggedIn) {
   // User is authenticated — create a client
-  const client = await createAudiotoolClient({ status });
+  const client = await createAudiotoolClient({ authorization: status });
   // ...use client
 } else {
   // Show a login button
@@ -34,29 +40,31 @@ if (status.type === "logged-in") {
 }
 ```
 
-When `status.login()` is called, the browser redirects to Audiotool's OAuth page. After the user authorizes, it redirects back to your `redirectUri`. Call `getLoginStatus` again on page load — this time it will return `LoggedInStatus`.
+When `status.login()` is called, the browser redirects to Audiotool's OAuth page. After the user authorizes, it redirects back to your `redirectUrl`. Call `getLoginStatus` again on page load — this time it will return `LoggedInStatus`.
 
 ### 3. Create the client
 
 ```typescript
-const client = await createAudiotoolClient({ status });
+const client = await createAudiotoolClient({ authorization: status });
 ```
 
-`createAudiotoolClient` accepts a `LoginStatus` (from `getLoginStatus`) or a PAT. It returns a fully initialized `AudiotoolClient`.
+`createAudiotoolClient` accepts the result from `getLoginStatus` or a <span class="tooltip" data-tooltip="A private token that lets your app access an Audiotool account without using a browser login flow.">Personal Access Token</span>. It returns a ready-to-use client.
 
-## Server apps — Personal Access Token
+## Server-side scripts — Personal Access Token
 
-For Node.js, Bun, or Deno scripts and bots:
+> **For browser apps, use the OAuth flow above.** PATs expose full account access and must never appear in browser-facing code.
+
+For server-side automation only — Node.js, Bun, or Deno scripts, CI jobs, bots:
 
 ```typescript
 const client = await createAudiotoolClient({
-  pat: process.env.AUDIOTOOL_PAT
+  authorization: process.env.AUDIOTOOL_PAT // always load from environment — never hardcode
 });
 ```
 
 No browser, no redirect, no `getLoginStatus` call needed. The client is immediately ready.
 
-PATs grant full access to the account. Store them in environment variables — never in code or version control.
+PATs grant full access to the account. Store them in environment variables and rotate them if compromised.
 
 ## After connecting
 

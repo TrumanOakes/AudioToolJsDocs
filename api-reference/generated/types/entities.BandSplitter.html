@@ -1,0 +1,422 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>BandSplitter | @audiotool/nexus - v0.0.12</title><meta name="description" content="Documentation for @audiotool/nexus"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/custom.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script>
+<!-- AUTIOTOOL_TYPEDOC_NAV_INJECTION_START -->
+
+<style>
+  :root {
+    --typedoc-bg: #0f1117;
+    --typedoc-panel: #161b22;
+    --typedoc-border: #30363d;
+    --typedoc-text: #e6edf3;
+    --typedoc-muted: #9da7b3;
+    --typedoc-link: #58a6ff;
+    --typedoc-link-hover: #79c0ff;
+  }
+
+  body {
+    background: var(--typedoc-bg);
+    color: var(--typedoc-text);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .tsd-page-toolbar {
+    background: var(--typedoc-panel);
+    border-bottom: 1px solid var(--typedoc-border);
+  }
+
+  .tsd-navigation a,
+  .tsd-page-toolbar a,
+  a {
+    color: var(--typedoc-link);
+  }
+
+  a:hover {
+    color: var(--typedoc-link-hover);
+  }
+
+  .tsd-panel {
+    border: 1px solid var(--typedoc-border);
+    background: var(--typedoc-panel);
+    border-radius: 8px;
+  }
+
+  .tsd-page-title h1,
+  .tsd-page-title h2,
+  .tsd-page-title h3,
+  h1, h2, h3 {
+    color: var(--typedoc-text);
+  }
+
+  .col-sidebar {
+    border-left: 1px solid var(--typedoc-border);
+  }
+
+  .typedoc-top-tabs {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 1rem;
+  }
+
+  .typedoc-top-tab {
+    display: inline-flex;
+    align-items: center;
+    height: 2rem;
+    padding: 0 0.75rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    color: var(--typedoc-text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .typedoc-top-tab:hover {
+    border-color: var(--typedoc-border);
+    background: #21262d;
+    color: var(--typedoc-text);
+    text-decoration: none;
+  }
+
+  .typedoc-top-tab.is-active {
+    border-color: var(--typedoc-link);
+    color: var(--typedoc-link);
+    font-weight: 600;
+  }
+</style>
+
+
+<script>
+(function () {
+  function addTopTabs() {
+    var toolbar = document.querySelector(".tsd-toolbar-contents");
+    if (!toolbar) return;
+    if (toolbar.querySelector(".typedoc-top-tabs")) return;
+
+    var tabs = document.createElement("nav");
+    tabs.className = "typedoc-top-tabs";
+    tabs.setAttribute("aria-label", "Documentation sections");
+
+    var path = window.location.pathname;
+    var isApi = path.indexOf("/api-reference/generated/") !== -1;
+
+    var docs = document.createElement("a");
+    docs.href = "/AudioToolJsDocs/";
+    docs.className = "typedoc-top-tab" + (isApi ? "" : " is-active");
+    docs.textContent = "Docs";
+
+    var api = document.createElement("a");
+    api.href = "/AudioToolJsDocs/api-reference/generated/";
+    api.className = "typedoc-top-tab" + (isApi ? " is-active" : "");
+    api.textContent = "API";
+
+    tabs.appendChild(docs);
+    tabs.appendChild(api);
+    toolbar.appendChild(tabs);
+  }
+
+  function run() {
+    addTopTabs();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run);
+  } else {
+    run();
+  }
+})();
+</script>
+
+<!-- AUTIOTOOL_TYPEDOC_NAV_INJECTION_END -->
+</head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="../index.html" class="title">@audiotool/nexus - v0.0.12</a><div id="tsd-toolbar-links"><a href="https://developer.audiotool.com">Developer Hub</a><a href="https://github.com/audiotool/nexus">GitHub</a></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><ul class="tsd-breadcrumb" aria-label="Breadcrumb"><li><a href="../modules/entities.html">entities</a></li><li><a href="" aria-current="page">BandSplitter</a></li></ul><h1>Type Alias BandSplitter</h1></div><section class="tsd-panel tsd-comment"><div class="tsd-comment tsd-typography"><table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>entity</td>
+</tr>
+<tr>
+<td>key</td>
+<td><code>&quot;bandSplitter&quot;</code></td>
+</tr>
+<tr>
+<td>is</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The band splitter splits the audio signal into three non-overlapping
+frequency sub-bands.</p>
+</div></section><div class="tsd-signature"><span class="tsd-signature-keyword">type</span> <span class="tsd-kind-type-alias">BandSplitter</span> <span class="tsd-signature-symbol">=</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#audioinput">audioInput</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.NexusObject.html" class="tsd-signature-type tsd-kind-interface">NexusObject</a><span class="tsd-signature-symbol">&lt;</span><a href="entities.Empty.html" class="tsd-signature-type tsd-kind-type-alias">Empty</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#displayname">displayName</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#filterhighhz">filterHighHz</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#filterlowhz">filterLowHz</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#highaudiooutput">highAudioOutput</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.NexusObject.html" class="tsd-signature-type tsd-kind-interface">NexusObject</a><span class="tsd-signature-symbol">&lt;</span><a href="entities.Empty.html" class="tsd-signature-type tsd-kind-type-alias">Empty</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#highgain">highGain</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#lowaudiooutput">lowAudioOutput</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.NexusObject.html" class="tsd-signature-type tsd-kind-interface">NexusObject</a><span class="tsd-signature-symbol">&lt;</span><a href="entities.Empty.html" class="tsd-signature-type tsd-kind-type-alias">Empty</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#lowgain">lowGain</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#midaudiooutput">midAudioOutput</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.NexusObject.html" class="tsd-signature-type tsd-kind-interface">NexusObject</a><span class="tsd-signature-symbol">&lt;</span><a href="entities.Empty.html" class="tsd-signature-type tsd-kind-type-alias">Empty</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#midgain">midGain</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#positionx">positionX</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#positiony">positionY</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts#L22">gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts:22</a></li></ul></aside><section class="tsd-panel-group tsd-index-group"><section class="tsd-panel tsd-index-panel"><details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h5 class="tsd-index-heading uppercase">Index</h5></summary><div class="tsd-accordion-details"><section class="tsd-index-section"><h3 class="tsd-index-heading">Properties</h3><div class="tsd-index-list"><a href="#audioinput" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>audio<wbr/>Input</span></a>
+<a href="#displayname" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>display<wbr/>Name</span></a>
+<a href="#filterhighhz" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>filter<wbr/>High<wbr/>Hz</span></a>
+<a href="#filterlowhz" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>filter<wbr/>Low<wbr/>Hz</span></a>
+<a href="#highaudiooutput" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>high<wbr/>Audio<wbr/>Output</span></a>
+<a href="#highgain" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>high<wbr/>Gain</span></a>
+<a href="#lowaudiooutput" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>low<wbr/>Audio<wbr/>Output</span></a>
+<a href="#lowgain" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>low<wbr/>Gain</span></a>
+<a href="#midaudiooutput" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>mid<wbr/>Audio<wbr/>Output</span></a>
+<a href="#midgain" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>mid<wbr/>Gain</span></a>
+<a href="#positionx" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>position<wbr/>X</span></a>
+<a href="#positiony" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>position<wbr/>Y</span></a>
+</div></section></div></details></section></section><details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h2>Properties</h2></summary><section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="audioinput"><span>audio<wbr/>Input</span><a href="#audioinput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">audioInput</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.NexusObject.html" class="tsd-signature-type tsd-kind-interface">NexusObject</a><span class="tsd-signature-symbol">&lt;</span><a href="entities.Empty.html" class="tsd-signature-type tsd-kind-type-alias">Empty</a><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Audio input that will be split into frequency bands.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#audioinput" class="tsd-kind-enum-member">api.TargetType.AudioInput</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts#L129">gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts:129</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="displayname"><span>display<wbr/>Name</span><a href="#displayname" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">displayName</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>The user-assigned name of this device.</p>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts#L26">gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts:26</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="filterhighhz"><span>filter<wbr/>High<wbr/>Hz</span><a href="#filterhighhz" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">filterHighHz</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Frequency where the middle band stops, and the high band starts.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>3600</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[20, 20000]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts#L64">gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts:64</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="filterlowhz"><span>filter<wbr/>Low<wbr/>Hz</span><a href="#filterlowhz" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">filterLowHz</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Frequency where the low band stops, and the middle band starts.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>360</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[20, 20000]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts#L54">gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts:54</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="highaudiooutput"><span>high<wbr/>Audio<wbr/>Output</span><a href="#highaudiooutput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">highAudioOutput</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.NexusObject.html" class="tsd-signature-type tsd-kind-interface">NexusObject</a><span class="tsd-signature-symbol">&lt;</span><a href="entities.Empty.html" class="tsd-signature-type tsd-kind-type-alias">Empty</a><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Single Output.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#audiooutput" class="tsd-kind-enum-member">api.TargetType.AudioOutput</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts#L83">gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts:83</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="highgain"><span>high<wbr/>Gain</span><a href="#highgain" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">highGain</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Gain multiplier applied to the high frequency band output.
+Equivalent to a dB range of [-inf, 18.0].</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>1</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[0, 7.943282127380371]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts#L75">gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts:75</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="lowaudiooutput"><span>low<wbr/>Audio<wbr/>Output</span><a href="#lowaudiooutput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">lowAudioOutput</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.NexusObject.html" class="tsd-signature-type tsd-kind-interface">NexusObject</a><span class="tsd-signature-symbol">&lt;</span><a href="entities.Empty.html" class="tsd-signature-type tsd-kind-type-alias">Empty</a><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Audio output for the low frequency band.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#audiooutput" class="tsd-kind-enum-member">api.TargetType.AudioOutput</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts#L121">gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts:121</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="lowgain"><span>low<wbr/>Gain</span><a href="#lowgain" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">lowGain</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Gain multiplier applied to the low frequency band output.
+Equivalent to a dB range of [-inf, 18.0].</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>1</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[0, 7.943282127380371]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts#L113">gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts:113</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="midaudiooutput"><span>mid<wbr/>Audio<wbr/>Output</span><a href="#midaudiooutput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">midAudioOutput</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.NexusObject.html" class="tsd-signature-type tsd-kind-interface">NexusObject</a><span class="tsd-signature-symbol">&lt;</span><a href="entities.Empty.html" class="tsd-signature-type tsd-kind-type-alias">Empty</a><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Single Output.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#audiooutput" class="tsd-kind-enum-member">api.TargetType.AudioOutput</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts#L102">gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts:102</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="midgain"><span>mid<wbr/>Gain</span><a href="#midgain" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">midGain</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Gain multiplier applied to the mid frequency band output.
+Equivalent to a dB range of [-inf, 18.0].</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>1</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[0, 7.943282127380371]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts#L94">gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts:94</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="positionx"><span>position<wbr/>X</span><a href="#positionx" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">positionX</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>X position on the desktop in the DAW.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>0</td>
+</tr>
+<tr>
+<td>range</td>
+<td>full</td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts#L35">gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts:35</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="positiony"><span>position<wbr/>Y</span><a href="#positiony" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">positionY</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Y position on the desktop in the DAW.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>0</td>
+</tr>
+<tr>
+<td>range</td>
+<td>full</td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/34b0286b29e80136e314cd9cff04ffe80b815ca6/src/gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts#L44">gen/audiotool/document/v1/entity/band_splitter/v1/band_splitter_nexus.ts:44</a></li></ul></aside></section></section></details></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Properties</summary><div><a href="#audioinput"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>audio<wbr/>Input</span></a><a href="#displayname"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>display<wbr/>Name</span></a><a href="#filterhighhz"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>filter<wbr/>High<wbr/>Hz</span></a><a href="#filterlowhz"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>filter<wbr/>Low<wbr/>Hz</span></a><a href="#highaudiooutput"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>high<wbr/>Audio<wbr/>Output</span></a><a href="#highgain"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>high<wbr/>Gain</span></a><a href="#lowaudiooutput"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>low<wbr/>Audio<wbr/>Output</span></a><a href="#lowgain"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>low<wbr/>Gain</span></a><a href="#midaudiooutput"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>mid<wbr/>Audio<wbr/>Output</span></a><a href="#midgain"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>mid<wbr/>Gain</span></a><a href="#positionx"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>position<wbr/>X</span></a><a href="#positiony"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>position<wbr/>Y</span></a></div></details></div></details></div><div class="site-menu"><nav id="tsd-sidebar-links" class="tsd-navigation"><a href="https://developer.audiotool.com" class="tsd-nav-link">Developer Hub</a><a href="https://github.com/audiotool/nexus" class="tsd-nav-link">GitHub</a></nav><nav class="tsd-navigation"><a href="../index.html">@audiotool/nexus - v0.0.12</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p><script>
+(() => {
+  const marker = "/api-reference/generated";
+  const path = window.location.pathname;
+  const idx = path.indexOf(marker);
+  const root = idx >= 0 ? (path.slice(0, idx) || "") + "/" : "/";
+  const docsHref = root;
+  const apiHref = root + "api-reference/generated/";
+  const toolbar = document.querySelector(".tsd-page-toolbar .tsd-toolbar-contents");
+  if (!toolbar) return;
+
+  const tabs = document.createElement("nav");
+  tabs.className = "docs-api-tabs";
+  tabs.setAttribute("aria-label", "Documentation sections");
+
+  const docsTab = document.createElement("a");
+  docsTab.href = docsHref;
+  docsTab.className = "docs-api-tab";
+  docsTab.textContent = "Docs";
+
+  const apiTab = document.createElement("a");
+  apiTab.href = apiHref;
+  apiTab.className = "docs-api-tab is-active";
+  apiTab.textContent = "API";
+
+  tabs.appendChild(docsTab);
+  tabs.appendChild(apiTab);
+
+  const titleLink = toolbar.querySelector("a.title");
+  if (titleLink && titleLink.nextSibling) {
+    toolbar.insertBefore(tabs, titleLink.nextSibling);
+  } else {
+    toolbar.prepend(tabs);
+  }
+})();
+</script></footer><div class="overlay"></div></body></html>

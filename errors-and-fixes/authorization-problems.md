@@ -1,3 +1,9 @@
+---
+title: Authorization Problems
+parent: Errors and Fixes
+nav_order: 2
+---
+
 # Authorization Problems
 
 Problems that occur during login, token handling, or client creation.
@@ -18,20 +24,20 @@ Your code should use the exact same string:
 ```typescript
 const status = await getLoginStatus({
   clientId: "your_client_id",
-  redirectUri: "http://127.0.0.1:5173/", // must match exactly
-  scopes: ["project:write"],
+  redirectUrl: "http://127.0.0.1:5173/", // must match exactly
+  scope: "project:write",
 });
 ```
 
 ## Login always shows as "logged out"
 
-**Cause:** This is expected behavior on the first call. `getLoginStatus` always reports `LoggedOutStatus` on its very first invocation — even if the user is authenticated. The OAuth flow works via a redirect, and the result is only available after the user has gone through the redirect.
+**Cause:** This is expected on the first call. `getLoginStatus` always reports the user as signed out initially — even if they authenticated before. The <span class="tooltip" data-tooltip="A login method that lets users sign in through Audiotool and grant your app permission without sharing their password directly.">OAuth</span> flow works via a browser redirect, and the signed-in state is only available after that redirect completes.
 
 **Fix:** Implement both login and logout button states, and do not assume that `LoggedOutStatus` means there is a problem:
 
 ```typescript
-if (status.type === "logged-in") {
-  const client = await createAudiotoolClient({ status });
+if (status.loggedIn) {
+  const client = await createAudiotoolClient({ authorization: status });
 } else {
   loginButton.onclick = () => status.login();
 }
@@ -48,7 +54,7 @@ After the user clicks login and completes the OAuth redirect, reload the page an
 1. Ensure `project:write` is listed in your registered scopes at the developer portal.
 2. Request the scope explicitly in your `getLoginStatus` call:
    ```typescript
-   scopes: ["project:write"]
+   scope: "project:write"
    ```
 3. If you added a scope after initial authorization, the user must re-authenticate.
 
@@ -62,7 +68,7 @@ After the user clicks login and completes the OAuth redirect, reload the page an
 - Regenerate the token if in doubt
 - Ensure you are passing it correctly:
   ```typescript
-  const client = await createAudiotoolClient({ pat: "at_pat_your_token_here" });
+  const client = await createAudiotoolClient({ authorization: "at_pat_your_token_here" });
   ```
 - Never expose a PAT in client-side browser code — PATs are for server environments only
 

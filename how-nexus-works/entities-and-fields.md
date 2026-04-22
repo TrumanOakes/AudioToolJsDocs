@@ -1,10 +1,16 @@
+---
+title: Entities and Fields
+parent: How Nexus Works
+nav_order: 3
+---
+
 # Entities and Fields
 
-Entities are the building blocks of every Audiotool project. This page explains what they are, how their fields work, and how they relate to each other.
+This page explains what <span class="tooltip" data-tooltip="A single item inside a project document, such as a device, note region, or other project object.">entities</span> are, how their fields work, and how they relate to each other.
 
 ## What is an entity?
 
-An entity is a small, typed object that lives inside a document. Every piece of a project — a synthesizer, a note, a mixer channel, a cable — is an entity.
+An entity is a single item inside a project. Every piece of a project — a synthesizer, a note, a mixer channel, a cable — is an entity.
 
 Each entity has:
 
@@ -12,7 +18,7 @@ Each entity has:
 - A fixed **type key** (like `"tinyGain"`, `"note"`, `"noteTrack"`)
 - A set of **typed fields** defined by that entity type's schema
 
-You interact with entities by reading their fields, updating their fields via transactions, and listening for changes via events.
+You interact with entities by reading their fields, updating them through <span class="tooltip" data-tooltip="A grouped set of changes made to a document as one operation.">transactions</span>, and listening for changes through <span class="tooltip" data-tooltip="A signal that something changed, such as an entity being created, updated, or removed.">events</span>.
 
 ## Entity categories
 
@@ -27,11 +33,11 @@ All device entities share these common fields:
 - `positionY` — vertical position on the desktop
 - `displayName` — label shown in the DAW UI
 
-**Synthesizers:** `pulverisateur`, `gakki`, `bassline`
+**Synthesizers:** [`pulverisateur`](../api-reference/generated/types/entities.Pulverisateur.html), [`gakki`](../api-reference/generated/types/entities.Gakki.html), [`bassline`](../api-reference/generated/types/entities.Bassline.html), [`kobolt`](../api-reference/generated/types/entities.Kobolt.html), [`tonematrix`](../api-reference/generated/types/entities.Tonematrix.html)
 
-**Drum machines:** `beatbox8`, `beatbox9`, `rasselbock`, `machiniste`
+**Drum machines:** [`beatbox8`](../api-reference/generated/types/entities.Beatbox8.html), [`beatbox9`](../api-reference/generated/types/entities.Beatbox9.html), [`rasselbock`](../api-reference/generated/types/entities.Rasselbock.html), [`machiniste`](../api-reference/generated/types/entities.Machiniste.html)
 
-**Filters and effects:** `autoFilter`, `graphicalEQ`, `stompbox*`, `tinyGain`, `audioMerger`, `audioSplitter`, `crossfader`
+**Filters and effects:** [`autoFilter`](../api-reference/generated/types/entities.AutoFilter.html), [`graphicalEQ`](../api-reference/generated/types/entities.GraphicalEQ.html), [`stompboxDelay`](../api-reference/generated/types/entities.StompboxDelay.html), [`stompboxSlope`](../api-reference/generated/types/entities.StompboxSlope.html), [`tinyGain`](../api-reference/generated/types/entities.TinyGain.html), [`audioMerger`](../api-reference/generated/types/entities.AudioMerger.html), [`audioSplitter`](../api-reference/generated/types/entities.AudioSplitter.html), [`crossfader`](../api-reference/generated/types/entities.Crossfader.html)
 
 > The system automatically manages device positioning to prevent overlaps.
 
@@ -41,13 +47,13 @@ Mixer entities control signal routing and mixing. They represent the mixer secti
 
 | Entity | Description |
 |--------|-------------|
-| `mixerMaster` | Required master output — one per document |
-| `mixerChannel` | Individual channel strip |
-| `mixerAux*` | Auxiliary send/return |
-| `mixerGroup*` | Group channel |
-| `mixerSidechain*` | Sidechain routing |
+| [`mixerMaster`](../api-reference/generated/types/entities.MixerMaster.html) | Required master output — one per document |
+| [`mixerChannel`](../api-reference/generated/types/entities.MixerChannel.html) | Individual channel strip |
+| [`mixerAux`](../api-reference/generated/types/entities.MixerAux.html) | Auxiliary send/return |
+| [`mixerGroup`](../api-reference/generated/types/entities.MixerGroup.html) | Group channel |
+| [`mixerSideChainCable`](../api-reference/generated/types/entities.MixerSideChainCable.html) | Sidechain routing |
 
-Audio devices connect to the mixer through `audioCable` entities that link device outputs to mixer channel inputs.
+Audio devices connect to the mixer through `desktopAudioCable` entities that link device outputs to mixer channel inputs.
 
 ### Timeline entities
 
@@ -55,15 +61,15 @@ Timeline entities construct the arrangement view — tracks, regions, and the no
 
 | Entity | Description |
 |--------|-------------|
-| `noteTrack` | Track for note/MIDI data |
-| `audioTrack` | Track for audio clips |
-| `automationTrack` | Track for parameter automation |
-| `patternTrack` | Pattern-based sequencing track |
-| `noteRegion` | A region on a note track |
-| `audioRegion` | A region on an audio track |
-| `automationRegion` | A region on an automation track |
-| `noteCollection` | A collection of notes (referenced by noteRegions) |
-| `note` | An individual note with `positionTicks`, `pitch`, `velocity` |
+| [`noteTrack`](../api-reference/generated/types/entities.NoteTrack.html) | Track for note/MIDI data |
+| [`audioTrack`](../api-reference/generated/types/entities.AudioTrack.html) | Track for audio clips |
+| [`automationTrack`](../api-reference/generated/types/entities.AutomationTrack.html) | Track for parameter automation |
+| [`patternTrack`](../api-reference/generated/types/entities.PatternTrack.html) | Pattern-based sequencing track |
+| [`noteRegion`](../api-reference/generated/types/entities.NoteRegion.html) | A region on a note track |
+| [`audioRegion`](../api-reference/generated/types/entities.AudioRegion.html) | A region on an audio track |
+| [`automationRegion`](../api-reference/generated/types/entities.AutomationRegion.html) | A region on an automation track |
+| [`noteCollection`](../api-reference/generated/types/entities.NoteCollection.html) | A collection of notes (referenced by noteRegions) |
+| [`note`](../api-reference/generated/types/entities.Note.html) | An individual note with `positionTicks`, `pitch`, `velocity` |
 
 ### Utility entities
 
@@ -71,13 +77,13 @@ Utility entities handle document-level configuration and connections.
 
 | Entity | Description |
 |--------|-------------|
-| `configuration` | Document-level settings |
-| `audioCable` | Connects audio device outputs to inputs |
-| `noteCable` | Connects note/MIDI outputs to inputs |
-| `groove` | Groove/swing quantization |
-| `microtuningOctave` | Per-octave microtuning definition |
-| `sample` | Reference to an audio sample file |
-| `vst3Plugin` | A VST3 plugin instance |
+| [`config`](../api-reference/generated/types/entities.Config.html) | Document-level settings |
+| [`desktopAudioCable`](../api-reference/generated/types/entities.DesktopAudioCable.html) | Connects audio device outputs to inputs |
+| [`desktopNoteCable`](../api-reference/generated/types/entities.DesktopNoteCable.html) | Connects note/MIDI outputs to inputs |
+| [`groove`](../api-reference/generated/types/entities.Groove.html) | Groove/swing quantization |
+| [`microTuningOctave`](../api-reference/generated/types/entities.MicroTuningOctave.html) | Per-octave microtuning definition |
+| [`sample`](../api-reference/generated/types/entities.Sample.html) | Reference to an audio sample file |
+| [`spitfireLabsVst3Plugin`](../api-reference/generated/types/entities.SpitfireLabsVst3Plugin.html) | A VST3 plugin instance |
 
 ## Fields and field types
 
@@ -98,21 +104,21 @@ entity.fields.collection  // a pointer field (references another entity)
 
 ## Pointers
 
-Some fields are **pointers** — they reference another entity or a field on another entity. Pointers define the relationships in the document graph.
+Some fields hold a reference to another entity instead of a plain value. These are called **pointers** — they define the relationships between entities in the document.
 
-Examples:
+For example:
 - A `note` has a `collection` field that points to the `noteCollection` it belongs to.
 - An `automationTrack` points to the device parameter it controls.
-- An `audioCable` points to the output and input it connects.
+- An `desktopAudioCable` points to the audio output and input it connects.
 
-When you create entities that need to reference others, you pass pointer values as part of the creation call.
+When you create an entity that needs to reference another, you pass the referenced entity as part of the creation fields.
 
 ## Working with entities in practice
 
 Creating an entity:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("tinyGain", {
     positionX: 100,
     positionY: 200,
@@ -124,17 +130,19 @@ await document.modify((t) => {
 Querying existing entities:
 
 ```typescript
-const gains = document.queryEntities.ofTypes("tinyGain").get();
+const gains = nexus.queryEntities.ofTypes("tinyGain").get();
 ```
 
 Listening for new entities:
 
 ```typescript
-document.events.onCreate("note", (entity) => {
-  console.log("New note at tick:", entity.fields.positionTicks);
+nexus.events.onCreate("note", (entity) => {
+  console.log("New note at tick:", entity.fields.positionTicks.value);
 });
 ```
 
 → See the full type definitions in [Entity Reference](../reference/entity-reference.md).
+
+→ For explanation-first pages about entity behavior, see [Reference → entities](../reference/entity-reference.html).
 
 → For step-by-step task guides, see [Create Devices](../working-with-audiotool-projects/create-devices.md) and [Work With Timeline Data](../working-with-audiotool-projects/work-with-timeline-data.md).
