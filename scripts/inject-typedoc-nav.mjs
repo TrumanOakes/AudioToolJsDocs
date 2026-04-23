@@ -30,7 +30,13 @@ function buildTabsAndSidebarScript() {
   function addTopTabs() {
     var toolbar = document.querySelector(".tsd-toolbar-contents");
     if (!toolbar) return;
-    if (toolbar.querySelector(".typedoc-top-tabs")) return;
+    var existingTabs = toolbar.querySelector(".typedoc-top-tabs");
+    if (existingTabs) return;
+
+    var legacyTabs = toolbar.querySelector(".docs-api-tabs");
+    if (legacyTabs) {
+      legacyTabs.remove();
+    }
 
     var tabs = document.createElement("nav");
     tabs.className = "typedoc-top-tabs";
@@ -51,7 +57,35 @@ function buildTabsAndSidebarScript() {
 
     tabs.appendChild(docs);
     tabs.appendChild(api);
-    toolbar.appendChild(tabs);
+
+    var title = toolbar.querySelector("a.title");
+    if (title && title.nextSibling) {
+      toolbar.insertBefore(tabs, title.nextSibling);
+    } else if (title) {
+      toolbar.appendChild(tabs);
+    } else {
+      toolbar.prepend(tabs);
+    }
+
+    var searchTrigger = toolbar.querySelector("#tsd-search-trigger");
+    if (searchTrigger) {
+      searchTrigger.classList.add("typedoc-search-trigger");
+      if (!searchTrigger.querySelector(".typedoc-search-trigger-label")) {
+        var searchLabel = document.createElement("span");
+        searchLabel.className = "typedoc-search-trigger-label";
+        searchLabel.textContent = "Search @audiotool/nexus Documentation";
+        searchTrigger.appendChild(searchLabel);
+      }
+
+      if (tabs.nextSibling !== searchTrigger) {
+        toolbar.insertBefore(searchTrigger, tabs.nextSibling);
+      }
+    }
+
+    var toolbarLinks = toolbar.querySelector("#tsd-toolbar-links");
+    if (toolbarLinks) {
+      toolbar.appendChild(toolbarLinks);
+    }
   }
 
   function run() {
@@ -96,6 +130,23 @@ function buildThemeOverrides() {
     border-bottom: 1px solid var(--typedoc-border);
   }
 
+  .tsd-toolbar-contents {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .tsd-toolbar-contents > .title {
+    margin-right: 0;
+    flex: 0 0 auto;
+  }
+
+  #tsd-toolbar-links {
+    margin-left: auto;
+    margin-right: 0;
+    gap: 1rem;
+  }
+
   .tsd-navigation a,
   .tsd-page-toolbar a,
   a {
@@ -127,7 +178,8 @@ function buildThemeOverrides() {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    margin-left: 1rem;
+    margin-left: 0;
+    flex: 0 0 auto;
   }
 
   .typedoc-top-tab {
@@ -154,6 +206,53 @@ function buildThemeOverrides() {
     border-color: var(--typedoc-link);
     color: var(--typedoc-link);
     font-weight: 600;
+  }
+
+  #tsd-search-trigger.typedoc-search-trigger {
+    width: clamp(15rem, 34vw, 26rem);
+    height: 2rem;
+    border: 1px solid var(--typedoc-border);
+    border-radius: 6px;
+    background: #0d1117;
+    color: var(--typedoc-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 0 0.625rem;
+    box-sizing: border-box;
+    flex: 0 1 auto;
+  }
+
+  #tsd-search-trigger.typedoc-search-trigger:hover {
+    border-color: var(--typedoc-link);
+    color: var(--typedoc-text);
+    background: #161b22;
+  }
+
+  #tsd-search-trigger .typedoc-search-trigger-label {
+    font-size: 0.85rem;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #tsd-search-trigger svg {
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 50rem) {
+    #tsd-search-trigger.typedoc-search-trigger {
+      width: 2.5rem;
+      justify-content: center;
+      padding: 0;
+      flex: 0 0 auto;
+    }
+
+    #tsd-search-trigger .typedoc-search-trigger-label {
+      display: none;
+    }
   }
 </style>
 `;
