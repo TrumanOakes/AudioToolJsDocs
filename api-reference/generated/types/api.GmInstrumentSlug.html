@@ -1,0 +1,823 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>GmInstrumentSlug | @audiotool/nexus - v0.0.15</title><meta name="description" content="Documentation for @audiotool/nexus"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/custom.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script><!-- AUTIOTOOL_TYPEDOC_NAV_INJECTION_START -->
+
+<style>
+  :root {
+    --typedoc-bg: #0f1117;
+    --typedoc-panel: #161b22;
+    --typedoc-border: #30363d;
+    --typedoc-text: #e6edf3;
+    --typedoc-muted: #9da7b3;
+    --typedoc-link: #58a6ff;
+    --typedoc-link-hover: #79c0ff;
+  }
+
+  body {
+    background: var(--typedoc-bg);
+    color: var(--typedoc-text);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .tsd-page-toolbar {
+    background: var(--typedoc-panel);
+    border-bottom: 1px solid var(--typedoc-border);
+  }
+
+  .tsd-navigation a,
+  .tsd-page-toolbar a,
+  a {
+    color: var(--typedoc-link);
+  }
+
+  a:hover {
+    color: var(--typedoc-link-hover);
+  }
+
+  .tsd-panel {
+    border: 1px solid var(--typedoc-border);
+    background: var(--typedoc-panel);
+    border-radius: 8px;
+  }
+
+  .tsd-page-title h1,
+  .tsd-page-title h2,
+  .tsd-page-title h3,
+  h1, h2, h3 {
+    color: var(--typedoc-text);
+  }
+
+  .col-sidebar {
+    border-left: 1px solid var(--typedoc-border);
+  }
+
+  .typedoc-top-tabs {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 1rem;
+  }
+
+  .typedoc-top-tab {
+    display: inline-flex;
+    align-items: center;
+    height: 2rem;
+    padding: 0 0.75rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    color: var(--typedoc-text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .typedoc-top-tab:hover {
+    border-color: var(--typedoc-border);
+    background: #21262d;
+    color: var(--typedoc-text);
+    text-decoration: none;
+  }
+
+  .typedoc-top-tab.is-active {
+    border-color: var(--typedoc-link);
+    color: var(--typedoc-link);
+    font-weight: 600;
+  }
+</style>
+
+
+<script>
+(function () {
+  function addTopTabs() {
+    var toolbar = document.querySelector(".tsd-toolbar-contents");
+    if (!toolbar) return;
+    if (toolbar.querySelector(".typedoc-top-tabs")) return;
+
+    var tabs = document.createElement("nav");
+    tabs.className = "typedoc-top-tabs";
+    tabs.setAttribute("aria-label", "Documentation sections");
+
+    var path = window.location.pathname;
+    var isApi = path.indexOf("/api-reference/generated/") !== -1;
+
+    var docs = document.createElement("a");
+    docs.href = "/AudioToolJsDocs/";
+    docs.className = "typedoc-top-tab" + (isApi ? "" : " is-active");
+    docs.textContent = "Docs";
+
+    var api = document.createElement("a");
+    api.href = "/AudioToolJsDocs/api-reference/generated/";
+    api.className = "typedoc-top-tab" + (isApi ? " is-active" : "");
+    api.textContent = "API";
+
+    tabs.appendChild(docs);
+    tabs.appendChild(api);
+    toolbar.appendChild(tabs);
+  }
+
+  function run() {
+    addTopTabs();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run);
+  } else {
+    run();
+  }
+})();
+</script>
+
+<!-- AUTIOTOOL_TYPEDOC_NAV_INJECTION_END -->
+</head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="../index.html" class="title">@audiotool/nexus - v0.0.15</a><div id="tsd-toolbar-links"><a href="https://developer.audiotool.com">Developer Hub</a><a href="https://github.com/audiotool/nexus">GitHub</a></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><ul class="tsd-breadcrumb" aria-label="Breadcrumb"><li><a href="../modules/api.html">api</a></li><li><a href="" aria-current="page">GmInstrumentSlug</a></li></ul><h1>Type Alias GmInstrumentSlug</h1></div><div class="tsd-signature"><span class="tsd-kind-type-alias">GmInstrumentSlug</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-keyword">keyof</span> <span class="tsd-signature-keyword">typeof</span> <span class="tsd-signature-type">gmInstrumentProgramBySlug</span></div><div class="tsd-comment tsd-typography"><p>One of the 128 General MIDI melodic preset slugs on the <code>gakki</code> sampler.</p>
+<p>The tables below are auto-synced from <code>presets.csv</code> by <code>npm run gen:presets</code>
+-- do not edit by hand between the <code>gm-instrument-table</code> markers.</p>
+<!-- gm-instrument-table:start -->
+<table>
+<thead>
+<tr>
+<th style="text-align:right">GM (program)</th>
+<th style="text-align:left">Slug</th>
+<th style="text-align:left">Short description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:left"><code>acoustic-piano</code></td>
+<td style="text-align:left">Classic full-bodied piano sound</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left"><code>bright-grand-2</code></td>
+<td style="text-align:left">Brighter, harder attack</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left"><code>piano-2</code></td>
+<td style="text-align:left">Classic piano</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left"><code>honky-tonk-piano</code></td>
+<td style="text-align:left">Detuned barroom piano</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:left"><code>electronic-piano-1</code></td>
+<td style="text-align:left">Rhodes-style smooth tone</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td style="text-align:left"><code>electronic-piano-2</code></td>
+<td style="text-align:left">FM-type bell piano</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td style="text-align:left"><code>harpsichord</code></td>
+<td style="text-align:left">Plucked baroque keyboard</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td style="text-align:left"><code>clavinet</code></td>
+<td style="text-align:left">Funky percussive electronic keyboard</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td style="text-align:left"><code>celesta</code></td>
+<td style="text-align:left">Bell-like piano</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td style="text-align:left"><code>glockenspiel</code></td>
+<td style="text-align:left">High metallic chime</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td style="text-align:left"><code>music-box</code></td>
+<td style="text-align:left">Wind-up toy box tone</td>
+</tr>
+<tr>
+<td style="text-align:right">11</td>
+<td style="text-align:left"><code>vibraphone</code></td>
+<td style="text-align:left">Jazz mallet instrument</td>
+</tr>
+<tr>
+<td style="text-align:right">12</td>
+<td style="text-align:left"><code>marimba</code></td>
+<td style="text-align:left">Wooden mallet percussion</td>
+</tr>
+<tr>
+<td style="text-align:right">13</td>
+<td style="text-align:left"><code>xylophone</code></td>
+<td style="text-align:left">Bright wooden percussion</td>
+</tr>
+<tr>
+<td style="text-align:right">14</td>
+<td style="text-align:left"><code>tubular-bells</code></td>
+<td style="text-align:left">Church bell tone</td>
+</tr>
+<tr>
+<td style="text-align:right">15</td>
+<td style="text-align:left"><code>dulcimer</code></td>
+<td style="text-align:left">Hammered string tone</td>
+</tr>
+<tr>
+<td style="text-align:right">16</td>
+<td style="text-align:left"><code>jazz-organ</code></td>
+<td style="text-align:left">Hammond-style tonewheel</td>
+</tr>
+<tr>
+<td style="text-align:right">17</td>
+<td style="text-align:left"><code>hammond-organ</code></td>
+<td style="text-align:left">Hammond-style tonewheel</td>
+</tr>
+<tr>
+<td style="text-align:right">18</td>
+<td style="text-align:left"><code>rock-organ</code></td>
+<td style="text-align:left">Hammond-style tonewheel</td>
+</tr>
+<tr>
+<td style="text-align:right">19</td>
+<td style="text-align:left"><code>church-organ</code></td>
+<td style="text-align:left">Grand cathedral sound</td>
+</tr>
+<tr>
+<td style="text-align:right">20</td>
+<td style="text-align:left"><code>reed-organ</code></td>
+<td style="text-align:left">Harmonium / pump organ</td>
+</tr>
+<tr>
+<td style="text-align:right">21</td>
+<td style="text-align:left"><code>accordion</code></td>
+<td style="text-align:left">Traditional accordion tone</td>
+</tr>
+<tr>
+<td style="text-align:right">22</td>
+<td style="text-align:left"><code>harmonica</code></td>
+<td style="text-align:left">Breath-based reed tone</td>
+</tr>
+<tr>
+<td style="text-align:right">23</td>
+<td style="text-align:left"><code>bandoneon</code></td>
+<td style="text-align:left">Reed-based button accordion</td>
+</tr>
+<tr>
+<td style="text-align:right">24</td>
+<td style="text-align:left"><code>nylon-guitar</code></td>
+<td style="text-align:left">Classical guitar tone</td>
+</tr>
+<tr>
+<td style="text-align:right">25</td>
+<td style="text-align:left"><code>dark-steel-guitar</code></td>
+<td style="text-align:left">Bright steel-string sound</td>
+</tr>
+<tr>
+<td style="text-align:right">26</td>
+<td style="text-align:left"><code>jazz-guitar</code></td>
+<td style="text-align:left">Smooth hollow-body tone</td>
+</tr>
+<tr>
+<td style="text-align:right">27</td>
+<td style="text-align:left"><code>clean-guitar</code></td>
+<td style="text-align:left">Balanced clean tone</td>
+</tr>
+<tr>
+<td style="text-align:right">28</td>
+<td style="text-align:left"><code>muted-guitar</code></td>
+<td style="text-align:left">Palm-muted pluck</td>
+</tr>
+<tr>
+<td style="text-align:right">29</td>
+<td style="text-align:left"><code>overdriven-guitar</code></td>
+<td style="text-align:left">Crunchy rock tone</td>
+</tr>
+<tr>
+<td style="text-align:right">30</td>
+<td style="text-align:left"><code>distortion-guitar</code></td>
+<td style="text-align:left">Heavy metal tone</td>
+</tr>
+<tr>
+<td style="text-align:right">31</td>
+<td style="text-align:left"><code>guitar-harmonics</code></td>
+<td style="text-align:left">Bell-like guitar harmonics</td>
+</tr>
+<tr>
+<td style="text-align:right">32</td>
+<td style="text-align:left"><code>acoustic-bass</code></td>
+<td style="text-align:left">Upright double bass</td>
+</tr>
+<tr>
+<td style="text-align:right">33</td>
+<td style="text-align:left"><code>fingered-bass</code></td>
+<td style="text-align:left">Smooth electronic bass</td>
+</tr>
+<tr>
+<td style="text-align:right">34</td>
+<td style="text-align:left"><code>picked-bass</code></td>
+<td style="text-align:left">Sharper bass tone</td>
+</tr>
+<tr>
+<td style="text-align:right">35</td>
+<td style="text-align:left"><code>fretless-bass</code></td>
+<td style="text-align:left">Slides and glides</td>
+</tr>
+<tr>
+<td style="text-align:right">36</td>
+<td style="text-align:left"><code>slap-bass-1</code></td>
+<td style="text-align:left">Funky thumb slap</td>
+</tr>
+<tr>
+<td style="text-align:right">37</td>
+<td style="text-align:left"><code>slap-bass-2</code></td>
+<td style="text-align:left">Heavier slap sound</td>
+</tr>
+<tr>
+<td style="text-align:right">38</td>
+<td style="text-align:left"><code>synth-bass-1</code></td>
+<td style="text-align:left">Analog-style bass bright</td>
+</tr>
+<tr>
+<td style="text-align:right">39</td>
+<td style="text-align:left"><code>synth-bass-2</code></td>
+<td style="text-align:left">Analog-style bass dark</td>
+</tr>
+<tr>
+<td style="text-align:right">40</td>
+<td style="text-align:left"><code>violin</code></td>
+<td style="text-align:left">Solo bowed string</td>
+</tr>
+<tr>
+<td style="text-align:right">41</td>
+<td style="text-align:left"><code>viola</code></td>
+<td style="text-align:left">Warm mid-range string</td>
+</tr>
+<tr>
+<td style="text-align:right">42</td>
+<td style="text-align:left"><code>cello</code></td>
+<td style="text-align:left">Deep, emotional tone</td>
+</tr>
+<tr>
+<td style="text-align:right">43</td>
+<td style="text-align:left"><code>contrabass</code></td>
+<td style="text-align:left">Orchestral bass</td>
+</tr>
+<tr>
+<td style="text-align:right">44</td>
+<td style="text-align:left"><code>tremolo-strings</code></td>
+<td style="text-align:left">Fast repeated bowing</td>
+</tr>
+<tr>
+<td style="text-align:right">45</td>
+<td style="text-align:left"><code>pizzicato-strings</code></td>
+<td style="text-align:left">Plucked orchestral strings</td>
+</tr>
+<tr>
+<td style="text-align:right">46</td>
+<td style="text-align:left"><code>harp</code></td>
+<td style="text-align:left">Sweeping harp sound</td>
+</tr>
+<tr>
+<td style="text-align:right">47</td>
+<td style="text-align:left"><code>timpani</code></td>
+<td style="text-align:left">Tuned orchestral drum</td>
+</tr>
+<tr>
+<td style="text-align:right">48</td>
+<td style="text-align:left"><code>string-section</code></td>
+<td style="text-align:left">Full string section</td>
+</tr>
+<tr>
+<td style="text-align:right">49</td>
+<td style="text-align:left"><code>string-ensemble</code></td>
+<td style="text-align:left">Full string section with low attack</td>
+</tr>
+<tr>
+<td style="text-align:right">50</td>
+<td style="text-align:left"><code>synth-strings-1</code></td>
+<td style="text-align:left">Classic analog pad</td>
+</tr>
+<tr>
+<td style="text-align:right">51</td>
+<td style="text-align:left"><code>synth-strings-2</code></td>
+<td style="text-align:left">Bright digital pad</td>
+</tr>
+<tr>
+<td style="text-align:right">52</td>
+<td style="text-align:left"><code>choir-aahs</code></td>
+<td style="text-align:left">Vocal ensemble &quot;Aah&quot;</td>
+</tr>
+<tr>
+<td style="text-align:right">53</td>
+<td style="text-align:left"><code>choir-oohs</code></td>
+<td style="text-align:left">Softer vocal &quot;Ooh&quot;</td>
+</tr>
+<tr>
+<td style="text-align:right">54</td>
+<td style="text-align:left"><code>synth-voice</code></td>
+<td style="text-align:left">Vocal-like synth tone</td>
+</tr>
+<tr>
+<td style="text-align:right">55</td>
+<td style="text-align:left"><code>orchestra-hit</code></td>
+<td style="text-align:left">Classic staccato hit</td>
+</tr>
+<tr>
+<td style="text-align:right">56</td>
+<td style="text-align:left"><code>trumpet</code></td>
+<td style="text-align:left">Bright brass solo</td>
+</tr>
+<tr>
+<td style="text-align:right">57</td>
+<td style="text-align:left"><code>trombone</code></td>
+<td style="text-align:left">Warm low brass</td>
+</tr>
+<tr>
+<td style="text-align:right">58</td>
+<td style="text-align:left"><code>tuba</code></td>
+<td style="text-align:left">Deep orchestral brass</td>
+</tr>
+<tr>
+<td style="text-align:right">59</td>
+<td style="text-align:left"><code>muted-trumpet</code></td>
+<td style="text-align:left">Jazz trumpet with mute</td>
+</tr>
+<tr>
+<td style="text-align:right">60</td>
+<td style="text-align:left"><code>french-horn</code></td>
+<td style="text-align:left">Smooth orchestral horn</td>
+</tr>
+<tr>
+<td style="text-align:right">61</td>
+<td style="text-align:left"><code>brass-section</code></td>
+<td style="text-align:left">Powerful ensemble</td>
+</tr>
+<tr>
+<td style="text-align:right">62</td>
+<td style="text-align:left"><code>synth-brass-1</code></td>
+<td style="text-align:left">Digital brass synth</td>
+</tr>
+<tr>
+<td style="text-align:right">63</td>
+<td style="text-align:left"><code>synth-brass-2</code></td>
+<td style="text-align:left">Analog brass synth</td>
+</tr>
+<tr>
+<td style="text-align:right">64</td>
+<td style="text-align:left"><code>soprano-sax</code></td>
+<td style="text-align:left">Bright, high sax</td>
+</tr>
+<tr>
+<td style="text-align:right">65</td>
+<td style="text-align:left"><code>alto-sax</code></td>
+<td style="text-align:left">Smooth middle sax</td>
+</tr>
+<tr>
+<td style="text-align:right">66</td>
+<td style="text-align:left"><code>tenor-sax</code></td>
+<td style="text-align:left">Deep expressive sax</td>
+</tr>
+<tr>
+<td style="text-align:right">67</td>
+<td style="text-align:left"><code>baritone-sax</code></td>
+<td style="text-align:left">Fat low sax sound</td>
+</tr>
+<tr>
+<td style="text-align:right">68</td>
+<td style="text-align:left"><code>oboe</code></td>
+<td style="text-align:left">Nasal woodwind tone</td>
+</tr>
+<tr>
+<td style="text-align:right">69</td>
+<td style="text-align:left"><code>english-horn</code></td>
+<td style="text-align:left">Mellow oboe variant</td>
+</tr>
+<tr>
+<td style="text-align:right">70</td>
+<td style="text-align:left"><code>bassoon</code></td>
+<td style="text-align:left">Deep reed woodwind</td>
+</tr>
+<tr>
+<td style="text-align:right">71</td>
+<td style="text-align:left"><code>clarinet</code></td>
+<td style="text-align:left">Smooth woodwind</td>
+</tr>
+<tr>
+<td style="text-align:right">72</td>
+<td style="text-align:left"><code>piccolo</code></td>
+<td style="text-align:left">Bright, high flute</td>
+</tr>
+<tr>
+<td style="text-align:right">73</td>
+<td style="text-align:left"><code>flute</code></td>
+<td style="text-align:left">Clear breathy tone</td>
+</tr>
+<tr>
+<td style="text-align:right">74</td>
+<td style="text-align:left"><code>recorder</code></td>
+<td style="text-align:left">Sweet folk flute</td>
+</tr>
+<tr>
+<td style="text-align:right">75</td>
+<td style="text-align:left"><code>pan-flute</code></td>
+<td style="text-align:left">Airy bamboo pipes</td>
+</tr>
+<tr>
+<td style="text-align:right">76</td>
+<td style="text-align:left"><code>blown-bottle</code></td>
+<td style="text-align:left">Airy whistle tone</td>
+</tr>
+<tr>
+<td style="text-align:right">77</td>
+<td style="text-align:left"><code>shakuhachi</code></td>
+<td style="text-align:left">Japanese bamboo flute</td>
+</tr>
+<tr>
+<td style="text-align:right">78</td>
+<td style="text-align:left"><code>whistle</code></td>
+<td style="text-align:left">Clear sharp whistle</td>
+</tr>
+<tr>
+<td style="text-align:right">79</td>
+<td style="text-align:left"><code>ocarina</code></td>
+<td style="text-align:left">Soft clay flute</td>
+</tr>
+<tr>
+<td style="text-align:right">80</td>
+<td style="text-align:left"><code>square-lead</code></td>
+<td style="text-align:left">Basic square wave lead</td>
+</tr>
+<tr>
+<td style="text-align:right">81</td>
+<td style="text-align:left"><code>saw-lead</code></td>
+<td style="text-align:left">Classic saw lead</td>
+</tr>
+<tr>
+<td style="text-align:right">82</td>
+<td style="text-align:left"><code>calliope-lead</code></td>
+<td style="text-align:left">Organ-like synth</td>
+</tr>
+<tr>
+<td style="text-align:right">83</td>
+<td style="text-align:left"><code>chiffer-lead</code></td>
+<td style="text-align:left">Breath noise synth</td>
+</tr>
+<tr>
+<td style="text-align:right">84</td>
+<td style="text-align:left"><code>charang</code></td>
+<td style="text-align:left">Guitar-like synth</td>
+</tr>
+<tr>
+<td style="text-align:right">85</td>
+<td style="text-align:left"><code>solo-voice</code></td>
+<td style="text-align:left">Vocal-ish lead tone</td>
+</tr>
+<tr>
+<td style="text-align:right">86</td>
+<td style="text-align:left"><code>fifth-sawtooth</code></td>
+<td style="text-align:left">Dual oscillator lead</td>
+</tr>
+<tr>
+<td style="text-align:right">87</td>
+<td style="text-align:left"><code>bass-lead</code></td>
+<td style="text-align:left">Hybrid lead/bass</td>
+</tr>
+<tr>
+<td style="text-align:right">88</td>
+<td style="text-align:left"><code>fantasia-pad</code></td>
+<td style="text-align:left">Soft evolving pad</td>
+</tr>
+<tr>
+<td style="text-align:right">89</td>
+<td style="text-align:left"><code>warm-pad</code></td>
+<td style="text-align:left">Gentle analog pad</td>
+</tr>
+<tr>
+<td style="text-align:right">90</td>
+<td style="text-align:left"><code>polysynth</code></td>
+<td style="text-align:left">Rich layered pad</td>
+</tr>
+<tr>
+<td style="text-align:right">91</td>
+<td style="text-align:left"><code>space-voice</code></td>
+<td style="text-align:left">Vocal-like pad</td>
+</tr>
+<tr>
+<td style="text-align:right">92</td>
+<td style="text-align:left"><code>bowed-glass</code></td>
+<td style="text-align:left">Bowed string pad</td>
+</tr>
+<tr>
+<td style="text-align:right">93</td>
+<td style="text-align:left"><code>metal</code></td>
+<td style="text-align:left">Bell-like pad</td>
+</tr>
+<tr>
+<td style="text-align:right">94</td>
+<td style="text-align:left"><code>halo</code></td>
+<td style="text-align:left">Airy shimmering pad</td>
+</tr>
+<tr>
+<td style="text-align:right">95</td>
+<td style="text-align:left"><code>sweep</code></td>
+<td style="text-align:left">Filter-sweep pad</td>
+</tr>
+<tr>
+<td style="text-align:right">96</td>
+<td style="text-align:left"><code>rain</code></td>
+<td style="text-align:left">Nature-like pad</td>
+</tr>
+<tr>
+<td style="text-align:right">97</td>
+<td style="text-align:left"><code>soundtrack</code></td>
+<td style="text-align:left">Cinematic pad</td>
+</tr>
+<tr>
+<td style="text-align:right">98</td>
+<td style="text-align:left"><code>crystal</code></td>
+<td style="text-align:left">Glassy sparkle</td>
+</tr>
+<tr>
+<td style="text-align:right">99</td>
+<td style="text-align:left"><code>atmosphere</code></td>
+<td style="text-align:left">Evolving space pad</td>
+</tr>
+<tr>
+<td style="text-align:right">100</td>
+<td style="text-align:left"><code>brightness</code></td>
+<td style="text-align:left">High resonant pad</td>
+</tr>
+<tr>
+<td style="text-align:right">101</td>
+<td style="text-align:left"><code>goblins</code></td>
+<td style="text-align:left">Weird sound effect</td>
+</tr>
+<tr>
+<td style="text-align:right">102</td>
+<td style="text-align:left"><code>echo-drops</code></td>
+<td style="text-align:left">Delayed texture</td>
+</tr>
+<tr>
+<td style="text-align:right">103</td>
+<td style="text-align:left"><code>sci-fi</code></td>
+<td style="text-align:left">Sci-fi-style pad</td>
+</tr>
+<tr>
+<td style="text-align:right">104</td>
+<td style="text-align:left"><code>sitar</code></td>
+<td style="text-align:left">Indian plucked string</td>
+</tr>
+<tr>
+<td style="text-align:right">105</td>
+<td style="text-align:left"><code>banjo</code></td>
+<td style="text-align:left">Bright folk string</td>
+</tr>
+<tr>
+<td style="text-align:right">106</td>
+<td style="text-align:left"><code>shamisen</code></td>
+<td style="text-align:left">Japanese 3-string lute</td>
+</tr>
+<tr>
+<td style="text-align:right">107</td>
+<td style="text-align:left"><code>koto</code></td>
+<td style="text-align:left">Japanese zither</td>
+</tr>
+<tr>
+<td style="text-align:right">108</td>
+<td style="text-align:left"><code>kalimba</code></td>
+<td style="text-align:left">Thumb piano</td>
+</tr>
+<tr>
+<td style="text-align:right">109</td>
+<td style="text-align:left"><code>bagpipe</code></td>
+<td style="text-align:left">Drone pipe sound</td>
+</tr>
+<tr>
+<td style="text-align:right">110</td>
+<td style="text-align:left"><code>fiddle</code></td>
+<td style="text-align:left">Folk violin</td>
+</tr>
+<tr>
+<td style="text-align:right">111</td>
+<td style="text-align:left"><code>shanai</code></td>
+<td style="text-align:left">Indian reed pipe</td>
+</tr>
+<tr>
+<td style="text-align:right">112</td>
+<td style="text-align:left"><code>tinkle-bells</code></td>
+<td style="text-align:left">Bright chime</td>
+</tr>
+<tr>
+<td style="text-align:right">113</td>
+<td style="text-align:left"><code>agogo</code></td>
+<td style="text-align:left">Twin cowbell tones</td>
+</tr>
+<tr>
+<td style="text-align:right">114</td>
+<td style="text-align:left"><code>steel-drums</code></td>
+<td style="text-align:left">Caribbean tone</td>
+</tr>
+<tr>
+<td style="text-align:right">115</td>
+<td style="text-align:left"><code>woodblock</code></td>
+<td style="text-align:left">Percussive wood click</td>
+</tr>
+<tr>
+<td style="text-align:right">116</td>
+<td style="text-align:left"><code>taiko-drum</code></td>
+<td style="text-align:left">Deep Japanese drum</td>
+</tr>
+<tr>
+<td style="text-align:right">117</td>
+<td style="text-align:left"><code>melodic-drum</code></td>
+<td style="text-align:left">Tuned toms</td>
+</tr>
+<tr>
+<td style="text-align:right">118</td>
+<td style="text-align:left"><code>synth-tom</code></td>
+<td style="text-align:left">Electronic tom hit</td>
+</tr>
+<tr>
+<td style="text-align:right">119</td>
+<td style="text-align:left"><code>reverse-cymbal</code></td>
+<td style="text-align:left">Reversed swell</td>
+</tr>
+<tr>
+<td style="text-align:right">120</td>
+<td style="text-align:left"><code>guitar-fret-noise</code></td>
+<td style="text-align:left">Sliding fret sound</td>
+</tr>
+<tr>
+<td style="text-align:right">121</td>
+<td style="text-align:left"><code>breath-noise</code></td>
+<td style="text-align:left">Inhale/exhale effect</td>
+</tr>
+<tr>
+<td style="text-align:right">122</td>
+<td style="text-align:left"><code>seashore</code></td>
+<td style="text-align:left">Ocean wave sound</td>
+</tr>
+<tr>
+<td style="text-align:right">123</td>
+<td style="text-align:left"><code>bird-tweet</code></td>
+<td style="text-align:left">Bird chirping</td>
+</tr>
+<tr>
+<td style="text-align:right">124</td>
+<td style="text-align:left"><code>telephone-ring</code></td>
+<td style="text-align:left">Old-style ring</td>
+</tr>
+<tr>
+<td style="text-align:right">125</td>
+<td style="text-align:left"><code>helicopter</code></td>
+<td style="text-align:left">Rotor blade sound</td>
+</tr>
+<tr>
+<td style="text-align:right">126</td>
+<td style="text-align:left"><code>applause</code></td>
+<td style="text-align:left">Audience clapping</td>
+</tr>
+<tr>
+<td style="text-align:right">127</td>
+<td style="text-align:left"><code>gunshot</code></td>
+<td style="text-align:left">Pistol/bang sound</td>
+</tr>
+</tbody>
+</table>
+<!-- gm-instrument-table:end --></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/api/presets/gm-slugs.ts#L285">api/presets/gm-slugs.ts:285</a></li></ul></aside></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div></div><div class="site-menu"><nav id="tsd-sidebar-links" class="tsd-navigation"><a href="https://developer.audiotool.com" class="tsd-nav-link">Developer Hub</a><a href="https://github.com/audiotool/nexus" class="tsd-nav-link">GitHub</a></nav><nav class="tsd-navigation"><a href="../index.html">@audiotool/nexus - v0.0.15</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p><script>
+(() => {
+  const marker = "/api-reference/generated";
+  const path = window.location.pathname;
+  const idx = path.indexOf(marker);
+  const root = idx >= 0 ? (path.slice(0, idx) || "") + "/" : "/";
+  const docsHref = root;
+  const apiHref = root + "api-reference/generated/";
+  const toolbar = document.querySelector(".tsd-page-toolbar .tsd-toolbar-contents");
+  if (!toolbar) return;
+
+  const tabs = document.createElement("nav");
+  tabs.className = "docs-api-tabs";
+  tabs.setAttribute("aria-label", "Documentation sections");
+
+  const docsTab = document.createElement("a");
+  docsTab.href = docsHref;
+  docsTab.className = "docs-api-tab";
+  docsTab.textContent = "Docs";
+
+  const apiTab = document.createElement("a");
+  apiTab.href = apiHref;
+  apiTab.className = "docs-api-tab is-active";
+  apiTab.textContent = "API";
+
+  tabs.appendChild(docsTab);
+  tabs.appendChild(apiTab);
+
+  const titleLink = toolbar.querySelector("a.title");
+  if (titleLink && titleLink.nextSibling) {
+    toolbar.insertBefore(tabs, titleLink.nextSibling);
+  } else {
+    toolbar.prepend(tabs);
+  }
+})();
+</script></footer><div class="overlay"></div></body></html>

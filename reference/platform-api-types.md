@@ -15,17 +15,17 @@ For practical usage examples, see [Use Platform APIs Through the Client](../work
 
 ## Accessing services
 
-All services are accessed via `client.api`:
+All services are exposed directly on `AudiotoolClient`:
 
 ```typescript
-const client = await createAudiotoolClient({ authorization: "at_pat_..." });
+const client = await createAudiotoolClient({ auth: "at_pat_..." });
 
-client.api.projectService
-client.api.sampleService
-client.api.projectRoleService
-client.api.userService
-client.api.audioGraphService
-client.api.presets
+client.projects
+client.samples
+client.projectRoles
+client.users
+client.audioGraph
+client.presets
 ```
 
 ---
@@ -38,27 +38,27 @@ Create, read, update, and delete projects. Also manages collaborative sessions o
 
 ```typescript
 // List all projects accessible to the authenticated account
-const { projects } = await client.api.projectService.listProjects({});
+const { projects } = await client.projects.listProjects({});
 for (const project of projects) {
   console.log(project.id, project.name);
 }
 
 // Create a new project
-const { project } = await client.api.projectService.createProject({
+const { project } = await client.projects.createProject({
   name: "My New Track",
 });
 
 // Update project metadata
-await client.api.projectService.updateProject({
+await client.projects.updateProject({
   id: project.id,
   name: "My New Track (Final)",
 });
 
 // Delete a project
-await client.api.projectService.deleteProject({ id: project.id });
+await client.projects.deleteProject({ id: project.id });
 
 // List active collaborative sessions on a project
-const { sessions } = await client.api.projectService.listSessions({
+const { sessions } = await client.projects.listSessions({
   projectId: project.id,
 });
 ```
@@ -71,10 +71,10 @@ List, register, and delete audio sample files. Uploading is a three-step process
 
 ```typescript
 // List all samples in the account
-const { samples } = await client.api.sampleService.listSamples({});
+const { samples } = await client.samples.listSamples({});
 
 // Step 1: Register a new sample — returns metadata including an upload URL
-const { sample } = await client.api.sampleService.createSample({
+const { sample } = await client.samples.createSample({
   name: "kick-drum.wav",
 });
 // sample.uploadUrl is a signed URL — PUT your audio bytes there directly
@@ -83,14 +83,14 @@ const { sample } = await client.api.sampleService.createSample({
 // await fetch(sample.uploadUrl, { method: "PUT", body: audioBytes });
 
 // Step 3: Notify the server that your upload is complete
-await client.api.sampleService.uploadSampleFinished({ id: sample.id });
+await client.samples.uploadSampleFinished({ id: sample.id });
 
 // Get a sample (returns metadata including a download URL)
-const { sample: fetched } = await client.api.sampleService.getSample({ id: sample.id });
+const { sample: fetched } = await client.samples.getSample({ id: sample.id });
 // fetched.downloadUrl is a signed URL to download the audio data
 
 // Delete a sample
-await client.api.sampleService.deleteSample({ id: sample.id });
+await client.samples.deleteSample({ id: sample.id });
 ```
 
 ---
@@ -101,7 +101,7 @@ Manage who has access to a project and at what permission level.
 
 ```typescript
 // List current collaborators
-const { roles } = await client.api.projectRoleService.listProjectRoles({
+const { roles } = await client.projectRoles.listProjectRoles({
   projectId: "abc123",
 });
 
@@ -110,14 +110,14 @@ for (const role of roles) {
 }
 
 // Add a collaborator
-await client.api.projectRoleService.createProjectRole({
+await client.projectRoles.createProjectRole({
   projectId: "abc123",
   userId: "user456",
   role: ProjectRoleType.EDITOR,
 });
 
 // Remove a collaborator
-await client.api.projectRoleService.deleteProjectRole({
+await client.projectRoles.deleteProjectRole({
   projectId: "abc123",
   userId: "user456",
 });
@@ -131,20 +131,20 @@ Look up and manage user accounts.
 
 ```typescript
 // Get a specific user's profile
-const { user } = await client.api.userService.getUser({ id: "user456" });
+const { user } = await client.users.getUser({ id: "user456" });
 console.log(user.name, user.email);
 
 // List users (e.g. search for collaborators)
-const { users } = await client.api.userService.listUsers({});
+const { users } = await client.users.listUsers({});
 
 // Update your own user profile
-await client.api.userService.updateUser({
+await client.users.updateUser({
   id: "user456",
   name: "New Display Name",
 });
 
 // Upload a profile avatar image
-await client.api.userService.uploadAvatar({
+await client.users.uploadAvatar({
   id: "user456",
   data: imageBytes, // Uint8Array of image file
 });
@@ -157,7 +157,7 @@ await client.api.userService.uploadAvatar({
 Retrieve audio graphs — vector graphics displayed in the Audiotool sample browser to show a waveform-like visualization.
 
 ```typescript
-const { graph } = await client.api.audioGraphService.getAudiograph({
+const { graph } = await client.audioGraph.getAudiograph({
   sampleId: sample.id,
   channels: GetAudiographChannels.STEREO,
   resolution: GetAudiographResolution.MEDIUM,
@@ -168,21 +168,6 @@ const { graph } = await client.api.audioGraphService.getAudiograph({
 ---
 
 ## Functions
-
-### [`createAudiotoolAPI()`](../api-reference/generated/functions/api.createAudiotoolAPI.html)
-
-Factory function to instantiate the API client directly, without going through `createAudiotoolClient`. Useful when you need the REST API without opening a document.
-
-```typescript
-import { createAudiotoolAPI } from "@audiotool/nexus/api";
-
-const api = await createAudiotoolAPI(async () => "at_pat_...");
-
-// Use the API directly
-const { projects } = await api.projectService.listProjects({});
-```
-
----
 
 ### [`neverThrowingFetch()`](../api-reference/generated/functions/api.neverThrowingFetch.html)
 
@@ -207,20 +192,17 @@ if (result.ok) {
 
 ## Type Aliases
 
-### [`AudiotoolAPI`](../api-reference/generated/types/api.AudiotoolAPI.html)
+### [`AudiotoolClient`](../api-reference/generated/types/index.AudiotoolClient.html)
 
-The full type of `client.api`. Use this as a type annotation when passing the API object to helper functions.
+The main authenticated client type. Use this when passing service access to helpers.
 
 ```typescript
-import type { AudiotoolAPI } from "@audiotool/nexus/api";
+import type { AudiotoolClient } from "@audiotool/nexus";
 
-async function listAllProjects(api: AudiotoolAPI) {
-  const { projects } = await api.projectService.listProjects({});
+async function listAllProjects(client: AudiotoolClient) {
+  const { projects } = await client.projects.listProjects({});
   return projects;
 }
-
-// Call with client.api
-await listAllProjects(client.api);
 ```
 
 ---
@@ -255,11 +237,11 @@ import type { KeepaliveTransport } from "@audiotool/nexus/api";
 
 ### [`NexusPreset`](../api-reference/generated/types/api.NexusPreset.html) and [`PresetUtil`](../api-reference/generated/types/api.PresetUtil.html)
 
-[`NexusPreset`](../api-reference/generated/types/api.NexusPreset.html) is how a device preset appears within a Nexus document. [`PresetUtil`](../api-reference/generated/types/api.PresetUtil.html) wraps preset API operations and is accessed via `client.api.presets`.
+[`NexusPreset`](../api-reference/generated/types/api.NexusPreset.html) is how a device preset appears within a Nexus document. [`PresetUtil`](../api-reference/generated/types/api.PresetUtil.html) wraps preset API operations and is accessed via `client.presets`.
 
 ```typescript
 // Access presets through the client
-const presetUtil = client.api.presets;
+const presetUtil = client.presets;
 
 // Preset IDs can be copied from the preset browser in the Audiotool DAW.
 // Use them to apply saved device configurations to instruments.
@@ -293,7 +275,7 @@ Defines the permission level of a collaborator on a project.
 import { ProjectRoleType } from "@audiotool/nexus/api";
 
 // Add a collaborator as an editor
-await client.api.projectRoleService.createProjectRole({
+await client.projectRoles.createProjectRole({
   projectId: "abc123",
   userId: "user456",
   role: ProjectRoleType.EDITOR,
@@ -309,7 +291,7 @@ The license type applied to a project track — controls how the track can be sh
 ```typescript
 import { TrackLicense } from "@audiotool/nexus/api";
 
-await client.api.projectService.updateProject({
+await client.projects.updateProject({
   id: "abc123",
   license: TrackLicense.CC_BY,
 });
@@ -325,7 +307,7 @@ The type of device a preset applies to (synthesizer, drum machine, effect, etc.)
 import { PresetDeviceType } from "@audiotool/nexus/api";
 
 // Use when filtering presets by device type
-const presets = await client.api.presets.list(PresetDeviceType.SYNTHESIZER);
+const presets = await client.presets.list(PresetDeviceType.SYNTHESIZER);
 ```
 
 ---
@@ -338,7 +320,7 @@ How a preset is used — whether it defines a sound, an effect setting, or anoth
 import { PresetDeviceType, PresetUsage } from "@audiotool/nexus/api";
 
 // Use when categorizing or filtering presets
-const allSynthPresets = await client.api.presets.list(PresetDeviceType.PULVERISATEUR);
+const allSynthPresets = await client.presets.list(PresetDeviceType.PULVERISATEUR);
 const soundPresets = allSynthPresets.filter(
   (preset) => preset.usage === PresetUsage.PUBLIC,
 );
@@ -353,7 +335,7 @@ Comment visibility mode — controls whether comments on a project are public or
 ```typescript
 import { CommentMode } from "@audiotool/nexus/api";
 
-await client.api.projectService.updateProject({
+await client.projects.updateProject({
   id: "abc123",
   commentMode: CommentMode.PUBLIC,
 });
@@ -368,7 +350,7 @@ Channel options for retrieving an audio graph visualization (mono or stereo).
 ```typescript
 import { GetAudiographChannels } from "@audiotool/nexus/api";
 
-const { graph } = await client.api.audioGraphService.getAudiograph({
+const { graph } = await client.audioGraph.getAudiograph({
   sampleId: sample.id,
   channels: GetAudiographChannels.STEREO,
 });
@@ -383,7 +365,7 @@ Resolution options for the audio graph visualization.
 ```typescript
 import { GetAudiographResolution } from "@audiotool/nexus/api";
 
-const { graph } = await client.api.audioGraphService.getAudiograph({
+const { graph } = await client.audioGraph.getAudiograph({
   sampleId: sample.id,
   resolution: GetAudiographResolution.HIGH,
 });
@@ -411,7 +393,7 @@ Status and mode types for sync tracks — the infrastructure that records and re
 import { SyncTrackStatus } from "@audiotool/nexus/api";
 
 // Check the status of a sync track
-const track = await client.api.projectService.getProject({ id: "..." });
+const track = await client.projects.getProject({ id: "..." });
 if (track.status === SyncTrackStatus.ACTIVE) {
   console.log("Sync track is live");
 }
@@ -466,9 +448,9 @@ import type {
 } from "@audiotool/nexus/api";
 
 // Example: type-annotate a helper
-async function getProjects(api: AudiotoolAPI): Promise<Project[]> {
+async function getProjects(client: AudiotoolClient): Promise<Project[]> {
   const request: ListProjectsRequest = {};
-  const response: ListProjectsResponse = await api.projectService.listProjects(request);
+  const response: ListProjectsResponse = await client.projects.listProjects(request);
   return response.projects;
 }
 ```
@@ -490,10 +472,10 @@ import type {
 
 // Example: type-annotate a function that creates a sample
 async function registerSample(
-  api: AudiotoolAPI,
+  client: AudiotoolClient,
   req: CreateSampleRequest
 ): Promise<CreateSampleResponse> {
-  return api.sampleService.createSample(req);
+  return client.samples.createSample(req);
 }
 ```
 
@@ -512,9 +494,9 @@ import type {
 } from "@audiotool/nexus/api";
 
 // Example: fetch and display a user's name
-async function getUserName(api: AudiotoolAPI, userId: string): Promise<string> {
+async function getUserName(client: AudiotoolClient, userId: string): Promise<string> {
   const req: GetUserRequest = { id: userId };
-  const { user }: GetUserResponse = await api.userService.getUser(req);
+  const { user }: GetUserResponse = await client.users.getUser(req);
   return user.name;
 }
 ```
@@ -535,11 +517,11 @@ import type {
 
 // Example: list active collaborative sessions
 async function getActiveSessions(
-  api: AudiotoolAPI,
+  client: AudiotoolClient,
   projectId: string
 ): Promise<Session[]> {
   const req: ListSessionsRequest = { projectId };
-  const { sessions }: ListSessionsResponse = await api.projectService.listSessions(req);
+  const { sessions }: ListSessionsResponse = await client.projects.listSessions(req);
   return sessions;
 }
 ```
@@ -558,8 +540,8 @@ import type {
 } from "@audiotool/nexus/api";
 
 // Example: list all presets
-async function getAllPresets(api: AudiotoolAPI): Promise<Preset[]> {
-  return api.presets.list(PresetDeviceType.SYNTHESIZER);
+async function getAllPresets(client: AudiotoolClient): Promise<Preset[]> {
+  return client.presets.list(PresetDeviceType.SYNTHESIZER);
 }
 ```
 
@@ -578,11 +560,11 @@ import type {
 } from "@audiotool/nexus/api";
 
 // Poll an operation until it completes
-async function waitForOperation(api: AudiotoolAPI, opId: string) {
+async function waitForOperation(client: AudiotoolClient, opId: string) {
   let op: Operation;
   do {
     const req: GetOperationRequest = { id: opId };
-    const res = await api.fetch(`/operations/${req.id}`);
+    const res = await client.fetch(`/operations/${req.id}`);
     if (!res.ok) throw new Error("Failed to fetch operation status");
     const data = await res.json() as GetOperationResponse;
     op = data.operation!;

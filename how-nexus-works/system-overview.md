@@ -25,7 +25,7 @@ Nexus supports two document modes:
 
 | Mode | How to create | What it does |
 |------|--------------|--------------|
-| **Synced** | `client.createSyncedDocument(...)` | Connects to a real Audiotool project via the backend. Changes are immediately broadcast to all connected collaborators. |
+| **Synced** | `client.open(...)` | Connects to a real Audiotool project via the backend. Changes are immediately broadcast to all connected collaborators. |
 | **Offline** | `createOfflineDocument()` | Runs locally with no backend. All changes are lost on shutdown. Useful for testing and development. |
 
 Both modes expose the same API — the same `modify()`, `events`, and `queryEntities` interface. This means code written against an offline document will work against a synced document too, which makes testing much easier.
@@ -124,7 +124,7 @@ Queries give you a snapshot of current entity state. Events give you a live stre
 
 A synced document has a lifecycle:
 
-1. **Create** — `client.createSyncedDocument(...)` creates the document object but does not begin syncing.
+1. **Create** — `client.open(...)` creates the document object but does not begin syncing.
 2. **Start** — `await nexus.start()` begins syncing with the backend. Events fire and modifications are transmitted.
 3. **Stop** — `await nexus.stop()` finalizes any pending changes and transitions the document to read-only. After stopping, you can still query entities but cannot modify them.
 

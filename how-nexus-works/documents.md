@@ -12,12 +12,10 @@ A **document** is the central object you work with in Nexus. It represents a sin
 
 ### SyncedDocument
 
-A <span class="tooltip" data-tooltip="A document connected to Audiotool in real time, so changes can update as the project changes.">synced document</span> connects to a live Audiotool project. Changes are immediately sent to Audiotool and visible to all other connected collaborators (other bots, other users in the DAW). Created via `client.createSyncedDocument(...)`.
+A <span class="tooltip" data-tooltip="A document connected to Audiotool in real time, so changes can update as the project changes.">synced document</span> connects to a live Audiotool project. Changes are immediately sent to Audiotool and visible to all other connected collaborators (other bots, other users in the DAW). Created via `client.open(...)`.
 
 ```typescript
-const nexus = await client.createSyncedDocument({
-  project: "https://beta.audiotool.com/studio?project=abc123"
-});
+const nexus = await client.open("https://beta.audiotool.com/studio?project=abc123");
 
 await nexus.start();
 // nexus is now live

@@ -17,19 +17,17 @@ import { createAudiotoolClient } from "@audiotool/nexus";
 
 // 1. Create an authenticated client using a Personal Access Token
 const client = await createAudiotoolClient({
-  authorization: "at_pat_your_token_here"
+  auth: "at_pat_your_token_here"
 });
 
 // 2. Open a synced document for a specific Audiotool project
-const nexus = await client.createSyncedDocument({
-  project: "https://beta.audiotool.com/studio?project=abc123"
-});
+const nexus = await client.open("https://beta.audiotool.com/studio?project=abc123");
 
 // 3. Start syncing
 await nexus.start();
 
 // 4. List all projects accessible to this token
-const projects = await client.api.projectService.listProjects({});
+const projects = await client.projects.listProjects({});
 console.log(projects);
 
 // 5. Stop when done

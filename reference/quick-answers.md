@@ -22,9 +22,9 @@ Yes — for synced documents. `start()` initiates the backend connection. Withou
 
 ---
 
-**Q: Why does `getLoginStatus` always report logged out on first call?**
+**Q: Why does `audiotool()` return `status: "unauthenticated"`?**
 
-This is expected. OAuth authentication happens via a browser redirect. The first call runs before any redirect has occurred, so there is no session yet. Implement a login button that calls `status.login()`, wait for the redirect, then call `getLoginStatus` again on page reload.
+This is expected until the OAuth redirect flow completes. Call `at.login()` to start authentication. After the user authorizes and the browser returns to your app, call `audiotool()` again — it will return `status: "authenticated"` when tokens are available.
 
 ---
 
@@ -36,7 +36,7 @@ No. The OAuth redirect URI registered for local development must be `http://127.
 
 **Q: What is the difference between an offline and a synced document?**
 
-An offline document (`createOfflineDocument()`) runs locally with no network or auth. Changes are lost on reload. A synced document (`client.createSyncedDocument()`) connects to a real Audiotool project, persists changes, and broadcasts them to collaborators in real time. Both expose the same `modify()`, `events`, and `queryEntities` API.
+An offline document (`createOfflineDocument()`) runs locally with no network or auth. Changes are lost on reload. A synced document (`client.open()`) connects to a real Audiotool project, persists changes, and broadcasts them to collaborators in real time. Both expose the same `modify()`, `events`, and `queryEntities` API.
 
 ---
 
@@ -85,7 +85,7 @@ await nexus.modify((t) => {
 
 **Q: Can I have multiple documents open at once?**
 
-Yes. Each call to `createSyncedDocument()` or `createOfflineDocument()` creates an independent document object. You can work with multiple documents simultaneously.
+Yes. Each call to `open()` or `createOfflineDocument()` creates an independent document object. You can work with multiple documents simultaneously.
 
 ---
 

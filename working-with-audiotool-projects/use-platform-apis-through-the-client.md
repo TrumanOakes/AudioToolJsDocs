@@ -14,12 +14,12 @@ Your <span class="tooltip" data-tooltip="The main object your app uses to connec
 const client = await createAudiotoolClient({ ... });
 
 // Access services via client.api
-client.api.projectService
-client.api.sampleService
-client.api.projectRoleService
-client.api.userService
-client.api.audioGraphService
-client.api.presets
+client.projects
+client.samples
+client.projectRoles
+client.users
+client.audioGraph
+client.presets
 ```
 
 All API calls return Promises. Transient network failures are automatically retried — you don't need to add any retry logic yourself.
@@ -28,26 +28,26 @@ All API calls return Promises. Transient network failures are automatically retr
 
 ```typescript
 // List all accessible projects
-const response = await client.api.projectService.listProjects({});
+const response = await client.projects.listProjects({});
 console.log(response.projects);
 
 // Create a new project
-const created = await client.api.projectService.createProject({
+const created = await client.projects.createProject({
   // CreateProjectRequest fields
 });
 
 // Update a project
-await client.api.projectService.updateProject({
+await client.projects.updateProject({
   // UpdateProjectRequest fields
 });
 
 // Delete a project
-await client.api.projectService.deleteProject({
+await client.projects.deleteProject({
   // DeleteProjectRequest fields
 });
 
 // View active collaborative sessions on a project
-const sessions = await client.api.projectService.listSessions({
+const sessions = await client.projects.listSessions({
   // ListSessionsRequest fields
 });
 ```
@@ -58,53 +58,53 @@ Uploading a sample is a two-step process: first register the sample to get an up
 
 ```typescript
 // List samples
-const { samples } = await client.api.sampleService.listSamples({});
+const { samples } = await client.samples.listSamples({});
 
 // Step 1: Register the sample — returns an upload URL
-const { sample } = await client.api.sampleService.createSample({ name: "kick.wav" });
+const { sample } = await client.samples.createSample({ name: "kick.wav" });
 // sample.uploadUrl contains the URL to PUT/POST your audio file to
 
 // Step 2: Upload the file to the URL returned by createSample (outside the SDK)
 // await fetch(sample.uploadUrl, { method: "PUT", body: audioBytes });
 
 // Step 3: Notify the server the upload is complete
-await client.api.sampleService.uploadSampleFinished({ id: sample.id });
+await client.samples.uploadSampleFinished({ id: sample.id });
 
 // Get a sample's metadata (includes a download URL)
-const { sample: fetched } = await client.api.sampleService.getSample({ id: sample.id });
+const { sample: fetched } = await client.samples.getSample({ id: sample.id });
 // fetched.downloadUrl contains the URL to fetch the audio data from
 
 // Delete a sample
-await client.api.sampleService.deleteSample({ id: sample.id });
+await client.samples.deleteSample({ id: sample.id });
 ```
 
 ## ProjectRoleService — manage collaborators
 
 ```typescript
 // List collaborators on a project
-const roles = await client.api.projectRoleService.listProjectRoles({ ... });
+const roles = await client.projectRoles.listProjectRoles({ ... });
 
 // Add a collaborator
-await client.api.projectRoleService.createProjectRole({ ... });
+await client.projectRoles.createProjectRole({ ... });
 
 // Remove a collaborator
-await client.api.projectRoleService.deleteProjectRole({ ... });
+await client.projectRoles.deleteProjectRole({ ... });
 ```
 
 ## UserService — manage users
 
 ```typescript
 // Get user information
-const user = await client.api.userService.getUser({ ... });
+const user = await client.users.getUser({ ... });
 
 // List users
-const users = await client.api.userService.listUsers({});
+const users = await client.users.listUsers({});
 
 // Update a user
-await client.api.userService.updateUser({ ... });
+await client.users.updateUser({ ... });
 
 // Upload a user avatar
-await client.api.userService.uploadAvatar({ ... });
+await client.users.uploadAvatar({ ... });
 ```
 
 ## AudiographService — audio graphs
@@ -112,7 +112,7 @@ await client.api.userService.uploadAvatar({ ... });
 Audio graphs are vector graphics displayed in the Audiotool sample browser.
 
 ```typescript
-const graph = await client.api.audioGraphService.getAudiograph({ ... });
+const graph = await client.audioGraph.getAudiograph({ ... });
 ```
 
 ## PresetUtil — apply device presets
@@ -120,7 +120,7 @@ const graph = await client.api.audioGraphService.getAudiograph({ ... });
 Presets are saved device configurations (instrument patches or effect settings). You can apply presets to devices to configure them for a specific sound or purpose.
 
 ```typescript
-const presetUtil = client.api.presets;
+const presetUtil = client.presets;
 // Preset IDs can be copied from the preset browser in the Audiotool DAW
 ```
 

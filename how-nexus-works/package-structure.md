@@ -13,7 +13,7 @@ The `@audiotool/nexus` package is split into several modules. This page explains
 For most tasks, you only need to import from the main entry point:
 
 ```typescript
-import { createAudiotoolClient, createOfflineDocument, getLoginStatus } from "@audiotool/nexus";
+import { audiotool, createAudiotoolClient, createOfflineDocument } from "@audiotool/nexus";
 ```
 
 This gives you everything needed to authenticate, create a client, and open a document.
@@ -32,11 +32,11 @@ This gives you everything needed to authenticate, create a client, and open a do
 
 The main module gives you the three functions you need most:
 
-- `createAudiotoolClient` — creates an authenticated <span class="tooltip" data-tooltip="The main object your app uses to connect to Audiotool and work with projects, documents, and APIs.">client</span> using a login result or a <span class="tooltip" data-tooltip="A private token that lets your app access an Audiotool account without using a browser login flow.">Personal Access Token</span>
+- `audiotool` — browser-first OAuth entry point; returns either an authenticated client result or an unauthenticated login result
+- `createAudiotoolClient` — creates an authenticated <span class="tooltip" data-tooltip="The main object your app uses to connect to Audiotool and work with projects, documents, and APIs.">client</span> using `auth` (PAT or auth provider)
 - `createOfflineDocument` — creates a local-only document for development and testing
-- `getLoginStatus` — checks whether the user is signed in (browser apps only)
 
-It also exports TypeScript types for the client, login state, and document objects. See [Package Entry Points](../reference/package-entry-points.md) for the full list.
+It also exports TypeScript types for browser auth results, the client, and document objects. See [Package Entry Points](../reference/package-entry-points.md) for the full list.
 
 ## Utility module highlights
 
@@ -61,7 +61,7 @@ The utils module also includes async coordination utilities (`AsyncLock`, `Notif
 
 ## API module
 
-The `api` module contains all the REST API types — service interfaces, request/response classes, enumerations, and data models. You rarely need to import from this directly since the services are accessed through `client.api`.
+The `api` module contains all the REST API types — service interfaces, request/response classes, enumerations, and data models. You rarely need to import from this directly since the services are accessed through the flat client properties (`client.projects`, `client.users`, etc.).
 
 However, if you need to type a request or response explicitly, import from `@audiotool/nexus/api`:
 

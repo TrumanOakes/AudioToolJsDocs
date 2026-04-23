@@ -13,12 +13,10 @@ Once you have an <span class="tooltip" data-tooltip="The main object your app us
 To connect to a real Audiotool project:
 
 ```typescript
-const nexus = await client.createSyncedDocument({
-  project: "https://beta.audiotool.com/studio?project=abc123"
-});
+const nexus = await client.open("https://beta.audiotool.com/studio?project=abc123");
 ```
 
-The `project` value is the URL of an Audiotool project. You can get this from the DAW's share button or from the `ProjectService` API.
+The `project` value is the URL, UUID, or name of an Audiotool project. You can get this from the DAW share button or from `client.projects`.
 
 After creating the document, start syncing:
 

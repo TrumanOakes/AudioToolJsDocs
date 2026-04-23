@@ -61,7 +61,7 @@ If you want to use another language:
 
 ## Package Version
 
-This documentation covers @audiotool/nexus version 0.0.12.
+This documentation covers @audiotool/nexus version 0.0.15.
 
 ```bash
 npm install @audiotool/nexus

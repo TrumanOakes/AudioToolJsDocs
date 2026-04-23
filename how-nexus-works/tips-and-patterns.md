@@ -102,7 +102,7 @@ For server-side scripts or automation (Node.js, CI jobs, bots), Personal Access 
 
 ```typescript
 const client = await createAudiotoolClient({
-  authorization: process.env.AUDIOTOOL_PAT // load from env — never hardcode
+  auth: process.env.AUDIOTOOL_PAT // load from env — never hardcode
 });
 ```
 

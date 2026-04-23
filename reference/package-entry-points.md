@@ -9,24 +9,24 @@ has_children: true
 
 **Module:** `@audiotool/nexus`
 
-The main entry point for the <span class="tooltip" data-tooltip="The JavaScript package used to interact with Audiotool projects and data from your own app.">Nexus</span> package. Import from here to create a client, check login status, or open an offline document.
+The main entry point for the <span class="tooltip" data-tooltip="The JavaScript package used to interact with Audiotool projects and data from your own app.">Nexus</span> package. Import from here for browser auth (`audiotool`), explicit client creation (`createAudiotoolClient`), auth providers, and offline documents.
 
 ## Quick start
 
 ```typescript
-import { createAudiotoolClient } from "@audiotool/nexus";
+import { audiotool } from "@audiotool/nexus";
 
-const client = await createAudiotoolClient({
-  authorization: "at_pat_your_token_here"
+const at = await audiotool({
+  clientId: "your_client_id",
+  redirectUrl: "http://127.0.0.1:5173/",
+  scope: "project:write",
 });
 
-const nexus = await client.createSyncedDocument({
-  project: "https://beta.audiotool.com/studio?project=abc123"
-});
-
-await nexus.start();
-
-const projects = await client.api.projectService.listProjects({});
+if (at.status === "authenticated") {
+  const nexus = await at.open("https://beta.audiotool.com/studio?project=abc123");
+  await nexus.start();
+  const projects = await at.projects.listProjects({});
+}
 ```
 
 ## Functions
@@ -34,16 +34,46 @@ const projects = await client.api.projectService.listProjects({});
 ### [`createAudiotoolClient`](../api-reference/generated/functions/index.createAudiotoolClient.html)
 
 ```ts
-createAudiotoolClient(opts: { authorization: LoginStatus | string }): Promise<AudiotoolClient>
+createAudiotoolClient(opts: {
+  auth: string | AuthProvider;
+  transport?: TransportFactory;
+  wasm?: WasmLoader;
+}): Promise<AudiotoolClient>
 ```
 
 Creates an authenticated Audiotool client.
 
 **Accepts:**
-- `{ authorization: LoginStatus }` — a login status object from `getLoginStatus()`
-- `{ authorization: string }` — a Personal Access Token
+- `{ auth: string }` — a Personal Access Token
+- `{ auth: createPATAuth(...) }` or `{ auth: createServerAuth(...) }` — explicit auth providers
+- Optional Node/Bun/Deno runtime helpers:
+  - `transport: createNodeTransport()` from `@audiotool/nexus/node` (Node.js)
+  - `wasm: createDiskWasmLoader()` from `@audiotool/nexus/node` (server runtimes)
 
 **Returns:** `Promise<AudiotoolClient>`
+
+### [`audiotool`](../api-reference/generated/functions/index.audiotool.html)
+
+```ts
+audiotool(opts: {
+  clientId: string;
+  redirectUrl: string;
+  scope: string;
+}): Promise<BrowserAuthResult>
+```
+
+Browser-first OAuth entry point. This replaces legacy `getLoginStatus` usage.
+
+When authenticated, the returned value is an `AuthenticatedClient` with `status: "authenticated"` and the full flat client API (`projects`, `samples`, `users`, `projectRoles`, `presets`, `audioGraph`, `open`).
+
+When unauthenticated, it returns `status: "unauthenticated"` with `.login()` to trigger OAuth.
+
+### [`createPATAuth`](../api-reference/generated/functions/index.createPATAuth.html) and [`createServerAuth`](../api-reference/generated/functions/index.createServerAuth.html)
+
+Helpers to create `AuthProvider` objects for explicit client creation.
+
+- `createPATAuth(pat)` — PAT-based auth
+- `createServerAuth(tokens)` — use OAuth tokens server-side
 
 ### [`createOfflineDocument`](../api-reference/generated/functions/index.createOfflineDocument.html)
 
@@ -60,36 +90,18 @@ Creates a nexus document that operates without backend synchronization. All chan
 
 The returned document is immediately ready — no `start()` call required. Use this for development and testing.
 
-### [`getLoginStatus`](../api-reference/generated/functions/index.getLoginStatus.html)
-
-```typescript
-getLoginStatus(opts: {
-  clientId: string;
-  redirectUrl: string;
-  scope: string;
-}): Promise<LoginStatus>
-```
-
-Returns the current OAuth login status. Used to implement login/logout UI in browser applications.
-
-> The very first call always returns `LoggedOutStatus`, even if the user was previously authenticated. This is expected — implement a login button that calls `status.login()`.
-
-**Returns:** `Promise<LoginStatus>` — resolves to either `LoggedInStatus` or `LoggedOutStatus`
-
 ## Exported Type Aliases
 
 ### [`AudiotoolClient`](../api-reference/generated/types/index.AudiotoolClient.html)
 
-The authenticated client object returned by `createAudiotoolClient()`. Use this to open documents and call REST API services.
+The authenticated client object returned by `createAudiotoolClient()` and (in browser apps) by `audiotool()` when `status === "authenticated"`.
 
 ```typescript
 import type { AudiotoolClient } from "@audiotool/nexus";
 
 // Pass the client to helper functions with a typed annotation
 async function openProject(client: AudiotoolClient, url: string) {
-  const nexus = await client.createSyncedDocument({
-    project: url,
-  });
+  const nexus = await client.open(url);
   await nexus.start();
   return nexus;
 }
@@ -97,56 +109,28 @@ async function openProject(client: AudiotoolClient, url: string) {
 
 ---
 
-### [`LoginStatus`](../api-reference/generated/types/index.LoginStatus.html)
-
-The union type returned by `getLoginStatus()` — either a `LoggedInStatus` or a `LoggedOutStatus`. Check which one you have before taking action.
+### [`BrowserAuthResult`](../api-reference/generated/types/index.BrowserAuthResult.html)
 
 ```typescript
-import type { LoginStatus } from "@audiotool/nexus";
+import type { BrowserAuthResult } from "@audiotool/nexus";
 
-function handleLogin(status: LoginStatus) {
-  if (status.loggedIn) {
-    // It's a LoggedInStatus — user is authenticated
-    console.log("Logged in");
+function handleAuth(at: BrowserAuthResult) {
+  if (at.status === "authenticated") {
+    console.log("Logged in as", at.userName);
   } else {
-    // It's a LoggedOutStatus — show a login button
-    status.login(); // redirect to the OAuth login page
+    at.login(); // redirect to OAuth consent
   }
 }
 ```
 
 ---
 
-### [`LoggedInStatus`](../api-reference/generated/types/index.LoggedInStatus.html)
+### [`AuthenticatedClient`](../api-reference/generated/types/index.AuthenticatedClient.html) and [`UnauthenticatedResult`](../api-reference/generated/types/index.UnauthenticatedResult.html)
 
-The user is authenticated. Has a `.logout()` method to end the session.
+Refined browser auth result types:
 
-```typescript
-import type { LoggedInStatus } from "@audiotool/nexus";
-
-function showUserMenu(status: LoggedInStatus) {
-  // User is signed in — show account options
-  document.getElementById("logout-btn")?.addEventListener("click", () => {
-    status.logout();
-  });
-}
-```
-
----
-
-### [`LoggedOutStatus`](../api-reference/generated/types/index.LoggedOutStatus.html)
-
-The user is not authenticated. Has a `.login()` method to start the OAuth login flow.
-
-```typescript
-import type { LoggedOutStatus } from "@audiotool/nexus";
-
-function showLoginPrompt(status: LoggedOutStatus) {
-  document.getElementById("login-btn")?.addEventListener("click", () => {
-    status.login(); // redirects the browser to the OAuth consent page
-  });
-}
-```
+- `AuthenticatedClient`: full `AudiotoolClient` + `status`, `userName`, `logout()`, `exportTokens()`
+- `UnauthenticatedResult`: `status` + `login()` (+ optional `error`)
 
 ---
 
@@ -172,7 +156,7 @@ async function buildTestDocument(): Promise<OfflineDocument> {
 
 ### [`SyncedDocument`](../api-reference/generated/types/index.SyncedDocument.html)
 
-A document connected to a real Audiotool project in real time. Changes are persisted and broadcast to all collaborators. Returned by `client.createSyncedDocument()` after calling `.start()`.
+A document connected to a real Audiotool project in real time. Changes are persisted and broadcast to all collaborators. Returned by `client.open(project)` after calling `.start()`.
 
 ```typescript
 import type { SyncedDocument } from "@audiotool/nexus";

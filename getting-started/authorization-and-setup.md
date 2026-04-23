@@ -68,27 +68,28 @@ After registering, you will receive a <span class="tooltip" data-tooltip="A uniq
 
 ### Browser apps (<span class="tooltip" data-tooltip="A login method that lets users sign in through Audiotool and grant your app permission without sharing their password directly.">OAuth</span>)
 
-<span class="tooltip" data-tooltip="This code checks whether the user is already signed in to Audiotool. If they are, it creates an Audiotool client so the app can continue. If not, it sets up a login button that starts the sign-in process when clicked.">The following example shows a browser-based login flow for a Nexus app.</span>
+<span class="tooltip" data-tooltip="This code initializes Audiotool browser auth. If the user is authenticated, the returned object is already a ready-to-use client. Otherwise it exposes login helpers.">The following example shows the current browser auth flow.</span>
 
 ```typescript
-import { getLoginStatus, createAudiotoolClient } from "@audiotool/nexus";
+import { audiotool } from "@audiotool/nexus";
 
-const status = await getLoginStatus({
+const at = await audiotool({
   clientId: "your_client_id",
   redirectUrl: "http://127.0.0.1:5173/",
   scope: "project:write",
 });
 
-if (status.loggedIn) {
-  const client = await createAudiotoolClient({ authorization: status });
-  // proceed with client
+if (at.status === "authenticated") {
+  // at is already an AudiotoolClient
+  const projects = await at.projects.listProjects({});
+  console.log(`Signed in as ${at.userName}`, projects.projects.length);
 } else {
   // Show a login button
-  loginButton.onclick = () => status.login();
+  loginButton.onclick = () => at.login();
 }
 ```
 
-> **Note:** The very first call to `getLoginStatus` always reports the user as logged out, even if they authenticated previously. This is expected behavior — the OAuth redirect happens asynchronously.
+> **Note:** On first load, before the OAuth redirect completes, `audiotool(...)` commonly returns `status === "unauthenticated"`. Trigger `at.login()`, complete the redirect, then initialize again.
 
 ### <span class="tooltip" data-tooltip="An app or script that runs outside the browser, such as in Node.js, Bun, or Deno.">Server-side scripts only</span> (<span class="tooltip" data-tooltip="A private token that lets your app access an Audiotool account without using a browser login flow.">Personal Access Token</span>)
 
@@ -101,11 +102,26 @@ import { createAudiotoolClient } from "@audiotool/nexus";
 
 // Load from an environment variable — never hardcode a PAT
 const client = await createAudiotoolClient({
-  authorization: process.env.AUDIOTOOL_PAT
+  auth: process.env.AUDIOTOOL_PAT
 });
 ```
 
 > **Security:** A PAT gives full access to the associated account. Store it in environment variables, never in source code or version control.
+
+### Server-side with browser OAuth tokens
+
+If your browser app signs users in with `audiotool(...)`, you can pass exported tokens to your server and create a server-side client:
+
+```typescript
+import { createAudiotoolClient, createServerAuth } from "@audiotool/nexus";
+import { createNodeTransport, createDiskWasmLoader } from "@audiotool/nexus/node";
+
+const client = await createAudiotoolClient({
+  auth: createServerAuth({ accessToken, refreshToken, expiresAt, clientId }),
+  transport: createNodeTransport(),
+  wasm: createDiskWasmLoader(),
+});
+```
 
 ## Step 7 — Start the dev server
 
