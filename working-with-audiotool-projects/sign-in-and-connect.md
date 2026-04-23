@@ -1,62 +1,72 @@
+---
+title: Sign In and Connect
+parent: Working With Audiotool Projects
+nav_order: 1
+---
+
 # Sign In and Connect
 
-This page covers the full authentication flow for browser apps and the Personal Access Token alternative for server environments — and how to go from a login to a connected client.
+This page shows how to authenticate and work with an <span class="tooltip" data-tooltip="The main object your app uses to connect to Audiotool and work with projects, documents, and APIs.">AudiotoolClient</span>. For setup instructions and a detailed explanation of browser and server auth methods, see [Authorization and Setup](../getting-started/authorization-and-setup.md).
 
 ## Browser apps — OAuth flow
 
-### 1. Check login status
+### 1. Initialize browser auth
 
 ```typescript
-import { getLoginStatus, createAudiotoolClient } from "@audiotool/nexus";
+import { audiotool } from "@audiotool/nexus";
 
-const status = await getLoginStatus({
+const at = await audiotool({
   clientId: "your_client_id",
-  redirectUri: "http://127.0.0.1:5173/",
-  scopes: ["project:write"],
+  redirectUrl: "http://127.0.0.1:5173/",
+  scope: "project:write",
 });
 ```
 
-`getLoginStatus` returns a `LoginStatus` — either `LoggedInStatus` or `LoggedOutStatus`.
+`audiotool(...)` returns an auth result object with a `status` field:
+- `"authenticated"` — the object is already a full client
+- `"unauthenticated"` — call `login()` to begin OAuth
 
-> The **first call always returns `LoggedOutStatus`**, even if the user authenticated before. This is expected — OAuth works via a redirect, and the result is only available after the redirect completes.
+> The first call may return unauthenticated until the OAuth redirect completes. This is expected.
 
 ### 2. Handle both states
 
 ```typescript
-if (status.type === "logged-in") {
-  // User is authenticated — create a client
-  const client = await createAudiotoolClient({ status });
-  // ...use client
+if (at.status === "authenticated") {
+  // at IS the client
+  const projects = await at.projects.listProjects({});
+  console.log("Logged in as:", at.userName, projects.projects.length);
 } else {
   // Show a login button
-  loginButton.onclick = () => status.login();
-  logoutButton.onclick = () => status.logout();
+  loginButton.onclick = () => at.login();
 }
 ```
 
-When `status.login()` is called, the browser redirects to Audiotool's OAuth page. After the user authorizes, it redirects back to your `redirectUri`. Call `getLoginStatus` again on page load — this time it will return `LoggedInStatus`.
+When `at.login()` is called, the browser redirects to Audiotool's OAuth page. After the user authorizes, it redirects back to your `redirectUrl`; then `audiotool(...)` resolves with `status === "authenticated"`.
 
-### 3. Create the client
+### 3. Use the authenticated client
 
-```typescript
-const client = await createAudiotoolClient({ status });
-```
+In browser OAuth flows, you do not call `createAudiotoolClient(...)` after auth. The authenticated `audiotool(...)` result is already the client.
 
-`createAudiotoolClient` accepts a `LoginStatus` (from `getLoginStatus`) or a PAT. It returns a fully initialized `AudiotoolClient`.
+## Server-side scripts — Personal Access Token
 
-## Server apps — Personal Access Token
+> **For browser apps, use the OAuth flow above.** PATs expose full account access and must never appear in browser-facing code.
 
-For Node.js, Bun, or Deno scripts and bots:
+For server-side automation only — Node.js, Bun, or Deno scripts, CI jobs, bots:
 
 ```typescript
+import { createAudiotoolClient, createPATAuth } from "@audiotool/nexus";
+import { createNodeTransport, createDiskWasmLoader } from "@audiotool/nexus/node";
+
 const client = await createAudiotoolClient({
-  pat: process.env.AUDIOTOOL_PAT
+  auth: createPATAuth(process.env.AUDIOTOOL_PAT!),
+  transport: createNodeTransport(),
+  wasm: createDiskWasmLoader(),
 });
 ```
 
-No browser, no redirect, no `getLoginStatus` call needed. The client is immediately ready.
+No browser redirect is needed in this mode.
 
-PATs grant full access to the account. Store them in environment variables — never in code or version control.
+PATs grant full access to the account. Store them in environment variables and rotate them if compromised.
 
 ## After connecting
 

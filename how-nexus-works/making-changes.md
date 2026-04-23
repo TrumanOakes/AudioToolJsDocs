@@ -1,22 +1,54 @@
+---
+title: Making Changes
+parent: How Nexus Works
+nav_order: 4
+---
+
 # Making Changes
 
-All modifications to a Nexus document go through a **transaction builder**. This page explains how transactions work, what operations are available, and how the document lock fits in.
+All modifications to a Nexus document go through a <span class="tooltip" data-tooltip="The tool used to prepare and apply changes to a document.">**transaction builder**</span>. This page explains how <span class="tooltip" data-tooltip="A grouped set of changes made to a document as one operation.">transactions</span> work and what operations are available.
 
-## The modify() method
+## Two ways to make changes
 
-Call `document.modify()` with a callback to open a transaction:
+Nexus has two transaction APIs. Both build and commit a set of changes atomically.
+
+### `nexus.modify()` — recommended for most cases
+
+Call `nexus.modify()` with a callback to open a transaction:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   // t is the transaction builder
   t.create("tinyGain", { positionX: 100, positionY: 200 });
 });
 ```
 
-- `modify()` acquires the document lock before your callback runs.
-- All operations inside the callback are collected and applied atomically.
+- `modify()` waits for any in-progress changes to finish before your callback runs.
+- All operations inside the callback are applied together — if any one fails, none of them go through.
 - If any operation fails validation, the entire transaction is rejected.
 - `modify()` returns a Promise that resolves when the transaction is committed.
+
+### `nexus.createTransaction()` — lower-level alternative
+
+`createTransaction()` gives you an explicit transaction object. Build your changes, then call `.send()` to commit:
+
+```typescript
+const t = await nexus.createTransaction();
+
+const synth = t.create("pulverisateur", { positionX: 100, positionY: 100 });
+const channel = t.create("mixerChannel", {});
+
+t.create("desktopAudioCable", {
+  fromSocket: synth.fields.audioOutput.location,
+  toSocket: channel.fields.audioInput.location,
+});
+
+t.send(); // commits all three creates at once
+```
+
+> This is the pattern used in all official Nexus examples. It makes it easy to reference entities created earlier in the same transaction — for example, using `synth.fields.audioOutput.location` on the line after creating `synth`.
+
+Both APIs produce identical results. Use `modify()` when you want automatic queuing, or `createTransaction()` when you prefer explicit control.
 
 ## The three operations
 
@@ -25,7 +57,7 @@ await document.modify((t) => {
 Creates a new entity of the given type with the specified initial fields:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("tonematrix", {});
   t.create("tinyGain", { positionX: 100, positionY: 200 });
   t.create("note", {
@@ -43,7 +75,7 @@ Fields you omit will use their schema defaults. You can create multiple entities
 Updates the value of a specific field on an existing entity:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.update(gainEntity.fields.gain, 0.75);
   t.update(gainEntity.fields.displayName, "Main Gain");
 });
@@ -56,22 +88,21 @@ You reference the field via `entity.fields.fieldName`. You cannot update an enti
 Removes an entity from the document:
 
 ```typescript
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.remove(gainEntity);
 });
 ```
 
 Removing an entity that other entities reference (via pointers) may cause validation errors depending on the schema rules.
 
-## The document lock
+## How multiple modify() calls work
 
-`modify()` acquires an internal **async lock** before the transaction runs. This guarantees:
+Only one `modify()` runs at a time. If you call `modify()` while another is already running, it waits in a queue. This means:
 
-- No two transactions run concurrently.
-- The transaction sees a consistent snapshot of the document state.
-- Concurrent `modify()` calls are queued and executed in order.
+- Multiple calls are always executed in the order you made them.
+- Each transaction sees consistent document state.
 
-You do not need to manage the lock manually — `modify()` handles it.
+You do not need to manage this yourself — `modify()` handles it automatically.
 
 ## Validation
 
@@ -86,12 +117,12 @@ If validation fails, `modify()` throws a transaction error. See [Validation Erro
 To disable validation (for rapid prototyping with an offline document):
 
 ```typescript
-const document = await createOfflineDocument({ validated: false });
+const nexus = await createOfflineDocument({ validated: false });
 ```
 
-## The SafeTransactionBuilder
+## Type safety
 
-The `SafeTransactionBuilder` type is a stricter variant of the transaction builder that enforces additional constraints at the TypeScript type level. This helps catch mistakes before they become runtime errors. It is the type used in the `modify()` callback by default.
+The transaction builder used in `modify()` is fully typed. TypeScript will flag incorrect field types or unknown entity keys at compile time — often before you even run your code.
 
 → See [Document Model](../reference/document-model.md) for the full type definitions.
 

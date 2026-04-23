@@ -1,21 +1,27 @@
+---
+title: Query and Event Confusion
+parent: Errors and Fixes
+nav_order: 5
+---
+
 # Query and Event Confusion
 
 Issues that arise from misunderstanding how queries and events work.
 
 ## Events not firing
 
-**Did you call `document.start()`?**
+**Did you call `nexus.start()`?**
 
 Events will not fire on a synced document until `start()` is called. This is the most common cause of "events not firing."
 
 ```typescript
 // Wrong order
-document.events.onCreate("note", handler);
-// ... forgot await document.start()
+nexus.events.onCreate("note", handler);
+// ... forgot await nexus.start()
 
 // Correct
-document.events.onCreate("note", handler);
-await document.start(); // events begin firing after this
+nexus.events.onCreate("note", handler);
+await nexus.start(); // events begin firing after this
 ```
 
 **Did you subscribe before calling `start()`?**
@@ -39,30 +45,30 @@ On a synced document, `queryEntities` reflects the current state after syncing h
 `.get()` returns a snapshot at the time of the call. It does not update automatically. If you need live results, combine an initial query with event subscriptions:
 
 ```typescript
-await document.start();
+await nexus.start();
 
 // Snapshot at start
-let notes = document.queryEntities.ofTypes("note").get();
+let notes = nexus.queryEntities.ofTypes("note").get();
 
 // Keep updated
-document.events.onCreate("note", (e) => notes = [...notes, e]);
-document.events.onRemove("note", (e) => notes = notes.filter(n => n.id !== e.id));
+nexus.events.onCreate("note", (e) => notes = [...notes, e]);
+nexus.events.onRemove("*", (e) => notes = notes.filter(n => n.id !== e.id));
 ```
 
-## Calling modify() inside an event handler causes a deadlock
+## Calling modify() inside an event handler causes it to hang
 
-The document lock is held during event dispatch. Calling `modify()` inside an event handler tries to acquire the same lock — causing a deadlock.
+Nexus can't start a new transaction while an event is being handled. Calling `modify()` inside an event callback will never resolve.
 
 ```typescript
-// WRONG — deadlocks
-document.events.onCreate("note", async (entity) => {
-  await document.modify((t) => { ... }); // never resolves
+// WRONG — will never resolve
+nexus.events.onCreate("note", async (entity) => {
+  await nexus.modify((t) => { ... }); // hangs here
 });
 
 // Correct — schedule modification for after the event
-document.events.onCreate("note", (entity) => {
+nexus.events.onCreate("note", (entity) => {
   setTimeout(async () => {
-    await document.modify((t) => { ... });
+    await nexus.modify((t) => { ... });
   }, 0);
 });
 ```
@@ -73,12 +79,12 @@ document.events.onCreate("note", (entity) => {
 
 ```typescript
 // Wrong — onUpdate does not take a type string
-document.events.onUpdate("gain", handler); // incorrect
+nexus.events.onUpdate("gain", handler); // incorrect
 
 // Correct — get the entity, then reference its field
-const gains = document.queryEntities.ofTypes("tinyGain").get();
+const gains = nexus.queryEntities.ofTypes("tinyGain").get();
 for (const gain of gains) {
-  document.events.onUpdate(gain.fields.gain, handler);
+  nexus.events.onUpdate(gain.fields.gain, handler);
 }
 ```
 

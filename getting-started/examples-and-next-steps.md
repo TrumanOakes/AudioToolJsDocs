@@ -1,42 +1,45 @@
+---
+title: Examples and Next Steps
+parent: Getting Started
+nav_order: 4
+---
+
 # Examples and Next Steps
 
 This page shows small, complete examples to help you get oriented quickly after setup. Each example links to the relevant deep-dive page.
 
 ## Minimal working example (PAT auth)
 
-The fastest way to try Nexus — no browser login required:
+The fastest way to try <span class="tooltip" data-tooltip="The JavaScript package used to interact with Audiotool projects and data from your own app.">Nexus</span> — no browser login required. Uses a <span class="tooltip" data-tooltip="A private token that lets your app access an Audiotool account without using a browser login flow.">Personal Access Token</span> to connect directly:
 
 ```typescript
 import { createAudiotoolClient } from "@audiotool/nexus";
 
 // 1. Create an authenticated client using a Personal Access Token
 const client = await createAudiotoolClient({
-  pat: "at_pat_your_token_here"
+  auth: "at_pat_your_token_here"
 });
 
 // 2. Open a synced document for a specific Audiotool project
-const document = await client.createSyncedDocument({
-  mode: "online",
-  project: "https://beta.audiotool.com/studio?project=abc123"
-});
+const nexus = await client.open("https://beta.audiotool.com/studio?project=abc123");
 
 // 3. Start syncing
-await document.start();
+await nexus.start();
 
 // 4. List all projects accessible to this token
-const projects = await client.api.projectService.listProjects({});
+const projects = await client.projects.listProjects({});
 console.log(projects);
 
 // 5. Stop when done
-await document.stop();
+await nexus.stop();
 ```
 
 ## Listen for entity creation events
 
 ```typescript
-await document.start();
+await nexus.start();
 
-document.events.onCreate("tonematrix", (entity) => {
+nexus.events.onCreate("tonematrix", (entity) => {
   console.log("A tonematrix was created:", entity);
 });
 ```
@@ -48,7 +51,7 @@ document.events.onCreate("tonematrix", (entity) => {
 ```typescript
 let gainEntity;
 
-await document.modify((t) => {
+await nexus.modify((t) => {
   gainEntity = t.create("tinyGain", {
     positionX: 100,
     positionY: 200,
@@ -56,7 +59,7 @@ await document.modify((t) => {
 });
 
 // Later, update the gain value
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.update(gainEntity.fields.gain, 0.75);
 });
 ```
@@ -66,7 +69,7 @@ await document.modify((t) => {
 ## Query the current state of the document
 
 ```typescript
-const notes = document.queryEntities.ofTypes("note").get();
+const notes = nexus.queryEntities.ofTypes("note").get();
 console.log(`There are ${notes.length} notes in the project.`);
 ```
 
@@ -74,13 +77,15 @@ console.log(`There are ${notes.length} notes in the project.`);
 
 ## Work offline (no backend needed)
 
+Use an <span class="tooltip" data-tooltip="A document used locally without a live connection, often for testing or controlled edits.">offline document</span> to develop and test your logic without connecting to Audiotool:
+
 ```typescript
 import { createOfflineDocument } from "@audiotool/nexus";
 
 // No auth or network required
-const document = await createOfflineDocument();
+const nexus = await createOfflineDocument();
 
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("tinyGain", {});
 });
 ```

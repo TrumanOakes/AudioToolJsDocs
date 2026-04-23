@@ -1,13 +1,19 @@
+---
+title: Work Offline for Testing
+parent: Working With Audiotool Projects
+nav_order: 8
+---
+
 # Work Offline for Testing
 
-Nexus supports a fully offline document mode for local development and testing. Offline documents use the same API as synced documents but require no auth, no network, and no project URL.
+<span class="tooltip" data-tooltip="The JavaScript package used to interact with Audiotool projects and data from your own app.">Nexus</span> supports a fully <span class="tooltip" data-tooltip="A document used locally without a live connection, often for testing or controlled edits.">offline document</span> mode for local development and testing. Offline documents use the same API as <span class="tooltip" data-tooltip="A document connected to Audiotool in real time, so changes can update as the project changes.">synced documents</span> but require no auth, no network, and no project URL.
 
 ## Create an offline document
 
 ```typescript
 import { createOfflineDocument } from "@audiotool/nexus";
 
-const document = await createOfflineDocument();
+const nexus = await createOfflineDocument();
 ```
 
 No `start()` call needed. The document is immediately ready for modifications.
@@ -16,9 +22,9 @@ No `start()` call needed. The document is immediately ready for modifications.
 
 Everything works the same as in a synced document:
 
-- `document.modify()` — create, update, remove entities
-- `document.events` — subscribe to entity events
-- `document.queryEntities` — query current state
+- `nexus.modify()` — create, update, remove entities
+- `nexus.events` — subscribe to entity events
+- `nexus.queryEntities` — query current state
 - All entity types and field validation
 
 The only difference: changes are not persisted. Everything resets when your script ends or the page reloads.
@@ -28,7 +34,7 @@ The only difference: changes are not persisted. Everything resets when your scri
 When exploring the API or building new logic, you may want to temporarily disable strict schema validation:
 
 ```typescript
-const document = await createOfflineDocument({ validated: false });
+const nexus = await createOfflineDocument({ validated: false });
 ```
 
 With validation disabled:
@@ -50,15 +56,12 @@ A recommended workflow:
 
 ```typescript
 // During development:
-const document = await createOfflineDocument();
+const nexus = await createOfflineDocument();
 
 // When ready to test live:
-const client = await createAudiotoolClient({ pat: process.env.AUDIOTOOL_PAT });
-const document = await client.createSyncedDocument({
-  mode: "online",
-  project: "https://beta.audiotool.com/studio?project=..."
-});
-await document.start();
+const client = await createAudiotoolClient({ auth: process.env.AUDIOTOOL_PAT });
+const nexus = await client.open("https://beta.audiotool.com/studio?project=...");
+await nexus.start();
 ```
 
 ## Offline vs synced: key differences

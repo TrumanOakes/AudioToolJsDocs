@@ -1,3 +1,9 @@
+---
+title: Offline vs Synced Behavior
+parent: Errors and Fixes
+nav_order: 6
+---
+
 # Offline vs Synced Behavior
 
 Offline documents and synced documents expose the same API, but they behave differently in important ways. This page clarifies the differences to prevent surprises.
@@ -25,7 +31,7 @@ If you used `createOfflineDocument({ validated: false })`, you may have written 
 
 When a synced document starts, it replays existing entities as `onCreate` events. If your code assumes `onCreate` means "brand new entity," it may double-process things that already existed.
 
-Design your `onCreate` handler to be idempotent — calling it twice for the same entity should not cause errors.
+Design your `onCreate` handler so that running it twice for the same entity doesn't cause errors — treat it as "this entity is now available" rather than "this entity was just added."
 
 ### Timing is different on synced
 
@@ -38,10 +44,10 @@ On synced documents, there is network latency. Events and query results may arri
 Unlike synced documents, offline documents start empty. There are no pre-existing entities to replay. If your code expects an initial set of entities (like a `mixerMaster`), you need to create them yourself when testing offline:
 
 ```typescript
-const document = await createOfflineDocument();
+const nexus = await createOfflineDocument();
 
 // Set up the initial state you need for testing
-await document.modify((t) => {
+await nexus.modify((t) => {
   t.create("mixerMaster", {});
   // add other initial entities
 });
@@ -53,7 +59,7 @@ All entity state is lost when the script ends or the page reloads. This is expec
 
 ## "I stopped the document but now query/modify is broken"
 
-After calling `document.stop()`, the document is read-only. `modify()` will throw. You can still use `queryEntities` to read data, but no further changes can be made.
+After calling `nexus.stop()`, the document is read-only. `modify()` will throw. You can still use `queryEntities` to read data, but no further changes can be made.
 
 If you need to make more changes, you must create a new document connection.
 

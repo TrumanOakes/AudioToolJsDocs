@@ -1,3 +1,9 @@
+---
+title: Quick Answers
+parent: Reference
+nav_order: 1
+---
+
 # Quick Answers
 
 Short answers to common questions about Nexus.
@@ -10,15 +16,15 @@ Chrome, Firefox, Node.js, Bun, and Deno. The OAuth browser login flow requires a
 
 ---
 
-**Q: Do I need to call `document.start()` every time?**
+**Q: Do I need to call `nexus.start()` every time?**
 
 Yes — for synced documents. `start()` initiates the backend connection. Without it, events will not fire and the document state will not be populated. Offline documents (`createOfflineDocument()`) do not require `start()`.
 
 ---
 
-**Q: Why does `getLoginStatus` always report logged out on first call?**
+**Q: Why does `audiotool()` return `status: "unauthenticated"`?**
 
-This is expected. OAuth authentication happens via a browser redirect. The first call runs before any redirect has occurred, so there is no session yet. Implement a login button that calls `status.login()`, wait for the redirect, then call `getLoginStatus` again on page reload.
+This is expected until the OAuth redirect flow completes. Call `at.login()` to start authentication. After the user authorizes and the browser returns to your app, call `audiotool()` again — it will return `status: "authenticated"` when tokens are available.
 
 ---
 
@@ -30,7 +36,7 @@ No. The OAuth redirect URI registered for local development must be `http://127.
 
 **Q: What is the difference between an offline and a synced document?**
 
-An offline document (`createOfflineDocument()`) runs locally with no network or auth. Changes are lost on reload. A synced document (`client.createSyncedDocument()`) connects to a real Audiotool project, persists changes, and broadcasts them to collaborators in real time. Both expose the same `modify()`, `events`, and `queryEntities` API.
+An offline document (`createOfflineDocument()`) runs locally with no network or auth. Changes are lost on reload. A synced document (`client.open()`) connects to a real Audiotool project, persists changes, and broadcasts them to collaborators in real time. Both expose the same `modify()`, `events`, and `queryEntities` API.
 
 ---
 
@@ -47,7 +53,7 @@ Use `secondsToTicks(seconds, bpm)` and `ticksToSeconds(ticks, bpm)` from the `ut
 
 **Q: Can I modify a document from inside an event handler?**
 
-No. The document lock is held during event dispatch. Calling `modify()` inside an event handler will deadlock. Schedule modifications with `setTimeout` or similar to run after the event handler returns.
+No. Nexus cannot start a new transaction while an event is already being handled — the call will never resolve. Schedule modifications with `setTimeout` or similar to run after the event handler returns.
 
 ---
 
@@ -69,7 +75,7 @@ The return value of `t.create()` inside `modify()` is the new entity object:
 
 ```typescript
 let newGain;
-await document.modify((t) => {
+await nexus.modify((t) => {
   newGain = t.create("tinyGain", {});
 });
 // newGain is now available
@@ -79,7 +85,7 @@ await document.modify((t) => {
 
 **Q: Can I have multiple documents open at once?**
 
-Yes. Each call to `createSyncedDocument()` or `createOfflineDocument()` creates an independent document object. You can work with multiple documents simultaneously.
+Yes. Each call to `open()` or `createOfflineDocument()` creates an independent document object. You can work with multiple documents simultaneously.
 
 ---
 

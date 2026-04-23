@@ -1,3 +1,10 @@
+---
+title: Home
+nav_order: 0
+description: "@audiotool/nexus — JavaScript/TypeScript package for reading and modifying Audiotool projects programmatically."
+permalink: /
+---
+
 # @audiotool/nexus Documentation
 
 **@audiotool/nexus** is a JavaScript/TypeScript package for reading and modifying [Audiotool](https://new.audiotool.com) projects programmatically — in real time, with full multiplayer support.
@@ -42,7 +49,7 @@ npm install @audiotool/nexus
 | Page | Description |
 |------|-------------|
 | [Sign In and Connect](working-with-audiotool-projects/sign-in-and-connect.md) | OAuth flow and Personal Access Token auth |
-| [Open or Create a Project Context](working-with-audiotool-projects/open-or-create-a-project-context.md) | createSyncedDocument and createOfflineDocument |
+| [Open or Create a Project Context](working-with-audiotool-projects/open-or-create-a-project-context.md) | open and createOfflineDocument |
 | [Create Devices](working-with-audiotool-projects/create-devices.md) | Add synthesizers, drum machines, and effects |
 | [Work With Timeline Data](working-with-audiotool-projects/work-with-timeline-data.md) | Tracks, regions, notes, and timing |
 | [Find and Read Entities](working-with-audiotool-projects/find-and-read-entities.md) | Query the document for current state |

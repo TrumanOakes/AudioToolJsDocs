@@ -1,3 +1,9 @@
+---
+title: Before You Debug
+parent: Errors and Fixes
+nav_order: 1
+---
+
 # Before You Debug
 
 When something is not working in Nexus, this page helps you quickly narrow down where the problem is.
@@ -24,17 +30,17 @@ The redirect URI in your code must match the URI registered at [developer.audiot
 
 → [Authorization Problems](authorization-problems.md)
 
-### 3. Did you call `document.start()` before using the document?
+### 3. Did you call `nexus.start()` before using the document?
 
 A synced document is not connected until `start()` is called. Events will not fire and some operations will fail if you skip this step.
 
 ```typescript
-await document.start(); // required before events/changes
+await nexus.start(); // required before events/changes
 ```
 
 ### 4. Are you calling `modify()` inside an event handler?
 
-This causes a deadlock. The document lock is already held when events fire. Schedule modifications outside the callback.
+Nexus can't start a new transaction while an event is being handled. The call will never resolve. Schedule modifications outside the callback.
 
 → [Query and Event Confusion](query-and-event-confusion.md)
 
@@ -44,7 +50,7 @@ This causes a deadlock. The document lock is already held when events fire. Sche
 
 ```typescript
 try {
-  await document.modify((t) => { ... });
+  await nexus.modify((t) => { ... });
 } catch (e) {
   console.error(e);
 }

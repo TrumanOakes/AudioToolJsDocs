@@ -1,13 +1,19 @@
+---
+title: Package Structure
+parent: How Nexus Works
+nav_order: 6
+---
+
 # Package Structure
 
-The `@audiotool/nexus` package is organized into several modules. This page explains what each module contains and when you need to import from it.
+The `@audiotool/nexus` package is split into several modules. This page explains what each one contains and when to use it.
 
-## Primary entry point
+## Main import
 
-Most code only needs the main entry point:
+For most tasks, you only need to import from the main entry point:
 
 ```typescript
-import { createAudiotoolClient, createOfflineDocument, getLoginStatus } from "@audiotool/nexus";
+import { audiotool, createAudiotoolClient, createOfflineDocument } from "@audiotool/nexus";
 ```
 
 This gives you everything needed to authenticate, create a client, and open a document.
@@ -24,16 +30,13 @@ This gives you everything needed to authenticate, create a client, and open a do
 
 ## Main module exports
 
-The primary module exports three functions and six types:
+The main module gives you the three functions you need most:
 
-**Functions:**
-- `createAudiotoolClient` — creates an authenticated client from a `LoginStatus` or PAT
-- `createOfflineDocument` — creates a local-only document for testing
-- `getLoginStatus` — checks current OAuth login state (browser only)
+- `audiotool` — browser-first OAuth entry point; returns either an authenticated client result or an unauthenticated login result
+- `createAudiotoolClient` — creates an authenticated <span class="tooltip" data-tooltip="The main object your app uses to connect to Audiotool and work with projects, documents, and APIs.">client</span> using `auth` (PAT or auth provider)
+- `createOfflineDocument` — creates a local-only document for development and testing
 
-**Types:**
-- `AudiotoolClient`, `LoginStatus`, `LoggedInStatus`, `LoggedOutStatus`
-- `SyncedDocument`, `OfflineDocument`
+It also exports TypeScript types for browser auth results, the client, and document objects. See [Package Entry Points](../reference/package-entry-points.md) for the full list.
 
 ## Utility module highlights
 
@@ -54,11 +57,11 @@ const ticks = secondsToTicks(2.5, 120); // 2.5 seconds at 120 BPM
 const secs  = ticksToSeconds(3840, 120); // one beat at 120 BPM = 0.5s
 ```
 
-The utils module also includes async locking and notification primitives (`AsyncLock`, `Notifier`, `ValueNotifier`, etc.) used internally by the package and available for your own code if needed.
+The utils module also includes async coordination utilities (`AsyncLock`, `Notifier`, `ValueNotifier`, etc.) used internally by Nexus and available for your own code if needed.
 
 ## API module
 
-The `api` module contains all the REST API types — service interfaces, request/response classes, enumerations, and data models. You rarely need to import from this directly since the services are accessed through `client.api`.
+The `api` module contains all the REST API types — service interfaces, request/response classes, enumerations, and data models. You rarely need to import from this directly since the services are accessed through the flat client properties (`client.projects`, `client.users`, etc.).
 
 However, if you need to type a request or response explicitly, import from `@audiotool/nexus/api`:
 

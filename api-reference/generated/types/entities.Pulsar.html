@@ -1,0 +1,793 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Pulsar | @audiotool/nexus - v0.0.15</title><meta name="description" content="Documentation for @audiotool/nexus"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><link rel="stylesheet" href="../assets/custom.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script><!-- AUTIOTOOL_TYPEDOC_NAV_INJECTION_START -->
+
+<style>
+  :root {
+    --typedoc-bg: #0f1117;
+    --typedoc-panel: #161b22;
+    --typedoc-border: #30363d;
+    --typedoc-text: #e6edf3;
+    --typedoc-muted: #9da7b3;
+    --typedoc-link: #58a6ff;
+    --typedoc-link-hover: #79c0ff;
+  }
+
+  body {
+    background: var(--typedoc-bg);
+    color: var(--typedoc-text);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .tsd-page-toolbar {
+    background: var(--typedoc-panel);
+    border-bottom: 1px solid var(--typedoc-border);
+  }
+
+  .tsd-toolbar-contents {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .tsd-toolbar-contents > .title {
+    margin-right: 0;
+    flex: 0 0 auto;
+  }
+
+  #tsd-toolbar-links {
+    margin-left: auto;
+    margin-right: 0;
+    gap: 1rem;
+  }
+
+  .tsd-navigation a,
+  .tsd-page-toolbar a,
+  a {
+    color: var(--typedoc-link);
+  }
+
+  a:hover {
+    color: var(--typedoc-link-hover);
+  }
+
+  .tsd-panel {
+    border: 1px solid var(--typedoc-border);
+    background: var(--typedoc-panel);
+    border-radius: 8px;
+  }
+
+  .tsd-page-title h1,
+  .tsd-page-title h2,
+  .tsd-page-title h3,
+  h1, h2, h3 {
+    color: var(--typedoc-text);
+  }
+
+  .col-sidebar {
+    border-left: 1px solid var(--typedoc-border);
+  }
+
+  .typedoc-top-tabs {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: 0;
+    flex: 0 0 auto;
+  }
+
+  .typedoc-top-tab {
+    display: inline-flex;
+    align-items: center;
+    height: 2rem;
+    padding: 0 0.75rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    color: var(--typedoc-text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .typedoc-top-tab:hover {
+    border-color: var(--typedoc-border);
+    background: #21262d;
+    color: var(--typedoc-text);
+    text-decoration: none;
+  }
+
+  .typedoc-top-tab.is-active {
+    border-color: var(--typedoc-link);
+    color: var(--typedoc-link);
+    font-weight: 600;
+  }
+
+  #tsd-search-trigger.typedoc-search-trigger {
+    width: clamp(15rem, 34vw, 26rem);
+    height: 2rem;
+    border: 1px solid var(--typedoc-border);
+    border-radius: 6px;
+    background: #0d1117;
+    color: var(--typedoc-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 0 0.625rem;
+    box-sizing: border-box;
+    flex: 0 1 auto;
+  }
+
+  #tsd-search-trigger.typedoc-search-trigger:hover {
+    border-color: var(--typedoc-link);
+    color: var(--typedoc-text);
+    background: #161b22;
+  }
+
+  #tsd-search-trigger .typedoc-search-trigger-label {
+    font-size: 0.85rem;
+    line-height: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  #tsd-search-trigger svg {
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 50rem) {
+    #tsd-search-trigger.typedoc-search-trigger {
+      width: 2.5rem;
+      justify-content: center;
+      padding: 0;
+      flex: 0 0 auto;
+    }
+
+    #tsd-search-trigger .typedoc-search-trigger-label {
+      display: none;
+    }
+  }
+</style>
+
+
+<script>
+(function () {
+  function addTopTabs() {
+    var toolbar = document.querySelector(".tsd-toolbar-contents");
+    if (!toolbar) return;
+    var existingTabs = toolbar.querySelector(".typedoc-top-tabs");
+    if (existingTabs) return;
+
+    var legacyTabs = toolbar.querySelector(".docs-api-tabs");
+    if (legacyTabs) {
+      legacyTabs.remove();
+    }
+
+    var tabs = document.createElement("nav");
+    tabs.className = "typedoc-top-tabs";
+    tabs.setAttribute("aria-label", "Documentation sections");
+
+    var path = window.location.pathname;
+    var isApi = path.indexOf("/api-reference/generated/") !== -1;
+
+    var docs = document.createElement("a");
+    docs.href = "/AudioToolJsDocs/";
+    docs.className = "typedoc-top-tab" + (isApi ? "" : " is-active");
+    docs.textContent = "Docs";
+
+    var api = document.createElement("a");
+    api.href = "/AudioToolJsDocs/api-reference/generated/";
+    api.className = "typedoc-top-tab" + (isApi ? " is-active" : "");
+    api.textContent = "API";
+
+    tabs.appendChild(docs);
+    tabs.appendChild(api);
+
+    var title = toolbar.querySelector("a.title");
+    if (title && title.nextSibling) {
+      toolbar.insertBefore(tabs, title.nextSibling);
+    } else if (title) {
+      toolbar.appendChild(tabs);
+    } else {
+      toolbar.prepend(tabs);
+    }
+
+    var searchTrigger = toolbar.querySelector("#tsd-search-trigger");
+    if (searchTrigger) {
+      searchTrigger.classList.add("typedoc-search-trigger");
+      if (!searchTrigger.querySelector(".typedoc-search-trigger-label")) {
+        var searchLabel = document.createElement("span");
+        searchLabel.className = "typedoc-search-trigger-label";
+        searchLabel.textContent = "Search @audiotool/nexus Documentation";
+        searchTrigger.appendChild(searchLabel);
+      }
+
+      if (tabs.nextSibling !== searchTrigger) {
+        toolbar.insertBefore(searchTrigger, tabs.nextSibling);
+      }
+    }
+
+    var toolbarLinks = toolbar.querySelector("#tsd-toolbar-links");
+    if (toolbarLinks) {
+      toolbar.appendChild(toolbarLinks);
+    }
+  }
+
+  function run() {
+    addTopTabs();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run);
+  } else {
+    run();
+  }
+})();
+</script>
+
+<!-- AUTIOTOOL_TYPEDOC_NAV_INJECTION_END -->
+</head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar"><div class="tsd-toolbar-contents container"><a href="../index.html" class="title">@audiotool/nexus - v0.0.15</a><div id="tsd-toolbar-links"><a href="https://developer.audiotool.com">Developer Hub</a><a href="https://github.com/audiotool/nexus">GitHub</a></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/><ul role="listbox" id="tsd-search-results"></ul><div id="tsd-search-status" aria-live="polite" aria-atomic="true"><div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></header><div class="container container-main"><div class="col-content"><div class="tsd-page-title"><ul class="tsd-breadcrumb" aria-label="Breadcrumb"><li><a href="../modules/entities.html">entities</a></li><li><a href="" aria-current="page">Pulsar</a></li></ul><h1>Type Alias Pulsar</h1></div><section class="tsd-panel tsd-comment"><div class="tsd-comment tsd-typography"><table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>entity</td>
+</tr>
+<tr>
+<td>key</td>
+<td><code>&quot;pulsar&quot;</code></td>
+</tr>
+<tr>
+<td>is</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The Pulsar delay is an advanced delay effect.</p>
+<p>The pre-delay allows adjusting the delay time for the left and right channel independently,
+and further allows panning the left/right channel for the pre-delay independently.</p>
+<p>The main delay controls allow applying a filter, setting sync and unsynced delay times, and applying
+a LFO to modulate the delay amount continuously.</p>
+</div></section><div class="tsd-signature"><span class="tsd-signature-keyword">type</span> <span class="tsd-kind-type-alias">Pulsar</span> <span class="tsd-signature-symbol">=</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#audioinput">audioInput</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.NexusObject.html" class="tsd-signature-type tsd-kind-interface">NexusObject</a><span class="tsd-signature-symbol">&lt;</span><a href="entities.Empty.html" class="tsd-signature-type tsd-kind-type-alias">Empty</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#audiooutput">audioOutput</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.NexusObject.html" class="tsd-signature-type tsd-kind-interface">NexusObject</a><span class="tsd-signature-symbol">&lt;</span><a href="entities.Empty.html" class="tsd-signature-type tsd-kind-type-alias">Empty</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#displayname">displayName</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#drygain">dryGain</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#feedbackdelaytimems">feedbackDelayTimeMs</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#feedbackdelaytimesemibreveindex">feedbackDelayTimeSemibreveIndex</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#feedbackfactor">feedbackFactor</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#filtermaxhz">filterMaxHz</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#filterminhz">filterMinHz</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#isactive">isActive</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#lfomodulationdepthms">lfoModulationDepthMs</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#lfospeedhz">lfoSpeedHz</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#positionx">positionX</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#positiony">positionY</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#predelayleftpanning">preDelayLeftPanning</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#predelaylefttimems">preDelayLeftTimeMs</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#predelaylefttimesemibreveindex">preDelayLeftTimeSemibreveIndex</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#predelayrightpanning">preDelayRightPanning</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#predelayrighttimems">preDelayRightTimeMs</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#predelayrighttimesemibreveindex">preDelayRightTimeSemibreveIndex</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#presetname">presetName</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#stereocrossfactor">stereoCrossFactor</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#wetgain">wetGain</a><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L27">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:27</a></li></ul></aside><section class="tsd-panel-group tsd-index-group"><section class="tsd-panel tsd-index-panel"><details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h5 class="tsd-index-heading uppercase">Index</h5></summary><div class="tsd-accordion-details"><section class="tsd-index-section"><h3 class="tsd-index-heading">Properties</h3><div class="tsd-index-list"><a href="#audioinput" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>audio<wbr/>Input</span></a>
+<a href="#audiooutput" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>audio<wbr/>Output</span></a>
+<a href="#displayname" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>display<wbr/>Name</span></a>
+<a href="#drygain" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>dry<wbr/>Gain</span></a>
+<a href="#feedbackdelaytimems" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>feedback<wbr/>Delay<wbr/>Time<wbr/>Ms</span></a>
+<a href="#feedbackdelaytimesemibreveindex" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>feedback<wbr/>Delay<wbr/>Time<wbr/>Semibreve<wbr/>Index</span></a>
+<a href="#feedbackfactor" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>feedback<wbr/>Factor</span></a>
+<a href="#filtermaxhz" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>filter<wbr/>Max<wbr/>Hz</span></a>
+<a href="#filterminhz" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>filter<wbr/>Min<wbr/>Hz</span></a>
+<a href="#isactive" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>is<wbr/>Active</span></a>
+<a href="#lfomodulationdepthms" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>lfo<wbr/>Modulation<wbr/>Depth<wbr/>Ms</span></a>
+<a href="#lfospeedhz" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>lfo<wbr/>Speed<wbr/>Hz</span></a>
+<a href="#positionx" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>position<wbr/>X</span></a>
+<a href="#positiony" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>position<wbr/>Y</span></a>
+<a href="#predelayleftpanning" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>pre<wbr/>Delay<wbr/>Left<wbr/>Panning</span></a>
+<a href="#predelaylefttimems" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>pre<wbr/>Delay<wbr/>Left<wbr/>Time<wbr/>Ms</span></a>
+<a href="#predelaylefttimesemibreveindex" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>pre<wbr/>Delay<wbr/>Left<wbr/>Time<wbr/>Semibreve<wbr/>Index</span></a>
+<a href="#predelayrightpanning" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>pre<wbr/>Delay<wbr/>Right<wbr/>Panning</span></a>
+<a href="#predelayrighttimems" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>pre<wbr/>Delay<wbr/>Right<wbr/>Time<wbr/>Ms</span></a>
+<a href="#predelayrighttimesemibreveindex" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>pre<wbr/>Delay<wbr/>Right<wbr/>Time<wbr/>Semibreve<wbr/>Index</span></a>
+<a href="#presetname" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>preset<wbr/>Name</span></a>
+<a href="#stereocrossfactor" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>stereo<wbr/>Cross<wbr/>Factor</span></a>
+<a href="#wetgain" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>wet<wbr/>Gain</span></a>
+</div></section></div></details></section></section><details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h2>Properties</h2></summary><section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="audioinput"><span>audio<wbr/>Input</span><a href="#audioinput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">audioInput</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.NexusObject.html" class="tsd-signature-type tsd-kind-interface">NexusObject</a><span class="tsd-signature-symbol">&lt;</span><a href="entities.Empty.html" class="tsd-signature-type tsd-kind-type-alias">Empty</a><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Single Input.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#audioinput" class="tsd-kind-enum-member">api.TargetType.AudioInput</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L278">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:278</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="audiooutput"><span>audio<wbr/>Output</span><a href="#audiooutput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">audioOutput</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.NexusObject.html" class="tsd-signature-type tsd-kind-interface">NexusObject</a><span class="tsd-signature-symbol">&lt;</span><a href="entities.Empty.html" class="tsd-signature-type tsd-kind-type-alias">Empty</a><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Single Output.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#audiooutput" class="tsd-kind-enum-member">api.TargetType.AudioOutput</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L286">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:286</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="displayname"><span>display<wbr/>Name</span><a href="#displayname" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">displayName</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>The user-assigned name of this device.</p>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L31">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:31</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="drygain"><span>dry<wbr/>Gain</span><a href="#drygain" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">dryGain</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>The gain applied to the (unprocessed) incoming signal that's added to the output mix. Equivalent to a dB range of [-inf, 0.0].</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>1</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[0, 1]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L251">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:251</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="feedbackdelaytimems"><span>feedback<wbr/>Delay<wbr/>Time<wbr/>Ms</span><a href="#feedbackdelaytimems" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">feedbackDelayTimeMs</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Milliseconds duration of the main delay feedback. Added to feedback_delay_time_semibreve internally.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>0</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[0, 500]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L178">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:178</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="feedbackdelaytimesemibreveindex"><span>feedback<wbr/>Delay<wbr/>Time<wbr/>Semibreve<wbr/>Index</span><a href="#feedbackdelaytimesemibreveindex" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">feedbackDelayTimeSemibreveIndex</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Semibreve (music time) duration of the main delay feedback.
+Is added with the milliseconds delay time internally to calculate the actual interval time</p>
+<ul>
+<li>0: invalid</li>
+<li>1:  0    semibreve</li>
+<li>2:  1/16 semibreve</li>
+<li>3:  1/12 semibreve</li>
+<li>4:  1/8  semibreve</li>
+<li>5:  1/6  semibreve</li>
+<li>6:  3/16 semibreve</li>
+<li>7:  1/4  semibreve</li>
+<li>8:  5/16 semibreve</li>
+<li>9:  1/3  semibreve</li>
+<li>10:  3/8  semibreve</li>
+<li>11: 7/16 semibreve</li>
+<li>12: 1/2  semibreve</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>1</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[1, 12]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L168">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:168</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="feedbackfactor"><span>feedback<wbr/>Factor</span><a href="#feedbackfactor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">feedbackFactor</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>The feedback factor of the main delay.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>0.699999988079071</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[0, 1]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L208">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:208</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="filtermaxhz"><span>filter<wbr/>Max<wbr/>Hz</span><a href="#filtermaxhz" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">filterMaxHz</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>The max frequency cutoff for the lowpass filter applied to the feedback signal.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>20000</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[20, 20000]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L241">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:241</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="filterminhz"><span>filter<wbr/>Min<wbr/>Hz</span><a href="#filterminhz" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">filterMinHz</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>The min frequency cutoff for the highpass filter applied to the feedback signal.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>20</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[20, 20000]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L231">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:231</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="isactive"><span>is<wbr/>Active</span><a href="#isactive" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">isActive</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Whether the device is active or not. When is_active=false, audio signal bypasses the device.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>true</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L270">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:270</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="lfomodulationdepthms"><span>lfo<wbr/>Modulation<wbr/>Depth<wbr/>Ms</span><a href="#lfomodulationdepthms" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">lfoModulationDepthMs</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>The delay-time modulating LFO's depth in milliseconds.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>0</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[0, 50]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L198">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:198</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="lfospeedhz"><span>lfo<wbr/>Speed<wbr/>Hz</span><a href="#lfospeedhz" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">lfoSpeedHz</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>The delay-time modulating LFO's speed in Hz.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>5</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[0.10000000149011612, 25]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L188">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:188</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="positionx"><span>position<wbr/>X</span><a href="#positionx" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">positionX</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>X position on the desktop in the DAW.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>0</td>
+</tr>
+<tr>
+<td>range</td>
+<td>full</td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L40">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:40</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="positiony"><span>position<wbr/>Y</span><a href="#positiony" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">positionY</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Y position on the desktop in the DAW.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>0</td>
+</tr>
+<tr>
+<td>range</td>
+<td>full</td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L49">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:49</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="predelayleftpanning"><span>pre<wbr/>Delay<wbr/>Left<wbr/>Panning</span><a href="#predelayleftpanning" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">preDelayLeftPanning</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Panning of the left channel of the pre-delay. This value controls the panning of the delayed signal.
+-1 is fully left (unchanged), 0 is centered, 1 is fully right.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[-1, 1]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L99">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:99</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="predelaylefttimems"><span>pre<wbr/>Delay<wbr/>Left<wbr/>Time<wbr/>Ms</span><a href="#predelaylefttimems" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">preDelayLeftTimeMs</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Milliseconds duration of the pre-delay of the left channel. Added to pre_delay_left_time_semibreve internally.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>0</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[0, 500]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L88">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:88</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="predelaylefttimesemibreveindex"><span>pre<wbr/>Delay<wbr/>Left<wbr/>Time<wbr/>Semibreve<wbr/>Index</span><a href="#predelaylefttimesemibreveindex" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">preDelayLeftTimeSemibreveIndex</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Semibreve (music time) duration of the pre-delay of the left channel.
+Is added with the milliseconds delay time internally to calculate the actual pre-delay time.</p>
+<ul>
+<li>0: invalid</li>
+<li>1:  0    semibreve</li>
+<li>2:  1/16 semibreve</li>
+<li>3:  1/12 semibreve</li>
+<li>4:  1/8  semibreve</li>
+<li>5:  1/6  semibreve</li>
+<li>6:  3/16 semibreve</li>
+<li>7:  1/4  semibreve</li>
+<li>8:  5/16 semibreve</li>
+<li>9:  1/3  semibreve</li>
+<li>10:  3/8  semibreve</li>
+<li>11: 7/16 semibreve</li>
+<li>12: 1/2  semibreve</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>1</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[1, 12]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L78">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:78</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="predelayrightpanning"><span>pre<wbr/>Delay<wbr/>Right<wbr/>Panning</span><a href="#predelayrightpanning" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">preDelayRightPanning</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Panning of the right channel of the pre-delay. This value controls the panning of the delayed signal.
+-1 is fully left, 0 is centered, 1 is fully right (unchanged).</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>1</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[-1, 1]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L144">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:144</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="predelayrighttimems"><span>pre<wbr/>Delay<wbr/>Right<wbr/>Time<wbr/>Ms</span><a href="#predelayrighttimems" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">preDelayRightTimeMs</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Milliseconds duration of the pre-delay of the right channel. Added to pre_delay_right_time_semibreve internally.</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>0</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[0, 500]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L133">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:133</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="predelayrighttimesemibreveindex"><span>pre<wbr/>Delay<wbr/>Right<wbr/>Time<wbr/>Semibreve<wbr/>Index</span><a href="#predelayrighttimesemibreveindex" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">preDelayRightTimeSemibreveIndex</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>Semibreve (music time) duration of the pre-delay of the right channel.
+Is added with the milliseconds delay time internally to calculate the actual pre-delay time.</p>
+<ul>
+<li>0: invalid</li>
+<li>1:  0/1  semibreve</li>
+<li>2:  1/16 semibreve</li>
+<li>3:  1/12 semibreve</li>
+<li>4:  1/8  semibreve</li>
+<li>5:  1/6  semibreve</li>
+<li>6:  3/16 semibreve</li>
+<li>7:  1/4  semibreve</li>
+<li>8:  5/16 semibreve</li>
+<li>9:  1/3  semibreve</li>
+<li>10: 3/8  semibreve</li>
+<li>11: 7/16 semibreve</li>
+<li>12: 1/2  semibreve</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>3</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[1, 12]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L123">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:123</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="presetname"><span>preset<wbr/>Name</span><a href="#presetname" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">presetName</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>The backend name of the preset applied to this device, if any. Usually presets/{uuid}.
+This is used for record-keeping only and has no effect on the sound of the device.</p>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L54">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:54</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="stereocrossfactor"><span>stereo<wbr/>Cross<wbr/>Factor</span><a href="#stereocrossfactor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">stereoCrossFactor</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>This controls to what extend the signal swaps left/right channel on every feedback cycle:
+1: fully swapped,
+0.5: turned into mono
+0: unmodified</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>1</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[0, 1]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L221">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:221</a></li></ul></aside></section><section class="tsd-panel tsd-member"><h3 class="tsd-anchor-link" id="wetgain"><span>wet<wbr/>Gain</span><a href="#wetgain" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3><div class="tsd-signature"><span class="tsd-kind-property">wetGain</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/document.PrimitiveField.html" class="tsd-signature-type tsd-kind-interface">PrimitiveField</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;mut&quot;</span><span class="tsd-signature-symbol">&gt;</span></div><div class="tsd-comment tsd-typography"><p>The gain applied to the (processed) delayed signal that's added to the output mix. Equivalent to a dB range of [-inf, 0.0].</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td>0.699999988079071</td>
+</tr>
+<tr>
+<td>range</td>
+<td>[0, 1]</td>
+</tr>
+<tr>
+<td>is</td>
+<td><a href="../enums/api.TargetType.html#automatableparameter" class="tsd-kind-enum-member">api.TargetType.AutomatableParameter</a></td>
+</tr>
+</tbody>
+</table>
+</div><aside class="tsd-sources"><ul><li>Defined in <a href="https://github.com/audiotool/nexus/blob/0ef17c7fde02641719dc78c4eb24c30925c6c36b/src/gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts#L261">gen/audiotool/document/v1/entity/pulsar/v1/pulsar_nexus.ts:261</a></li></ul></aside></section></section></details></div><div class="col-sidebar"><div class="page-menu"><div class="tsd-navigation settings"><details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h3>Settings</h3></summary><div class="tsd-accordion-details"><div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span><ul id="tsd-filter-options"><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li><li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></div><div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div><details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg><h3>On This Page</h3></summary><div class="tsd-accordion-details"><details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Properties</summary><div><a href="#audioinput"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>audio<wbr/>Input</span></a><a href="#audiooutput"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>audio<wbr/>Output</span></a><a href="#displayname"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>display<wbr/>Name</span></a><a href="#drygain"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>dry<wbr/>Gain</span></a><a href="#feedbackdelaytimems"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>feedback<wbr/>Delay<wbr/>Time<wbr/>Ms</span></a><a href="#feedbackdelaytimesemibreveindex"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>feedback<wbr/>Delay<wbr/>Time<wbr/>Semibreve<wbr/>Index</span></a><a href="#feedbackfactor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>feedback<wbr/>Factor</span></a><a href="#filtermaxhz"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>filter<wbr/>Max<wbr/>Hz</span></a><a href="#filterminhz"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>filter<wbr/>Min<wbr/>Hz</span></a><a href="#isactive"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>is<wbr/>Active</span></a><a href="#lfomodulationdepthms"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>lfo<wbr/>Modulation<wbr/>Depth<wbr/>Ms</span></a><a href="#lfospeedhz"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>lfo<wbr/>Speed<wbr/>Hz</span></a><a href="#positionx"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>position<wbr/>X</span></a><a href="#positiony"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>position<wbr/>Y</span></a><a href="#predelayleftpanning"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>pre<wbr/>Delay<wbr/>Left<wbr/>Panning</span></a><a href="#predelaylefttimems"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>pre<wbr/>Delay<wbr/>Left<wbr/>Time<wbr/>Ms</span></a><a href="#predelaylefttimesemibreveindex"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>pre<wbr/>Delay<wbr/>Left<wbr/>Time<wbr/>Semibreve<wbr/>Index</span></a><a href="#predelayrightpanning"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>pre<wbr/>Delay<wbr/>Right<wbr/>Panning</span></a><a href="#predelayrighttimems"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>pre<wbr/>Delay<wbr/>Right<wbr/>Time<wbr/>Ms</span></a><a href="#predelayrighttimesemibreveindex"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>pre<wbr/>Delay<wbr/>Right<wbr/>Time<wbr/>Semibreve<wbr/>Index</span></a><a href="#presetname"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>preset<wbr/>Name</span></a><a href="#stereocrossfactor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>stereo<wbr/>Cross<wbr/>Factor</span></a><a href="#wetgain"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>wet<wbr/>Gain</span></a></div></details></div></details></div><div class="site-menu"><nav id="tsd-sidebar-links" class="tsd-navigation"><a href="https://developer.audiotool.com" class="tsd-nav-link">Developer Hub</a><a href="https://github.com/audiotool/nexus" class="tsd-nav-link">GitHub</a></nav><nav class="tsd-navigation"><a href="../index.html">@audiotool/nexus - v0.0.15</a><ul class="tsd-small-nested-navigation" id="tsd-nav-container"><li>Loading...</li></ul></nav></div></div></div><footer><p class="tsd-generator">Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></footer><div class="overlay"></div></body></html>

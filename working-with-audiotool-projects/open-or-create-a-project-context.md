@@ -1,24 +1,27 @@
+---
+title: Open or Create a Project Context
+parent: Working With Audiotool Projects
+nav_order: 2
+---
+
 # Open or Create a Project Context
 
-Once you have an `AudiotoolClient`, the next step is to open a **document** — the object that represents a specific Audiotool project and gives you access to its entities, events, and modification interface.
+Once you have an <span class="tooltip" data-tooltip="The main object your app uses to connect to Audiotool and work with projects, documents, and APIs.">AudiotoolClient</span>, the next step is to open a <span class="tooltip" data-tooltip="The structured data that represents the contents of an Audiotool project.">**document**</span> — the object that represents a specific Audiotool project and gives you access to its entities, events, and changes.
 
 ## Open a synced document
 
 To connect to a real Audiotool project:
 
 ```typescript
-const document = await client.createSyncedDocument({
-  mode: "online",
-  project: "https://beta.audiotool.com/studio?project=abc123"
-});
+const nexus = await client.open("https://beta.audiotool.com/studio?project=abc123");
 ```
 
-The `project` value is the URL of an Audiotool project. You can get this from the DAW's share button or from the `ProjectService` API.
+The `project` value is the URL, UUID, or name of an Audiotool project. You can get this from the DAW share button or from `client.projects`.
 
 After creating the document, start syncing:
 
 ```typescript
-await document.start();
+await nexus.start();
 ```
 
 Until `start()` is called, the document exists but is not connected. Always call `start()` before reading events or making changes.
@@ -30,7 +33,7 @@ For development and testing — no project URL, no auth, no network required:
 ```typescript
 import { createOfflineDocument } from "@audiotool/nexus";
 
-const document = await createOfflineDocument();
+const nexus = await createOfflineDocument();
 // No start() needed — immediately ready
 ```
 
@@ -39,7 +42,7 @@ Offline documents use the same API as synced documents. Switch to synced when yo
 To suppress validation errors during rapid prototyping:
 
 ```typescript
-const document = await createOfflineDocument({ validated: false });
+const nexus = await createOfflineDocument({ validated: false });
 ```
 
 ## Stop the document
@@ -47,10 +50,10 @@ const document = await createOfflineDocument({ validated: false });
 When you are done, stop syncing:
 
 ```typescript
-await document.stop();
+await nexus.stop();
 ```
 
-This finalizes any pending changes and transitions the document to read-only. After stopping, you can still query entities but cannot call `modify()`.
+This finalizes any pending changes and makes the document read-only. You can still query entities, but `modify()` will throw.
 
 Offline documents do not require `stop()`.
 
